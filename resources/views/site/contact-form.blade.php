@@ -104,10 +104,10 @@ new class extends \Livewire\Volt\Component {
         ';
         
         \Mail::html($body, function ($message) {
-            $message->from('info@send.catalog.fm', $this->name)
-                    ->to('info@catalog.fm')
+            $message->from('info@broshur.com', $this->name)
+                    ->to('info@broshur.com')
                     ->replyTo($this->email, $this->name)
-                    ->subject('رسالة من موقع كتالوج');
+                    ->subject('رسالة من موقع بروشور');
         });
  
  
