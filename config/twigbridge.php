@@ -247,6 +247,7 @@ return [
             'renderMarkdown',
             'poseClass',
             'editorStyle',
+            'production',
             // 'catalogTwindConfig',
             // 'langDir',
             // 'blockInfo',

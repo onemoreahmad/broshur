@@ -37,9 +37,22 @@
             scroll-behavior: smooth;
         }
     </style>
+
+    {% if production() %}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGLEWMFNLV"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-FGLEWMFNLV');
+        </script>
+    {% endif %}
+
 </head>
  
 <body class="">
+   
     <main>
          {{slot}}    
     </main>

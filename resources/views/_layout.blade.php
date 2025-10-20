@@ -17,6 +17,17 @@
             scroll-behavior: smooth;
         }
     </style>
+    @if (app()->environment('production'))
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-FGLEWMFNLV"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-FGLEWMFNLV');
+        </script>
+    @endif
+
 </head>
 <body class="bg-gray-200 relative">
 

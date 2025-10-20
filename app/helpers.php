@@ -219,6 +219,13 @@ if (!function_exists('locale')) {
     }
 }
 
+if (!function_exists('production')) {
+    function production()
+    {
+        return app()->environment('production');
+    }
+}
+
 if (!function_exists('siteStyle')) {
     function siteStyle()
     {
