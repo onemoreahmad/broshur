@@ -21,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
         });
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'currentBroshur' => \App\Http\Middleware\CurrentBroshur::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
