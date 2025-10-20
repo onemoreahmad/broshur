@@ -5,7 +5,7 @@ use Livewire\Volt\Volt;
  
 // site routes
 Route::as('site.')
-// ->domain(config('app.domain'))
+->domain(config('app.domain'))
 ->middleware(['web'])
 ->group(function () {
     Volt::route('/', 'site.home')->name('home');

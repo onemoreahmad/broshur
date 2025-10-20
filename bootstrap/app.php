@@ -10,7 +10,7 @@ return Application::configure(basePath: dirname(__DIR__))
             __DIR__.'/../routes/web.php', 
             __DIR__.'/../routes/auth.php', 
             __DIR__.'/../routes/admin.php', 
-            // __DIR__.'/../routes/tenant.php'
+            __DIR__.'/../routes/tenant.php'
         ],
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
@@ -19,6 +19,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo(function ($request) {
             return route('auth.login');
         });
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

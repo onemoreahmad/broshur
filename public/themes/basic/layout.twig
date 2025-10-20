@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html dir="{{ locale() == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ str_replace('_', '-', locale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="{{ site('slogan') }}">
+    <meta name="theme-color" content="{{primaryColorCode()}}">
+    <meta name="msapplication-navbutton-color" content="{{primaryColorCode()}}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="{{primaryColorCode()}}">
+    <link rel="icon" type="image/x-icon" href="{{ site('logo') ?: asset('assets/images/catalog-logo.svg') }}?width=50">
+ 
+    <link rel="preload" as="script" href="{{ asset('assets/js/twind.min.js') }}">
+    <link rel="preload" as="script" href="{{ asset('assets/js/twind.custom.js') }}">
+    <link rel="preload" as="font" href="{{ asset('assets/fonts/ibmps/IBMPlexSansArabic-SemiBold.ttf?v=1.1') }}">
+    <link rel="preload" as="font" href="{{ asset('assets/fonts/ibmps/IBMPlexSansArabic-Regular.ttf?v=1.1') }}">
+    <link rel="preload" as="image" href="{{ asset('assets/images/catalog-logo.svg') }}">
+    <link rel="preload" as="image" href="{{site('logo')}}">
+    <script src="{{ asset('assets/js/twind.min.js') }}"></script>
+    <script src="{{ asset('assets/js/twind.custom.js') }}"></script>
+ 
+    <title>
+            {% if title %} {{ title }} | {% endif %} {{ site('name') }} 
+         {{ site('slogan') ? ' : ' ~ site('slogan') : '' }}
+    </title>
+    <script>
+        let config = {
+            ...{{ siteStyle() }},
+                ...customTwindconf
+            };
+        twind.install(config);
+    </script>
+   <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+ 
+<body class="min-h-screen bg-{{options.bgColor ?? 'gray-200'}}">
+ 
+    <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+        <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-{{options.primaryColor ?? 'primary'}}-600 to-{{options.primaryColor ?? 'primary'}}-200 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+    </div>
+
+    <main class="">
+        
+        {{include('theme::_header')}}
+        
+        <div class="px-1 lg:px-0 min-h-screen">
+            {{slot}}    
+        </div>
+
+        {{include('theme::_footer')}}
+    </main>
+ 
+</body>
+</html>

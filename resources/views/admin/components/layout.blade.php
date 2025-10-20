@@ -1,12 +1,18 @@
 <div>
     <x-admin::notify />
-    <ui:navbar wire:ignore class="!bg-purple-700 bg-gradient-to-r from-primary-900 via-primary-800 to-indigo-700 !p-3 text-white">
+    {{-- <ui:navbar wire:ignore container="max-w-7xl" class="!bg-purple-700 bg-gradient-to-r from-primary-900 via-primary-800 to-indigo-700 !p-3 text-white"> --}}
+    <ui:navbar wire:ignore container="max-w-7xl" class="!bg-[#030637] bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#030637] via-[#3c0753] to-[#720455]/50 !p-3 text-white">
     {{-- <ui:navbar wire:ignore class="!bg-primary-900 !p-2 text-white"> --}}
     {{-- <ui:navbar wire:ignore class="bg-gradient-to-r from-blue-800 via-cyan-700 to-blue-900  !p-2 text-white"> --}}
     {{-- <ui:navbar wire:ignore class="bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-[#202040] via-[#543864] to-[#ff6363] !p-2 text-white"> --}}
-        <ui:brand href="{{ route('admin.home') }}" wire:navigate logo="{{data_get(currentTenant(), 'logo')}}" name="{{ config('app.name') }}" Xsubtitle="{{ config('app.domain') }}" size="7"  />
+        <ui:brand href="{{ route('admin.home') }}" wire:navigate logo="{{data_get(currentTenant(), 'logo')}}" name="{{data_get(currentTenant(), 'name')}}" Xsubtitle="{{ config('app.domain') }}" size="7"  />
  
-
+        <a href="{{ route('admin.orders.index') }}" wire:navigate title="" class="shrink-0 ms-12 justify-center flex items-center gap-x-2 text-white p-1 px-2 rounded-lg " wire:current="bg-black/40">
+            <ui:icon name="message-2" size="6" />
+            <span class="text-sm">
+                التفاعل والطلبات
+            </span>
+        </a>
 
         <x-slot name="end">
             {{-- <ui:button variant="ghost" class="text-white" wire:current="!bg-white/10" href="{{ route('admin.settings.index') }}" wire:navigate icon="settings" label="الإعدادات" />  --}}
@@ -17,7 +23,6 @@
 
                 <div class="p-0.5 bg-white rounded-b-md mt-px w-48 text-sm">
                     <div class="text-gray-500 p-2 mb-1">
-
                         <ui:heading size="sm" class="text-gray-500">{{ data_get(auth()->user(), 'name') }}</ui:heading>
                         @if (auth()->user()?->email)
                             <ui:text size="xs" class="text-gray-500">{{ data_get(auth()->user(), 'email') }}</ui:text>
@@ -37,15 +42,32 @@
     </ui:navbar>
      
     <nav class="bg-white pt-1x">
-        <div class="flex items-center gap-x-px container justify-between lg:justify-start overflow-x-auto mx-auto px-px lg:px-0 divide-x-reverse divide-xXX divide-gray-400/20 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-            <a href="{{ route('admin.home') }}" wire:navigate title="" class="lg:w-fullx shrink-0 lg:shrink justify-center flex items-center gap-x-2  px-5 py-3" wire:current.exact="bg-gray-200">
-                <ui:icon name="home" size="6" />
+        <div class="flex items-center gap-x-px max-w-7xl justify-between lg:justify-start overflow-x-auto mx-auto px-px lg:px-0 divide-x-reverse divide-xXX divide-gray-400/20 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <a href="{{ route('admin.home') }}" wire:navigate title="" class="lg:w-fullx xshrink-0 lg:shrink justify-center flex items-center w-full lg:w-auto gap-x-2  lg:px-5 px-2 py-3" wire:current.exact="bg-gray-200">
+                <ui:icon name="file-text" size="6" />
+                <span class="text-sm">
+                    محتوى الصفحة
+                </span>
             </a>
 
-            <a href="{{ route('admin.orders.index') }}" wire:navigate title="" class="lg:w-fullX shrink-0 lg:shrinkX justify-center flex items-center gap-x-2 px-5 py-3" wire:current="bg-gray-200">
-                <ui:icon name="message-2" size="6" />
+            <a href="{{ route('admin.design') }}" wire:navigate title="" class="lg:w-fullX xshrink-0 lg:shrink justify-center flex items-center w-full lg:w-auto gap-x-2 lg:px-5 px-2 py-3" wire:current="bg-gray-200">
+                <ui:icon name="palette" size="6" />
                 <span class="text-sm">
-                    التفاعل والطلبات
+                    التصميم
+                </span>
+            </a>
+
+            <a href="{{ route('admin.share') }}" wire:navigate title="" class="lg:w-fullX xshrink-0 lg:shrink justify-center flex items-center w-full lg:w-auto gap-x-2 lg:px-5 px-2 py-3" wire:current="bg-gray-200">
+                <ui:icon name="share" size="6" />
+                <span class="text-sm">
+                    نشر ومشاركة 
+                </span>
+            </a>
+
+            <a href="{{ route('admin.settings.index') }}" wire:navigate title="" class="lg:w-fullX xshrink-0 lg:shrink justify-center flex items-center w-full lg:w-auto gap-x-2 lg:px-5 px-2 py-3" wire:current="bg-gray-200">
+                <ui:icon name="settings" size="6" />
+                <span class="text-sm">
+                    الإعدادات
                 </span>
             </a>
     

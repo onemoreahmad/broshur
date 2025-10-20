@@ -10,16 +10,18 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "bkwld/cloner": "^3.14",
+        "elegantly/laravel-media": "^4.4",
+        "kra8/laravel-snowflake": "^2.4",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "league/flysystem-aws-s3-v3": "^3.29",
+        "livewire/volt": "^1.7",
         "lorisleiva/laravel-actions": "^2.9",
         "lucasdotvin/laravel-soulbscription": "^4.3",
         "rcrowe/twigbridge": "^0.14.6",
-        "kra8/laravel-snowflake": "^2.4",
-        "spatie/laravel-schemaless-attributes": "^2.5",
         "spatie/laravel-model-status": "^1.18",
-        "bkwld/cloner": "^3.14",
-        "livewire/volt": "^1.7"
+        "spatie/laravel-schemaless-attributes": "^2.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

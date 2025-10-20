@@ -6,17 +6,18 @@ use Livewire\Volt\Volt;
 // admin 
 Route::as('admin.')
 ->prefix('admin')
-->middleware(['auth'])
+->middleware(['auth','admin'])
 ->group(function () {
     Volt::route('/', 'admin.home')->name('home');
 
     Route::post('upload-media', [\App\Actions\UploadMedia::class, 'upload'])->name('upload-media');
  
-    // Route::middleware(['web'])
-    //     ->group(function () {
-    //         Volt::route('/content', 'admin.content.index')->name('content');
-    //         Volt::route('/design', 'admin.design.index')->name('design');
-    //     });
+    Route::middleware(['web'])
+        ->group(function () {
+            Volt::route('/content', 'admin.content.index')->name('content');
+            Volt::route('/design', 'admin.design.index')->name('design');
+            Volt::route('/share', 'admin.share')->name('share');
+        });
  
     // orders
     Route::as('orders.')
@@ -41,6 +42,13 @@ Route::as('admin.')
         Volt::route('/confirm-subscription', 'admin.subscription.confirm-subscription')->name('confirm-subscription');
     });
 
+    Route::as('settings.')
+        ->prefix('settings')
+        ->group(function () {
+            Volt::route('/', 'admin.settings.index')->name('index');
+            Volt::route('/{slug}', 'admin.settings.detail')->name('detail');
+        });
+ 
 });
  
 

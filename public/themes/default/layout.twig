@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html dir="{{ locale() == 'ar' ? 'rtl' : 'ltr' }}" lang="{{ str_replace('_', '-', locale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="{{ site('slogan') }}">
+    <meta name="theme-color" content="{{primaryColorCode()}}">
+    <meta name="msapplication-navbutton-color" content="{{primaryColorCode()}}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="{{primaryColorCode()}}">
+    <link rel="icon" type="image/x-icon" href="{{ tenant('logo') ?: asset('assets/images/catalog-logo.svg') }}?width=50">
+ 
+    <link rel="preload" as="script" href="{{ asset('assets/js/twind.min.js') }}">
+    <link rel="preload" as="script" href="{{ asset('assets/js/twind.custom.js') }}">
+    <link rel="preload" as="font" href="{{ asset('assets/fonts/ibmps/IBMPlexSansArabic-SemiBold.ttf?v=1.1') }}">
+    <link rel="preload" as="font" href="{{ asset('assets/fonts/ibmps/IBMPlexSansArabic-Regular.ttf?v=1.1') }}">
+    <link rel="preload" as="image" href="{{ asset('assets/images/catalog-logo.svg') }}">
+    <link rel="preload" as="image" href="{{site('logo')}}">
+    <script src="{{ asset('assets/js/twind.min.js') }}"></script>
+    <script src="{{ asset('assets/js/twind.custom.js') }}"></script>
+    <script data-host="https://analytics.test" data-dnt="false" src="https://analytics.test/js/script.js" id="ZwSg9rf6GA" async defer></script>
+ 
+    <title>
+            {% if title %} {{ title }} | {% endif %} {{ site('name') }} 
+         {{ site('slogan') ? ' : ' ~ site('slogan') : '' }}
+    </title>
+    <script>
+        let config = {
+            ...{{ siteStyle() }},
+                ...customTwindconf
+            };
+        twind.install(config);
+    </script>
+   <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+ 
+<body class="">
+    <main>
+         {{slot}}    
+    </main>
+</body>
+</html>

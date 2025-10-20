@@ -1,0 +1,89 @@
+<div class="bg-{{data_get(options, 'primaryColor', 'gray')}}-700/10 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-{{data_get(options, 'primaryColor', 'yellow')}}-50 via-{{data_get(options, 'primaryColor', 'yellow')}}-100 to-{{data_get(options, 'primaryColor', 'yellow')}}-200 min-h-screen lg:py-4 py-3 px-1 lg:px-0 lg:pt-8">
+ 
+
+    <div class="mx-auto lg:max-w-xl">
+        {% if socialLinks | length %}
+        <div class="flex items-center gap-x-2 overflow-x-auto w-full justify-end">
+            {% for link in socialLinks %}
+            <a href="{{data_get(link, 'link')}}" target="_blank" class="flex items-center  text-black/30  p-1.5 group rounded-lg bg-{{data_get(options, 'primaryColor', 'gray')}}-500/10 hover:bg-white hover:text-black/40 transition-all duration-300 transition-colors">
+                <span class="size-5">
+                    <img src="{{ asset('assets/icons/social/brand-'~data_get(link, 'name')~'.svg') }}" alt="{{ data_get(link, 'name') }}" class="w-full h-full opacity-50 group-hover:opacity-80 ">
+                </span>
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+     
+    <div class="mt-3 mx-auto lg:max-w-xl rounded-2xl bg-{{data_get(options, 'primaryColor', 'gray')}}-900/10 p-1">
+  
+        <div class="overflow-hidden bg-white rounded-2xl">
+            <div class="py-4 px-3">
+                <div class="flex items-center">
+                    <img class="object-cover w-16 h-16 {{data_get(options, 'logoRadius', 'rounded-2xl')}} shrink-0" src="{{ tenant('logo') }}" alt="" />
+                    <div class="flex-1 ms-3">
+                        <p class="text-base font-bold text-gray-900">{{ tenant('name') }}</p>
+                        <p class="mt-1 text-xs text-gray-500">{{ tenant('meta.slogan.'~locale()) }}</p>
+                        <p class="mt-1 text-xs text-gray-500">{{ tenant('country') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {# <div class="flex items-center gap-1 bg-{{data_get(options, 'primaryColor', 'gray')}}-500/20 text-black/80 p-1 text-xs rounded-b-xl overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <a href="" wire:navigate class="bg-{{data_get(options, 'primaryColor', 'gray')}}-50 inline-flex items-center text-gray-800 cursor-pointer transition-all duration-300 justify-center gap-x-2 whitespace-nowrap rounded-md transition-colors  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 px-3 py-2"> 
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5 text-gray-600" viewBox="0 0 24 24"  fill="none"><path d="m9.02 2.838-5.39 4.2c-.9.7-1.63 2.19-1.63 3.32v7.41c0 2.32 1.89 4.22 4.21 4.22h11.58c2.32 0 4.21-1.9 4.21-4.21v-7.28c0-1.21-.81-2.76-1.8-3.45l-6.18-4.33c-1.4-.98-3.65-.93-5 .12Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path><g opacity=".4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16.5 11.5-4.2 4.2-1.6-2.4-3.2 3.2"></path><path d="M14.5 11.5h2v2"></path></g></svg>
+            </a>
+            <a href="" wire:navigate class="inline-flex hover:bg-white/60 items-center cursor-pointer transition-all duration-300 justify-center gap-x-2 whitespace-nowrap rounded-md transition-colors  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 px-3 py-2">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5 " viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><g opacity=".4"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 3h1a28.424 28.424 0 000 18H8M15 3a28.424 28.424 0 010 18"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 16v-1a28.424 28.424 0 0018 0v1M3 9a28.424 28.424 0 0118 0"></path></g></svg>
+                 <span>الموقع</span> 
+            </a>
+            <a href="" wire:navigate class="inline-flex hover:bg-white/60 items-center cursor-pointer transition-all duration-300 justify-center gap-x-2 whitespace-nowrap rounded-md transition-colors  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 px-3 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none"><path d="m21.93 6.761-3.37 13.53a2.228 2.228 0 0 1-2.18 1.71H3.24c-1.51 0-2.59-1.48-2.14-2.93L5.31 5.55a2.25 2.25 0 0 1 2.14-1.59h12.3c.95 0 1.74.58 2.07 1.38.19.43.23.92.11 1.42Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></path><path opacity=".4" d="M16 22h4.78c1.29 0 2.3-1.09 2.21-2.38L22 6" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="m9.68 6.379 1.04-4.32M16.38 6.39l.94-4.34" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path opacity=".4" d="M7.7 12h8M6.7 16h8" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span> قائمة الطعام </span> 
+            </a>
+            <a href="" wire:navigate class="inline-flex hover:bg-white/60 items-center cursor-pointer transition-all duration-300 justify-center gap-x-2 whitespace-nowrap rounded-md transition-colors  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 px-3 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none"><path d="M9 22h6c5 0 7-2 7-7V9c0-5-2-7-7-7H9C4 2 2 4 2 9v6c0 5 2 7 7 7Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><g opacity=".4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8.888c3.15-1.57 6.85-1.57 10 0M12 16.3V7.93"></path></g></svg>
+                <span> المدونة </span>  
+            </a>
+                <a href="" wire:navigate class="inline-flex hover:bg-white/60 items-center cursor-pointer transition-all duration-300 justify-center gap-x-2 whitespace-nowrap rounded-md transition-colors  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 px-3 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none"><g opacity=".4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9V2l-2 2M12 2l2 2"></path></g><path opacity=".4" d="M1.98 13h4.41c.38 0 .72.21.89.55l1.17 2.34A2 2 0 0 0 10.24 17h3.53a2 2 0 0 0 1.79-1.11l1.17-2.34a1 1 0 0 1 .89-.55h4.36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 5.129c-3.54.52-5 2.6-5 6.87v3c0 5 2 7 7 7h6c5 0 7-2 7-7v-3c0-4.27-1.46-6.35-5-6.87" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span> النشرة </span> 
+            </a>
+            <a href="" wire:navigate class="inline-flex hover:bg-white/60 items-center cursor-pointer transition-all duration-300 justify-center gap-x-2 whitespace-nowrap rounded-md transition-colors  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 px-3 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none"><path d="M17 18.43h-4l-4.45 2.96A.997.997 0 0 1 7 20.56v-2.13c-3 0-5-2-5-5v-6c0-3 2-5 5-5h10c3 0 5 2 5 5v6c0 3-2 5-5 5Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path opacity=".4" d="M12 11.36v-.21c0-.68.42-1.04.84-1.33.41-.28.82-.64.82-1.3 0-.92-.74-1.66-1.66-1.66-.92 0-1.66.74-1.66 1.66M11.995 13.75h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span> الأسئلة </span> 
+            </a>
+            <a href="" wire:navigate class="inline-flex hover:bg-white/60 items-center cursor-pointer transition-all duration-300 justify-center gap-x-2 whitespace-nowrap rounded-md transition-colors  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 px-3 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none"><path d="M17 6v10c0 4-1 5-5 5H6c-4 0-5-1-5-5V6c0-4 1-5 5-5h6c4 0 5 1 5 5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path opacity=".4" d="M11 4.5H7M9 18.1A1.55 1.55 0 1 0 9 15a1.55 1.55 0 0 0 0 3.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span> اتصل بنا </span> 
+            </a>
+        </div> #}
+
+
+ 
+
+        <section class="mt-4 p-4">
+
+
+
+
+             <!-- links -->
+             <div class=" flex flex-col space-y-2">
+                {% for link in links %}
+                    <a href="{{ link.link }}" target="_blank" class="w-full group flex items-center justify-center text-center text-white bg-{{data_get(options, 'primaryColor', 'blue')}}-800 hover:!bg-{{data_get(options, 'primaryColor', 'blue')}}-900 {{data_get(options, 'buttonRadius', 'rounded-full')}} py-3">
+                        <span class="flex-grow">{{ link.name }}   </span>   
+                        <div class="flex justify-end pe-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor" class="size-5 opacity-50 group-hover:opacity-70">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 19.5-15-15m0 0v11.25m0-11.25h11.25" />
+                            </svg>
+                        </div>
+                           
+                    </a>
+                {% endfor %}
+            </div>
+
+        </section>
+    </div>
+</div>
