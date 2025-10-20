@@ -154,7 +154,7 @@
 <?php 
  
 new 
-#[\Livewire\Attributes\Title('نظام واحد لإدارة أعمالك وتجارتك')]
+#[\Livewire\Attributes\Title('أنشئ بروشور لأعمالك، يبيع عنّك بدقائق!')]
 class extends \Livewire\Volt\Component {
      
 }; ?>

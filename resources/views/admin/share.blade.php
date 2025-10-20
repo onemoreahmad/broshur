@@ -47,38 +47,38 @@
           
                 <div class="flex flex-col md:flex-row items-center gap-2 p-2 mt-4">
                   
-                  <ui:button variant="outline" class="w-fullx" target="_blank" href="https://api.whatsapp.com/send?text={{ currentTenant('storefrontUrl') }}">
+                  <ui:button variant="outline" class="w-full lg:w-auto" target="_blank" href="https://api.whatsapp.com/send?text={{ currentTenant('storefrontUrl') }}">
             
                          <img src="{{ asset('assets/icons/social/brand-whatsapp.svg') }}" alt="whatsapp" class="size-5 !text-white">
                  
                         واتساب
                   </ui:button>
-                  <ui:button variant="outline" class="w-fullx" target="_blank" href="https://t.me/share/url?text={{ currentTenant('storefrontUrl') }}&url={{ currentTenant('storefrontUrl') }}">
+                  <ui:button variant="outline" class="w-full lg:w-auto" target="_blank" href="https://t.me/share/url?text={{ currentTenant('storefrontUrl') }}&url={{ currentTenant('storefrontUrl') }}">
                   
                            <img src="{{ asset('assets/icons/social/brand-telegram.svg') }}" alt="telegram" class="size-5">
                      
                         تليجرام
                   </ui:button>
-                  <ui:button variant="outline" class="w-fullx" target="_blank" href="https://x.com/intent/tweet?url={{ currentTenant('storefrontUrl') }}&text={{ tenant()->name }}">
+                  <ui:button variant="outline" class="w-full lg:w-auto" target="_blank" href="https://x.com/intent/tweet?url={{ currentTenant('storefrontUrl') }}&text={{ tenant()->name }}">
                      
                            <img src="{{ asset('assets/icons/social/brand-x.svg') }}" alt="x" class="size-5">
                      
                         تويتر  
                   </ui:button>
-                  <ui:button variant="outline" class="w-fullx" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ currentTenant('storefrontUrl') }}">
+                  <ui:button variant="outline" class="w-full lg:w-auto" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ currentTenant('storefrontUrl') }}">
                      
                            <img src="{{ asset('assets/icons/social/brand-facebook.svg') }}" alt="facebook" class="size-5">
                
                         فيسبوك
                   </ui:button>
-                  <ui:button variant="outline" class="w-fullx" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ currentTenant('storefrontUrl') }}">
+                  <ui:button variant="outline" class="w-full lg:w-auto" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ currentTenant('storefrontUrl') }}">
                      
                            <img src="{{ asset('assets/icons/social/brand-linkedin.svg') }}" alt="linkedin" class="size-5">
                      
                         لينكد ان
                   </ui:button>
       
-                  <ui:button variant="outline" class="w-fullx" target="_blank" href="mailto:info@example.com?&subject=&cc=&bcc=&body={{ currentTenant('storefrontUrl') }}">
+                  <ui:button variant="outline" class="w-full lg:w-auto" target="_blank" href="mailto:info@example.com?&subject=&cc=&bcc=&body={{ currentTenant('storefrontUrl') }}">
                      
                            <img src="{{ asset('assets/icons/social/brand-email.svg') }}" alt="email" class="size-5">
                      

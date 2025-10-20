@@ -15,7 +15,8 @@
         </a>
 
         <x-slot name="end">
-            {{-- <ui:button variant="ghost" class="text-white" wire:current="!bg-white/10" href="{{ route('admin.settings.index') }}" wire:navigate icon="settings" label="الإعدادات" />  --}}
+            <ui:button variant="ghost" class="text-white !hidden !lg:block" wire:current="!bg-white/10" href="{{ tenant('siteUrl') }}" target="_blank" icon:trailing="arrow-up-left" label="معاينة البروشور" /> 
+            <ui:button variant="ghost" class="text-white !block !lg:hidden" wire:current="!bg-white/10" href="{{ tenant('siteUrl') }}" target="_blank" icon:trailing="arrow-up-left" /> 
             <ui:dropdown>
                 <x-slot:trigger @click="openDropdown = ! openDropdown" class="flex items-center gap-x-2" icon:trailing="chevron-down">
                     <ui:avatar :src="data_get(auth()->user(), 'image')" size="sm" class="border-2 border-black/10 hover:border-black/20" /> 
