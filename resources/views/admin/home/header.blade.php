@@ -13,15 +13,10 @@
             <div class="bg-gray-50 rounded-lg p-3">
               
  
-            <ui:radio 
-                name="radio" 
-                label="الخدمة العسكرية" 
-                width="w-full"
-                :options="[
-                    'yes' => 'نعم',
-                    'no' => 'لا',
-                    'hide' => 'إخفاء'
-                ]"
+            <ui:input 
+                name="name" 
+                label="الاسم" 
+               
             />
              
             </div>
@@ -52,17 +47,14 @@ use Livewire\Attributes\Renderless;
 new class extends \Livewire\Volt\Component {
     use WithFileUploads;
  
-    public $radio;
+    public $block;
+    public $name;
     public $profileImage;
  
     public function mount() {
-        $this->loadPersonalData();
-    }
-
-    public function loadPersonalData() {
-        $block =  Block::where('tenant_id', currentTenant('id'))->where('name', 'header')->first();
+        $this->block =  Block::firstOrCreate(['name'=> 'header']);
         
-        $this->radio = data_get($block, 'config.radio', '');
+        $this->name = data_get($this->block, 'config.name', '');
     }
 
     public function updatedProfileImage() {
@@ -73,7 +65,7 @@ new class extends \Livewire\Volt\Component {
 
     public function rules() {
         $rules = [
-            'radio' => 'required|string',
+            'name' => 'required|string',
         ];
 
         // Only validate profile image if a new image is being uploaded
@@ -88,21 +80,17 @@ new class extends \Livewire\Volt\Component {
         $this->validate();
  
         // Update personal data
-        //$this->cv->personal->name = $this->name;
+        $this->block->config->name = $this->name;
  
         if ($this->profileImage instanceof TemporaryUploadedFile) {
             //$this->cv->personal->profile_image = $this->profileImage->store('cv_images');
         }
         
-        //$this->cv->save();
+        $this->block->save();
  
         $this->dispatch('notify', type:'success', text:'تم حفظ التعديلات بنجاح'); 
     }
-
-    public function saveAndNext() {
-        $this->save();
-        $this->dispatch('setTab', tab: 'cta');
-    }
+ 
 
     #[Renderless]
     public function autoSave() {
