@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'current_tenant_id',
+        'meta',
     ];
 
     /**
@@ -45,4 +48,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function tenant()
+    {
+        return $this->hasOne(Tenant::class, 'id', 'current_tenant_id');
+    }
+
+    public function getImageAttribute($value)
+    {
+        if ($value) {
+            return Storage::url($value);
+        }
+
+        return 'https://ui-avatars.com/api/?background=219EBD&color=fff&name=' . data_get($this, 'name');
+    }
+  
+
 }

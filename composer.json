@@ -11,7 +11,15 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "lorisleiva/laravel-actions": "^2.9",
+        "lucasdotvin/laravel-soulbscription": "^4.3",
+        "rcrowe/twigbridge": "^0.14.6",
+        "kra8/laravel-snowflake": "^2.4",
+        "spatie/laravel-schemaless-attributes": "^2.5",
+        "spatie/laravel-model-status": "^1.18",
+        "bkwld/cloner": "^3.14",
+        "livewire/volt": "^1.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -28,7 +36,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

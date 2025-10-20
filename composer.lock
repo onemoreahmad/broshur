@@ -4,8 +4,67 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "499ff201ed8537cc67e26201ae6954a0",
+    "content-hash": "d9a45380c29f388804ec26ee1610ae6d",
     "packages": [
+        {
+            "name": "bkwld/cloner",
+            "version": "3.14.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BKWLD/cloner.git",
+                "reference": "cdf41dfeb1ed27da62ef05e30153d0c5a388f6cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BKWLD/cloner/zipball/cdf41dfeb1ed27da62ef05e30153d0c5a388f6cc",
+                "reference": "cdf41dfeb1ed27da62ef05e30153d0c5a388f6cc",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "bkwld/upchuck": "^2.6@dev",
+                "illuminate/database": "^5.5|^6.0|^10.0|^11.0|^12.0",
+                "league/flysystem-vfs": "^1.0",
+                "mockery/mockery": "^1.2.3",
+                "phpunit/phpunit": "~6.0|~8.0|^9.5.10|^10.5",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "suggest": {
+                "bkwld/upchuck": "Required for replicating of files."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Bkwld\\Cloner\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bkwld\\Cloner\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Reinhard",
+                    "email": "info@bkwld.com"
+                }
+            ],
+            "description": "A trait for Laravel Eloquent models that lets you clone of a model and it's relationships, including files.",
+            "support": {
+                "issues": "https://github.com/BKWLD/cloner/issues",
+                "source": "https://github.com/BKWLD/cloner/tree/3.14.2"
+            },
+            "time": "2025-05-21T15:02:34+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.14.0",
@@ -1054,6 +1113,71 @@
             "time": "2025-08-22T14:27:06+00:00"
         },
         {
+            "name": "kra8/laravel-snowflake",
+            "version": "v2.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kra8/laravel-snowflake.git",
+                "reference": "b0365701617be62c91b8b9f0a1b9072f75432e52"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kra8/laravel-snowflake/zipball/b0365701617be62c91b8b9f0a1b9072f75432e52",
+                "reference": "b0365701617be62c91b8b9f0a1b9072f75432e52",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6.3|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0",
+                "phpunit/phpunit": "^10.0|^11.0|^12.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Kra8\\Snowflake\\Providers\\LaravelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kra8\\Snowflake\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Koki Asai",
+                    "email": "koki@asai.email"
+                }
+            ],
+            "description": "Snowflake for Laravel and Lumen.",
+            "homepage": "https://github.com/kra8/laravel-snowflake",
+            "keywords": [
+                "laravel",
+                "lumen",
+                "php",
+                "snowflake"
+            ],
+            "support": {
+                "issues": "https://github.com/kra8/laravel-snowflake/issues",
+                "source": "https://github.com/kra8/laravel-snowflake/tree/v2.4.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kra8",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-04-23T02:58:19+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v12.34.0",
             "source": {
@@ -2008,6 +2132,371 @@
                 }
             ],
             "time": "2024-12-08T08:18:47+00:00"
+        },
+        {
+            "name": "livewire/livewire",
+            "version": "v3.6.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/livewire/livewire.git",
+                "reference": "ef04be759da41b14d2d129e670533180a44987dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/ef04be759da41b14d2d129e670533180a44987dc",
+                "reference": "ef04be759da41b14d2d129e670533180a44987dc",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^10.0|^11.0|^12.0",
+                "illuminate/routing": "^10.0|^11.0|^12.0",
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "illuminate/validation": "^10.0|^11.0|^12.0",
+                "laravel/prompts": "^0.1.24|^0.2|^0.3",
+                "league/mime-type-detection": "^1.9",
+                "php": "^8.1",
+                "symfony/console": "^6.0|^7.0",
+                "symfony/http-kernel": "^6.2|^7.0"
+            },
+            "require-dev": {
+                "calebporzio/sushi": "^2.1",
+                "laravel/framework": "^10.15.0|^11.0|^12.0",
+                "mockery/mockery": "^1.3.1",
+                "orchestra/testbench": "^8.21.0|^9.0|^10.0",
+                "orchestra/testbench-dusk": "^8.24|^9.1|^10.0",
+                "phpunit/phpunit": "^10.4|^11.5",
+                "psy/psysh": "^0.11.22|^0.12"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Livewire": "Livewire\\Livewire"
+                    },
+                    "providers": [
+                        "Livewire\\LivewireServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Livewire\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Porzio",
+                    "email": "calebporzio@gmail.com"
+                }
+            ],
+            "description": "A front-end framework for Laravel.",
+            "support": {
+                "issues": "https://github.com/livewire/livewire/issues",
+                "source": "https://github.com/livewire/livewire/tree/v3.6.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/livewire",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-07-17T05:12:15+00:00"
+        },
+        {
+            "name": "livewire/volt",
+            "version": "v1.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/livewire/volt.git",
+                "reference": "91ba934e72bbd162442840862959ade24dbe728a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/livewire/volt/zipball/91ba934e72bbd162442840862959ade24dbe728a",
+                "reference": "91ba934e72bbd162442840862959ade24dbe728a",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^10.38.2|^11.0|^12.0",
+                "livewire/livewire": "^3.6.1",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/folio": "^1.1",
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^8.15.0|^9.0|^10.0",
+                "pestphp/pest": "^2.9.5|^3.0",
+                "phpstan/phpstan": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Livewire\\Volt\\VoltServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "functions.php"
+                ],
+                "psr-4": {
+                    "Livewire\\Volt\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Nuno Maduro",
+                    "email": "nuno@laravel.com"
+                }
+            ],
+            "description": "An elegantly crafted functional API for Laravel Livewire.",
+            "homepage": "https://github.com/livewire/volt",
+            "keywords": [
+                "laravel",
+                "livewire",
+                "volt"
+            ],
+            "support": {
+                "issues": "https://github.com/livewire/volt/issues",
+                "source": "https://github.com/livewire/volt"
+            },
+            "time": "2025-08-06T15:40:50+00:00"
+        },
+        {
+            "name": "lorisleiva/laravel-actions",
+            "version": "v2.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lorisleiva/laravel-actions.git",
+                "reference": "11c2531366ca8bd5efcd0afc9e8047e7999926ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lorisleiva/laravel-actions/zipball/11c2531366ca8bd5efcd0afc9e8047e7999926ff",
+                "reference": "11c2531366ca8bd5efcd0afc9e8047e7999926ff",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0|^11.0|^12.0",
+                "lorisleiva/lody": "^0.6",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^10.0",
+                "pestphp/pest": "^2.34|^3.0",
+                "phpunit/phpunit": "^10.5|^11.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Action": "Lorisleiva\\Actions\\Facades\\Actions"
+                    },
+                    "providers": [
+                        "Lorisleiva\\Actions\\ActionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lorisleiva\\Actions\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Loris Leiva",
+                    "email": "loris.leiva@gmail.com",
+                    "homepage": "https://lorisleiva.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel components that take care of one specific task",
+            "homepage": "https://github.com/lorisleiva/laravel-actions",
+            "keywords": [
+                "action",
+                "command",
+                "component",
+                "controller",
+                "job",
+                "laravel",
+                "listener",
+                "object"
+            ],
+            "support": {
+                "issues": "https://github.com/lorisleiva/laravel-actions/issues",
+                "source": "https://github.com/lorisleiva/laravel-actions/tree/v2.9.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/lorisleiva",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-08-10T08:58:19+00:00"
+        },
+        {
+            "name": "lorisleiva/lody",
+            "version": "v0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lorisleiva/lody.git",
+                "reference": "6bada710ebc75f06fdf62db26327be1592c4f014"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lorisleiva/lody/zipball/6bada710ebc75f06fdf62db26327be1592c4f014",
+                "reference": "6bada710ebc75f06fdf62db26327be1592c4f014",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0|^11.0|^12.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^10.0",
+                "pestphp/pest": "^2.34|^3.0",
+                "phpunit/phpunit": "^10.5|^11.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Lody": "Lorisleiva\\Lody\\Lody"
+                    },
+                    "providers": [
+                        "Lorisleiva\\Lody\\LodyServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lorisleiva\\Lody\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Loris Leiva",
+                    "email": "loris.leiva@gmail.com",
+                    "homepage": "https://lorisleiva.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Load files and classes as lazy collections in Laravel.",
+            "homepage": "https://github.com/lorisleiva/lody",
+            "keywords": [
+                "classes",
+                "collection",
+                "files",
+                "laravel",
+                "load"
+            ],
+            "support": {
+                "issues": "https://github.com/lorisleiva/lody/issues",
+                "source": "https://github.com/lorisleiva/lody/tree/v0.6.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/lorisleiva",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-03-01T19:21:17+00:00"
+        },
+        {
+            "name": "lucasdotvin/laravel-soulbscription",
+            "version": "4.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lucasdotvin/laravel-soulbscription.git",
+                "reference": "55c47f7b7ff547582ed598a9a06fe45eefd6ebbd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lucasdotvin/laravel-soulbscription/zipball/55c47f7b7ff547582ed598a9a06fe45eefd6ebbd",
+                "reference": "55c47f7b7ff547582ed598a9a06fe45eefd6ebbd",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^8.0|^9.0|^10.0|^11.0|^12.0",
+                "php": "^8.0|^8.1|^8.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.22|^7.0|^8.0|^9.0|^10.0",
+                "phpunit/phpunit": "^9.5|^10.0|^11.5.3",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": [],
+                    "providers": [
+                        "LucasDotVin\\Soulbscription\\SoulbscriptionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LucasDotVin\\Soulbscription\\": "src",
+                    "LucasDotVin\\Soulbscription\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lucas Vinicius",
+                    "email": "lucasvinicius211@yahoo.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A straightforward interface to handle subscriptions and features consumption.",
+            "homepage": "https://github.com/lucasdotvin/laravel-soulbscription",
+            "keywords": [
+                "laravel",
+                "laravel-soulbscription",
+                "lucasdotvin",
+                "subscriptions"
+            ],
+            "support": {
+                "issues": "https://github.com/lucasdotvin/laravel-soulbscription/issues",
+                "source": "https://github.com/lucasdotvin/laravel-soulbscription/tree/4.3.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/lucasdotvin",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-07-24T23:23:02+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3275,6 +3764,286 @@
                 "source": "https://github.com/ramsey/uuid/tree/4.9.1"
             },
             "time": "2025-09-04T20:59:21+00:00"
+        },
+        {
+            "name": "rcrowe/twigbridge",
+            "version": "v0.14.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rcrowe/TwigBridge.git",
+                "reference": "0798ee4b5e5b943d0200850acaa87ccd82e2fe45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rcrowe/TwigBridge/zipball/0798ee4b5e5b943d0200850acaa87ccd82e2fe45",
+                "reference": "0798ee4b5e5b943d0200850acaa87ccd82e2fe45",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^9|^10|^11|^12",
+                "illuminate/view": "^9|^10|^11|^12",
+                "php": "^8.1",
+                "twig/twig": "~3.21"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "laravel/framework": "^9|^10|^11|^12",
+                "mockery/mockery": "^1.3.1",
+                "phpunit/phpunit": "^8.5.8 || ^9.3.7 || ^10.0 || ^11.0 || ^12.0",
+                "squizlabs/php_codesniffer": "^3.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Twig": "TwigBridge\\Facade\\Twig"
+                    },
+                    "providers": [
+                        "TwigBridge\\ServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "0.14-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TwigBridge\\": "src",
+                    "TwigBridge\\Tests\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Crowe",
+                    "email": "hello@vivalacrowe.com"
+                },
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Adds the power of Twig to Laravel",
+            "keywords": [
+                "laravel",
+                "twig"
+            ],
+            "support": {
+                "issues": "https://github.com/rcrowe/TwigBridge/issues",
+                "source": "https://github.com/rcrowe/TwigBridge/tree/v0.14.6"
+            },
+            "time": "2025-08-20T11:25:49+00:00"
+        },
+        {
+            "name": "spatie/laravel-model-status",
+            "version": "1.18.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-model-status.git",
+                "reference": "16533bb34ef31a100390567e7afb48e862fe2bc9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-model-status/zipball/16533bb34ef31a100390567e7afb48e862fe2bc9",
+                "reference": "16533bb34ef31a100390567e7afb48e862fe2bc9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "pestphp/pest": "^2.34|^3.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\ModelStatus\\ModelStatusServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\ModelStatus\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Verhelst",
+                    "email": "tvke91@gmail.com",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A package to enable assigning statuses to Eloquent Models",
+            "homepage": "https://github.com/spatie/laravel-model-status",
+            "keywords": [
+                "laravel-status",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-model-status/issues",
+                "source": "https://github.com/spatie/laravel-model-status/tree/1.18.1"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2025-02-21T13:20:00+00:00"
+        },
+        {
+            "name": "spatie/laravel-package-tools",
+            "version": "1.92.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "f09a799850b1ed765103a4f0b4355006360c49a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/f09a799850b1ed765103a4f0b4355006360c49a5",
+                "reference": "f09a799850b1ed765103a4f0b4355006360c49a5",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.28|^10.0|^11.0|^12.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^7.7|^8.0|^9.0|^10.0",
+                "pestphp/pest": "^1.23|^2.1|^3.1",
+                "phpunit/php-code-coverage": "^9.0|^10.0|^11.0",
+                "phpunit/phpunit": "^9.5.24|^10.5|^11.5",
+                "spatie/pest-plugin-test-time": "^1.1|^2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPackageTools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
+            "keywords": [
+                "laravel-package-tools",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.92.7"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-07-17T15:46:43+00:00"
+        },
+        {
+            "name": "spatie/laravel-schemaless-attributes",
+            "version": "2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-schemaless-attributes.git",
+                "reference": "3561875fb6886ae55e5378f20ba5ac87f20b265a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-schemaless-attributes/zipball/3561875fb6886ae55e5378f20ba5ac87f20b265a",
+                "reference": "3561875fb6886ae55e5378f20ba5ac87f20b265a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/database": "^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/support": "^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.4.3"
+            },
+            "require-dev": {
+                "brianium/paratest": "^6.2|^7.4",
+                "mockery/mockery": "^1.4",
+                "nunomaduro/collision": "^5.3|^6.0|^8.0",
+                "orchestra/testbench": "^6.15|^7.0|^8.0|^9.0|^10.0",
+                "pestphp/pest-plugin-laravel": "^1.3|^2.1|^3.1",
+                "phpunit/phpunit": "^9.6|^10.5|^11.5|^12.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\SchemalessAttributes\\SchemalessAttributesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\SchemalessAttributes\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Add schemaless attributes to Eloquent models",
+            "homepage": "https://github.com/spatie/laravel-schemaless-attributes",
+            "keywords": [
+                "laravel-schemaless-attributes",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-schemaless-attributes/issues",
+                "source": "https://github.com/spatie/laravel-schemaless-attributes/tree/2.5.1"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-10T09:28:22+00:00"
         },
         {
             "name": "symfony/clock",
@@ -5807,6 +6576,85 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/v2.3.0"
             },
             "time": "2024-12-21T16:25:41+00:00"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v3.21.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "285123877d4dd97dd7c11842ac5fb7e86e60d81d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/285123877d4dd97dd7c11842ac5fb7e86e60d81d",
+                "reference": "285123877d4dd97dd7c11842ac5fb7e86e60d81d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1.0",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/polyfill-ctype": "^1.8",
+                "symfony/polyfill-mbstring": "^1.3"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.0",
+                "psr/container": "^1.0|^2.0",
+                "symfony/phpunit-bridge": "^5.4.9|^6.4|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Resources/core.php",
+                    "src/Resources/debug.php",
+                    "src/Resources/escaper.php",
+                    "src/Resources/string_loader.php"
+                ],
+                "psr-4": {
+                    "Twig\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Twig Team",
+                    "role": "Contributors"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "https://twig.symfony.com",
+            "keywords": [
+                "templating"
+            ],
+            "support": {
+                "issues": "https://github.com/twigphp/Twig/issues",
+                "source": "https://github.com/twigphp/Twig/tree/v3.21.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-05-03T07:21:55+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
