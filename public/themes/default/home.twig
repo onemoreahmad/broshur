@@ -76,10 +76,10 @@
  
            
 
-            {% include 'theme::blocks.hero' %}
-            {% include 'theme::blocks.about' %}
-            {% include 'theme::blocks.features' %}
-            {% include 'theme::blocks.faq' %}
+            {{renderBlock('hero')}}
+            {{renderBlock('about')}}
+            {{renderBlock('features')}}
+            {{renderBlock('faq')}}
   
             
         </div>

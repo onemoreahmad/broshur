@@ -97,7 +97,7 @@ new class extends \Livewire\Volt\Component {
         }
  
         $this->tenant->save();
-            $this->block->save();
+        $this->block->save();
 
         $this->js('document.getElementById("linkinbio-iframe").contentWindow.location.reload();');
  

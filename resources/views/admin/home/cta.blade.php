@@ -8,7 +8,7 @@
  
     <div class="mt-5 max-w-3xl">
         <form wire:submit="save" class="flex flex-col gap-y-1">
-            <ui:toggle name="whatsappButton" label="زر محادثة واتساب"   />
+            <ui:toggle name="whatsappButton" label="زر محادثة واتساب" :live="true"  />
 
             @if($whatsappButton)
                 <ui:input name="whatsappNumber" label="رقم واتساب" placeholder="9665xxxxxxxx" dir="ltr" />

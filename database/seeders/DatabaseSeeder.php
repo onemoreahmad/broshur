@@ -35,9 +35,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Wjeez',
             'handle' => 'wjeez',
             'user_id' => 1,
-            'logo' => asset('assets/images/logo.png'),
-            'domain' => 'broshore.com',
-            'email' => 'info@broshore.com',
+            'domain' => 'broshur.com',
+            'email' => 'info@broshur.com',
             'phone' => '0543001200',
             'active' => true,
         ], 'id');

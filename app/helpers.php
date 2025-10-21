@@ -227,9 +227,13 @@ if (!function_exists('production')) {
 }
 
 if (!function_exists('storage')) {
-    function storage($path)
+    function storage($path = null)
     {
-        return Storage::url($path) ?? $path;
+        if($path){
+            return Storage::url($path);
+        }
+
+        return $path;
     }
 }
 
