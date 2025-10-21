@@ -7,24 +7,14 @@
     </ui:callout>
  
     <div class="mt-5 max-w-3xl">
-        <form wire:submit="save" class="flex flex-col gap-y-6">
-             
-            <!-- Basic Information -->
-            <div class="bg-gray-50 rounded-lg p-3">
-              
- 
-            <ui:radio 
-                name="radio" 
-                label="الخدمة العسكرية" 
-                width="w-full"
-                :options="[
-                    'yes' => 'نعم',
-                    'no' => 'لا',
-                    'hide' => 'إخفاء'
-                ]"
-            />
-             
-            </div>
+        <form wire:submit="save" class="flex flex-col gap-y-1">
+            <ui:toggle name="whatsappButton" label="زر محادثة واتساب"   />
+
+            @if($whatsappButton)
+                <ui:input name="whatsappNumber" label="رقم واتساب" placeholder="9665xxxxxxxx" dir="ltr" />
+            @endif
+
+            <ui:toggle name="contactButton" label="زر اتصل بنا"   />
  
             <div class="flex mt-5 border-t border-gray-200 pt-3 border-dashed">
                 <ui:button 
@@ -48,40 +38,43 @@ use Livewire\Attributes\Renderless;
  
 new class extends \Livewire\Volt\Component {
    
-    public $radio;
-  
+    public $block;
+    public $whatsappButton;
+    public $contactButton;
+    public $whatsappNumber;
+     
     public function mount() {
-  
-        $block =  Block::where('tenant_id', currentTenant('id'))->where('name', 'cta')->first();
+        $this->block =  Block::firstOrCreate(['name'=> 'cta']);
         
-        $this->radio = data_get($block, 'config.radio', '');
+        $this->whatsappButton = data_get($this->block, 'config.whatsappButton', true);
+        $this->contactButton = data_get($this->block, 'config.contactButton', true);
+        $this->whatsappNumber = data_get($this->block, 'config.whatsappNumber', '');
+
+
     }
   
     public function rules() {
         $rules = [
-            'radio' => 'required|string',
+            'whatsappButton' => 'required|boolean',
+            'contactButton' => 'required|boolean',
+            'whatsappNumber' => 'required|string',
         ];
- 
- 
+  
         return $rules;
     }
 
     public function save($showMessage = true) {   
         $this->validate();
+
+        $this->block->config->set('whatsappButton', $this->whatsappButton);
+        $this->block->config->set('contactButton', $this->contactButton);
+        $this->block->config->set('whatsappNumber', $this->whatsappNumber);
+        $this->block->save();
    
         $this->dispatch('notify', type:'success', text:'تم حفظ التعديلات بنجاح'); 
+        $this->js('document.getElementById("linkinbio-iframe").contentWindow.location.reload();');
     }
-
-    public function saveAndNext() {
-        $this->save();
-        $this->dispatch('setTab', tab: 'cta');
-    }
-
-    #[Renderless]
-    public function autoSave() {
-        $this->save(false);
-    }
-
+ 
     function placeholder() {
         return loadingIcon();
     }

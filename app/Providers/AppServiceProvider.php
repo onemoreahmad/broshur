@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
         $this->loadViewsFrom( resource_path('views/admin'), 'admin'); 
         $this->loadViewsFrom( resource_path('views/site'), 'site'); 
         $this->loadViewsFrom( resource_path('views/auth'), 'auth'); 
+        $this->loadViewsFrom( resource_path('views/storefront'), 'storefront'); 
     }
 
     /**
@@ -24,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Livewire::addPersistentMiddleware([
             \App\Http\Middleware\AdminMiddleware::class,
+            \App\Http\Middleware\CurrentBroshur::class,
         ]);
     }
 }

@@ -262,21 +262,38 @@ if (!function_exists('currency')) {
     }
 }
 
-if (!function_exists('component')) {
-    function component($component, $parms = [], $isLazy = false)
+if (!function_exists('renderBlock')) {
+    function renderBlock($component, $parms = [], $isLazy = false)
     {
+        $parms['component'] = $component;
+
         // lazy load
         if($isLazy || isset($parms['lazy']) && $parms['lazy']){
-
-            $parms['component'] = $component;
-      
-            $html = \Livewire\Livewire::mount('storefront/Components/view', array_merge($parms, ['lazy' => true]), generateKey());
+            $html = \Livewire\Livewire::mount('storefront.render-block', array_merge($parms, ['lazy' => true]), generateKey());
  
             return new \Twig\Markup($html, 'UTF-8');
         }
 
-        $html = \Livewire\Livewire::mount($component, array_merge($parms, ['lazy' => $isLazy]), generateKey());
+        $html = \Livewire\Livewire::mount('storefront.render-block', array_merge($parms, ['lazy' => $isLazy]), generateKey());
+ 
+        return new \Twig\Markup($html, 'UTF-8');
+    }
+}
 
+if (!function_exists('component')) {
+    function component($component, $parms = [], $isLazy = false)
+    {
+        $parms['component'] = $component;
+
+        // lazy load
+        if($isLazy || isset($parms['lazy']) && $parms['lazy']){
+            $html = \Livewire\Livewire::mount('storefront.component', array_merge($parms, ['lazy' => true]), generateKey());
+ 
+            return new \Twig\Markup($html, 'UTF-8');
+        }
+
+        $html = \Livewire\Livewire::mount('storefront.component', array_merge($parms, ['lazy' => $isLazy]), generateKey());
+ 
         return new \Twig\Markup($html, 'UTF-8');
     }
 }

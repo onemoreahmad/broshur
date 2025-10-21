@@ -232,6 +232,7 @@ return [
             'price',
             'data_get',
             'component',
+            'renderBlock',
             'siteComponent',
             // 'render',
             'cart',

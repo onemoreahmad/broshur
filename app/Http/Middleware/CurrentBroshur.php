@@ -21,8 +21,8 @@ class CurrentBroshur
         // if ($subdomain == config('app.domain')) {
         //     return $next($request);
         // }   
-  
-        $tenant = Tenant::where('handle', $subdomain)->orWhere('handle', request()->segment(1))->orWhere(function ($q) use ($host) {
+   
+        $tenant = Tenant::where('handle', $subdomain)->orWhere('handle', data_get(request(), 'tenant'))->orWhere(function ($q) use ($host) {
             $q->where('domain', $host)->where('domain_status', 1);
         })->first();
 
