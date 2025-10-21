@@ -7,7 +7,8 @@ use App\Models\ThemeOption;
 new class extends \Livewire\Volt\Component {
     public function render(): View
     {
-        $blocks = Block::where('tenant_id', tenant('id'))->where('active', true)->orderBy('order')->get();
+        $blocks = Block::where('active', true)->orderBy('order')->get();
+        $header = Block::where('name', 'header')->first();
    
         $themeOption = ThemeOption::where('theme_id', tenant('theme_id'))->first();
 
@@ -16,6 +17,7 @@ new class extends \Livewire\Volt\Component {
             ->with([
                 'blocks' => $blocks,
                 'options' => data_get($themeOption, 'config', []),
+                'header' => data_get($header, 'config', []),
             ])
             ;      
     } 

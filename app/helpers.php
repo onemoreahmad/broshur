@@ -226,6 +226,13 @@ if (!function_exists('production')) {
     }
 }
 
+if (!function_exists('storage')) {
+    function storage($path)
+    {
+        return Storage::url($path) ?? $path;
+    }
+}
+
 if (!function_exists('siteStyle')) {
     function siteStyle()
     {

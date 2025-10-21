@@ -248,6 +248,7 @@ return [
             'poseClass',
             'editorStyle',
             'production',
+            'storage',
             // 'catalogTwindConfig',
             // 'langDir',
             // 'blockInfo',

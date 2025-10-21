@@ -42,7 +42,8 @@ new class extends \Livewire\Volt\Component {
         $this->name = $this->tenant->name;
         $this->slogan = data_get($this->tenant->meta->slogan, app()->getLocale());
         $this->domain = $this->tenant->domain;
-        $this->logo = $this->tenant->meta->get('logo');
+        //$this->logo = $this->tenant->meta->get('logo');
+        $this->logo = $this->tenant->logo;
     }
 
     public function rules()
@@ -61,7 +62,8 @@ new class extends \Livewire\Volt\Component {
         $this->tenant->meta->set('slogan.' . app()->getLocale(), $this->slogan);
   
        if( !is_string($this->logo) && $this->logo) {
-            $this->tenant->meta->set('logo', $this->logo->store('logo'));
+            //$this->tenant->meta->set('logo', $this->logo->store('logo'));
+            $this->tenant->logo = $this->logo->store('logo');
         }
         
        /* if ($this->logo) {

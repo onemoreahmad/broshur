@@ -36,10 +36,10 @@ class Tenant extends Model
         return $this->domain && $this->domain_status == 1 ? $protocol . $this->domain : $protocol . $this->handle . '.' . config('app.domain');
     }
 
-    public function getLogoAttribute()
+    public function getLogoAttribute($value)
     {
-        if (data_get($this, 'meta.logo')) {
-            return Storage::url(data_get($this, 'meta.logo'));
+        if ($value) {
+            return Storage::url($value);
         }
   
         $parms = http_build_query([
@@ -66,16 +66,7 @@ class Tenant extends Model
         // return $this->siteUrl . '/links';
         // return $this->siteUrl . '/link-in-bio';
     }
-
-    public function getMenuUrlAttribute()
-    {
-        return $this->siteUrl . '/menu';
-    }
-
-    public function getBlogUrlAttribute()
-    {
-        return $this->siteUrl . '/blog';
-    }
+ 
  
     public function getSloganAttribute()
     {

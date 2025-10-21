@@ -1,39 +1,24 @@
 <div>
-    <ui:callout icon="info-circle" color="blue" inline>
-        <x-slot name="text"> هيدر البروشور الرئيسي.</x-slot>
-        {{-- <x-slot name="action" class="@md:h-full m-0!">
-            <rasm:button variant="primary" icon:trailing="arrow-left" wire-target="saveAndNext" class="cursor-pointer" wire:click="saveAndNext"> التالي </rasm:button>
-        </x-slot> --}}
-    </ui:callout>
- 
+    <ui:callout icon="info-circle" color="blue" text="هيدر البروشور الرئيسي." />
+  
     <div class="mt-5 max-w-3xl">
-        <form wire:submit="save" class="flex flex-col gap-y-6">
-             
-            <!-- Basic Information -->
-            <div class="bg-gray-50 rounded-lg p-3">
-              
- 
-            <ui:input 
-                name="name" 
-                label="الاسم" 
-               
-            />
-             
-            </div>
- 
+        <form wire:submit="save" id="header-form" class="flex flex-col gap-y-1">
+           
+            <ui:field name="logo" label="الشعار"  class="flex flex-col">
+                <ui:uploader wire:model="logo" :file="$logo" mode="profile" />
+            </ui:field>
+            
+            <ui:input name="name" label="اسم البروشور" placeholder="مثال: وجيز، قوت .." width="w-full" />
+            <ui:input name="slogan" label="الشعار النصّي" placeholder="مثال: Just do it ✔" width="w-full" />
+            
+            <ui:field name="cover" label="صورة الغلاف"  class="flex flex-col">
+                <ui:uploader wire:model="cover" :file="$cover"  />
+            </ui:field>
             <div class="flex mt-5 border-t border-gray-200 pt-3 border-dashed">
-                <ui:button 
-                    wire-target="save" 
-                    wire-action="submit" 
-                    variant="primary" 
-                    icon="check" 
-                    type="submit" 
-                    class="cursor-pointer"
-                > 
-                    حفظ التعديلات 
-                </ui:button>
+                <ui:button wire-target="save" label="حفظ " icon="check"  />
             </div>
         </form>
+ 
     </div>
 </div>
 
@@ -49,28 +34,37 @@ new class extends \Livewire\Volt\Component {
  
     public $block;
     public $name;
-    public $profileImage;
- 
+    public $domain;
+    public $tenant;
+    public $slogan;
+    public $logo;
+    public $cover;
+
     public function mount() {
         $this->block =  Block::firstOrCreate(['name'=> 'header']);
         
-        $this->name = data_get($this->block, 'config.name', '');
+        $this->tenant = currentTenant();
+ 
+        $this->name = $this->tenant->name;
+        $this->slogan = data_get($this->tenant->meta->slogan, app()->getLocale());
+        $this->cover = data_get($this->block, 'config.cover') ? \Storage::url(data_get($this->block, 'config.cover')) : null;
+        $this->domain = $this->tenant->domain;
+        $this->logo = $this->tenant->logo;
     }
-
-    public function updatedProfileImage() {
-        if ($this->profileImage instanceof TemporaryUploadedFile) {
-            $this->tempProfileImageUrl = $this->profileImage->temporaryUrl();
-        }
-    }
+ 
 
     public function rules() {
         $rules = [
-            'name' => 'required|string',
+            'name' => 'required|string|min:2|max:255',
         ];
 
-        // Only validate profile image if a new image is being uploaded
-        if ($this->profileImage instanceof TemporaryUploadedFile) {
-            $rules['profileImage'] = 'image|max:5048'; // 2MB max
+        // Only validate image if a new image is being uploaded
+        if ($this->logo instanceof TemporaryUploadedFile) {
+            $rules['logo'] = 'image|max:5048';  
+        }
+ 
+        if ($this->cover instanceof TemporaryUploadedFile) {
+            $rules['cover'] = 'image|max:5048';  
         }
  
         return $rules;
@@ -79,14 +73,33 @@ new class extends \Livewire\Volt\Component {
     public function save($showMessage = true) {   
         $this->validate();
  
-        // Update personal data
+        // Update block
         $this->block->config->name = $this->name;
- 
-        if ($this->profileImage instanceof TemporaryUploadedFile) {
-            //$this->cv->personal->profile_image = $this->profileImage->store('cv_images');
+       
+        // Update tenant
+        $this->tenant->name = $this->name;
+        $this->tenant->meta->set('slogan.' . app()->getLocale(), $this->slogan);
+  
+        if( !is_string($this->logo) && $this->logo) {
+            $this->tenant->logo = $this->logo->store('logo');
         }
-        
-        $this->block->save();
+  
+        if( !is_string($this->cover) && $this->cover) {
+            $this->block->config->set('cover', $this->cover->store('cover'));
+        }
+
+        if(!$this->cover) {
+            $this->block->config->set('cover', null);
+        }
+
+        if(!$this->logo) {
+            $this->tenant->logo = null;
+        }
+ 
+        $this->tenant->save();
+            $this->block->save();
+
+        $this->js('document.getElementById("linkinbio-iframe").contentWindow.location.reload();');
  
         $this->dispatch('notify', type:'success', text:'تم حفظ التعديلات بنجاح'); 
     }
