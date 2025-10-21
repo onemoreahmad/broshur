@@ -119,7 +119,7 @@ if (!function_exists('loadingIcon')) {
     function loadingIcon()
     {
         return '<div class="flex justify-center items-center p-3">
-            <rasm:icon name="loader-3" class="animate-spin  text-gray-300 w-10 h-10" />
+            <ui:icon name="loader-3" class="animate-spin  text-gray-300 w-10 h-10" />
         </div>';
     }
 }
