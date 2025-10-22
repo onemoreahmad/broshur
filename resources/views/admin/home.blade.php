@@ -19,7 +19,7 @@
                 </button>
                 <button wire:click="setTab('cta')" class="cursor-pointer lg:w-full w-fit shrink-0 hover:bg-gray-50 rounded-s p-2.5 px-3 flex flex-grow items-center gap-x-2 {{ $tab == 'cta' ? 'bg-white' : 'bg-gray-100/50' }}">
                     <span class="text-lg inline-block -mt-1"> 
-<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-octagon-plus size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13.196 1.246l5.575 2.39a3.04 3.04 0 0 1 1.595 1.594l2.388 5.573c.328 .764 .328 1.63 0 2.393l-2.39 5.575a3.04 3.04 0 0 1 -1.594 1.595l-5.573 2.388a3.03 3.03 0 0 1 -2.393 0l-5.574 -2.389a3.04 3.04 0 0 1 -1.595 -1.595l-2.388 -5.574a3.04 3.04 0 0 1 0 -2.392l2.39 -5.575a3.04 3.04 0 0 1 1.593 -1.595l5.574 -2.388a3.04 3.04 0 0 1 2.392 0m-1.196 6.754a1 1 0 0 0 -1 1v2h-2a1 1 0 0 0 0 2h2v2a1 1 0 0 0 2 0v-2h2a1 1 0 0 0 0 -2h-2v-2a1 1 0 0 0 -1 -1" /></svg>  
+                        <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-octagon-plus size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13.196 1.246l5.575 2.39a3.04 3.04 0 0 1 1.595 1.594l2.388 5.573c.328 .764 .328 1.63 0 2.393l-2.39 5.575a3.04 3.04 0 0 1 -1.594 1.595l-5.573 2.388a3.03 3.03 0 0 1 -2.393 0l-5.574 -2.389a3.04 3.04 0 0 1 -1.595 -1.595l-2.388 -5.574a3.04 3.04 0 0 1 0 -2.392l2.39 -5.575a3.04 3.04 0 0 1 1.593 -1.595l5.574 -2.388a3.04 3.04 0 0 1 2.392 0m-1.196 6.754a1 1 0 0 0 -1 1v2h-2a1 1 0 0 0 0 2h2v2a1 1 0 0 0 2 0v-2h2a1 1 0 0 0 0 -2h-2v-2a1 1 0 0 0 -1 -1" /></svg>  
                      </span>
                     <span class="text-sm text-gray-500"> أزرار الإجراءات </span>
                 </button>
@@ -54,11 +54,11 @@
                      </span>
                     <span class="text-sm text-gray-500"> آراء العملاء </span>
                 </button>
-                <button wire:click="setTab('projects')" class="cursor-pointer lg:w-full w-fit shrink-0 hover:bg-gray-50 rounded-s p-2.5 px-3 flex flex-grow items-center gap-x-2 {{ $tab == 'projects' ? 'bg-white' : 'bg-gray-100/50' }}">
+                <button wire:click="setTab('clients')" class="cursor-pointer lg:w-full w-fit shrink-0 hover:bg-gray-50 rounded-s p-2.5 px-3 flex flex-grow items-center gap-x-2 {{ $tab == 'clients' ? 'bg-white' : 'bg-gray-100/50' }}">
                     <span class="text-lg inline-block -mt-1"> 
                     <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-trophy size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" /></svg>
                      </span>
-                    <span class="text-sm text-gray-500"> الأعمال والمشاريع </span>
+                    <span class="text-sm text-gray-500"> العملاء </span>
                 </button>
                 <button wire:click="setTab('branches')" class="cursor-pointer lg:w-full w-fit text-start shrink-0 hover:bg-gray-50 rounded-s p-2.5 px-3 flex flex-grow items-center gap-x-2 {{ $tab == 'branches' ? 'bg-white' : 'bg-gray-100/50' }}">
                     <span class="text-lg inline-block -mt-1"> 
