@@ -1,10 +1,10 @@
 
- <section class="bg-gray-100">
+ <section class="bg-gray-100 pb-32">
     <div class="px-4 mx-auto bg-black max-w-7xl sm:px-6 lg:px-8 2xl:rounded-xl">
         <div class="py-10 sm:py-16 lg:py-24 2xl:ps-24">
             <div class="grid items-center grid-cols-1 gap-y-8 lg:grid-cols-2 lg:gap-x-8 2xl:gap-x-20">
                 <div class="lg:order-2 2xl:-ml-24">
-                    <img class="w-full shadow-xl rounded-xl" src="https://cdn.rareblocks.xyz/collection/celebration/images/cta/6/dashboard-screenshot.png" alt="" />
+                    <img class="w-full shadow-xl rounded-xl" src="{{ asset('assets/images/dashboard.webp') }}" alt="" />
                 </div>
 
                 <div class="lg:order-1">
