@@ -1,7 +1,5 @@
 <div>
-    <ui:callout icon="info-circle" color="blue" inline>
-        <x-slot name="text"> أزرار الإجراءات الرئيسية، يمكنك إضافة أكثر من زر لدفع الزائر لإتخاذ إجراء مثل شراء أو حجز خدمة أو التواصل معك.</x-slot>
-    </ui:callout>
+    <ui:callout icon="info-circle" color="blue" text="قائمة المزايا الرئيسية، يمكنك إضافة أكثر من ميزة لعرضها لعملائك المحتملين." />
  
     <div class="mt-5 max-w-3xl">
         <form wire:submit="save" class="flex flex-col gap-y-1">

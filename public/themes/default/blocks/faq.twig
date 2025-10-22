@@ -1,24 +1,33 @@
   <!-- FAQ Section -->
-  <div class="mt-6" x-data="{ openItem: null }">
-    <h3 class="text-lg font-bold text-gray-900 flex items-center gap-x-2 px-6 border-b-2 border-gray-100 pb-3">
-        <span class="text-gray-500"> 
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
-            </svg>
-        </span>
-        <span class="text-gray-800"> الأسئلة المتكررة </span>
-    </h3>
-    <div class="space-y-px">
-        <!-- FAQ Item 1 -->
+  <div class="mt-6" x-data="{ openItem: 1 }">
+
+    <div class="px-6 border-b-2 border-gray-100 pb-6">
+        <h3 class="text-lg font-bold text-gray-900 flex items-center gap-x-2  ">
+            <span class="text-gray-500"> 
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                </svg>
+            </span>
+            <span class="text-gray-800"> {{title[locale()]}} </span>
+
+        </h3>
+        {% if subtitle[locale()] %}
+        <p class="text-gray-500 ms-8 mt-2 text-sm"> {{subtitle[locale()]}} </p>
+        {% endif %}
+    </div>
+
+    <div class="space-y-px divide-y divide-gray-100">
+        {% for item in items %}
+        <!-- FAQ Item  -->
         <div class="">
             <button 
-                @click="openItem = openItem === 1 ? null : 1"
+                @click="openItem = {{loop.index}}"
                 class="w-full flex items-center justify-between p-4 px-8 hover:bg-gray-50 transition-colors"
             >
-                <span class="font-medium text-gray-600"> قصة الشركة </span>
+                <span class="font-medium text-gray-600"> {{item.question[locale()]}} </span>
                 <svg 
                     class="w-5 h-5 text-gray-500 transition-transform duration-200"
-                    :class="{ 'rotate-180': openItem === 1 }"
+                    :class="{ 'rotate-180': openItem === {{loop.index}} }"
                     fill="none" 
                     stroke="currentColor" 
                     viewBox="0 0 24 24"
@@ -27,118 +36,22 @@
                 </svg>
             </button>
             <div 
-                x-show="openItem === 1"
-                x-transition:enter="transition ease-out duration-200"
+                x-show="openItem === {{loop.index}} "
+                {# x-transition:enter="transition ease-out duration-50"
                 x-transition:enter-start="opacity-0 transform -translate-y-2"
                 x-transition:enter-end="opacity-100 transform translate-y-0"
-                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave="transition ease-in duration-50"
                 x-transition:leave-start="opacity-100 transform translate-y-0"
-                x-transition:leave-end="opacity-0 transform -translate-y-2"
+                x-transition:leave-end="opacity-0 transform -translate-y-2" #}
                 class="px-4 py-4"
             >
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    We started our journey in 2015 with a vision to provide exceptional real estate services. Over the years, we've helped hundreds of families find their dream homes and investment properties. Our commitment to excellence and personalized service has made us one of the most trusted real estate teams in Philadelphia.
+                <p class="text-gray-600 text-sm leading-relaxed ms-6">
+                    {{item.answer[locale()]}}
                 </p>
             </div>
         </div>
+        {% endfor %}
 
-        <!-- FAQ Item 2 -->
-        <div class="borderx border-gray-200 rounded-lg">
-            <button 
-                @click="openItem = openItem === 2 ? null : 2"
-                class="w-full flex items-center justify-between p-4 px-8 hover:bg-gray-50 transition-colors"
-            >
-                <span class="font-medium text-gray-600"> لماذا نحن ؟ </span>
-                <svg 
-                    class="w-5 h-5 text-gray-500 transition-transform duration-200"
-                    :class="{ 'rotate-180': openItem === 2 }"
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-            </button>
-            <div 
-                x-show="openItem === 2"
-                x-transition:enter="transition ease-out duration-200"
-                x-transition:enter-start="opacity-0 transform -translate-y-2"
-                x-transition:enter-end="opacity-100 transform translate-y-0"
-                x-transition:leave="transition ease-in duration-150"
-                x-transition:leave-start="opacity-100 transform translate-y-0"
-                x-transition:leave-end="opacity-0 transform -translate-y-2"
-                class="px-4 py-4"
-            >
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    Our team brings over 5+ years of combined experience in the Philadelphia real estate market. We understand the local neighborhoods, market trends, and what it takes to get the best deals for our clients. We're committed to making your real estate journey as smooth and stress-free as possible.
-                </p>
-            </div>
-        </div>
-
-        <!-- FAQ Item 3 -->
-        <div class="borderx border-gray-200 rounded-lg">
-            <button 
-                @click="openItem = openItem === 3 ? null : 3"
-                class="w-full flex items-center justify-between p-4 px-8 hover:bg-gray-50 transition-colors"
-            >
-                <span class="font-medium text-gray-600"> كيف نعمل ؟ </span>
-                <svg 
-                    class="w-5 h-5 text-gray-500 transition-transform duration-200"
-                    :class="{ 'rotate-180': openItem === 3 }"
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-            </button>
-            <div 
-                x-show="openItem === 3"
-                x-transition:enter="transition ease-out duration-200"
-                x-transition:enter-start="opacity-0 transform -translate-y-2"
-                x-transition:enter-end="opacity-100 transform translate-y-0"
-                x-transition:leave="transition ease-in duration-150"
-                x-transition:leave-start="opacity-100 transform translate-y-0"
-                x-transition:leave-end="opacity-0 transform -translate-y-2"
-                class="px-4 py-4"
-            >
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    We follow a comprehensive approach: First, we listen to your needs and preferences. Then, we conduct thorough market research to find the best properties or buyers. We handle all negotiations, paperwork, and legal requirements. Finally, we ensure a smooth closing process and provide ongoing support even after the transaction is complete.
-                </p>
-            </div>
-        </div>
-
-        <!-- FAQ Item 4 -->
-        <div class="borderx border-gray-200 rounded-lg">
-            <button 
-                @click="openItem = openItem === 4 ? null : 4"
-                class="w-full flex items-center justify-between p-4 px-8 hover:bg-gray-50 transition-colors"
-            >
-                <span class="font-medium text-gray-600"> مناطق الخدمة </span>
-                <svg 
-                    class="w-5 h-5 text-gray-500 transition-transform duration-200"
-                    :class="{ 'rotate-180': openItem === 4 }"
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-            </button>
-            <div 
-                x-show="openItem === 4"
-                x-transition:enter="transition ease-out duration-200"
-                x-transition:enter-start="opacity-0 transform -translate-y-2"
-                x-transition:enter-end="opacity-100 transform translate-y-0"
-                x-transition:leave="transition ease-in duration-150"
-                x-transition:leave-start="opacity-100 transform translate-y-0"
-                x-transition:leave-end="opacity-0 transform -translate-y-2"
-                class="px-4 py-4"
-            >
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    We specialize in the greater Philadelphia area, including Center City, University City, Fishtown, Northern Liberties, Queen Village, and surrounding neighborhoods. We also serve clients in the Philadelphia suburbs including Bucks County, Montgomery County, and Delaware County.
-                </p>
-            </div>
-        </div>
+       
     </div>
 </div>
