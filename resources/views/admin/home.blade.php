@@ -60,12 +60,12 @@
                      </span>
                     <span class="text-sm text-gray-500"> العملاء </span>
                 </button>
-                <button wire:click="setTab('branches')" class="cursor-pointer lg:w-full w-fit text-start shrink-0 hover:bg-gray-50 rounded-s p-2.5 px-3 flex flex-grow items-center gap-x-2 {{ $tab == 'branches' ? 'bg-white' : 'bg-gray-100/50' }}">
+                {{-- <button wire:click="setTab('branches')" class="cursor-pointer lg:w-full w-fit text-start shrink-0 hover:bg-gray-50 rounded-s p-2.5 px-3 flex flex-grow items-center gap-x-2 {{ $tab == 'branches' ? 'bg-white' : 'bg-gray-100/50' }}">
                     <span class="text-lg inline-block -mt-1"> 
                     <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-map-2 size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 18.5l-3 -1.5l-6 3v-13l6 -3l6 3l6 -3v7.5" /><path d="M9 4v13" /><path d="M15 7v5.5" /><path d="M21.121 20.121a3 3 0 1 0 -4.242 0c.418 .419 1.125 1.045 2.121 1.879c1.051 -.89 1.759 -1.516 2.121 -1.879z" /><path d="M19 18v.01" /></svg>
                     </span>
                     <span class="text-sm text-gray-500"> الفروع وساعات العمل </span>
-                </button>
+                </button> --}}
                
             </nav>
 

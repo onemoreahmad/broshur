@@ -29,12 +29,10 @@
          <div x-data="{ input: '{{ currentTenant('storefrontUrl') }}'  }" class="flex items-center gap-2 bg-gray-300/50 p-1 rounded-lg">
             <ui:icon name="link" class="text-gray-500 ms-2" />
             <div class="text-gray-400 text-sm w-full bg-white p-2 px-3 rounded-lg border border-gray-200" dir="ltr">{{ currentTenant('storefrontUrl') }}</div>
-            <ui:button icon="copy" @click="navigator.clipboard.writeText(input), $dispatch('notify', {text: 'تم نسخ رابط السيرة الذاتية', type: 'success'})" class="bg-white hover:bg-gray-100 !text-gray-500" />
+            <ui:button icon="copy" @click="navigator.clipboard.writeText(input), $dispatch('notify', {text: 'تم نسخ رابط البروشور', type: 'success'})" class="bg-white hover:bg-gray-100 !text-gray-500" />
             <ui:button icon="eye" icon:trailing="arrow-up-left" target="_blank" variant="primary" class="bg-green-500 hover:bg-green-600 text-white" href="{{ currentTenant('storefrontUrl') }}"> معاينة البروشور</ui:button>
          </div>
-  
    
-      
 
          <div class="md:flex items-center bg-gray-50 p-2 rounded-lg" data-sentry-component="ShareCv" data-sentry-source-file="share-cv.tsx">
             <div class="grow">

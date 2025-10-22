@@ -1,25 +1,24 @@
-<header class="py-2 @if(!request()->routeIs('site.home')) bg-black/80 @endif text-white sm:py-3 fixedX w-full " x-data="{expanded: false}">
-        <div class="px-1 lg:px-0 mx-auto max-w-7xl">
+<header class="py-3 @if(!request()->routeIs('site.home')) bg-black/80 @endif text-white sm:py-6 fixedX w-full " x-data="{expanded: false}">
+        <div class="px-2 lg:px-0 mx-auto max-w-7xl">
             <div class="flex items-center justify-between">
                 <div class="shrink-0 flex items-center gap-x-2">
-                    <a href="{{ route('site.home') }}" wire:navigate title="" class="flex items-center gap-x-2 ps-3">
-                        {{-- <img class="w-auto h-7 rounded-full" src="{{ asset('assets/images/logo.png') }}" alt="" /> --}}
-                        <img class="w-auto h-7 rounded-full" src="{{ asset('assets/images/logos/link-in-bio.svg') }}" alt="" />
-                        <span class=" font-bold">
+                    <a href="{{ route('site.home') }}" wire:navigate title="" class="flex items-center gap-x-3  ">
+                        <img class="w-auto h-10" src="{{ asset('assets/images/logo-shape-white.svg') }}" alt="" />
+                        <img class="w-auto h-10" src="{{ asset('assets/images/logo-white.webp') }}" alt="" />
+                        {{-- <span class=" font-bold">
                             {{ config('app.name') }} 
-                        </span>
+                        </span> --}}
                     </a>
 
-                    <div class="lg:ms-20 ms-6 flex items-center gap-x-2">
-                        {{-- <ui:button variant="ghost" href="{{ route('site.page.about') }}" label="عن {{ config('app.name') }}" wire:navigate wire:current="!bg-gray-200" class="text-black !hidden !lg:flex hover:text-black/70 !hover:bg-black/5 "  /> --}}
+                    {{-- <div class="lg:ms-20 ms-6 flex items-center gap-x-2">
                         <ui:button variant="ghost" href="{{ route('site.page.plans') }}" label="الأسعار" wire:navigate wire:current="!bg-gray-800" class="text-white hover:text-white/70 !hover:bg-black/5 "  />
-                    </div>
+                    </div> --}}
                 </div>
      
       
                 <div class="flex items-center sm:ms-auto lg:ms-4 gap-x-2">
                     @auth
-                        <ui:button variant="primary" href="{{ route('admin.home') }}" label="لوحة التحكم" class="!rounded-full" rounded="full" icon="settings" />
+                        <ui:button variant="primary" href="{{ route('admin.home') }}" label="لوحة التحكم" class="!rounded-full text-xl !p-6" rounded="full" icon="settings" />
                     @else
                         <ui:button variant="primary" href="{{ route('auth.register') }}" label="بروشور جديد" wire:navigate rounded="full" icon="plus" class="!rounded-full !bg-primary-600 !hover:bg-primary-700" />
                         <ui:button variant="ghost" href="{{ route('auth.login') }}" label="دخول" wire:navigate class="text-white hover:text-white/70 !hover:bg-black/5 " icon:trailing="arrow-left" />
