@@ -1,5 +1,6 @@
 @props([
     'items' => [],
+    'fields' => [],
     'addLabel' => 'أضف عنصر',
 ])
     
@@ -13,7 +14,12 @@
              }
          },
          addItem() {
-             this.items.push({ id: Math.random() * 10, title: '', description: '' })
+             var fields =  @js($fields) ;
+      
+             var item =  { id: parseInt(Math.random() * 10) + 1, ...fields} ;
+
+             this.items.push(item)
+             console.log(this.items);
          },
          removeItem(i) {
              this.items.splice(i, 1)
@@ -27,8 +33,7 @@
                          class=" !bg-red-100 !text-red-500 !hover:text-red-500 !text-xs !hover:bg-red-300 flex-shrink-0 !px-2 !py-1 absolute top-0 rtl:left-0 ltr:right-0 z-40 !no-underline" />
 
                      <span x-text="i + 1" class="bg-primary-100 text-black/40 text-xs rounded-md px-2 py-1 absolute top-0 rtl:left-0 ltr:right-0 z-40 me-6"></span>
-
-
+ 
                      {{ $slot }}
                  </div>
              </template>
