@@ -7,7 +7,7 @@
                 <img class="w-auto h-8 mx-auto lg:mx-0" src="{{ asset('assets/images/logo.svg') }}" alt="" />
             </div>
 
-            <ul class="flex items-center justify-center mt-8 gap-x-6 sm:mt-12 sm:gap-x-16 lg:mt-0">
+            {{-- <ul class="flex items-center justify-center mt-8 gap-x-6 sm:mt-12 sm:gap-x-16 lg:mt-0">
                 <li>
                     <a href="{{ route('site.page.about') }}" wire:navigate title="" class="text-sm font-medium text-gray-900 transition-all duration-200 font-pj hover:text-gray-600"> عن {{ config('app.name') }} </a>
                 </li>
@@ -24,7 +24,7 @@
                 <li>
                     <a href="{{ route('site.page.contact') }}" wire:navigate title="" class="text-sm font-medium text-gray-900 transition-all duration-200 font-pj hover:text-gray-600"> اتصل بنا </a>
                 </li>
-            </ul>
+            </ul> --}}
 
             <ul class="flex items-center justify-center mt-8 gap-x-3 sm:mt-12 lg:justify-end lg:mt-0">
                 <li>
