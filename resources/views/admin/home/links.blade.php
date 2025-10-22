@@ -1,42 +1,18 @@
 <div>
-    <ui:callout icon="info-circle" color="blue" inline>
-        <x-slot name="text"> أزرار الإجراءات الرئيسية، يمكنك إضافة أكثر من زر لدفع الزائر لإتخاذ إجراء مثل شراء أو حجز خدمة أو التواصل معك.</x-slot>
-        {{-- <x-slot name="action" class="@md:h-full m-0!">
-            <rasm:button variant="primary" icon:trailing="arrow-left" wire-target="saveAndNext" class="cursor-pointer" wire:click="saveAndNext"> التالي </rasm:button>
-        </x-slot> --}}
-    </ui:callout>
+    <ui:callout icon="info-circle" color="blue" text="قائمة الحسابات الإجتماعية التي يمكنك إضافها لعرضها في الهيدر والصفحة الرئيسية." />
  
     <div class="mt-5 max-w-3xl">
-        <form wire:submit="save" class="flex flex-col gap-y-6">
-             
-            <!-- Basic Information -->
-            <div class="bg-gray-50 rounded-lg p-3">
-              
- 
-            <ui:radio 
-                name="radio" 
-                label="الخدمة العسكرية" 
-                width="w-full"
-                :options="[
-                    'yes' => 'نعم',
-                    'no' => 'لا',
-                    'hide' => 'إخفاء'
-                ]"
-            />
-             
-            </div>
- 
+        <form wire:submit="save" class="flex flex-col gap-y-1">
+  
+                <ui:item-list :items="$items" addLabel="أضف حساب إجتماعي" :fields="['name' => 'twitter', 'url' => '']">
+                    <ui:select x-model="item.name" :options="__('socialNetworks')" placeholder="مثال: الفيسبوك" label="الشبكة" />
+                    <ui:input x-model="item.url" placeholder="https://x.com/yourhandle" dir="ltr" label="الرابط" />
+                </ui:item-list>
+                <pre x-text="JSON.stringify($items, null, 2)"></pre>
+            
+
             <div class="flex mt-5 border-t border-gray-200 pt-3 border-dashed">
-                <ui:button 
-                    wire-target="save" 
-                    wire-action="submit" 
-                    variant="primary" 
-                    icon="check" 
-                    type="submit" 
-                    class="cursor-pointer"
-                > 
-                    حفظ التعديلات 
-                </ui:button>
+                <ui:button wire-target="save" label="حفظ " icon="check"  />
             </div>
         </form>
     </div>
@@ -44,44 +20,44 @@
 
 <?php
 use App\Models\Block;
-use Livewire\Attributes\Renderless;
  
 new class extends \Livewire\Volt\Component {
    
-    public $radio;
-  
+    public $active = true;
+    public $block;
+    public $title;
+    public $subtitle;
+    public $items = [];
+
     public function mount() {
-  
-        $block =  Block::where('tenant_id', currentTenant('id'))->where('name', 'cta')->first();
-        
-        $this->radio = data_get($block, 'config.radio', '');
+        $this->items = data_get(tenant(), 'meta.socialLinks', [
+            [
+                'name' => 'twitter',
+                'url' => ''
+            ],
+        ]);
     }
   
     public function rules() {
         $rules = [
-            'radio' => 'required|string',
+            'items' => 'nullable|array',
         ];
- 
- 
+  
         return $rules;
     }
 
-    public function save($showMessage = true) {   
+    public function save() {   
         $this->validate();
+ 
    
+        tenant()->meta->set('socialLinks', $this->items);
+        tenant()->save();
+
+        $this->js('document.getElementById("linkinbio-iframe").contentWindow.location.reload();');
+
         $this->dispatch('notify', type:'success', text:'تم حفظ التعديلات بنجاح'); 
     }
-
-    public function saveAndNext() {
-        $this->save();
-        $this->dispatch('setTab', tab: 'cta');
-    }
-
-    #[Renderless]
-    public function autoSave() {
-        $this->save(false);
-    }
-
+ 
     function placeholder() {
         return loadingIcon();
     }

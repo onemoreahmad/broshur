@@ -1,0 +1,16 @@
+
+ {% if items | length %}
+ <div class="hidden md:flex absolute -left-16 flex-col gap-1.5 z-20 bg-black/20 p-1 rounded-xl">
+    {% for link in items %}
+    <button class="w-12 h-12  flex items-center justify-center   ">
+ 
+
+        <a href="{{link.url}}" target="_blank"
+        class="flex items-center  text-white/80  p-2  rounded-xl bg-white/5  hover:bg-white/10">
+            <span class="size-7">{% include 'assets/icons/social/brand-'~link.name~'.svg' ignore missing %}   </span>
+        </a>
+
+    </button>
+    {% endfor %}
+</div>
+{% endif %}

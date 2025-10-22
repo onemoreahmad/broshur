@@ -72,4 +72,10 @@ class Tenant extends Model
     {
         return data_get($this, 'meta.slogan') ? data_get($this, 'meta.slogan.'.app()->getLocale()) : null;
     }
+
+    public function getSocialLinksAttribute()
+    {
+        return data_get($this, 'meta.socialLinks', []);
+    }
+    
 }

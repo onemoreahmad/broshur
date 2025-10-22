@@ -2,7 +2,6 @@
 
 use Illuminate\Contracts\View\View;
 use App\Models\Block;
-use App\Models\ThemeOption;
  
 new class extends \Livewire\Volt\Component {
     public function render(): View
@@ -10,13 +9,12 @@ new class extends \Livewire\Volt\Component {
         $blocks = Block::where('active', true)->orderBy('order')->get();
         $header = Block::where('name', 'header')->first();
    
-        $themeOption = ThemeOption::where('theme_id', tenant('theme_id'))->first();
 
         return view()->first(['theme::home'])
             ->layout('theme::layout')
             ->with([
                 'blocks' => $blocks,
-                'options' => data_get($themeOption, 'config', []),
+                'options' => option(),
                 'header' => data_get($header, 'config', []),
             ])
             ;      

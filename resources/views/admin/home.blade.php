@@ -23,6 +23,12 @@
                      </span>
                     <span class="text-sm text-gray-500"> أزرار الإجراءات </span>
                 </button>
+                 <button wire:click="setTab('links')" class="cursor-pointer lg:w-full w-fit text-start shrink-0 hover:bg-gray-50 rounded-s p-2.5 px-3 flex flex-grow items-center gap-x-2 {{ $tab == 'links' ? 'bg-white' : 'bg-gray-100/50' }}">
+                    <span class="text-lg inline-block -mt-1"> 
+                        <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-share size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M8.7 10.7l6.6 -3.4" /><path d="M8.7 13.3l6.6 3.4" /></svg>
+                    </span>
+                    <span class="text-sm text-gray-500"> الحسابات الإجتماعية </span>
+                </button>
                 <button wire:click="setTab('hero')" class="cursor-pointer lg:w-full w-fit shrink-0 hover:bg-gray-50 rounded-s p-2.5 px-3 flex flex-grow items-center gap-x-2 {{ $tab == 'hero' ? 'bg-white' : 'bg-gray-100/50' }}">
                     <span class="text-lg inline-block -mt-1"> 
                     <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-star size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" /></svg>
@@ -60,12 +66,7 @@
                     </span>
                     <span class="text-sm text-gray-500"> الفروع وساعات العمل </span>
                 </button>
-                <button wire:click="setTab('links')" class="cursor-pointer lg:w-full w-fit text-start shrink-0 hover:bg-gray-50 rounded-s p-2.5 px-3 flex flex-grow items-center gap-x-2 {{ $tab == 'links' ? 'bg-white' : 'bg-gray-100/50' }}">
-                    <span class="text-lg inline-block -mt-1"> 
-                        <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-share size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M8.7 10.7l6.6 -3.4" /><path d="M8.7 13.3l6.6 3.4" /></svg>
-                    </span>
-                    <span class="text-sm text-gray-500"> الحسابات الإجتماعية </span>
-                </button>
+               
             </nav>
 
             <div class="bg-white lg:rounded-lg rounded-b-lg -mr-1.5 p-6 min-h-[60vh] w-full">

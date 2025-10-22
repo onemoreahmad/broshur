@@ -205,12 +205,16 @@ if (!function_exists('themeOptionList')) {
     }
 }
 
-// if (!function_exists('option')) {
-//     function option($key, $default = null)
-//     {
-//         return data_get(tenant(), 'linkinbio_theme_options.'.$key, $default);
-//     }
-// }
+if (!function_exists('option')) {
+    function option($key =null, $default = null)
+    {
+        if($key){
+            return data_get(config('themeOptions'), $key, $default);
+        }
+
+        return config('themeOptions');
+    }
+}
 
 if (!function_exists('locale')) {
     function locale()

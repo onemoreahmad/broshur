@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Models\Tenant;
 use App\Models\Theme;
 // use App\Models\Setting;
+use App\Models\ThemeOption;
 
 class CurrentBroshur
 {
@@ -34,10 +35,11 @@ class CurrentBroshur
  
         // $settings = Setting::where('tenant_id', $tenant->id)->where('name', 'settings')->first();
         $theme = Theme::where('id', $tenant->theme_id)->first();
-    
+        $themeOptions = ThemeOption::where('theme_id', $tenant->theme_id)->first();
+ 
         // config()->set('settings', data_get($settings, 'config', []));
-   
-  
+        config()->set('themeOptions', data_get($themeOptions, 'config', []));
+    
         view()->addNamespace(
             'theme',
             public_path('themes/' .  data_get($theme, 'slug', 'default'))

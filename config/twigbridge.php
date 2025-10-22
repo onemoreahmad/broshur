@@ -268,7 +268,7 @@ return [
             // 'appsMap',
             // 'appSlugById',
             // 'appNameById',
-            // 'option',
+            'option',
             'primaryColorCode',
             'cityById',
             'icon',
