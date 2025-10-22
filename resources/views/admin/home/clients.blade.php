@@ -12,9 +12,10 @@
             
                 <ui:separator text="قائمة العملاء" />
 
-                <ui:item-list :items="$items" addLabel="أضف عميل" :fields="['name' => '', 'logo' => '', 'url' => '']">
+                <ui:item-list imageField="logo" :items="$items" addLabel="أضف عميل" :fields="['name' => '', 'logo' => '', 'url' => '']">
                     <ui:input x-model="item.name" placeholder="مثال: وجيز" label="اسم العميل" />
-                    <ui:input x-model="item.logo" label="الشعار" />
+                    <ui:upload-image name="item.logo"  label="الشعار" />
+                   
                     <ui:input x-model="item.url" placeholder="https://www.google.com" dir="ltr" label="الرابط" />
                 </ui:item-list>
             @endif
@@ -28,8 +29,10 @@
 
 <?php
 use App\Models\Block;
- 
+use Livewire\WithFileUploads;
+
 new class extends \Livewire\Volt\Component {
+    use WithFileUploads;
    
     public $active = true;
     public $block;
@@ -59,7 +62,7 @@ new class extends \Livewire\Volt\Component {
 
     public function save() {   
         $this->validate();
-  
+ 
         $this->block->active = $this->active;
         $this->block->config->set('title.' . app()->getLocale(), $this->title);
         $this->block->config->set('subtitle.' . app()->getLocale(), $this->subtitle);
@@ -69,6 +72,21 @@ new class extends \Livewire\Volt\Component {
         $this->js('document.getElementById("linkinbio-iframe").contentWindow.location.reload();');
 
         $this->dispatch('notify', type:'success', text:'تم حفظ التعديلات بنجاح'); 
+    }
+
+    public function updatedItems($value, $key)
+    {
+        // Handle image uploads when items are updated
+        if (str_contains($key, '.logo')) {
+            $itemIndex = explode('.', $key)[0];
+            if (isset($this->items[$itemIndex]['logo']) && $this->items[$itemIndex]['logo']) {
+                if(!is_string($this->items[$itemIndex]['logo'])) {
+                    $this->items[$itemIndex]['logo'] = $this->items[$itemIndex]['logo']->store('clients');
+                } else {
+                    $this->items[$itemIndex]['logo'] = $this->items[$itemIndex]['logo'];
+                }
+            }
+        }
     }
  
     function placeholder() {

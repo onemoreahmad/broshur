@@ -1,6 +1,7 @@
 @props([
     'items' => [],
     'fields' => [],
+    'imageField' => 'logo',
     'addLabel' => 'أضف عنصر',
 ])
     
@@ -19,11 +20,32 @@
              var item =  { id: parseInt(Math.random() * 10) + 1, ...fields} ;
 
              this.items.push(item)
-             console.log(this.items);
          },
          removeItem(i) {
              this.items.splice(i, 1)
          },
+         handleImageUpload(itemIndex, file) {
+             if (file) {
+                 // Create a temporary URL for preview
+                 const reader = new FileReader();
+                 reader.onload = (e) => {
+                     this.items[itemIndex]['{{ $imageField }}'] = e.target.result;
+                 };
+                 reader.readAsDataURL(file);
+                 
+                 // Use Livewire's upload method for the specific item
+                 @this.upload('items.' + itemIndex + '.' + '{{ $imageField }}', file, () => {
+                     console.log('Upload started');
+                 }, () => {
+                     console.log('Upload completed');
+                 }, (event) => {
+                     console.log('Upload progress:', event.detail.progress);
+                 });
+             }
+         },
+         removeImage(itemIndex) {
+             this.items[itemIndex]['{{ $imageField }}'] = null;
+         }
      }" x-cloak class="flex flex-col gap-y-1">
          <div wire:ignore x-id="['list-item']">
              <template x-for="(item, i) in items" :key="i">

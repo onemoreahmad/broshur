@@ -237,7 +237,7 @@ if (!function_exists('storage')) {
             return Storage::url($path);
         }
 
-        return $path;
+        return Storage::url('/');
     }
 }
 
