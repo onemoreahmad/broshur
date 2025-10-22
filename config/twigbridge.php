@@ -234,6 +234,8 @@ return [
             'component',
             'renderBlock',
             'siteComponent',
+            'gravatar',
+            'hideEmail',
             // 'render',
             'cart',
             // 'cartItems',

@@ -1,42 +1,28 @@
 <div>
-    <ui:callout icon="info-circle" color="blue" inline>
-        <x-slot name="text"> أزرار الإجراءات الرئيسية، يمكنك إضافة أكثر من زر لدفع الزائر لإتخاذ إجراء مثل شراء أو حجز خدمة أو التواصل معك.</x-slot>
-        {{-- <x-slot name="action" class="@md:h-full m-0!">
-            <rasm:button variant="primary" icon:trailing="arrow-left" wire-target="saveAndNext" class="cursor-pointer" wire:click="saveAndNext"> التالي </rasm:button>
-        </x-slot> --}}
-    </ui:callout>
+    <ui:callout icon="info-circle" color="blue" text="قائمة آراء وتقييمات العملاء، يمكنك إضافة التقييمات الخاصة بالعملاء لعرضها بالصفحة." />
  
     <div class="mt-5 max-w-3xl">
-        <form wire:submit="save" class="flex flex-col gap-y-6">
-             
-            <!-- Basic Information -->
-            <div class="bg-gray-50 rounded-lg p-3">
-              
- 
-            <ui:radio 
-                name="radio" 
-                label="الخدمة العسكرية" 
-                width="w-full"
-                :options="[
-                    'yes' => 'نعم',
-                    'no' => 'لا',
-                    'hide' => 'إخفاء'
-                ]"
-            />
-             
-            </div>
- 
+        <form wire:submit="save" class="flex flex-col gap-y-1">
+
+            <ui:toggle name="active" label="تفعيل القسم" :live="true"   />
+
+            @if($active)
+                <ui:input name="title" label="العنوان الأساسي" placeholder="مثال: آراء العملاء" />
+                <ui:textarea name="subtitle" label="العنوان الفرعي" placeholder="مثال: هنا قائمة بآراء العملاء على أكثر الخدمات تكراراً، إذا لم تجد آراء لخدمتك تواصل معنا في أي وقت."   />
+            
+                <ui:separator text="قائمة التقييمات" />
+
+                <ui:item-list :items="$items" addLabel="أضف تقييم" :fields="['comment' => '', 'name' => '', 'email' => '', 'rating' => 5]">
+                    <ui:textarea x-model="item.comment" placeholder="مثال: كانت الخدمة رائعة، والموظفين مهذبين ومتعاونين." label="التعليق" />
+                    <ui:input x-model="item.name" placeholder="مثال: عبد الله خالد" label="الاسم" />
+                    <ui:input x-model="item.email" dir="ltr" placeholder="example@gmail.com" label="البريد الإلكتروني" type="email" />
+                    <ui:input x-model="item.rating" placeholder="5" label="التقييم" type="number" min="1" max="5" step="1" />
+                    {{-- <ui:rating x-model="item.rating" placeholder="5" label="التقييم" type="number" min="1" max="5" step="1" /> --}}
+                </ui:item-list>
+            @endif
+
             <div class="flex mt-5 border-t border-gray-200 pt-3 border-dashed">
-                <ui:button 
-                    wire-target="save" 
-                    wire-action="submit" 
-                    variant="primary" 
-                    icon="check" 
-                    type="submit" 
-                    class="cursor-pointer"
-                > 
-                    حفظ التعديلات 
-                </ui:button>
+                <ui:button wire-target="save" label="حفظ " icon="check"  />
             </div>
         </form>
     </div>
@@ -44,44 +30,49 @@
 
 <?php
 use App\Models\Block;
-use Livewire\Attributes\Renderless;
  
 new class extends \Livewire\Volt\Component {
    
-    public $radio;
-  
+    public $active = true;
+    public $block;
+    public $title;
+    public $subtitle;
+    public $items = [];
+
     public function mount() {
-  
-        $block =  Block::where('tenant_id', currentTenant('id'))->where('name', 'cta')->first();
-        
-        $this->radio = data_get($block, 'config.radio', '');
+        $this->block =  Block::firstOrCreate(['name'=> 'testimonials']);    
+
+        $this->active = data_get($this->block, 'active', true);
+        $this->title = data_get($this->block, 'config.title.' . app()->getLocale());
+        $this->subtitle = data_get($this->block, 'config.subtitle.' . app()->getLocale());
+        $this->items = data_get($this->block, 'config.items', []);
     }
   
     public function rules() {
         $rules = [
-            'radio' => 'required|string',
+            'title' => 'nullable|string|max:255',
+            'subtitle' => 'nullable|string',
+            'active' => 'required|boolean',
+            'items' => 'nullable|array',
         ];
- 
- 
+  
         return $rules;
     }
 
-    public function save($showMessage = true) {   
+    public function save() {   
         $this->validate();
-   
+  
+        $this->block->active = $this->active;
+        $this->block->config->set('title.' . app()->getLocale(), $this->title);
+        $this->block->config->set('subtitle.' . app()->getLocale(), $this->subtitle);
+        $this->block->config->set('items', $this->items);
+        $this->block->save();
+
+        $this->js('document.getElementById("linkinbio-iframe").contentWindow.location.reload();');
+
         $this->dispatch('notify', type:'success', text:'تم حفظ التعديلات بنجاح'); 
     }
-
-    public function saveAndNext() {
-        $this->save();
-        $this->dispatch('setTab', tab: 'cta');
-    }
-
-    #[Renderless]
-    public function autoSave() {
-        $this->save(false);
-    }
-
+ 
     function placeholder() {
         return loadingIcon();
     }

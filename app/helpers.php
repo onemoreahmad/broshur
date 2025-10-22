@@ -309,3 +309,80 @@ if (!function_exists('money')) {
         return new \Twig\Markup($html, 'UTF-8');
     }
 }
+
+
+
+/**
+ * Get either a Gravatar URL or complete image tag for a specified email address.
+ *
+ * @param string $email The email address
+ * @param int $size Size in pixels, defaults to 64px [ 1 - 2048 ]
+ * @param string $default_image_type Default imageset to use [ 404 | mp | identicon | monsterid | wavatar ]
+ * @param bool $force_default Force default image always. By default false.
+ * @param string $rating Maximum rating (inclusive) [ g | pg | r | x ]
+ * @param bool $return_image True to return a complete IMG tag False for just the URL
+ * @param array $html_tag_attributes Optional, additional key/value attributes to include in the IMG tag
+ *
+ * @return string containing either just a URL or a complete image tag
+ * @source https://gravatar.com/site/implement/images/php/
+ */
+if (!function_exists('gravatar')) {
+function gravatar(
+    $email,
+    $return_image = false,
+    $size = 64,
+    $default_image_type = 'mp',
+    $force_default = false,
+    $rating = 'g',
+    $html_tag_attributes = []
+) {
+    // Prepare parameters.
+    $params = [
+        's' => htmlentities( $size ),
+        'd' => htmlentities( $default_image_type ),
+        'r' => htmlentities( $rating ),
+    ];
+    if ( $force_default ) {
+        $params['f'] = 'y';
+    }
+ 
+    // Generate url.
+    $base_url = 'https://www.gravatar.com/avatar';
+    $hash = hash( 'sha256', strtolower( trim( $email ) ) );
+    $query = http_build_query( $params );
+    $url = sprintf( '%s/%s?%s', $base_url, $hash, $query );
+ 
+    // Return image tag if necessary.
+    if ( $return_image ) {
+        $attributes = '';
+        foreach ( $html_tag_attributes as $key => $value ) {
+            $value = htmlentities( $value, ENT_QUOTES, 'UTF-8' );
+            $attributes .= sprintf( '%s="%s" ', $key, $value );
+        }
+ 
+        return sprintf( '<img src="%s" %s/>', $url, $attributes );
+    }
+ 
+    return $url;
+ 
+    }
+}
+
+if (!function_exists('hideEmail')) {    
+    function hideEmail($email) {
+        // Extract the username and domain
+        $parts = explode('@', $email);
+        $username = $parts[0];
+        $domain = $parts[1];
+
+        // Determine the number of characters to hide (e.g., half of the username)
+        $chars_to_hide = floor(strlen($username) / 1.3);
+
+        // Keep the first part of the username visible and replace the rest with stars
+        $visible_part = substr($username, 0, strlen($username) - $chars_to_hide);
+        $hidden_part = str_repeat('*', $chars_to_hide);
+
+        // Combine the parts to form the hidden email
+        return $visible_part . $hidden_part . '@' . $domain;
+    }   
+}
