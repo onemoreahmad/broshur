@@ -174,7 +174,7 @@
                 >
                     <h3>
                         <button @click="expanded = !expanded" :aria-expanded="expanded" class="flex items-center justify-between w-full px-6 py-5 text-sm lg:text-lg font-semibold  text-gray-900 sm:p-6">
-                            <span> ماهي الدول المسموح بها لاستخدام منصة وجيز ؟ </span>
+                            <span> ماهي الدول المسموح بها لاستخدام منصة بروشور ؟ </span>
                             <span x-show="expanded" aria-hidden="true" class="ms-4">
                                 <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
@@ -191,9 +191,9 @@
                     <div x-show="expanded" x-collapse>
                         <div class="px-6 pb-6">
                             <p class="text-sm lg:text-base text-gray-600"> 
-                             لا توجد قيود على الدول. يمكنك استخدام كل تطبيقات وجيز من أي مكان به انترنت.
+                             لا توجد قيود على الدول. يمكنك استخدام منصة بروشور من أي مكان به انترنت.
                              <br>
-القيود ستكون عند تعاملك مع شركات الأطراف الخارجية مثل بوابات الدفع والمنصات الأخرى التي تود ربطها في مع وجيز. 
+القيود ستكون عند تعاملك مع شركات الأطراف الخارجية مثل بوابات الدفع والمنصات الأخرى التي تود ربطها في مع بروشور. 
 
                             </p>
                         </div>
