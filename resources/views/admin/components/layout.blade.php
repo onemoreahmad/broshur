@@ -5,18 +5,23 @@
     {{-- <ui:navbar wire:ignore class="!bg-primary-900 !p-2 text-white"> --}}
     {{-- <ui:navbar wire:ignore class="bg-gradient-to-r from-blue-800 via-cyan-700 to-blue-900  !p-2 text-white"> --}}
     {{-- <ui:navbar wire:ignore class="bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-[#202040] via-[#543864] to-[#ff6363] !p-2 text-white"> --}}
-        <ui:brand href="{{ route('admin.home') }}" wire:navigate logo="{{data_get(currentTenant(), 'logo')}}" name="{{data_get(currentTenant(), 'name')}}" Xsubtitle="{{ config('app.domain') }}" size="7"  />
+        {{-- <ui:brand href="{{ route('admin.home') }}" wire:navigate logo="{{data_get(currentTenant(), 'logo')}}" name="{{data_get(currentTenant(), 'name')}}" Xsubtitle="{{ config('app.domain') }}" size="7"  /> --}}
+        <ui:brand href="{{ route('admin.home') }}" wire:navigate logo="{{ asset('assets/images/logo-shape-white.svg') }}"  size="6" iconClass="!w-auto" />
+        <ui:brand href="{{ route('admin.home') }}" wire:navigate logo="{{ asset('assets/images/logo-white.webp') }}"  size="6" iconClass="!w-auto" />
  
         <a href="{{ route('admin.orders.index') }}" wire:navigate title="" class="shrink-0 ms-12 justify-center flex items-center gap-x-2 text-white p-1 px-2 rounded-lg " wire:current="bg-black/40">
             <ui:icon name="message-2" size="6" />
-            <span class="text-sm">
+            <span class="text-sm hidden lg:block">
                 التفاعل والطلبات
+            </span>
+            <span class="text-sm block lg:hidden">
+                الطلبات
             </span>
         </a>
 
         <x-slot name="end">
-            <ui:button variant="ghost" class="text-white !hidden !lg:block" wire:current="!bg-white/10" href="{{ tenant('storeFrontUrl') }}" target="_blank" icon:trailing="arrow-up-left" label="معاينة البروشور" /> 
-            <ui:button variant="ghost" class="text-white !block !lg:hidden" wire:current="!bg-white/10" href="{{ tenant('storeFrontUrl') }}" target="_blank" icon:trailing="arrow-up-left" /> 
+            <ui:button variant="ghost" class="text-white !hidden !lg:block !bg-green-600 !hover:bg-green-700" wire:current="!bg-white/10" href="{{ tenant('storeFrontUrl') }}" target="_blank" icon:trailing="arrow-up-left" label="معاينة البروشور" /> 
+            <ui:button variant="ghost" class="text-white !block !lg:hidden !bg-green-600 !hover:bg-green-700" wire:current="!bg-white/10" href="{{ tenant('storeFrontUrl') }}" target="_blank" icon:trailing="arrow-up-left" /> 
             <ui:dropdown>
                 <x-slot:trigger @click="openDropdown = ! openDropdown" class="flex items-center gap-x-2" icon:trailing="chevron-down">
                     <ui:avatar :src="data_get(auth()->user(), 'image')" size="sm" class="border-2 border-black/10 hover:border-black/20" /> 
@@ -46,8 +51,11 @@
         <div class="flex items-center gap-x-px max-w-7xl justify-between lg:justify-start overflow-x-auto mx-auto px-px lg:px-0 divide-x-reverse divide-xXX divide-gray-400/20 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             <a href="{{ route('admin.home') }}" wire:navigate title="" class="lg:w-fullx xshrink-0 lg:shrink justify-center flex items-center w-full lg:w-auto gap-x-2  lg:px-5 px-2 py-3" wire:current.exact="bg-gray-200">
                 <ui:icon name="file-text" size="6" />
-                <span class="text-sm">
+                <span class="text-sm hidden lg:block">
                     محتوى الصفحة
+                </span>
+                <span class="text-sm block lg:hidden">
+                    المحتوى
                 </span>
             </a>
 
@@ -60,8 +68,11 @@
 
             <a href="{{ route('admin.share') }}" wire:navigate title="" class="lg:w-fullX xshrink-0 lg:shrink justify-center flex items-center w-full lg:w-auto gap-x-2 lg:px-5 px-2 py-3" wire:current="bg-gray-200">
                 <ui:icon name="share" size="6" />
-                <span class="text-sm">
+                <span class="text-sm hidden lg:block">
                     نشر ومشاركة 
+                </span>
+                <span class="text-sm block lg:hidden">
+                    نشر
                 </span>
             </a>
 

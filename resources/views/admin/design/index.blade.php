@@ -24,7 +24,7 @@
 <?php 
  
 new 
-#[\Livewire\Attributes\Title('إدارة الصفحات')]
+#[\Livewire\Attributes\Title('تصميم الصفحة')]
 class extends \Livewire\Volt\Component {
      
 }; ?>

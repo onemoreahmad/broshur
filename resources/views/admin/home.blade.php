@@ -69,7 +69,7 @@
                
             </nav>
 
-            <div class="bg-white lg:rounded-lg rounded-b-lg -mr-1.5 p-6 min-h-[60vh] w-full">
+            <div class="bg-white lg:rounded-lg rounded-b-lg lg:-mr-1.5 p-6 min-h-[60vh] w-full">
                 <livewire:is :component="'admin.home.'.$tab" wire:key="tab-{{ $tab }}" lazy />
             </div> 
 
