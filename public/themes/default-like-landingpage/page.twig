@@ -1,0 +1,9 @@
+<div>
+    <div class="flex flex-col gap-y-1">
+        {% for blk in blocks %}
+            <div class="">
+                {{component('blocks.block', {'block': blk, 'tenant': tenant()})}}
+            </div>
+        {% endfor %}
+    </div>
+</div>

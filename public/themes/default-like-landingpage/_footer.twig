@@ -1,0 +1,25 @@
+<footer class="lg:py-3 pb-24 pt-2 px-2 flex items-center justify-center mx-auto gap-x-4">
+    <div class="text-xs font-normal text-center text-gray-400 items-center  gap-x-4 hidden md:flex">
+        © {{dt('Y')}}
+    </div>
+ 
+    <div>
+        {% if site('socialLinks') | length %}
+        <div class="flex items-center gap-x-4">
+            {% for link in site('socialLinks') %}
+            <a href="{{link.url}}" target="_blank"
+            class="flex items-center  text-black/30  p-1.5  rounded-full bg-black/5 hover:text-black/40">
+                <span class="h-5 w-5">{% include 'assets/icons/social/brand-'~link.network~'.svg' ignore missing %}</span>
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="flex items-center gap-x-2 text-xs text-gray-400">
+        باستخدام
+        <a href="https://broshore.com" target="_blank" class="flex items-center gap-x-2 font-semibold text-[#219EBC] hover:text-[#3daac5]">
+            <img class=" h-5" src="{{asset('assets/images/logo.png')}}" alt="{{site('name')}}" /> وجيز
+        </a>
+    </div>
+</footer>

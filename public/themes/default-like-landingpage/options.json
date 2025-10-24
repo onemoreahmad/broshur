@@ -1,0 +1,41 @@
+{
+    "primaryColor": {
+        "type": "picker-color",
+        "label": "لون القالب",
+        "options": [
+            "blue",
+            "cyan",
+            "green",
+            "teal",
+            "sky",
+            "purple",
+            "violet",
+            "indigo",
+            "red",
+            "pink",
+            "fuchsia",
+            "orange",
+            "amber",
+            "yellow",
+            "zinc",
+            "emerald",
+            "lime",
+            "rose",
+            "gray"
+        ],
+        "default": "blue"
+    },
+    "logoRadius": {
+        "type": "radio",
+        "label": "شكل انحناء الشعار",
+        "info": "قم باختيار طريقة عرض  حواف الشعار.",
+        "options": [
+            "rounded-full",
+            "rounded-2xl",
+            "rounded-lg",
+            "rounded-md",
+            "rounded-none"
+        ],
+        "default": "rounded-full"
+    } 
+}
