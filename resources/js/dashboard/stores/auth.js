@@ -7,7 +7,7 @@ export const useAuthStore = defineStore('useAuthStore', () => {
     const tenant = ref(null)
 
     const setAuth = async () => {
-        const response = await axios.get('/api/current-user')
+        const response = await axios.get('/api/auth')
         user.value = response.data.user
         tenant.value = response.data.tenant
     }

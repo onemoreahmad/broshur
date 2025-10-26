@@ -1,11 +1,11 @@
 <template>
     <div>
  
-        <div v-if="currentTenant?.tenant" class="max-w-7xl mx-auto py-4 flex items-center gap-4 px-1 xl:px-0">
-            <img :src="currentTenant?.tenant?.logo" alt="avatar" class="size-16 rounded-2xl">
+        <div v-if="auth?.tenant" class="max-w-7xl mx-auto py-4 flex items-center gap-4 px-1 xl:px-0">
+            <img :src="auth?.tenant?.logo" alt="avatar" class="size-16 rounded-2xl">
             <div class="">
-                <h1 class="text-2xl font-bold"> {{ currentTenant?.tenant?.name  }} </h1> 
-                <p class="text-sm text-gray-500"> {{ currentTenant?.tenant?.handle  }} </p>
+                <h1 class="text-2xl font-bold"> {{ auth?.tenant?.name  }} </h1> 
+                <p class="text-sm text-gray-500"> {{ auth?.tenant?.handle  }} </p>
             </div>
         </div>
 
@@ -91,6 +91,6 @@
 <script setup>
     import { useAuthStore } from '@/stores/auth';
  
-    const currentTenant = useAuthStore()
+    const auth = useAuthStore()
     
 </script>

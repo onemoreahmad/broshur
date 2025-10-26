@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Resources\TenantResource;
 use App\Http\Resources\UserResource;
 
-Route::get('/current-user', function (Request $request) {
+Route::get('/auth', function (Request $request) {
     $data = collect($request->user()->load('tenant')->only('id', 'name', 'email','tenant'));
     return response()->json([
         'tenant' => TenantResource::make($data->get('tenant')) ,

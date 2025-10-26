@@ -15,16 +15,12 @@
             </div>
          </RouterLink>
          <RouterLink :to="{ name: 'orders' }"  title="الطلبات" class="text-white flex p-1 px-2 gap-x-2 items-center justify-center shrink-0 ms-12 rounded-lg" activeClass="bg-black/40">
-            <svg viewBox="0 0 24 24" class="size-5 text-white" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-               <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-               <g id="SVGRepo_iconCarrier">
-                  <path opacity="0.5" d="M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                  <circle cx="19" cy="5" r="3" stroke="currentColor" stroke-width="1.5"></circle>
-                  <path d="M7 14H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                  <path d="M7 17.5H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-               </g>
-            </svg>
+            <svg class="@if-&amp;&amp; !@if-$label @endif !h-5 !w-5 inline-block size-5 ltr:-ml-1 rtl:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M9 15l6 -6"></path>
+                  <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464"></path>
+                  <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463"></path>
+               </svg>
             <span class="text-sm hidden lg:block">
             التفاعل والطلبات
             </span>
@@ -34,6 +30,11 @@
          </RouterLink>
       </div>
       <div class="flex items-center gap-4">
+         <a :href="currentUser?.tenant?.storefront_url" target="_blank"  class="btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-[1.2em]"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
+            معاينة البروشور
+         </a>
+
          <a :href="currentUser?.tenant?.storefront_url" target="_blank" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 text-white !hidden cursor-pointer gap-2 h-9 inline-flex !bg-green-600 px-4 py-2 text-sm transition-all transition-colors bg-transparent duration-300 items-center justify-center whitespace-nowrap rounded-md hover:!bg-green-700 hover:bg-black/10 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:!block" >
             <span>
                <svg class="@if-&amp;&amp; !@if-$label @endif !h-5 !w-5 inline-block size-5 ltr:-ml-1 rtl:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -54,7 +55,7 @@
                </svg>
             </span>
          </a>
-         <RouterLink :to="{ name: 'preview' }" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 text-white !block cursor-pointer gap-2 h-9 inline-flex !bg-green-600 px-4 py-2 text-sm transition-all transition-colors bg-transparent duration-300 items-center justify-center whitespace-nowrap rounded-md hover:!bg-green-700 hover:bg-black/10 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:!hidden" wire:current="!bg-white/10" target="_blank" icon:trailing="arrow-up-left">
+         <a :href="currentUser?.tenant?.storefront_url"  class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 text-white !block cursor-pointer gap-2 h-9 inline-flex !bg-green-600 px-4 py-2 text-sm transition-all transition-colors bg-transparent duration-300 items-center justify-center whitespace-nowrap rounded-md hover:!bg-green-700 hover:bg-black/10 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:!hidden" wire:current="!bg-white/10" target="_blank" icon:trailing="arrow-up-left">
             <span>
                <svg class="!h-5 !w-5 inline-block size-5 rtl:-ml-1 ltr:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -62,7 +63,7 @@
                   <path d="M16 7l-9 0l0 9"></path>
                </svg>
             </span>
-         </RouterLink>
+         </a>
          <div class="relative" ref="dropdownRef">
             <div class="cursor-pointer flex items-center gap-x-2" @click="toggleDropdown" icon:trailing="chevron-down">
                <img src="https://ui-avatars.com/api/?background=219EBD&amp;color=fff&amp;name=Ahmad" alt="" class="object-cover rounded-full size-8 border-2 border-black/10 hover:border-black/20">

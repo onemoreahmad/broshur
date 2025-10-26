@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/logo.svg') }}">
     <title>{{ $title ?? '' }} | {{config('app.name')}}</title>
-    <script src="{{ asset('assets/js/twind.min.js') }}"></script>
-    <script src="{{ asset('assets/js/twind.custom.js') }}"></script>
-    @vite(['resources/js/dashboard/index.js'])
-    <script>
+    {{-- <script src="{{ asset('assets/js/twind.min.js') }}"></script>
+    <script src="{{ asset('assets/js/twind.custom.js') }}"></script> --}}
+    @vite(['resources/js/dashboard/index.js','resources/css/dashboard.css'])
+    {{-- <script>
         let config = { ...@js(config('twind')), ...customTwindconf };
         twind.install(config);
-    </script>
+    </script> --}}
     <style>
         html {
             scroll-behavior: smooth;
