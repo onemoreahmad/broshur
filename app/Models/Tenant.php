@@ -17,6 +17,10 @@ class Tenant extends Model
         'linkinbio_theme_options' => 'array',
     ];
 
+    protected $appends = [
+        'storefront_url',
+    ];  
+
     protected $fillable = [
         'name',
         'handle',

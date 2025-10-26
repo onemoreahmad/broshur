@@ -34,7 +34,7 @@
          </RouterLink>
       </div>
       <div class="flex items-center gap-4">
-         <RouterLink :to="{ name: 'preview' }" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 text-white !hidden cursor-pointer gap-2 h-9 inline-flex !bg-green-600 px-4 py-2 text-sm transition-all transition-colors bg-transparent duration-300 items-center justify-center whitespace-nowrap rounded-md hover:!bg-green-700 hover:bg-black/10 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:!block" wire:current="!bg-white/10" target="_blank" icon:trailing="arrow-up-left">
+         <a :href="currentUser?.tenant?.storefront_url" target="_blank" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 text-white !hidden cursor-pointer gap-2 h-9 inline-flex !bg-green-600 px-4 py-2 text-sm transition-all transition-colors bg-transparent duration-300 items-center justify-center whitespace-nowrap rounded-md hover:!bg-green-700 hover:bg-black/10 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:!block" >
             <span>
                <svg class="@if-&amp;&amp; !@if-$label @endif !h-5 !w-5 inline-block size-5 ltr:-ml-1 rtl:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -53,7 +53,7 @@
                   <path d="M16 7l-9 0l0 9"></path>
                </svg>
             </span>
-         </RouterLink>
+         </a>
          <RouterLink :to="{ name: 'preview' }" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 text-white !block cursor-pointer gap-2 h-9 inline-flex !bg-green-600 px-4 py-2 text-sm transition-all transition-colors bg-transparent duration-300 items-center justify-center whitespace-nowrap rounded-md hover:!bg-green-700 hover:bg-black/10 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:!hidden" wire:current="!bg-white/10" target="_blank" icon:trailing="arrow-up-left">
             <span>
                <svg class="!h-5 !w-5 inline-block size-5 rtl:-ml-1 ltr:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -76,9 +76,9 @@
             <div v-show="openDropdown" class="absolute [*+&amp;]:mt-2 z-40 left-0" x-transition="" >
                <div class="p-0.5 bg-white rounded-b-md mt-px w-48 text-sm">
                   <div class="text-gray-500 p-2 mb-1">
-                     <h1 class="font-medium text-sm [&amp;:has(+[*])]:mb-2 [*+&amp;]:mt-4 text-gray-500">Ahmad</h1>
+                     <h1 class="font-medium text-sm [&amp;:has(+[*])]:mb-2 [*+&amp;]:mt-4 text-gray-500">{{ currentUser?.user?.name }}</h1>
                      <div class="text-gray-500 text-sm [*+&amp;]:mt-2 dark:text-white/70">
-                        contact@ahmad.tech
+                        {{ currentUser?.user?.email }}
                      </div>
                   </div>
                   <div class="grid gap-y-px">
@@ -131,9 +131,12 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import { useAuthStore } from '@/stores/auth';
 
 const openDropdown = ref(false);
 let dropdownRef = ref(null);
+const currentUser = useAuthStore();
+ 
 
 const toggleDropdown = () => {
     openDropdown.value = !openDropdown.value;

@@ -6,7 +6,7 @@ import vue from '@vitejs/plugin-vue';
 export default defineConfig({
     resolve: {
         alias: {
-          '@': '/resources/dashboard',
+          '@': '/resources/js/dashboard',
         },
       },
       build: {

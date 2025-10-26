@@ -2,18 +2,16 @@
     <div>
         <Header />
         <Navbar />
-        <RouterView :key="$route.path" />
+      
+        <RouterView /> 
+
     </div>
 </template>
 
 <script setup>
-import { RouterView } from 'vue-router';
-
-defineProps({
-    title: {
-        type: String,
-        required: false,
-        default: 'Dashboard',
-    },
-});
+ 
+// import { useAuthStore } from '@/stores/auth';
+ 
+// const currentTenant = useAuthStore().tenant
+// const currentUser = useAuthStore().user
 </script>

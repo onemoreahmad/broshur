@@ -6,6 +6,9 @@ use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
+        api: [
+            __DIR__.'/../routes/api.php',
+        ],
         web: [
             __DIR__.'/../routes/web.php', 
             __DIR__.'/../routes/auth.php', 
@@ -24,6 +27,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'currentBroshur' => \App\Http\Middleware\CurrentBroshur::class,
         ]);
+
+        $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
