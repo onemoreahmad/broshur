@@ -11,6 +11,14 @@
       "app.css"
     ]
   },
+  "resources/css/dashboard.css": {
+    "file": "assets/dashboard-Bch7NIAR.css",
+    "src": "resources/css/dashboard.css",
+    "isEntry": true,
+    "names": [
+      "dashboard.css"
+    ]
+  },
   "resources/js/app.js": {
     "file": "assets/app-9aYweeFC.js",
     "name": "app",
@@ -21,7 +29,7 @@
     ]
   },
   "resources/js/dashboard/index.js": {
-    "file": "assets/index-jB6mHW1t.js",
+    "file": "assets/index-Dv-UhWP7.js",
     "name": "index",
     "src": "resources/js/dashboard/index.js",
     "isEntry": true,
