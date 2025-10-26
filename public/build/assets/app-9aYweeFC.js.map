@@ -1,0 +1,1 @@
+{"version":3,"file":"app-9aYweeFC.js","sources":["../../../resources/js/bootstrap.js"],"sourcesContent":["import axios from 'axios';\nwindow.axios = axios;\n\nwindow.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';\n"],"names":["axios"],"mappings":"wCACA,OAAO,MAAQA,EAEf,OAAO,MAAM,SAAS,QAAQ,OAAO,kBAAkB,EAAI"}

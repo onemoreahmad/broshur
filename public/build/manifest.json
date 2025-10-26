@@ -1,4 +1,8 @@
 {
+  "_index-ngrFHoWO.js": {
+    "file": "assets/index-ngrFHoWO.js",
+    "name": "index"
+  },
   "resources/css/app.css": {
     "file": "assets/app-CRVfxU3H.css",
     "src": "resources/css/app.css",
@@ -8,15 +12,21 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-Bj43h_rG.js",
+    "file": "assets/app-9aYweeFC.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_index-ngrFHoWO.js"
+    ]
   },
   "resources/js/dashboard/index.js": {
-    "file": "assets/index-2iptXyxf.js",
+    "file": "assets/index-CnaZuGKX.js",
     "name": "index",
     "src": "resources/js/dashboard/index.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_index-ngrFHoWO.js"
+    ]
   }
 }
