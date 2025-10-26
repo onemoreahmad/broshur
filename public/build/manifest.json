@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-DIc0kdyo.css",
+    "file": "assets/app-D4jalEtq.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "names": [
@@ -12,5 +12,93 @@
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
+  },
+  "resources/js/dashboard/index.js": {
+    "file": "assets/index-qqNJ0_ZO.js",
+    "name": "index",
+    "src": "resources/js/dashboard/index.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/dashboard/views/Home.vue",
+      "resources/js/dashboard/views/Orders.vue",
+      "resources/js/dashboard/views/About.vue",
+      "resources/js/dashboard/views/Preview.vue",
+      "resources/js/dashboard/views/Account.vue",
+      "resources/js/dashboard/views/Design.vue",
+      "resources/js/dashboard/views/Share.vue",
+      "resources/js/dashboard/views/Settings.vue"
+    ]
+  },
+  "resources/js/dashboard/views/About.vue": {
+    "file": "assets/About-Bd12Yae0.js",
+    "name": "About",
+    "src": "resources/js/dashboard/views/About.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/dashboard/index.js"
+    ]
+  },
+  "resources/js/dashboard/views/Account.vue": {
+    "file": "assets/Account-UeNjMhe7.js",
+    "name": "Account",
+    "src": "resources/js/dashboard/views/Account.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/dashboard/index.js"
+    ]
+  },
+  "resources/js/dashboard/views/Design.vue": {
+    "file": "assets/Design-DZMrHE1E.js",
+    "name": "Design",
+    "src": "resources/js/dashboard/views/Design.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/dashboard/index.js"
+    ]
+  },
+  "resources/js/dashboard/views/Home.vue": {
+    "file": "assets/Home-BoL__Er8.js",
+    "name": "Home",
+    "src": "resources/js/dashboard/views/Home.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/dashboard/index.js"
+    ]
+  },
+  "resources/js/dashboard/views/Orders.vue": {
+    "file": "assets/Orders-DbwWzUDH.js",
+    "name": "Orders",
+    "src": "resources/js/dashboard/views/Orders.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/dashboard/index.js"
+    ]
+  },
+  "resources/js/dashboard/views/Preview.vue": {
+    "file": "assets/Preview-C_FENy1-.js",
+    "name": "Preview",
+    "src": "resources/js/dashboard/views/Preview.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/dashboard/index.js"
+    ]
+  },
+  "resources/js/dashboard/views/Settings.vue": {
+    "file": "assets/Settings-CVvSQQN3.js",
+    "name": "Settings",
+    "src": "resources/js/dashboard/views/Settings.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/dashboard/index.js"
+    ]
+  },
+  "resources/js/dashboard/views/Share.vue": {
+    "file": "assets/Share-Bhm-P1fM.js",
+    "name": "Share",
+    "src": "resources/js/dashboard/views/Share.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/dashboard/index.js"
+    ]
   }
 }
