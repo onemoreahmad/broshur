@@ -1,17 +1,26 @@
     import { createRouter, createWebHistory } from 'vue-router';    
   
+    import Home from '../views/Home.vue';
+    import Orders from '../views/Orders.vue';
+    import About from '../views/About.vue';
+    import Preview from '../views/Preview.vue';
+    import Account from '../views/Account.vue';
+    import Design from '../views/Design.vue';
+    import Share from '../views/Share.vue';
+    import Settings from '../views/Settings.vue';
+    
     const router = createRouter({
         history: createWebHistory('/dashboard'),
      
         routes: [
-            { path: '/', component: () => import('../views/Home.vue'), name: 'home' },
-            { path: '/orders', component: () => import('../views/Orders.vue'), name: 'orders' },
-            { path: '/about', component: () => import('../views/About.vue'), name: 'about' },
-            { path: '/preview', component: () => import('../views/Preview.vue'), name: 'preview' },
-            { path: '/account', component: () => import('../views/Account.vue'), name: 'account' },
-            { path: '/design', component: () => import('../views/Design.vue'), name: 'design' },
-            { path: '/share', component: () => import('../views/Share.vue'), name: 'share' },
-            { path: '/settings', component: () => import('../views/Settings.vue'), name: 'settings' },
+            { path: '/', component: Home, name: 'home' },
+            { path: '/orders', component: Orders, name: 'orders' },
+            { path: '/about', component: About, name: 'about' },
+            { path: '/preview', component: Preview, name: 'preview' },
+            { path: '/account', component: Account, name: 'account' },
+            { path: '/design', component: Design, name: 'design' },
+            { path: '/share', component: Share, name: 'share' },
+            { path: '/settings', component: Settings, name: 'settings' },
         ],  
     });
 
