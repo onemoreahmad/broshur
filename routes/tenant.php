@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
   
 // sitefront routes
-Volt::route('{tenant}', 'storefront.home')
+Volt::route('{tenant}/{lang?}', 'storefront.home')
     // ->domain('{tenant}.' . config('app.domain'))
     ->middleware(['currentBroshur'])
     ->name('storefront.home');

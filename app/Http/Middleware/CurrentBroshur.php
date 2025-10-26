@@ -32,6 +32,12 @@ class CurrentBroshur
         }
  
         config()->set('tenant', $tenant);
+
+        $lang = data_get($request, 'lang', app()->getLocale());
+        if(!in_array($lang, config('app.locales'))){
+            $lang = app()->getLocale();
+        }
+        app()->setLocale($lang);
  
         // $settings = Setting::where('tenant_id', $tenant->id)->where('name', 'settings')->first();
         $theme = Theme::where('id', $tenant->theme_id)->first();

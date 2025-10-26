@@ -38,14 +38,14 @@
         <!-- Floating Language Buttons - Desktop (Outside Card) -->
         <div class="hidden md:flex absolute rtl:-left-16 ltr:-right-16 flex-col gap-1.5 z-20 bg-black/20 p-1 rounded-xl">
             <!-- English Button -->
-            <button class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
-                <span class="text-sm font-semibold text-gray-700 group-hover:text-gray-900">EN</span>
-            </button>
+            <a href="{{route('storefront.home', {tenant: tenant('handle'), lang: 'en'})}}" class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
+                <span class="text-sm font-semibold text-gray-700 group-hover:text-gray-900">En</span>
+            </a>
             
             <!-- Arabic Button -->
-            <button class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
+            <a href="{{route('storefront.home', {tenant: tenant('handle') })}}" class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
                 <span class="text-sm font-semibold text-gray-700 group-hover:text-gray-900">ع</span>
-            </button>
+            </a>
         </div>
 
             <!-- Header Image -->
@@ -66,14 +66,14 @@
             <!-- Floating Language Buttons - Mobile (Inside Header Image) -->
             <div class="md:hidden absolute top-2 left-2 flex flex-col gap-2 z-20">
                 <!-- English Button -->
-                <button class="size-8 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
+                <a href="{{route('storefront.home', {tenant: tenant('handle'), lang: 'en'})}}" class="size-8 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
                     <span class="text-xs font-semibold text-gray-700 group-hover:text-gray-900">EN</span>
-                </button>
+                </a>
                 
                 <!-- Arabic Button -->
-                <button class="size-8 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
+                <a href="{{route('storefront.home', {tenant: tenant('handle'), lang: 'ar'})}}" class="size-8 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
                     <span class="text-xs font-semibold text-gray-700 group-hover:text-gray-900">ع</span>
-                </button>
+                </a>
             </div>
 
                 <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
