@@ -598,7 +598,7 @@
                             <template x-for="(testimonial, index) in testimonials" :key="index">
                                 <button 
                                     @click="currentSlide = index"
-                                    :class="`w-2 h-2 rounded-full transition-colors ${currentSlide === index ? 'bg-${options.primaryColor ?? 'primary'}-600' : 'bg-gray-300'}`"
+                                    :class="`w-2 h-2 rounded-full transition-colors ${currentSlide === index ? 'bg-{{ options.primaryColor ?? 'primary' }}-600' : 'bg-gray-300'}`"
                                 ></button>
                             </template>
         </div>
