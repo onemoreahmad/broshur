@@ -4,7 +4,7 @@
     "name": "index"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CNY6BHDM.css",
+    "file": "assets/app-DULKA21i.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "names": [
@@ -12,7 +12,7 @@
     ]
   },
   "resources/css/dashboard.css": {
-    "file": "assets/dashboard-Bch7NIAR.css",
+    "file": "assets/dashboard-C9amtvjs.css",
     "src": "resources/css/dashboard.css",
     "isEntry": true,
     "names": [
@@ -29,7 +29,7 @@
     ]
   },
   "resources/js/dashboard/index.js": {
-    "file": "assets/index-Dv-UhWP7.js",
+    "file": "assets/index-Ch56h9Ie.js",
     "name": "index",
     "src": "resources/js/dashboard/index.js",
     "isEntry": true,

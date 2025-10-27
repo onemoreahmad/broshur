@@ -1,10 +1,45 @@
 @import 'tailwindcss';
 
 @import "tailwindcss";
+
+ 
+
+@font-face {
+    font-family: 'ibmps';
+    src: url('/assets/fonts/ibmps/IBMPlexSansArabic-Regular.ttf') ;
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+ 
+@font-face {
+	font-family: "tsh";
+	src: url("/assets/fonts/tsh200.woff2") format("woff2"), url("/assets/fonts/tsh200.woff") format("woff");
+	font-style: normal;
+	font-weight: 300;
+	font-display: auto;
+}
+@font-face {
+	font-family: "tsh";
+	src: url("/assets/fonts/tsh400.woff2") format("woff2"), url("/assets/fonts/tsh400.woff") format("woff");
+	font-style: normal;
+	font-weight: 400;
+	font-display: auto;
+}
+ 
+
+@theme {
+    --font-sans: 'ibmps',  ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+
 @plugin "daisyui" {
-  themes: light --default,  cupcake;
+  themes: emerald --default,  cupcake;
 }
 
 @source '../**/*.blade.php';
 @source '../**/*.js';
 @source '../**/*.vue';
+
+
