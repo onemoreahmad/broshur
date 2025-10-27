@@ -1,7 +1,7 @@
 <template>
     <div>
  
-        <div v-if="auth?.tenant" class="max-w-7xl mx-auto py-4 flex items-center gap-4 px-1 xl:px-0">
+        <div v-if="auth?.tenant" class="max-w-7xl mx-auto py-4 flex items-center gap-4 px-1 xl:px-0 mt-4">
             <img :src="auth?.tenant?.logo" alt="avatar" class="size-16 rounded-2xl">
             <div class="">
                 <h1 class="text-2xl font-bold"> {{ auth?.tenant?.name  }} </h1> 
@@ -10,7 +10,7 @@
         </div>
 
         <div class="lg:flex max-w-7xl mx-auto items-start px-1 xl:px-0 mt-3">
-            <nav class="flex lg:flex-col lg:w-80 gap-px overflow-hidden mx-auto justify-between max-w-7xl overflow-x-auto text-start">
+            <nav class="flex lg:flex-col lg:w-80 min-w-48 gap-px overflow-hidden mx-auto justify-between max-w-7xl overflow-x-auto text-start">
                 <RouterLink :to="{ name: 'home' }" exactActiveClass="bg-white" class="cursor-pointer lg:w-full w-fit shrink-0 hover:bg-gray-50 flex flex-grow items-center gap-x-2 text-xs rounded-s p-2.5 px-3 bg-gray-100/50">
                     <span class="text-lg inline-block -mt-1"> 
                         <svg viewBox="0 0 24 24" fill="none" class="size-5" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M21 16.0909V11.0975C21 6.80891 21 4.6646 19.682 3.3323C18.364 2 16.2426 2 12 2C7.75736 2 5.63604 2 4.31802 3.3323C3 4.6646 3 6.80891 3 11.0975V16.0909C3 19.1875 3 20.7358 3.73411 21.4123C4.08421 21.735 4.52615 21.9377 4.99692 21.9915C5.98402 22.1045 7.13673 21.0849 9.44216 19.0458C10.4612 18.1445 10.9708 17.6938 11.5603 17.5751C11.8506 17.5166 12.1494 17.5166 12.4397 17.5751C13.0292 17.6938 13.5388 18.1445 14.5578 19.0458C16.8633 21.0849 18.016 22.1045 19.0031 21.9915C19.4739 21.9377 19.9158 21.735 20.2659 21.4123C21 20.7358 21 19.1875 21 16.0909Z" stroke="#1C274D" stroke-width="1.5"></path> <path opacity="0.5" d="M15 6H9" stroke="#1C274D" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
@@ -68,16 +68,16 @@
                 </RouterLink>
             </nav>
  
-            <div class="bg-white lg:rounded-lg rounded-b-lg lg:-mr-1.5 p-6 min-h-[60vh] w-full">
+            <div class="bg-white truncate lg:rounded-lg rounded-b-lg lg:-mr-1.5 p-6 min-h-[60vh] w-full relative">
                 <RouterView :key="$route.name" />
             </div>
 
             <div class="hidden lg:block lg:px-5">
                 <div class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[10px] rounded-[2.5rem] h-[700px] w-[420px] [&amp;::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]" dir="ltr">
-                    <div class="h-[32px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -start-[27px] top-[72px] rounded-s-lg"></div>
+                    <!--<div class="h-[32px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -start-[27px] top-[72px] rounded-s-lg"></div>
                     <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -start-[17px] top-[124px] rounded-s-lg"></div>
                     <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -start-[17px] top-[178px] rounded-s-lg"></div>
-                    <div class="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -end-[17px] top-[142px] rounded-e-lg"></div>
+                    <div class="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -end-[17px] top-[142px] rounded-e-lg"></div>-->
                     <div class="h-[672px] overflow-hidden w-[398px] bg-white overflow-y-scroll rounded-[2rem] dark:bg-gray-800">
                         <iframe id="linkinbio-iframe" src="https://broshur.test/wjeez/preview" class="w-full min-h-screen"></iframe> 
                     </div>

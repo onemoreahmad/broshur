@@ -8,7 +8,11 @@
             <legend class="fieldset-legend">البريد الإلكتروني</legend>
             <input v-model="form.email" type="text" class="input" placeholder="your@email.com" dir="ltr" />
         </fieldset>
-        <button @click="update" class="btn btn-primary">تحديث</button>
+        <button @click="save" class="btn btn-primary" :disabled="formLoading" > 
+            <span v-if="!formLoading"> حفظ </span>
+            <span v-if="formLoading" class="loading loading-spinner loading-xs"></span>
+        </button>
+             
     </Container>
 </template>
 
@@ -17,7 +21,9 @@ import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import { useAuthStore } from '../stores/auth'
 import { storeToRefs } from 'pinia'
+
 const store = useAuthStore()
+const formLoading = ref(false)
 
 const { user } = storeToRefs(useAuthStore())
  
@@ -28,12 +34,13 @@ const form = computed(() => {
     }
 })
    
-const update = () => {
-    axios.post('/api/account', form.value).then(response => {
-      
-        console.log(response.data.message)
+const save = () => {
+    formLoading.value = true
+        axios.post('/api/account', form.value).then(response => {
+        formLoading.value = false
         store.updateUser(response.data.user)
     }).catch(error => {
+        formLoading.value = false
         console.error(error)
     })
 }

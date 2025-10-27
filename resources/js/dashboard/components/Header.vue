@@ -41,10 +41,10 @@
                   </svg>
                </span>
             </div>
-            <div v-show="openDropdown" class="absolute [*+&amp;]:mt-2 z-40 left-0" x-transition="" >
+            <div v-show="openDropdown" class="absolute  z-40 left-0" x-transition="" >
                <div class="p-0.5 bg-white rounded-b-md mt-px w-48 text-sm">
                   <div class="text-gray-500 p-2 mb-1">
-                     <h1 class="font-medium text-sm [&amp;:has(+[*])]:mb-2 [*+&amp;]:mt-4 text-gray-500">{{ currentUser?.user?.name }}</h1>
+                     <h1 class="font-medium text-sm  text-gray-500">{{ currentUser?.user?.name }}</h1>
                      <div class="text-gray-500 text-sm [*+&amp;]:mt-2">
                         {{ currentUser?.user?.email }}
                      </div>

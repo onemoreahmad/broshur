@@ -12,13 +12,19 @@ export const useAuthStore = defineStore('useAuthStore', () => {
         tenant.value = response.data.tenant
     }
 
-    onMounted(() => {
-        setAuth()
-    })
+
 
     const updateUser = (userData) => {
         user.value = { ...user.value, ...userData }
     }
+ 
+    const updateTenant = (tenantData) => {
+        tenant.value = { ...tenant.value, ...tenantData }
+    } 
 
-    return { user, tenant, updateUser  }
+    onMounted(() => {
+        setAuth()
+    })
+    
+    return { user, tenant, updateUser, updateTenant  }
   })

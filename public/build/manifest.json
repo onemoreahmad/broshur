@@ -3,8 +3,40 @@
     "file": "assets/index-ngrFHoWO.js",
     "name": "index"
   },
+  "public/assets/fonts/ibmps/IBMPlexSansArabic-Bold.ttf": {
+    "file": "assets/IBMPlexSansArabic-Bold-BodNR7--.ttf",
+    "src": "public/assets/fonts/ibmps/IBMPlexSansArabic-Bold.ttf"
+  },
+  "public/assets/fonts/ibmps/IBMPlexSansArabic-Medium.ttf": {
+    "file": "assets/IBMPlexSansArabic-Medium-B-89VveJ.ttf",
+    "src": "public/assets/fonts/ibmps/IBMPlexSansArabic-Medium.ttf"
+  },
+  "public/assets/fonts/ibmps/IBMPlexSansArabic-Regular.ttf": {
+    "file": "assets/IBMPlexSansArabic-Regular-DsN3Thpy.ttf",
+    "src": "public/assets/fonts/ibmps/IBMPlexSansArabic-Regular.ttf"
+  },
+  "public/assets/fonts/ibmps/IBMPlexSansArabic-SemiBold.ttf": {
+    "file": "assets/IBMPlexSansArabic-SemiBold-BPBc9WjB.ttf",
+    "src": "public/assets/fonts/ibmps/IBMPlexSansArabic-SemiBold.ttf"
+  },
+  "public/assets/fonts/tsh200.woff": {
+    "file": "assets/tsh200-CTPe5rI5.woff",
+    "src": "public/assets/fonts/tsh200.woff"
+  },
+  "public/assets/fonts/tsh200.woff2": {
+    "file": "assets/tsh200-2L38LitM.woff2",
+    "src": "public/assets/fonts/tsh200.woff2"
+  },
+  "public/assets/fonts/tsh400.woff": {
+    "file": "assets/tsh400-BKxFvaGH.woff",
+    "src": "public/assets/fonts/tsh400.woff"
+  },
+  "public/assets/fonts/tsh400.woff2": {
+    "file": "assets/tsh400-Dp0XgMms.woff2",
+    "src": "public/assets/fonts/tsh400.woff2"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-DULKA21i.css",
+    "file": "assets/app-B8Ywe92V.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "names": [
@@ -12,7 +44,7 @@
     ]
   },
   "resources/css/dashboard.css": {
-    "file": "assets/dashboard-C9amtvjs.css",
+    "file": "assets/dashboard-qYUDz4B8.css",
     "src": "resources/css/dashboard.css",
     "isEntry": true,
     "names": [
@@ -29,7 +61,7 @@
     ]
   },
   "resources/js/dashboard/index.js": {
-    "file": "assets/index-ImWy1TiB.js",
+    "file": "assets/index-qLEjG_2k.js",
     "name": "index",
     "src": "resources/js/dashboard/index.js",
     "isEntry": true,
