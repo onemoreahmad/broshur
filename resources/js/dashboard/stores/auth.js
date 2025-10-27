@@ -16,5 +16,9 @@ export const useAuthStore = defineStore('useAuthStore', () => {
         setAuth()
     })
 
-    return { user, tenant  }
+    const updateUser = (userData) => {
+        user.value = { ...user.value, ...userData }
+    }
+
+    return { user, tenant, updateUser  }
   })

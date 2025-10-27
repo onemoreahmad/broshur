@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <h1>Account</h1>
- 
+    <Container title="الحساب">
         <fieldset class="fieldset mt-4">
             <legend class="fieldset-legend">الاسم </legend>
             <input v-model="form.name" type="text" class="input" placeholder="الاسم" />
@@ -11,27 +9,32 @@
             <input v-model="form.email" type="text" class="input" placeholder="your@email.com" dir="ltr" />
         </fieldset>
         <button @click="update" class="btn btn-primary">تحديث</button>
-    </div>
+    </Container>
 </template>
 
 <script setup>
-import { useAuthStore } from '../stores/auth'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
-
+import { useAuthStore } from '../stores/auth'
+import { storeToRefs } from 'pinia'
 const store = useAuthStore()
-let form = ref({
-    name: '',
-    email: '',
-})
+
+const { user } = storeToRefs(useAuthStore())
  
-onMounted(() => {
-    form.value.name = store.user?.name
-    form.value.email = store.user?.email || ''
+const form = computed(() => {
+    return {
+        name: user.value?.name,
+        email: user.value?.email,
+    }
 })
- 
-const update = async () => {
-    const response = await axios.post('/api/account', form.value)
-    store.user = response.data
+   
+const update = () => {
+    axios.post('/api/account', form.value).then(response => {
+      
+        console.log(response.data.message)
+        store.updateUser(response.data.user)
+    }).catch(error => {
+        console.error(error)
+    })
 }
 </script>

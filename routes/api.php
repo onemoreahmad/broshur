@@ -13,3 +13,13 @@ Route::get('/auth', function (Request $request) {
         'user' => UserResource::make($request->user()) ,
     ]);
 })->middleware('auth:sanctum');
+
+
+Route::post('/account', function (Request $request) {
+
+    $request->user()->update($request->all());
+    return response()->json([
+        'message' => 'Account updated successfully',
+        'user' => UserResource::make($request->user()) ,
+    ]);
+})->middleware('auth:sanctum');
