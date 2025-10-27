@@ -8,6 +8,7 @@
             <fieldset v-if="block" class="fieldset mt-4">
                 <legend class="fieldset-legend"> اسم البروشور </legend>
                 <input v-model="block.name" type="text" class="input" placeholder="الاسم" />
+                <span v-if="errorsStore.errors && errorsStore.errors['name']" class="text-red-500">   {{ errorsStore.errors['name'][0] }} </span>
             </fieldset>
             <fieldset v-if="block" class="fieldset mt-4">
                 <legend class="fieldset-legend"> اسم البروشور </legend>
@@ -29,12 +30,14 @@
 import axios from 'axios'
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import { useErrorsStore } from '@/stores/errors'
 const store = useAuthStore()
+const errorsStore = useErrorsStore()
 
 const block = ref(null)
 const loading = ref(false)
 const formLoading = ref(false)
-
+ 
 onMounted(() => {
     loading.value = true
     axios.get('/api/blocks/header').then(response => {
@@ -49,10 +52,16 @@ onMounted(() => {
 
 const save = () => {
     formLoading.value = true
-    axios.post('/api/blocks/header', block.value).then(response => {
+    axios.patch('/api/blocks/header', {
+        name: block.value.name,
+        slogan: block.value.slogan,
+        logo: block.value.logo ? block.value.logo : null,
+        cover: block.value.cover ? block.value.cover : null,
+    }).then(response => {
         console.log(response.data)
         formLoading.value = false
- 
+        errorsStore.setErrors([]);
+
         store.updateTenant({
             name: response.data.data.name,
             slogan: response.data.data.slogan,
@@ -60,8 +69,11 @@ const save = () => {
         })
     })
     .catch(error => {
-        console.error(error)
-        formLoading.value = false
+        console.error(error.response.data.errors)
+        formLoading.value = false;
+        if (error.response) {
+            errorsStore.setErrors(error.response.data.errors);
+        }
     })
 }
 </script>
