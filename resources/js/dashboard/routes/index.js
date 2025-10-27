@@ -81,4 +81,9 @@
         ],  
     });
 
+    router.beforeEach((to, from, next) => {
+      document.title = to.meta.title || 'إدارة البروشور';
+      next();
+    });
+    
     export default router;

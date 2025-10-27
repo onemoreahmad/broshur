@@ -67,6 +67,15 @@
 @plugin "daisyui" {
   themes: emerald --default,  cupcake;
 }
+ 
+.input {
+    &:focus, &:focus-within {
+        outline: 1px solid var(--input-color);
+        outline-offset: 0px;
+    }
+}
+
+
 
 @source '../views/dashboard/*.blade.php';
 @source '../**/*.js';

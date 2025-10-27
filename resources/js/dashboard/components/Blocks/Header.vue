@@ -4,21 +4,27 @@
             <span class="loading loading-spinner loading-lg opacity-75"></span>
         </div>
         <div v-else>
-        <div >
-            <fieldset v-if="block" class="fieldset mt-4">
-                <legend class="fieldset-legend"> اسم البروشور </legend>
-                <input v-model="block.name" type="text" class="input" placeholder="الاسم" />
+        <div class="flex flex-col gap-3">
+            <label class="input w-full focus-within:ring-offset-0 ">
+                <span class="label">اسم البروشور</span>
+                <input v-model="form.name" type="text" placeholder="الاسم" class="" />
                 <span v-if="errorsStore.errors && errorsStore.errors['name']" class="text-red-500">   {{ errorsStore.errors['name'][0] }} </span>
-            </fieldset>
-            <fieldset v-if="block" class="fieldset mt-4">
-                <legend class="fieldset-legend"> اسم البروشور </legend>
-                <input v-model="block.slogan" type="text" class="input" placeholder="الاسم" />
-            </fieldset>
+            </label>
 
-            <button @click="save" class="btn btn-primary" :disabled="formLoading" > 
-                <span v-if="!formLoading"> حفظ </span>
-                <span v-if="formLoading" class="loading loading-spinner loading-xs"></span>
-            </button>
+            <label class="input w-full">
+                <span class="label">الشعار النصي</span>
+                <input v-model="form.slogan" type="text" placeholder="الشعار النصي" />
+                <span v-if="errorsStore.errors && errorsStore.errors['slogan']" class="text-red-500">   {{ errorsStore.errors['slogan'][0] }} </span>
+            </label>
+  
+            <div class="flex justify-end w-full">
+                <button @click="save" class="btn btn-primary" :disabled="formLoading" > 
+                    <span v-if="!formLoading"> حفظ </span>
+                    <span v-if="formLoading" class="loading loading-spinner loading-xs"></span>
+                </button>
+            </div>
+
+
 
             <!--<pre>{{ block }}</pre>-->
         </div>
@@ -34,14 +40,21 @@ import { useErrorsStore } from '@/stores/errors'
 const store = useAuthStore()
 const errorsStore = useErrorsStore()
 
-const block = ref(null)
+const form = ref({
+    name: '',
+    slogan: '',
+    logo: null,
+    newLogo: null,
+    cover: null,
+    newCover: null,
+})
 const loading = ref(false)
 const formLoading = ref(false)
  
 onMounted(() => {
     loading.value = true
     axios.get('/api/blocks/header').then(response => {
-        block.value = response.data.data
+        form.value = response.data.data
         loading.value = false
     })
     .catch(error => {
@@ -53,10 +66,10 @@ onMounted(() => {
 const save = () => {
     formLoading.value = true
     axios.patch('/api/blocks/header', {
-        name: block.value.name,
-        slogan: block.value.slogan,
-        logo: block.value.logo ? block.value.logo : null,
-        cover: block.value.cover ? block.value.cover : null,
+        name: form.value.name,
+        slogan: form.value.slogan,
+        logo: form.value.logo ? form.value.logo : null,
+        newCover: form.value.newCover ? form.value.newCover : null,
     }).then(response => {
         console.log(response.data)
         formLoading.value = false

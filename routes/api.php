@@ -32,36 +32,8 @@ Route::middleware(['auth:sanctum','admin'])
     ->as('blocks.')
     ->namespace('App\Api\Block')
     ->group(function () {
-       Route::get('/header', Header\GetHeader::class);
-       Route::patch('/header', Header\UpdateHeader::class);
+       Route::get('header', Header\GetHeader::class);
+       Route::patch('header', Header\UpdateHeader::class);
     });
 
-
-// Route::get('/blocks/header', function (Request $request) {
-    
-//     $block = Block::firstOrCreate(['name'=> 'header']);
-    
-//     return response()->json([
-//         'data' => [
-//             'name' => currentTenant()->name,
-//             'slogan' => data_get(currentTenant(), 'meta.slogan.'.app()->getLocale()),
-//             'logo' => data_get(currentTenant(), 'logo'),
-//         ],
-//     ]);
-// })->middleware('auth:sanctum','admin');
-
-// Route::post('/blocks/header', function (Request $request) {
-   
-//     $block = Block::firstOrCreate(['name'=> 'header']);
-//     tenant()->name = $request->name;
-//     tenant()->save();
-
-//     return response()->json([
-//         'message' => 'Block updated successfully',
-//         'data' => [
-//             'name' => currentTenant()->name,
-//             'slogan' => data_get(currentTenant(), 'meta.slogan.'.app()->getLocale()),
-//             'logo' => data_get(currentTenant(), 'logo'),
-//         ],
-//     ]);
-// })->middleware('auth:sanctum','admin');
+ 

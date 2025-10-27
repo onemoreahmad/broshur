@@ -29,7 +29,7 @@ class UpdateHeader
 
         // update tenant
         tenant()->name = $request->name;
-        // tenant()->meta->slogan = $request->slogan;
+        tenant()->meta->set('slogan.'.app()->getLocale(), $request->slogan);
         if ($request->hasFile('newLogo')) {
             tenant()->logo = $request->newLogo->store('logo', 'public');
         }
