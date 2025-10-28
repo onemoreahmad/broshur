@@ -121,66 +121,8 @@ useHead({
   ],
 })
 
-// Fake themes data
-const themes = ref([
-    {
-        id: 1,
-        name: 'القالب الكلاسيكي',
-        category: 'كلاسيكي',
-        price: 29,
-        description: 'قالب أنيق ومهني مناسب للشركات والمؤسسات الرسمية. يتميز بتصميم نظيف وألوان هادئة.',
-        preview: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center',
-        features: [
-            'تصميم نظيف ومهني',
-            'ألوان هادئة ومريحة للعين',
-            'مناسب للعروض التقديمية الرسمية',
-            'سهولة في القراءة'
-        ]
-    },
-    {
-        id: 2,
-        name: 'القالب العصري',
-        category: 'عصري',
-        price: 39,
-        description: 'قالب حديث ومبتكر يتميز بألوان زاهية وتصميم جذاب يناسب الشركات الناشئة والمشاريع الإبداعية.',
-        preview: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=300&fit=crop&crop=center',
-        features: [
-            'تصميم عصري وجذاب',
-            'ألوان زاهية ومتناسقة',
-            'مناسب للمشاريع الإبداعية',
-            'تأثيرات بصرية متقدمة'
-        ]
-    },
-    {
-        id: 3,
-        name: 'القالب المينيمالي',
-        category: 'مينيمالي',
-        price: 19,
-        description: 'قالب بسيط وأنيق يركز على المحتوى مع أقل قدر من العناصر البصرية. مثالي للعروض الأكاديمية.',
-        preview: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&crop=center',
-        features: [
-            'تصميم بسيط وأنيق',
-            'تركيز على المحتوى',
-            'مناسب للعروض الأكاديمية',
-            'سهولة في التركيز'
-        ]
-    },
-  
-    {
-        id: 6,
-        name: 'القالب الطبي',
-        category: 'طبي',
-        price: 42,
-        description: 'قالب مصمم خصيصاً للمؤسسات الطبية والصحية يتميز بألوان هادئة وثقة عالية.',
-        preview: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop&crop=center',
-        features: [
-            'تصميم طبي متخصص',
-            'ألوان هادئة ومريحة',
-            'مناسب للمؤسسات الطبية',
-            'مظهر موثوق ومهني'
-        ]
-    }
-])
+// Themes from API
+const themes = ref([])
 
 const selectedTheme = ref(null)
 const isLoading = ref(false)
@@ -245,6 +187,20 @@ watch(() => route.query.theme, (newThemeId) => {
 
 // Initialize on component mount
 onMounted(() => {
-    initializeTheme()
+    axios.get('/api/themes').then(response => {
+        themes.value = response.data.data.map(t => ({
+            id: t.id,
+            name: t.name,
+            category: t.category || 'عام',
+            price: t.price ?? 0,
+            description: t.description || '',
+            preview: t.image,
+            features: Array.isArray(t.features) ? t.features : []
+        }))
+        initializeTheme()
+    }).catch(() => {
+        themes.value = []
+        initializeTheme()
+    })
 })
 </script>

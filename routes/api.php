@@ -67,6 +67,29 @@ Route::post('/tenant/handle', function (Request $request) {
     ]);
 })->middleware('auth:sanctum');
 
+// Themes
+Route::get('/themes', function () {
+    $themes = \App\Models\Theme::where('active', true)
+        ->orderBy('id', 'asc')
+        ->get()
+        ->map(function ($theme) {
+            return [
+                'id' => $theme->id,
+                'name' => $theme->name,
+                'slug' => $theme->slug ?? null,
+                'image' => $theme->image, // accessor on model
+                'price' => data_get($theme, 'meta.price', null),
+                'description' => data_get($theme, 'meta.description', null),
+                'category' => data_get($theme, 'meta.category', null),
+                'features' => (array) data_get($theme, 'meta.features', []),
+            ];
+        });
+
+    return response()->json([
+        'data' => $themes,
+    ]);
+})->middleware('auth:sanctum');
+
 Route::get('/orders', function (Request $request) {
     $orders = \App\Models\Order::where('tenant_id', $request->user()->tenant->id)
         ->with(['items' ])
@@ -163,6 +186,10 @@ Route::middleware(['auth:sanctum','admin'])
        Route::post('header', Header\UpdateHeader::class);
        Route::get('about', About\GetAbout::class);
        Route::post('about', About\UpdateAbout::class);
+       Route::get('links', Links\GetLinks::class);
+       Route::post('links', Links\UpdateLinks::class);
+       Route::get('cta', Cta\GetCta::class);
+       Route::post('cta', Cta\UpdateCta::class);
     });
 
  

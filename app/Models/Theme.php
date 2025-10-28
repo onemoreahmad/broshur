@@ -31,10 +31,10 @@ class Theme extends Model
 
     public function getImageAttribute()
     {
-        if (file_exists(public_path('linkinbio-themes/' . $this->slug . '/image.webp'))) {
-            return asset('linkinbio-themes/' . $this->slug . '/image.webp');
+        if (file_exists(public_path('themes/' . $this->slug . '/image.png'))) {
+            return asset('themes/' . $this->slug . '/image.png');
         }
 
-        return asset('assets/images/linkinbio-image.webp');
+        return asset('assets/images/theme-image.webp');
     }
 }

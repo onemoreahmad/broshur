@@ -7,11 +7,11 @@
             <div class="flex flex-col gap-3">
                 
                 <label class="input w-full focus-within:ring-offset-0">
-                    <span class="label">عنوان القسم</span>
+                    <span class="label">العنوان</span>
                     <input 
                         v-model="form.title" 
                         type="text" 
-                        placeholder="عنوان القسم" 
+                        placeholder="مثال : من نحن ؟" 
                         class="" 
                     />
                     <span v-if="errorsStore.errors && errorsStore.errors['title']" class="text-red-500 text-xs">
