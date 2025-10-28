@@ -20,6 +20,7 @@ class TenantResource extends JsonResource
             'handle' => $this->handle,
             'logo' => $this->logo,
             'storefront_url' => $this->storefront_url,
+            'site_url' => $this->storefront_url,
             'preview_url' => $this->preview_url,
         ];
     }
