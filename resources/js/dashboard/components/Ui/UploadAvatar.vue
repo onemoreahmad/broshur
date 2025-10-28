@@ -5,14 +5,19 @@
         </div>
         <span class="sr-only">اختر صورة</span>
         <input type="file" @change="handleFileChange" class="sr-only" id="upload_avatar" />
+        <span v-if="errorsStore.errors && errorsStore.errors[props.name]" class="text-red-500 text-xs">  
+             {{ errorsStore.errors[props.name][0] }} 
+        </span>
     </label>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { useErrorsStore } from '@/stores/errors'
+const errorsStore = useErrorsStore()
 
 const emit = defineEmits(['update:modelValue'])
-const props = defineProps(['preview'])
+const props = defineProps(['preview', 'name'])
 const preview = ref(props.preview)
 
 const handleFileChange = (event) => {

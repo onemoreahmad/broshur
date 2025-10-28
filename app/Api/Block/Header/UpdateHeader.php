@@ -15,7 +15,7 @@ class UpdateHeader
         return [
             'name' => ['required', 'min:3', 'max:150'],
             'slogan' => ['nullable', 'min:1', 'max:255'],
-            'newLogo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:4048'],
+            'newLogo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:6048'],
             'newCover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:6048'],
         ];
     }
@@ -46,5 +46,12 @@ class UpdateHeader
                 'cover' => data_get($block, 'config.cover'),
             ],
         ]);
+    }
+
+    public function getValidationAttributes(): array
+    {
+        return [
+            'newLogo' => 'الشعار',
+        ];
     }
 }

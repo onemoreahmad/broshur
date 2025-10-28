@@ -6,19 +6,19 @@
         <div v-else>
         <div class="flex flex-col gap-3">
             
-            <UiUploadAvatar v-model="form.newLogo" :preview="form.logo" />
+            <UiUploadAvatar v-model="form.newLogo" :preview="form.logo" name="newLogo" />
             
  
             <label class="input w-full focus-within:ring-offset-0 ">
                 <span class="label">اسم البروشور</span>
                 <input v-model="form.name" type="text" placeholder="الاسم" class="" />
-                <span v-if="errorsStore.errors && errorsStore.errors['name']" class="text-red-500">   {{ errorsStore.errors['name'][0] }} </span>
+                <span v-if="errorsStore.errors && errorsStore.errors['name']" class="text-red-500 text-xs">   {{ errorsStore.errors['name'][0] }} </span>
             </label>
 
             <label class="input w-full">
                 <span class="label">الشعار النصي</span>
                 <input v-model="form.slogan" type="text" placeholder="الشعار النصي" />
-                <span v-if="errorsStore.errors && errorsStore.errors['slogan']" class="text-red-500">   {{ errorsStore.errors['slogan'][0] }} </span>
+                <span v-if="errorsStore.errors && errorsStore.errors['slogan']" class="text-red-500 text-xs">   {{ errorsStore.errors['slogan'][0] }} </span>
             </label>
   
             <div class="flex justify-end w-full">
