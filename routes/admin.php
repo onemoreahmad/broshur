@@ -11,7 +11,7 @@ Route::as('admin.')
     Volt::route('/', 'admin.home')->name('home');
 
     Route::post('upload-media', [\App\Actions\UploadMedia::class, 'upload'])->name('upload-media');
- 
+    Route::post('upload-image', [\App\Actions\UploadImage::class, 'upload'])->name('upload-image');
     Route::middleware(['web'])
         ->group(function () {
             Volt::route('/content', 'admin.content.index')->name('content');

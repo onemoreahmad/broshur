@@ -17,7 +17,7 @@
     import FaqBlock from '../components/Blocks/Faq.vue';
     import GalleryBlock from '../components/Blocks/Gallery.vue';
     import ReviewsBlock from '../components/Blocks/Reviews.vue';
-
+    import PortfolioBlock from '../components/Blocks/Portfolio.vue';
     
     const router = createRouter({
         history: createWebHistory('/dashboard'),
@@ -67,6 +67,11 @@
                       path: 'gallery',
                       name: 'blocks.gallery',
                       component: GalleryBlock,
+                    },
+                    {
+                      path: 'portfolio',
+                      name: 'blocks.portfolio',
+                      component: PortfolioBlock,
                     },
                   ],
              },

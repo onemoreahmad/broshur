@@ -74,8 +74,7 @@ class UploadMedia
             ];
             $model->save();  
         }
- 
-
+  
         // $media = $model->addMedia($file)
         //     ->preservingOriginal()
         //     ->usingFileName(md5($file->getClientOriginalName()).'.'.$file->getClientOriginalExtension())
