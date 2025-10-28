@@ -190,6 +190,10 @@ Route::middleware(['auth:sanctum','admin'])
        Route::post('links', Links\UpdateLinks::class);
        Route::get('cta', Cta\GetCta::class);
        Route::post('cta', Cta\UpdateCta::class);
+       Route::get('faq', Faq\GetFaq::class);
+       Route::post('faq', Faq\UpdateFaq::class);
+       Route::get('features', Features\GetFeatures::class);
+       Route::post('features', Features\UpdateFeatures::class);
     });
 
  
