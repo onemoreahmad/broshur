@@ -161,6 +161,8 @@ Route::middleware(['auth:sanctum','admin'])
     ->group(function () {
        Route::get('header', Header\GetHeader::class);
        Route::post('header', Header\UpdateHeader::class);
+       Route::get('about', About\GetAbout::class);
+       Route::post('about', About\UpdateAbout::class);
     });
 
  

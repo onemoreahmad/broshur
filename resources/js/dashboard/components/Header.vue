@@ -62,7 +62,7 @@
                         حسابي
                         </span>
                      </RouterLink>
-                     <RouterLink :to="{ name: 'preview' }" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex bg-black/10 bg-gray-100 px-4 py-2 text-sm transition-all transition-colors duration-300 items-center justify-center justify-start whitespace-nowrap rounded-md hover:bg-black/20 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none">
+                     <a href="/" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex bg-black/10 bg-gray-100 px-4 py-2 text-sm transition-all transition-colors duration-300 items-center justify-center justify-start whitespace-nowrap rounded-md hover:bg-black/20 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none">
                         <span>
                            <svg class="@if-&amp;&amp; !@if-$label @endif !h-5 !w-5 inline-block size-5 ltr:-ml-1 rtl:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -74,7 +74,7 @@
                         <span>
                         بروشور
                         </span>
-                     </RouterLink>
+                     </a>
                      <a href="/logout" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex bg-black/10 bg-gray-100 px-4 py-2 text-sm transition-all transition-colors duration-300 items-center justify-center justify-start whitespace-nowrap rounded-md hover:bg-black/20 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none">
                         <span>
                            <svg class="@if-&amp;&amp; !@if-$label @endif !h-5 !w-5 inline-block size-5 ltr:-ml-1 rtl:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
