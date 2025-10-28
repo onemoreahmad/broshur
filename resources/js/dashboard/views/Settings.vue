@@ -113,13 +113,20 @@ const form = computed(() => {
         handle: tenant.value?.handle,
     }
 })
- 
+
+// const originalHandle = ref('')
+
 // Computed properties
 const previewUrl = computed(() => {
     if (!form.value?.handle) return ''
     return `https://${domain}/${form.value?.handle}`
 })
- 
+
+// Initialize form with current tenant data
+// onMounted(() => {
+//     form.value.handle = tenant?.value?.handle
+//     originalHandle.value = tenant?.value?.handle 
+// })
 
 const updateHandle = async () => {
     if (!form.value.handle) return
@@ -131,11 +138,15 @@ const updateHandle = async () => {
         const response = await axios.post('/api/tenant/handle', {
             handle: form.value.handle
         })
-         
+        
+        // Update the tenant in the auth store
+        // authStore.updateTenant({ handle: form.value.handle })
+        
         // Update original handle
-        originalHandle.value = form.value.handle
+        // originalHandle.value = form.value.handle
         authStore.updateTenant(response.data.tenant)
- 
+
+        
         // Show success message
         console.log('Handle updated successfully:', response.data)
         
@@ -151,7 +162,7 @@ const updateHandle = async () => {
 }
 
 const resetForm = () => {
-    form.value.handle = originalHandle.value
+    // form.value.handle = originalHandle.value
     errors.value = {}
 }
 
