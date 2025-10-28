@@ -2,6 +2,8 @@
 
 namespace App\Api\Block\Portfolio;
 
+use App\Models\Portfolio;
+use App\Models\Block;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class GetPortfolio
@@ -10,22 +12,32 @@ class GetPortfolio
 
     public function handle()
     {
-        $block = \App\Models\Block::firstOrCreate([
+        $tenantId = currentTenant()->id;
+        
+        // Get portfolio items for current tenant
+        $items = Portfolio::where('tenant_id', $tenantId)
+            ->orderBy('sort')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'image' => $item->image,
+                    'image_url' => $item->image_url,
+                    'caption' => $item->caption,
+                    'active' => $item->active,
+                    'sort' => $item->sort,
+                ];
+            });
+
+        $block = Block::firstOrCreate([
             'name' => 'portfolio',
         ]);
-        
+
         return response()->json([
             'data' => [
-                'id' => data_get($block, 'id'),
-                'active' => (bool) data_get($block, 'active', true),
-                'items' => collect(data_get($block, 'config.items', []))
-                    ->map(function ($item) {
-                        return [
-                            'image' => data_get($item, 'image', ''),
-                            'caption' => data_get($item, 'caption', ''),
-                            'active' => (bool) data_get($item, 'active', true),
-                        ];
-                    })->values(),
+                'id' => $block->id,  
+                'active' => $block->active,  
+                'items' => $items,
             ],
         ]);
     }

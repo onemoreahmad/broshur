@@ -96,7 +96,7 @@
                                     :name="`items.${index}.image`"
                                     :modelId="form.id"
                                     mediaCollection="portfolio"
-                                    :preview="item.image ? `https://storage.broshur.com/${item.image}` : ''"
+                                    :preview="item.image_url || ''"
                                 />
                             </div>
 
@@ -166,12 +166,7 @@ onMounted(() => {
     loading.value = true
     axios.get('/api/blocks/portfolio').then(response => {
         form.value = response.data.data
-        form.value.id = response.data.data.id
-        // Add IDs to existing items if they don't have them
-        form.value.items = form.value.items.map((item, index) => ({
-            ...item,
-            id: item.id || Date.now() + index
-        }))
+        // Items already have proper structure from API
         loading.value = false
     })
     .catch(error => {
@@ -182,10 +177,12 @@ onMounted(() => {
 
 const addItem = () => {
     form.value.items.push({
-        id: Date.now(),
+        id: null, // Will be set by server when created
         image: '',
+        image_url: '',
         caption: '',
-        active: true
+        active: true,
+        sort: form.value.items.length
     })
 }
 
@@ -217,6 +214,11 @@ const drop = (dropIndex, event) => {
     // Insert at new position
     form.value.items.splice(dropIndex, 0, draggedItem)
     
+    // Update sort for all items
+    form.value.items.forEach((item, index) => {
+        item.sort = index
+    })
+    
     // Reset drag state
     draggedIndex.value = null
 }
@@ -227,6 +229,9 @@ const save = () => {
     axios.post('/api/blocks/portfolio', form.value).then(response => {
         formLoading.value = false
         errorsStore.setErrors([]);
+        
+        // Update form with response data to get proper IDs
+        form.value = response.data.data
         
         // Reload preview iframe
         const previewIframe = document.getElementById('preview-iframe')

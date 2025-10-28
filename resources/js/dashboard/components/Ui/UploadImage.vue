@@ -72,6 +72,7 @@ const props = defineProps({
 })
 
 const uploading = ref(false)
+const preview = ref(props.preview)
 
 const handleFileChange = async (event) => {
     const file = event.target.files[0]
@@ -109,7 +110,8 @@ const handleFileChange = async (event) => {
         if (response.data.success) {
             // Update preview with uploaded image URL
             emit('update:modelValue', response.data.url)
-            emit('uploaded', response.data.url)
+            preview.value = URL.createObjectURL(file)
+
         }
         
     } catch (error) {
