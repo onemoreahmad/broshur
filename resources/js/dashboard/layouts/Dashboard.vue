@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bg-base-200 min-h-screen relative pb-20">
         <Header />
         <Navbar />
       

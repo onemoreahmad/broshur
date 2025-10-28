@@ -17,7 +17,10 @@ class TenantResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'created_at' => $this->created_at->format('Y-m-d'),
+            'active' => $this->active,
             'handle' => $this->handle,
+            'theme_id' => $this->theme_id,
             'logo' => $this->logo,
             'storefront_url' => $this->storefront_url,
             'site_url' => $this->storefront_url,

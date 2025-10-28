@@ -65,7 +65,7 @@
 
 
 @plugin "daisyui" {
-  themes: emerald --default,  cupcake;
+  themes: emerald, cmyk --default,  cupcake;
 }
  
 .input {

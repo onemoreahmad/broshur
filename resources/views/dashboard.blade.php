@@ -30,7 +30,7 @@
         </script>
     @endif
 </head>
-<body class="bg-gray-200 min-h-screen relative">
+<body class="">
     <div id="app"></div>
 </body>
 </html>

@@ -25,6 +25,48 @@ Route::post('/account', function (Request $request) {
     ]);
 })->middleware('auth:sanctum');
 
+Route::post('/tenant/theme', function (Request $request) {
+    $request->validate([
+        'theme_id' => 'required|integer|min:1'
+    ]);
+
+    $tenant = $request->user()->tenant;
+    $tenant->theme_id = $request->theme_id;
+    $tenant->save();
+
+    return response()->json([
+        'message' => 'Theme updated successfully',
+        'tenant' => TenantResource::make($tenant),
+    ]);
+})->middleware('auth:sanctum');
+
+Route::post('/tenant/handle', function (Request $request) {
+    $request->validate([
+        'handle' => [
+            'required',
+            'string',
+            'min:3',
+            'max:50',
+            'regex:/^[a-z0-9-]+$/',
+            'unique:tenants,handle,' . $request->user()->tenant->id
+        ]
+    ], [
+        'handle.regex' => 'اسم المستخدم يجب أن يحتوي على أحرف صغيرة وأرقام وشرطات فقط',
+        'handle.unique' => 'اسم المستخدم هذا مستخدم بالفعل',
+        'handle.min' => 'اسم المستخدم يجب أن يكون على الأقل 3 أحرف',
+        'handle.max' => 'اسم المستخدم يجب أن يكون أقل من 50 حرف'
+    ]);
+
+    $tenant = $request->user()->tenant;
+    $tenant->handle = $request->handle;
+    $tenant->save();
+
+    return response()->json([
+        'message' => 'Handle updated successfully',
+        'tenant' => TenantResource::make($tenant),
+    ]);
+})->middleware('auth:sanctum');
+
 
 // Manage Blocks
 Route::middleware(['auth:sanctum','admin'])
