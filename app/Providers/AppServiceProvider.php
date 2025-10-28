@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        \URL::forceScheme('https');
+
         Livewire::addPersistentMiddleware([
             \App\Http\Middleware\AdminMiddleware::class,
             \App\Http\Middleware\CurrentBroshur::class,
