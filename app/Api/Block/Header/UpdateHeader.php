@@ -24,14 +24,14 @@ class UpdateHeader
     {
         $block = Block::firstOrCreate(['name'=> 'header']);
         // $block->convert_uudecode = $request->cover;
-
+ 
         // $block->save();
 
         // update tenant
         tenant()->name = $request->name;
         tenant()->meta->set('slogan.'.app()->getLocale(), $request->slogan);
         if ($request->hasFile('newLogo')) {
-            tenant()->logo = $request->newLogo->store('logo', 'public');
+            tenant()->logo = $request->newLogo->store('logo');
         }
        
         // tenant()->logo = $request->newLogo ? $request->newLogo : null;

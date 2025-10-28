@@ -5,6 +5,10 @@
         </div>
         <div v-else>
         <div class="flex flex-col gap-3">
+            
+            <UiUploadAvatar v-model="form.newLogo" :preview="form.logo" />
+            
+ 
             <label class="input w-full focus-within:ring-offset-0 ">
                 <span class="label">اسم البروشور</span>
                 <input v-model="form.name" type="text" placeholder="الاسم" class="" />
@@ -63,15 +67,23 @@ onMounted(() => {
     })
 })
 
+const handleLogoUpload = (event) => {
+    form.value.newLogo = event.target.files[0]
+    const reader = new FileReader()
+    reader.onload = (e) => {
+        document.getElementById('preview_img').src = e.target.result
+    }
+    reader.readAsDataURL(form.value.newLogo)
+}
+
 const save = () => {
-    formLoading.value = true
-    axios.patch('/api/blocks/header', {
-        name: form.value.name,
-        slogan: form.value.slogan,
-        logo: form.value.logo ? form.value.logo : null,
-        newCover: form.value.newCover ? form.value.newCover : null,
+    formLoading.value = true;
+ 
+    axios.post('/api/blocks/header', form.value, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     }).then(response => {
-        console.log(response.data)
         formLoading.value = false
         errorsStore.setErrors([]);
 
@@ -80,6 +92,9 @@ const save = () => {
             slogan: response.data.data.slogan,
             logo: response.data.data.logo,
         })
+
+        document.getElementById('preview-iframe').contentWindow.location.reload();
+        
     })
     .catch(error => {
         console.error(error.response.data.errors)

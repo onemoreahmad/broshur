@@ -19,6 +19,9 @@ class Tenant extends Model
 
     protected $appends = [
         'storefront_url',
+        'preview_url',
+        'slogan',
+        'social_links',
     ];  
 
     protected $fillable = [
@@ -69,6 +72,11 @@ class Tenant extends Model
         return route('storefront.home', $this->handle);
         // return $this->siteUrl . '/links';
         // return $this->siteUrl . '/link-in-bio';
+    }
+
+    public function getPreviewUrlAttribute()
+    {
+        return route('storefront.home.preview', $this->handle);
     }
  
  

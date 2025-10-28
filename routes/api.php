@@ -33,7 +33,7 @@ Route::middleware(['auth:sanctum','admin'])
     ->namespace('App\Api\Block')
     ->group(function () {
        Route::get('header', Header\GetHeader::class);
-       Route::patch('header', Header\UpdateHeader::class);
+       Route::post('header', Header\UpdateHeader::class);
     });
 
  

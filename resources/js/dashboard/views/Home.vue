@@ -71,7 +71,7 @@
             <div class="bg-white truncate lg:rounded-lg rounded-b-lg lg:-mr-1.5 p-6 min-h-[60vh] w-full relative">
                 <RouterView :key="$route.name" />
             </div>
-
+ 
             <div class="hidden lg:block lg:px-5">
                 <div class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[10px] rounded-[2.5rem] h-[700px] w-[420px] [&amp;::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]" dir="ltr">
                     <!--<div class="h-[32px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -start-[27px] top-[72px] rounded-s-lg"></div>
@@ -79,7 +79,7 @@
                     <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -start-[17px] top-[178px] rounded-s-lg"></div>
                     <div class="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -end-[17px] top-[142px] rounded-e-lg"></div>-->
                     <div class="h-[672px] overflow-hidden w-[398px] bg-white overflow-y-scroll rounded-[2rem] dark:bg-gray-800">
-                        <iframe id="linkinbio-iframe" src="https://broshur.test/wjeez/preview" class="w-full min-h-screen"></iframe> 
+                        <iframe id="preview-iframe" :src="auth?.tenant?.preview_url" class="w-full min-h-screen"></iframe> 
                     </div>
                 </div>   
             </div>
