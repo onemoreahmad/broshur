@@ -2,6 +2,7 @@
   
     import Home from '../views/Home.vue';
     import Orders from '../views/Orders.vue';
+    import OrderDetail from '../views/OrderDetail.vue';
     import About from '../views/About.vue';
     import Preview from '../views/Preview.vue';
     import Account from '../views/Account.vue';
@@ -72,6 +73,7 @@
                   ],
              },
             { path: '/orders', component: Orders, name: 'orders' },
+            { path: '/orders/:id', component: OrderDetail, name: 'orders.detail' },
             { path: '/about', component: About, name: 'about' },
             { path: '/preview', component: Preview, name: 'preview' },
             { path: '/account', component: Account, name: 'account' },

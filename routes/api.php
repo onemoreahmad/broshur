@@ -67,6 +67,91 @@ Route::post('/tenant/handle', function (Request $request) {
     ]);
 })->middleware('auth:sanctum');
 
+Route::get('/orders', function (Request $request) {
+    $orders = \App\Models\Order::where('tenant_id', $request->user()->tenant->id)
+        ->with(['items' ])
+        ->orderBy('created_at', 'desc')
+        ->paginate(15);
+
+    return response()->json([
+        'data' => $orders->items(),
+        'pagination' => [
+            'current_page' => $orders->currentPage(),
+            'last_page' => $orders->lastPage(),
+            'per_page' => $orders->perPage(),
+            'total' => $orders->total(),
+            'has_more' => $orders->hasMorePages()
+        ]
+    ]);
+})->middleware('auth:sanctum');
+
+Route::post('/orders', function (Request $request) {
+    $request->validate([
+        'client_name' => 'required|string|max:255',
+        'client_phone' => 'nullable|string|max:20',
+        'client_email' => 'nullable|email|max:255',
+        'items' => 'required|array|min:1',
+        'items.*.name' => 'required|string|max:255',
+        'items.*.quantity' => 'required|integer|min:1',
+        'items.*.price' => 'required|numeric|min:0',
+        'total' => 'required|numeric|min:0',
+        'status' => 'required|string|in:pending,processing,completed,cancelled',
+        'notes' => 'nullable|string|max:1000'
+    ]);
+
+    $tenant = $request->user()->tenant;
+    
+    // Create the order
+    $order = \App\Models\Order::create([
+        'tenant_id' => $tenant->id,
+        'user_id' => $request->user()->id,
+        'total' => $request->total,
+        'meta' => [
+            'notes' => $request->notes,
+            'status' => $request->status,
+            'client_name' => $request->client_name,
+            'client_phone' => $request->client_phone,
+            'client_email' => $request->client_email,
+        ]
+    ]);
+
+    // Create order items
+    foreach ($request->items as $item) {
+        \App\Models\OrderItem::create([
+            'order_id' => $order->id,
+            'quantity' => $item['quantity'],
+            'amount' => $item['price'],
+            'total_pre_tax' => $item['quantity'] * $item['price'],
+            'data' => [
+                'name' => $item['name'],
+                'notes' => $request->notes,
+                'status' => $request->status,
+                'client_name' => $request->client_name,
+                'client_phone' => $request->client_phone,
+                'client_email' => $request->client_email,
+            ]
+        ]);
+    }
+
+    // Set order status
+    $order->setStatus($request->status);
+
+    return response()->json([
+        'message' => 'Order created successfully',
+        'order' => $order->load(['items'])
+    ]);
+})->middleware('auth:sanctum');
+
+Route::get('/orders/{id}', function (Request $request, $id) {
+    $order = \App\Models\Order::where('tenant_id', $request->user()->tenant->id)
+        ->with(['items'])
+        ->findOrFail($id);
+
+    return response()->json([
+        'data' => $order,
+    ]);
+})->middleware('auth:sanctum');
+
 
 // Manage Blocks
 Route::middleware(['auth:sanctum','admin'])

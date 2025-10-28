@@ -16,6 +16,16 @@ class Order extends Model
         'meta' => SchemalessAttributes::class,
     ];
 
+    protected $fillable = [
+        'tenant_id',
+        'user_id',
+        'number',
+        'status',
+        'total',
+        'notes',
+        'meta',
+    ];
+
     protected static function booted(): void
     {
         static::creating(function ($model) {
@@ -29,10 +39,10 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function client()
-    {
-        return $this->belongsTo(Client::class);
-    }
+    // public function client()
+    // {
+    //     return $this->belongsTo(Client::class);
+    // }
 
     public function getSNumberAttribute()
     {
