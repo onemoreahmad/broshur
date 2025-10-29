@@ -5,7 +5,16 @@
         <div class="space-y-3 flex flex-col gap-3 w-full">
             <div v-for="(option, name) in themeOptions" :key="name" class="relative">
                 <UiRadioField  class="bg-white my-1" 
-                    v-if="option.type == 'radio' || option.type == 'picker-color'" 
+                    v-if="option.type == 'radio'" 
+                    :options="option.options" 
+                    v-model="modelValue[name]" 
+                    :model="name" 
+                    :label="option.label" 
+                    placeholder="" 
+                    help="" />
+
+                <UiPickColor  class="bg-white my-1" 
+                    v-if="option.type == 'picker-color'" 
                     :options="option.options" 
                     v-model="modelValue[name]" 
                     :model="name" 
