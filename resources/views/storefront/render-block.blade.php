@@ -3,8 +3,7 @@
         @includeFirst(['theme::blocks.'.$component, 'empty'] , data_get($block, 'config', []))
     @endif
 </div>
-
-
+ 
 <?php
 use App\Models\Block;
 new class extends Livewire\Volt\Component {
@@ -22,6 +21,5 @@ new class extends Livewire\Volt\Component {
 
         // return view('ui::components.lazy-placeholder', ['color' => 'gray-400', 'padding' => 'py-1', 'size' => '4', 'width' => 'w-10']);
     }
-
-
+ 
 }; ?>

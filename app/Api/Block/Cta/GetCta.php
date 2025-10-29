@@ -14,6 +14,7 @@ class GetCta
         
         return response()->json([
             'data' => [
+                'active' => (bool) data_get($block, 'active', false),
                 'whatsapp_enabled' => (bool) data_get($block, 'config.whatsapp_enabled', false),
                 'whatsapp_number' => data_get($block, 'config.whatsapp_number', ''),
                 'whatsapp_message' => data_get($block, 'config.whatsapp_message', ''),

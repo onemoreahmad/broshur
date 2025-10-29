@@ -1,0 +1,12 @@
+<!-- Floating Language Buttons - Mobile (Inside Header Image) -->
+<div class="md:hidden absolute top-2 left-2 flex flex-col gap-2 z-20">
+    <!-- English Button -->
+    <a href="{{route('storefront.home', {tenant: tenant('handle'), lang: 'en'})}}" class="size-8 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
+        <span class="text-xs font-semibold text-gray-700 group-hover:text-gray-900">EN</span>
+    </a>
+    
+    <!-- Arabic Button -->
+    <a href="{{route('storefront.home', {tenant: tenant('handle'), lang: 'ar'})}}" class="size-8 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
+        <span class="text-xs font-semibold text-gray-700 group-hover:text-gray-900">ع</span>
+    </a>
+</div>

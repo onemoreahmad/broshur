@@ -271,7 +271,26 @@ if (!function_exists('currency')) {
 }
 
 if (!function_exists('renderBlock')) {
-    function renderBlock($component, $parms = [], $isLazy = false)
+    function renderBlock($component, $view = null, $parms = [], $isLazy = false)
+    {
+        $parms['component'] = $component;
+        $parms['view'] = $view;
+
+        // lazy load
+        if($isLazy || isset($parms['lazy']) && $parms['lazy']){
+            $html = \Livewire\Livewire::mount('storefront.blocks.'.$component, array_merge($parms, ['lazy' => true]), generateKey());
+ 
+            return new \Twig\Markup($html, 'UTF-8');
+        }
+
+        $html = \Livewire\Livewire::mount('storefront.blocks.'.$component, array_merge($parms, ['lazy' => $isLazy]), generateKey());
+ 
+        return new \Twig\Markup($html, 'UTF-8');
+    }
+}
+
+if (!function_exists('renderBlockComponent')) {
+    function renderBlockComponent($component, $parms = [], $isLazy = false)
     {
         $parms['component'] = $component;
 

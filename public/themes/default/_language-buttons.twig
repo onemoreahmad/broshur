@@ -1,0 +1,12 @@
+<!-- Floating Language Buttons - Desktop (Outside Card) -->
+<div class="hidden md:flex absolute rtl:-left-16 ltr:-right-16 flex-col gap-1.5 z-20 bg-black/20 p-1 rounded-xl">
+    <!-- English Button -->
+    <a href="{{route('storefront.home', {tenant: tenant('handle'), lang: 'en'})}}" class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
+        <span class="text-sm font-semibold text-gray-700 group-hover:text-gray-900">En</span>
+    </a>
+    
+    <!-- Arabic Button -->
+    <a href="{{route('storefront.home', {tenant: tenant('handle') })}}" class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
+        <span class="text-sm font-semibold text-gray-700 group-hover:text-gray-900">ع</span>
+    </a>
+</div>

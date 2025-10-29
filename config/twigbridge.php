@@ -233,6 +233,7 @@ return [
             'data_get',
             'component',
             'renderBlock',
+            'renderBlockComponent',
             'siteComponent',
             'gravatar',
             'hideEmail',

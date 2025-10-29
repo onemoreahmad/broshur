@@ -1,8 +1,7 @@
 <div class="min-h-screen bg-{{ options.primaryColor ?? 'primary' }}-900 relative overflow-hidden" x-data="{ menuOpen: false }" x-effect="document.body.style.overflow = menuOpen ? 'hidden' : 'auto'">
    
     <!-- Blurred Background -->
-    <div class="absolutex fixed inset-0 z-0 bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-{{ options.primaryColor ?? 'primary' }}-800 via-{{ options.primaryColor ?? 'primary' }}-700/80 to-{{ options.primaryColor ?? 'primary' }}-500">
-       
+    <div class="absolutex fixed inset-0 z-0 bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-{{ options.primaryColor ?? 'primary' }}-800 via-black/20 to-{{ options.primaryColor ?? 'primary' }}-700">
         <svg class="absolute opacity-80 inset-0 -z-10 size-full mask-[radial-gradient(100%_100%_at_top_right,white,transparent)] stroke-white/5" aria-hidden="true">
             <defs>
             <pattern id="983e3e4c-de6d-4c3f-8d64-b9761d1534cc" width="200" height="200" x="50%" y="-1" patternUnits="userSpaceOnUse">
@@ -13,886 +12,46 @@
             <path d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z" stroke-width="0"></path>
             </svg>
             <rect width="100%" height="100%" stroke-width="0" fill="url(#983e3e4c-de6d-4c3f-8d64-b9761d1534cc)"></rect>
-        </svg>
-         
+        </svg> 
     </div>
-
-        <!-- Contact Card -->
-        <div class="relative md:my-4 z-10 flex flex-col items-center md:max-w-2xl md:rounded-2xl w-full md:border-4 border-black/20 mx-auto">
  
 
-            {% if tenant('socialLinks') | length %}
-            <div class="hidden md:flex absolute rtl:-right-16 ltr:-left-16 flex-col gap-1.5 p-1 z-20 bg-black/20  rounded-xl">
-               {% for link in tenant('socialLinks') %}
-                   <a href="{{link.url}}" target="_blank" class="flex items-center  text-white/80 p-2  rounded-xl bg-white/5  hover:bg-white/10">
-                       <span class="size-6">{% include 'assets/icons/social/brand-'~link.name~'.svg' ignore missing %}   </span>
-                   </a>
-               {% endfor %}
-           </div>
-           {% endif %}
+    <!-- Contact Card -->
+    <div class="relative md:my-4 z-10 flex flex-col items-center md:max-w-2xl md:rounded-2xl w-full md:border-4 border-black/20 mx-auto">
 
+        {{renderBlock('links')}}
+    
+        {% include 'theme::_language-buttons' %}
 
-        <!-- Floating Language Buttons - Desktop (Outside Card) -->
-        <div class="hidden md:flex absolute rtl:-left-16 ltr:-right-16 flex-col gap-1.5 z-20 bg-black/20 p-1 rounded-xl">
-            <!-- English Button -->
-            <a href="{{route('storefront.home', {tenant: tenant('handle'), lang: 'en'})}}" class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
-                <span class="text-sm font-semibold text-gray-700 group-hover:text-gray-900">En</span>
-            </a>
-            
-            <!-- Arabic Button -->
-            <a href="{{route('storefront.home', {tenant: tenant('handle') })}}" class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
-                <span class="text-sm font-semibold text-gray-700 group-hover:text-gray-900">ع</span>
-            </a>
-        </div>
-
-            <!-- Header Image -->
-            <div class="w-full min-h-[8rem] object-cover md:rounded-t-xl bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-[#001f3f] via-[#083358] to-[#0da574] relative">
-          
-            
-                  <!-- Floating Language Buttons - Mobile (Inside Header Image) -->
-                  <div class="md:hidden absolute top-2 right-2 flex items-center gap-2 z-20">
-                    {% for link in tenant('socialLinks') %}
-                         <a href="{{link.url}}" target="_blank" class="flex items-center  text-white/80 p-2  rounded-xl bg-black/40  hover:bg-black/30">
-                             <span class="size-6">{% include 'assets/icons/social/brand-'~link.name~'.svg' ignore missing %}   </span>
-                         </a>
-                     {% endfor %}
-                 </div>
-                 
-
-
-            <!-- Floating Language Buttons - Mobile (Inside Header Image) -->
-            <div class="md:hidden absolute top-2 left-2 flex flex-col gap-2 z-20">
-                <!-- English Button -->
-                <a href="{{route('storefront.home', {tenant: tenant('handle'), lang: 'en'})}}" class="size-8 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
-                    <span class="text-xs font-semibold text-gray-700 group-hover:text-gray-900">EN</span>
-                </a>
+        <!-- Header Image -->
+        <div class="w-full min-h-[0.5rem] object-cover md:rounded-t-xl bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-primary-600 via-black/20 to-primary-800 relative">
+        
+            {{renderBlock('links', 'links-mobile')}}
                 
-                <!-- Arabic Button -->
-                <a href="{{route('storefront.home', {tenant: tenant('handle'), lang: 'ar'})}}" class="size-8 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 flex items-center justify-center hover:bg-white hover:shadow-xl transition-all duration-200 group">
-                    <span class="text-xs font-semibold text-gray-700 group-hover:text-gray-900">ع</span>
-                </a>
-            </div>
+            {% include 'theme::_language-buttons-mobile' %}
 
             {% if tenant('cover') %}
                 <img src="{{ tenant('cover') }}" 
                     alt="BMW Cars Header" 
-                    class="w-full h-48 object-cover md:rounded-t-xl shadow-lg">
+                    class="w-full min-h-48 max-h-56 object-cover md:rounded-t-xl shadow-lg">
             {% endif %}
-            </div>
-
-
-
-            <div class="md:max-w-2xl w-full Xborder-b-4 border-white/90 bg-white py-4 lg:rounded-b-xl">
-
-
-
-
-                <!-- Name, Title and Logo Row -->
-                <div class="flex items-center gap-x-3 mb-5 px-4">
-                
-                    <!-- Logo -->
-                    <img src="{{ tenant('logo') }}" alt="{{ tenant('name') }}" class="size-14 rounded-xl flex items-center justify-center bg-white shadow-sm object-cover">
-                    
-                    <!-- Name and Title -->
-                    <div class="flex-1">
-                        <h1 class="text-xl font-bold text-gray-900 mb-1" >{{ tenant('name') }} </h1>
-                        <p class="text-gray-600 text-sm mb-1">{{ tenant('meta.slogan.'~locale()) }}   </p>
-                    </div>
-
-                </div>
-
-
-                 <!-- Action Buttons -->
-                <div class="flex items-center gap-x-2 p-4 bg-gray-100 mb-10">
-                 
-                    <a href="https://wa.me/{{whatsappNumber}}?text=السلام عليكم {{tenant('name')}}" target="_blank" class="w-full bg-white border-2 border-{{ option('primaryColor', 'primary') }}-700 text-{{ option('primaryColor', 'primary') }}-900 flex items-center gap-x-2 justify-center py-3 px-4 rounded-lg font-medium hover:bg-{{ option('primaryColor', 'primary') }}-700 hover:text-white transition-colors duration-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></svg>
-                        ابدأ المحادثة    
-                    </a>
-                  
-                    <button class="w-full bg-{{ option('primaryColor', 'primary') }}-700 hover:bg-{{ option('primaryColor', 'primary') }}-800 flex items-center justify-center gap-x-2 border-2 border-transparent text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-                        </svg>
-                        
-                        اتصل بنا
-                    </button>
-                   
-                </div>
-
-
-
-                <!-- About Section -->
-                <div class="px-5">
-                        <h3 class="text-xl font-bold text-gray-900 mb-4 -mx-5 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4">   من نحن ؟</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Hi, I'm Michelle! 👋 I have 5+ years of experience in Philadelphia Real Estate running my own successful team. I'm committed to helping you get the best deal possible with least amount of stress.
-                        </p>
-                </div>
-
-                <div class="h-1 bg-gray-100 my-10"></div>
-
-
-                <!-- Storefront Products Section -->
-                <div class="mt-6 px-5" x-data="{ selectedCategory: 'All', favorites: [], cart: [] }" dir="{{ locale() == 'ar' ? 'rtl' : 'ltr' }}">
-                    {# <h3 class="text-lg font-bold text-gray-900 mb-4">منتجاتنا</h3> #}
-                    <h3 class="text-xl font-bold text-gray-900 mb-6 -mx-5 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4"> منتجاتنا</h3>
-                     
-                    <!-- Products Grid -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <!-- Product 1 - Tennis Bracelet -->
-                        <div class="bg-white border border-gray-200 rounded-xl overflow-hidden relative">
-                            <!-- Product Image -->
-                            <div class="relative h-48">
-                                <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" 
-                                     alt="Tennis Bracelet" 
-                                     class="w-full h-full object-cover">
-                            </div>
-                            
-                            <!-- Product Details -->
-                            <div class="p-3">
-                                <h4 class="font-semibold text-gray-900 mb-1">سوار تنس</h4>
-                                <div class="text-lg font-bold text-gray-900">$83.97</div>
-                            </div>
-                        </div>
-
-
-                        <!-- Product 2 - Gold Bracelet -->
-                        <div class="bg-white border border-gray-200 rounded-xl overflow-hidden relative">
-                            <!-- Product Image -->
-                            <div class="relative h-48">
-                                <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" 
-                                     alt="Gold Bracelet" 
-                                     class="w-full h-full object-cover">
-                            </div>
-                            
-                            <!-- Product Details -->
-                            <div class="p-3">
-                                <h4 class="font-semibold text-gray-900 mb-1">سوار ذهبي</h4>
-                                <div class="text-lg font-bold text-gray-900">$120.00</div>
-                            </div>
-                        </div>
-
-                        <!-- Product 3 - Charm Necklace -->
-                        <div class="bg-white border border-gray-200 rounded-xl overflow-hidden relative">
-                            <!-- Product Image -->
-                            <div class="relative h-48">
-                                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" 
-                                     alt="Charm Necklace" 
-                                     class="w-full h-full object-cover">
-                            </div>
-                            
-                            <!-- Product Details -->
-                            <div class="p-3">
-                                <h4 class="font-semibold text-gray-900 mb-1">قلادة تعويذة</h4>
-                                <div class="text-lg font-bold text-gray-900">$83.97</div>
-                            </div>
-                        </div>
-
-                        <!-- Product 4 - Gold Earring -->
-                        <div class="bg-white border border-gray-200 rounded-xl overflow-hidden relative">
-                            <!-- Product Image -->
-                            <div class="relative h-48">
-                                <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" 
-                                     alt="Gold Earring" 
-                                     class="w-full h-full object-cover">
-                            </div>
-                            
-                            <!-- Product Details -->
-                            <div class="p-3">
-                                <h4 class="font-semibold text-gray-900 mb-1">قرط ذهبي</h4>
-                                <div class="text-lg font-bold text-gray-900">$120.00</div>
-                            </div>
-                        </div>
-
-                        <!-- Product 5 - Gold Ring -->
-                        <div class="bg-white border border-gray-200 rounded-xl overflow-hidden relative">
-                            <!-- Product Image -->
-                            <div class="relative h-48">
-                                <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" 
-                                     alt="Gold Ring" 
-                                     class="w-full h-full object-cover">
-                            </div>
-                            
-                            <!-- Product Details -->
-                            <div class="p-3">
-                                <h4 class="font-semibold text-gray-900 mb-1">خاتم ذهبي</h4>
-                                <div class="text-lg font-bold text-gray-900">$95.50</div>
-                            </div>
-                        </div>
-
-                        <!-- Product 6 - Snake Ring -->
-                        <div class="bg-white border border-gray-200 rounded-xl overflow-hidden relative">
-                            <!-- Product Image -->
-                            <div class="relative h-48">
-                                <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" 
-                                     alt="Snake Ring" 
-                                     class="w-full h-full object-cover">
-                            </div>
-                            
-                            <!-- Product Details -->
-                            <div class="p-3">
-                                <h4 class="font-semibold text-gray-900 mb-1">خاتم ثعبان</h4>
-                                <div class="text-lg font-bold text-gray-900">$110.00</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
- 
-      
- 
-                <div class="h-1 bg-gray-100 my-10"></div>
-
-                <!-- Why Choose Us Section -->
-                <div class="mt-6 px-5">
-                    {# <h3 class="text-lg font-bold text-gray-900 mb-6">لماذا نحن؟</h3> #}
-                    <h3 class="text-xl font-bold text-gray-900 mb-6 -mx-5 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4"> لماذا نحن؟</h3>
-
-                    <!-- Why Choose Us Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Block 1 - Experience -->
-                        <div class="bg-gray-50 rounded-xl p-6">
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 bg-{{ options.primaryColor ?? 'primary' }}-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-{{ options.primaryColor ?? 'primary' }}-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.847a4.5 4.5 0 003.09 3.09L15.75 12l-2.847.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
-                                    </svg>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="text-lg font-bold text-gray-900 mb-2">خبرة واسعة</h4>
-                                    <p class="text-gray-600 text-sm leading-relaxed">
-                                        لدينا أكثر من 5 سنوات من الخبرة في السوق المحلي، مما يمكننا من تقديم أفضل النصائح والحلول لعملائنا
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Block 2 - Quality Service -->
-                        <div class="bg-gray-50 rounded-xl p-6">
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 bg-{{ options.primaryColor ?? 'primary' }}-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-{{ options.primaryColor ?? 'primary' }}-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655-5.653a2.548 2.548 0 010-3.586l.696-.696a2.548 2.548 0 013.586 0l5.653 4.655a2.548 2.548 0 010 3.586l-.696.696a2.548 2.548 0 01-3.586 0L9.75 9.75" />
-                    </svg>
-                </div>
-                                <div class="flex-1">
-                                    <h4 class="text-lg font-bold text-gray-900 mb-2">خدمة عالية الجودة</h4>
-                                    <p class="text-gray-600 text-sm leading-relaxed">
-                                        نلتزم بتقديم خدمة استثنائية ومتابعة دقيقة لكل عميل لضمان تحقيق أفضل النتائج
-                                    </p>
-                                </div>
-                            </div>
-            </div>
-            
-                        <!-- Block 3 - Trusted Team -->
-                        <div class="bg-gray-50 rounded-xl p-6">
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 bg-{{ options.primaryColor ?? 'primary' }}-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-{{ options.primaryColor ?? 'primary' }}-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-                                    </svg>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="text-lg font-bold text-gray-900 mb-2">فريق موثوق</h4>
-                                    <p class="text-gray-600 text-sm leading-relaxed">
-                                        فريقنا المحترف يتمتع بالخبرة والمعرفة اللازمة لمساعدتك في اتخاذ أفضل القرارات
-                                    </p>
-                                </div>
-                            </div>
         </div>
 
-                        <!-- Block 4 - Customer Support -->
-                        <div class="bg-gray-50 rounded-xl p-6">
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 bg-{{ options.primaryColor ?? 'primary' }}-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-{{ options.primaryColor ?? 'primary' }}-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                    </svg>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="text-lg font-bold text-gray-900 mb-2">دعم عملاء متميز</h4>
-                                    <p class="text-gray-600 text-sm leading-relaxed">
-                                        نقدم دعم عملاء على مدار الساعة لضمان رضاكم الكامل وتقديم المساعدة عند الحاجة
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="md:max-w-2xl w-full Xborder-b-4 border-white/90 bg-white py-4 lg:rounded-b-xl md:rounded-t-xl md:-mt-2 z-50">
  
-                <div class="h-1 bg-gray-100 my-10"></div>
+            {% include 'theme::_header' %}
 
-                <!-- Services Section -->
-                <div class="mt-6 px-5">
-                    <h3 class="text-xl font-bold text-gray-900 mb-6 -mx-5 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4">خدماتنا</h3>
-                    
-                    <!-- Services Grid - 2x3 layout -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Service 1 - Mobile Application Solutions -->
-                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                            <h4 class="text-lg font-bold text-gray-900 mb-3">حلول تطبيقات الهاتف المحمول</h4>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-6">
-                                فريقنا الماهر من مطوري تطبيقات الهاتف المحمول يتعاون معك لإنشاء تطبيقات iOS و Android مذهلة
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 bg-gray-200 rounded flex items-center justify-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M17 1.01L7 1c-1.1 0-1.99.9-1.99 2v18c0 1.1.89 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
-                                        </svg>
-                                    </div>
-                                    <div class="flex gap-1">
-                                        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <button class="px-4 py-2 border border-purple-300 text-purple-600 text-sm rounded-lg hover:bg-purple-50 transition-colors">
-                                    استأجرنا
-                                </button>
-                            </div>
-                        </div>
+            {{renderBlockComponent('cta')}}
 
-                        <!-- Service 2 - Web Application Solutions -->
-                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                            <h4 class="text-lg font-bold text-gray-900 mb-3">حلول تطبيقات الويب</h4>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-6">
-                                نقدم مجموعة متنوعة من خدمات تصميم وتطوير الويب المصممة خصيصاً للعملاء في جميع أنحاء العالم
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 bg-gray-200 rounded flex items-center justify-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM3 19V5h18v14H3z"/>
-                                        </svg>
-                                    </div>
-                                    <div class="w-4 h-4 bg-orange-400 rounded"></div>
-                                </div>
-                                <button class="px-4 py-2 border border-purple-300 text-purple-600 text-sm rounded-lg hover:bg-purple-50 transition-colors">
-                                    استأجرنا
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Service 3 - Custom ERP Solutions -->
-                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                            <h4 class="text-lg font-bold text-gray-900 mb-3">حلول ERP مخصصة</h4>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-6">
-                                نبني برامج ERP مخصصة لتلبية متطلبات الصناعة المحددة، مع ضمان التكامل السلس مع الأنظمة الموجودة
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                                        </svg>
-                                    </div>
-                                    <div class="flex gap-1">
-                                        <div class="w-2 h-2 bg-orange-300 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-orange-300 rounded-full"></div>
-                                        <div class="w-2 h-2 bg-orange-300 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <button class="px-4 py-2 border border-purple-300 text-purple-600 text-sm rounded-lg hover:bg-purple-50 transition-colors">
-                                    استأجرنا
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Service 4 - Support & Maintenance -->
-                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                            <h4 class="text-lg font-bold text-gray-900 mb-3">الدعم والصيانة</h4>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-6">
-                                احصل على دعم فني يركز على العملاء على مدار الساعة من فريقنا المخصص من المطورين وممثلي خدمة العملاء
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 bg-blue-100 rounded flex items-center justify-center relative">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
-                                        </svg>
-                                        <div class="absolute -bottom-1 -right-1 w-3 h-3 bg-blue-600 rounded-full flex items-center justify-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-2 h-2 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="px-4 py-2 border border-purple-300 text-purple-600 text-sm rounded-lg hover:bg-purple-50 transition-colors">
-                                    استأجرنا
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Service 5 - Digital Marketing & SEO -->
-                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                            <h4 class="text-lg font-bold text-gray-900 mb-3">التسويق الرقمي و SEO</h4>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-6">
-                                استمتع بدعم فني مستمر يركز على العملاء من مطورينا الملتزمين وموظفي الدعم
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 bg-blue-100 rounded flex items-center justify-center">
-                                        <span class="text-blue-600 text-xs font-bold">SEO</span>
-                                    </div>
-                                    <div class="flex flex-col gap-1">
-                                        <div class="w-3 h-1 bg-red-400 rounded"></div>
-                                        <div class="w-2 h-1 bg-yellow-400 rounded"></div>
-                                        <div class="w-4 h-1 bg-green-400 rounded"></div>
-                                    </div>
-                                </div>
-                                <button class="px-4 py-2 border border-purple-300 text-purple-600 text-sm rounded-lg hover:bg-purple-50 transition-colors">
-                                    استأجرنا
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Service 6 - Content Creation -->
-                        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                            <h4 class="text-lg font-bold text-gray-900 mb-3">إنشاء المحتوى</h4>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-6">
-                                ننتج محتوى مقنع يحقق النتائج، مع محاذاة كل قطعة مع أهداف عملك واحتياجات جمهورك
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 bg-gray-200 rounded flex items-center justify-center">
-                                        <div class="flex gap-1">
-                                            <div class="w-1 h-1 bg-red-400 rounded-full"></div>
-                                            <div class="w-1 h-1 bg-yellow-400 rounded-full"></div>
-                                            <div class="w-1 h-1 bg-green-400 rounded-full"></div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-1">
-                                        <div class="w-4 h-4 bg-white border border-gray-300 rounded flex items-center justify-center">
-                                            <div class="w-2 h-2 bg-red-400 rounded"></div>
-                                        </div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <button class="px-4 py-2 border border-purple-300 text-purple-600 text-sm rounded-lg hover:bg-purple-50 transition-colors">
-                                    استأجرنا
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="h-1 bg-gray-100 my-10"></div>
-
-                <!-- Client Testimonials Section -->
-                <div class="mt-6 px-5" x-data="{ currentSlide: 0, testimonials: [
-                        {
-                            name: 'أحمد محمد',
-                            role: 'عميل سابق',
-                            review: 'خدمة ممتازة ومهنية جداً. فريق العمل كان متعاوناً وساعدني في الحصول على أفضل النتائج. أنصح الجميع بالتعامل معهم.',
-                            avatar: 'أ',
-                            color: 'from-{{ options.primaryColor ?? 'primary' }}-400 to-{{ options.primaryColor ?? 'primary' }}-600'
-                        },
-                        {
-                            name: 'فاطمة أحمد',
-                            role: 'عميلة سابقة',
-                            review: 'تجربة رائعة من البداية للنهاية. الاهتمام بالتفاصيل والجودة في الخدمة واضح جداً. شكراً لكم على الجهود المتميزة.',
-                            avatar: 'ف',
-                            color: 'from-green-400 to-green-600'
-                        },
-                        {
-                            name: 'محمد علي',
-                            role: 'عميل سابق',
-                            review: 'سرعة في الاستجابة ودقة في التنفيذ. فريق محترف جداً ويقدم حلول مبتكرة. أنا راضٍ تماماً عن الخدمة المقدمة.',
-                            avatar: 'م',
-                            color: 'from-blue-400 to-blue-600'
-                        },
-                        {
-                            name: 'سارة حسن',
-                            role: 'عميلة سابقة',
-                            review: 'خدمة متميزة وفريق عمل محترف. التزامهم بالمواعيد وجودة العمل واضح. سأتعامل معهم مرة أخرى بالتأكيد.',
-                            avatar: 'س',
-                            color: 'from-purple-400 to-purple-600'
-                        }
-                    ] }">
-
- 
-                    <!-- Testimonials Slider -->
-                    <div class="relative">
-
-                        <div class="flex items-center justify-between mb-6">
-                            {# <h3 class="text-lg font-bold text-gray-900 "> قالوا عنا </h3> #}
-                            <h3 class="text-xl font-bold text-gray-900 -mx-5 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4"> قالوا عنا</h3>
-
-                            <!-- Navigation Arrows -->
-                            <div class="flex justify-end gap-1">
-                                <button 
-                                    @click="currentSlide = currentSlide > 0 ? currentSlide - 1 : testimonials.length - 1"
-                                    class="size-8 bg-white border border-{{ options.primaryColor ?? 'primary' }}-600 rounded-md flex items-center justify-center hover:bg-gray-50 transition-colors"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-{{ options.primaryColor ?? 'primary' }}-600 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                                    </svg>
-                                </button>
-                                
-                                <button 
-                                    @click="currentSlide = currentSlide < testimonials.length - 1 ? currentSlide + 1 : 0"
-                                    class="size-8 bg-{{ options.primaryColor ?? 'primary' }}-600 border border-{{ options.primaryColor ?? 'primary' }}-600 rounded-md flex items-center justify-center hover:bg-{{ options.primaryColor ?? 'primary' }}-700 transition-colors"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Testimonial Container -->
-                        <div class="overflow-hidden">
-                            <div 
-                                class="flex transition-transform duration-300 ease-in-out"
-                                :class="'{{ locale() == 'ar' ? 'flex-row-reverse' }}'"
-                                :style="`transform: translateX(-${currentSlide * 100}%)`"
-                            >
-                                <template x-for="(testimonial, index) in testimonials" :key="index">
-                                    <div class="w-full flex-shrink-0">
-                                        <div class="bg-gray-50 rounded-2xl p-5">
-                                            <!-- Quote Icon -->
-                                            <div class="mb-4 flex items-center justify-between">
-                                                <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-quote size-8" viewBox="0 0 16 16">
-                                                    <path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388q0-.527.062-1.054.093-.558.31-.992t.559-.683q.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612q0-.527.062-1.054.094-.558.31-.992.217-.434.559-.683.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 3 7.558V11a1 1 0 0 0 1 1z"/>
-                                                </svg>
-                                                
-                                                  <!-- Stars Rating -->
-                                            <div class="flex items-center gap-1 mb-4">
-                                                <template x-for="i in 5" :key="i">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-300" :class="`text-yellow-500`" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-                                                    </svg>
-                                                </template>
-                                            </div>
-                                            </div>
-                                            
-                                            <!-- Review Text -->
-                                            <p class="text-gray-700 text-base leading-relaxed mb-6" x-text="testimonial.review"></p>
-                                            
-                                          
-                                            
-                                            <!-- Client Info -->
-                                            <div class="flex items-center gap-3">
-                                                <!-- Avatar -->
-                                                <div :class="`w-12 h-12 bg-gradient-to-br ${testimonial.color} rounded-full flex items-center justify-center flex-shrink-0`">
-                                                    <span class="text-white font-bold text-lg" x-text="testimonial.avatar"></span>
-                                                </div>
-                                                
-                                                <div>
-                                                    <!-- Customer Name -->
-                                                    <div class="text-gray-900 font-bold text-sm" x-text="testimonial.name"></div>
-                                                    <div class="text-gray-500 text-xs" x-text="testimonial.role"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
+            <div class="flex flex-col gap-y-10 divide-y-2 divide-gray-200 divide-dashed">
+                {{renderBlockComponent('about')}}
+                {{renderBlockComponent('features')}}
+                {# {{renderBlockComponent('services')}} #}
+                {{renderBlock('reviews')}}
+                {{renderBlockComponent('faq')}}
+                {# {{renderBlockComponent('contact-info')}} #}
             </div>
            
-                        <!-- Dots Indicator -->
-                        <div class="flex justify-center mt-8 gap-2">
-                            <template x-for="(testimonial, index) in testimonials" :key="index">
-                                <button 
-                                    @click="currentSlide = index"
-                                    :class="`w-2 h-2 rounded-full transition-colors ${currentSlide === index ? 'bg-{{ options.primaryColor ?? 'primary' }}-600' : 'bg-gray-300'}`"
-                                ></button>
-                            </template>
         </div>
     </div>
-</div>
-
-    <div class="h-1 bg-gray-100 my-10"></div>   
-                
-                <!-- FAQ Section -->
-                <div class="mt-6" x-data="{ openItem: null }">
-                        {# <h3 class="text-lg font-bold text-gray-900 mb-3 px-5">الأسئلة المتكررة</h3> #}
-                        <h3 class="text-xl font-bold text-gray-900 mb-6 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4"> الأسئلة المتكررة</h3>
-
-                        <div class="space-y-px divide-y divide-gray-200 divide-dashed">
-                            <!-- FAQ Item 1 -->
-                            <div class="">
-                                <button 
-                                    @click="openItem = openItem === 1 ? null : 1"
-                                    class="w-full flex items-center justify-between p-4 px-6 hover:bg-gray-50 transition-colors"
-                                >
-                                    <span class="font-medium text-gray-700 text-sm">Our Long Story</span>
-                                    <svg 
-                                        class="w-5 h-5 text-gray-400 transition-transform duration-200"
-                                        :class="{ 'rotate-180 !text-gray-500': openItem === 1 }"
-                                        fill="none" 
-                                        stroke="currentColor" 
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                    </svg>
-                                </button>
-                                <div 
-                                    x-show="openItem === 1"
-                                    class="p-4"
-                                >
-                                    <p class="text-gray-600 text-sm leading-relaxed">
-                                        We started our journey in 2015 with a vision to provide exceptional real estate services. Over the years, we've helped hundreds of families find their dream homes and investment properties. Our commitment to excellence and personalized service has made us one of the most trusted real estate teams in Philadelphia.
-                                    </p>
-                                </div>
-                            </div>
-    
-                            <!-- FAQ Item 2 -->
-                            <div class="">
-                                <button 
-                                    @click="openItem = openItem === 2 ? null : 2"
-                                    class="w-full flex items-center justify-between p-4 px-6 hover:bg-gray-50 transition-colors"
-                                >
-                                    <span class="font-medium text-gray-700 text-sm">Why Choose Our Team</span>
-                                    <svg 
-                                        class="w-5 h-5 text-gray-400 transition-transform duration-200"
-                                        :class="{ 'rotate-180 !text-gray-500': openItem === 2 }"
-                                        fill="none" 
-                                        stroke="currentColor" 
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                    </svg>
-                                </button>
-                                <div 
-                                    x-show="openItem === 2"
-                                    class="p-4"
-                                >
-                                    <p class="text-gray-600 text-sm leading-relaxed">
-                                        Our team brings over 5+ years of combined experience in the Philadelphia real estate market. We understand the local neighborhoods, market trends, and what it takes to get the best deals for our clients. We're committed to making your real estate journey as smooth and stress-free as possible.
-                                    </p>
-                                </div>
-                            </div>
-    
-                            <!-- FAQ Item 3 -->
-                            <div class="">
-                                <button 
-                                    @click="openItem = openItem === 3 ? null : 3"
-                                    class="w-full flex items-center justify-between p-4 px-6 hover:bg-gray-50 transition-colors"
-                                >
-                                    <span class="font-medium text-gray-700 text-sm">How We Work</span>
-                                    <svg 
-                                        class="w-5 h-5 text-gray-400 transition-transform duration-200"
-                                        :class="{ 'rotate-180 !text-gray-500': openItem === 3 }"
-                                        fill="none" 
-                                        stroke="currentColor" 
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                    </svg>
-                                </button>
-                                <div 
-                                    x-show="openItem === 3"
-                                    class="p-4"
-                                >
-                                    <p class="text-gray-600 text-sm leading-relaxed">
-                                        We follow a comprehensive approach: First, we listen to your needs and preferences. Then, we conduct thorough market research to find the best properties or buyers. We handle all negotiations, paperwork, and legal requirements. Finally, we ensure a smooth closing process and provide ongoing support even after the transaction is complete.
-                                    </p>
-                                </div>
-                            </div>
-
-    
-                            <!-- FAQ Item 4 -->
-                            <div class="">
-                                <button 
-                                    @click="openItem = openItem === 4 ? null : 4"
-                                    class="w-full flex items-center justify-between p-4 px-6 hover:bg-gray-50 transition-colors"
-                                >
-                                    <span class="font-medium text-gray-700 text-sm">Our Service Areas</span>
-                                    <svg 
-                                        class="w-5 h-5 text-gray-400 transition-transform duration-200"
-                                        :class="{ 'rotate-180 !text-gray-500': openItem === 4 }"
-                                        fill="none" 
-                                        stroke="currentColor" 
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                    </svg>
-                                </button>
-                                <div 
-                                    x-show="openItem === 4"
-                                    class="p-4"
-                                >
-                                    <p class="text-gray-600 text-sm leading-relaxed">
-                                        We specialize in the greater Philadelphia area, including Center City, University City, Fishtown, Northern Liberties, Queen Village, and surrounding neighborhoods. We also serve clients in the Philadelphia suburbs including Bucks County, Montgomery County, and Delaware County.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-
-                <div class="h-1 bg-gray-100 my-10"></div>
-
-                <!-- Contact Info Section -->
-                <div class="mt-6">
-                    {# <h3 class="text-lg font-bold text-gray-900 mb-4 px-5">معلومات الاتصال</h3> #}
-                    <h3 class="text-xl font-bold text-gray-900 mb-6 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4"> معلومات الاتصال</h3>
-                    
-                    <!-- Contact Info List -->
-                    <div class="space-y-0   overflow-hidden">
-                        <!-- Mobile Phone -->
-                        <div class="flex items-center justify-between p-5 border-b border-gray-100">
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-900 font-medium">+49 303 909 9999</span>
-                            </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
-
-                        <!-- Landline Phone -->
-                        <div class="flex items-center justify-between p-5 border-b border-gray-100">
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-900 font-medium">+49 303 909 3939</span>
-                            </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
-
-                        <!-- Website -->
-                        <div class="flex items-center justify-between p-5 border-b border-gray-100">
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-900 font-medium">mercedesbenz.com</span>
-                            </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
-
-                        <!-- Email -->
-                        <div class="flex items-center justify-between p-5 border-b border-gray-100">
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                                    </svg>
-                                </div>
-                                <span class="text-gray-900 font-medium">mercedesbenz@mail.com</span>
-                            </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
-
-                        <!-- Location Pin Address -->
-                        <div class="flex items-center justify-between p-5 border-b border-gray-100">
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25a7.5 7.5 0 1115 0z" />
-                                    </svg>
-                                </div>
-                                <div class="flex flex-col">
-                                    <span class="text-gray-900 font-medium">Richard-Wagner-Strasse 28</span>
-                                    <span class="text-gray-900 font-medium">95444, Bayreuth, Bavaria, Germany</span>
-                                </div>
-                            </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </div>
- 
-                        </div>
-                </div>
-
-                <div class="h-1 bg-gray-100 my-10"></div>
-
-                <!-- Map Section -->
-                <div class="mt-6 p-1">
-                    {# <h3 class="text-lg font-bold text-gray-900 mb-3 px-5"> موقعنا </h3> #}
-                        <h3 class="text-xl font-bold text-gray-900 mb-6 -mx-1 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4"> موقعنا</h3>
-                    
-                    <!-- Address Information -->
-                    <div class="mb-4 px-5">
-                        <p class="text-gray-600 text-sm mb-2">100 Main St, Philadelphia, PA 12001, United States</p>
-                        <a href="https://maps.google.com" target="_blank" class="text-gray-500 text-sm hover:text-gray-700 transition-colors">
-                            maps.google.com
-                        </a>
-                    </div>
-                    
-                    <!-- Embedded Map -->
-                    <div class="w-full h-64 bg-gray-100 rounded-2xl border border-gray-200 overflow-hidden relative">
-                        <!-- Map Placeholder with Location Pin -->
-                        <div class="w-full h-full bg-gradient-to-br from-green-100 to-yellow-100 relative">
-                            <!-- Grid Pattern -->
-                            <div class="absolute inset-0 opacity-20">
-                                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                                    <defs>
-                                        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                                            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gray" stroke-width="0.5" stroke-dasharray="1,1"/>
-                                        </pattern>
-                                    </defs>
-                                    <rect width="100" height="100" fill="url(#grid)"/>
-                                </svg>
-                            </div>
-                            
-                            <!-- Location Pin -->
-                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                <div class="relative">
-                                    <!-- Pin Shadow -->
-                                    <div class="absolute top-1 left-1 w-6 h-8 bg-black/20 rounded-full transform rotate-12"></div>
-                                    <!-- Pin Body -->
-                                    <div class="relative w-6 h-8 bg-red-500 rounded-full flex items-center justify-center shadow-lg">
-                                        <div class="w-2 h-2 bg-white rounded-full"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Location Label -->
-                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-8">
-                                <div class="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-md border border-gray-200">
-                                    <span class="text-xs font-semibold text-gray-800">Philadelphia, PA</span>
-                                </div>
-                            </div>
-                            
-                            <!-- Map Controls (Optional) -->
-                            <div class="absolute top-2 right-2 flex flex-col gap-1">
-                                <button class="w-8 h-8 bg-white/90 backdrop-blur-sm rounded shadow-md border border-gray-200 flex items-center justify-center hover:bg-white transition-colors">
-                                    <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                                    </svg>
-                                </button>
-                                <button class="w-8 h-8 bg-white/90 backdrop-blur-sm rounded shadow-md border border-gray-200 flex items-center justify-center hover:bg-white transition-colors">
-                                    <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Click to Open in Google Maps Overlay -->
-                        <div class="absolute inset-0 bg-black/0 hover:bg-black/5 transition-colors cursor-pointer flex items-center justify-center">
-                            <div class="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg border border-gray-200 opacity-0 hover:opacity-100 transition-opacity">
-                                <span class="text-sm font-medium text-gray-700">Click to open in Google Maps</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                {# <div class="h-1 bg-gray-100 my-3"></div> #}
-
-
-
-            </div>
-        </div>
 </div>

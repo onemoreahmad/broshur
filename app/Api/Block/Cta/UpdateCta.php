@@ -13,6 +13,7 @@ class UpdateCta
     public function rules(): array
     {
         return [
+            'active' => ['required', 'boolean'],
             'whatsapp_enabled' => ['required', 'boolean'],
             'whatsapp_number' => ['required_if:whatsapp_enabled,true', 'string', 'max:20'],
             'whatsapp_message' => ['nullable', 'string', 'max:500'],
@@ -26,6 +27,7 @@ class UpdateCta
     {
         $block = Block::firstOrCreate(['name' => 'cta']);
         
+        $block->active = (bool) $request->active;
         $block->config = [
             'whatsapp_enabled' => (bool) $request->whatsapp_enabled,
             'whatsapp_number' => $request->whatsapp_number,
@@ -34,11 +36,13 @@ class UpdateCta
             'contact_email' => $request->contact_email,
             'contact_subject' => $request->contact_subject,
         ];
+
         $block->save();
 
         return response()->json([
             'message' => 'CTA block updated successfully',
             'data' => [
+                'active' => $block->active,
                 'whatsapp_enabled' => $block->config['whatsapp_enabled'],
                 'whatsapp_number' => $block->config['whatsapp_number'],
                 'whatsapp_message' => $block->config['whatsapp_message'],
@@ -52,6 +56,7 @@ class UpdateCta
     public function getValidationAttributes(): array
     {
         return [
+            'active' => 'الحالة',
             'whatsapp_enabled' => 'تفعيل واتساب',
             'whatsapp_number' => 'رقم واتساب',
             'whatsapp_message' => 'رسالة واتساب',
