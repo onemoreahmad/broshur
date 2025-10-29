@@ -1,7 +1,5 @@
 <div class="min-h-screen bg-{{ options.primaryColor ?? 'primary' }}-900 relative overflow-hidden" x-data="{ menuOpen: false }" x-effect="document.body.style.overflow = menuOpen ? 'hidden' : 'auto'">
-  
    
-  
     <!-- Blurred Background -->
     <div class="absolutex fixed inset-0 z-0 bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-{{ options.primaryColor ?? 'primary' }}-800 via-{{ options.primaryColor ?? 'primary' }}-700/80 to-{{ options.primaryColor ?? 'primary' }}-500">
        
@@ -21,8 +19,7 @@
 
         <!-- Contact Card -->
         <div class="relative md:my-4 z-10 flex flex-col items-center md:max-w-2xl md:rounded-2xl w-full md:border-4 border-black/20 mx-auto">
-
-       
+ 
 
             {% if tenant('socialLinks') | length %}
             <div class="hidden md:flex absolute rtl:-right-16 ltr:-left-16 flex-col gap-1.5 p-1 z-20 bg-black/20  rounded-xl">
