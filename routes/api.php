@@ -30,15 +30,14 @@ Route::post('/tenant/theme', function (Request $request) {
         'theme_id' => 'required|integer|min:1'
     ]);
 
-    $tenant = $request->user()->tenant;
+    $tenant = currentTenant();
     $tenant->theme_id = $request->theme_id;
     $tenant->save();
 
     return response()->json([
-        'message' => 'Theme updated successfully',
-        'tenant' => TenantResource::make($tenant),
+        'message' => 'Theme updated successfully'
     ]);
-})->middleware('auth:sanctum');
+})->middleware('auth:sanctum','admin');
 
 Route::post('/tenant/handle', function (Request $request) {
     $request->validate([

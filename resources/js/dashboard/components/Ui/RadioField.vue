@@ -1,9 +1,9 @@
 <template>
-    <div class="bg-gray-50 p-2 py-1 rounded sm:max-w-3xl mb-1 last:mb-0 sm:flex sm:items-center">
+    <div class="">
         <label for="name" class="block text-sm font-bold leading-5 text-gray-500 p-2 sm:w-48"> {{label}} </label>
-        <div class="bg-gray-100 p-1 w-full rounded mt-1">
+        <div class="w-full mt-1 flex items-center gap-2 flex-wrap">
 
-            <label class="ms-2 text-xs mb-1 font-bold text-cool-gray-600 cursor-pointer border-2 border-transparent hover:bg-blue-100 bg-gray-200 px-2 py-2 rounded inline-block"
+            <label class="input radio-input w-fit cursor-pointer"
                 v-for="(item,key) in options" 
                 :key="key"
                 :class="{'bg-blue-200 hover:bg-blue-200  border-blue-300': modelValue == item}"
@@ -13,7 +13,7 @@
                     :value="item"
                     :checked="modelValue == item"
                     @change="$emit('update:modelValue', $event.target.value)"
-                    class="me-1 p-1">
+                    class="radio radio-neutral radio-sm">
                     <span class="capitalize">{{item}}  </span>
             </label>
 

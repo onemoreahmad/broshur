@@ -15,10 +15,11 @@
                             : 'border-gray-200'
                     ]"
                 >
+               
                     <!-- Current Theme Badge -->
                     <div v-if="currentThemeId === theme.id" 
                          class="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-medium z-10">
-                        القالب الحالي
+                        القالب الحالي 
                     </div>
                     
                     <div class="w-full h-28 bg-gray-50 rounded-lg overflow-hidden mb-3">
@@ -53,20 +54,39 @@
                                     القالب الحالي
                                 </span>
                             </div>
-                            <span class="text-3xl font-bold text-green-600">
-                                {{ selectedTheme.price == 0 ? 'مجاني' : '$' + selectedTheme.price }}
-                            </span>
+                          
+
+                            <div class="flex items-center gap-3">
+                                <span class="text-lg font-bold text-green-600">
+                                    {{ selectedTheme.price == 0 ? 'مجاني' : '$' + selectedTheme.price }}
+                                </span>
+                                <button 
+                                    @click="setCurrentTheme"
+                                    :disabled="isLoading || currentThemeId === selectedTheme.id"
+                                    class="btn btn-primary"
+                                >
+                                    <span v-if="!isLoading">
+                                        {{ currentThemeId === selectedTheme.id ? 'القالب الحالي' : 'تعيين كقالب حالي' }}
+                                    </span>
+                                    <span v-if="isLoading" class="flex items-center gap-2">
+                                        <span class="loading loading-spinner loading-xs"></span>
+                                        جاري التطبيق...
+                                    </span>
+                                </button>
+                                
+                            </div>
+
+
                         </div>
                         <span class="inline-block bg-primary-500 text-white px-3 py-1 rounded-full text-xs font-medium mb-4">
                             {{ selectedTheme.category }}
                         </span>
                         <p class="text-gray-600 leading-relaxed mb-6">{{ selectedTheme.description }}</p>
                        
-                            <ThemeOptionsForm v-model="options" :options="options" :themeOptions="selectedTheme.optionFields" :themeId="selectedTheme.id" />
                            
 
                         <div class="mb-8">
-                            <h4 class="text-base font-semibold text-gray-800 mb-3">المميزات:</h4>
+                             
                             <ul class="space-y-2">
                                 <li v-for="feature in selectedTheme.features" :key="feature" 
                                     class="text-gray-600 pr-6 relative">
@@ -76,24 +96,11 @@
                             </ul>
                         </div>
                         
-                        <div class="flex gap-3">
-                            <button 
-                                @click="setCurrentTheme"
-                                :disabled="isLoading || currentThemeId === selectedTheme.id"
-                                class="btn btn-primary"
-                            >
-                                <span v-if="!isLoading">
-                                    {{ currentThemeId === selectedTheme.id ? 'القالب الحالي' : 'تعيين كقالب حالي' }}
-                                </span>
-                                <span v-if="isLoading" class="flex items-center gap-2">
-                                    <span class="loading loading-spinner loading-xs"></span>
-                                    جاري التطبيق...
-                                </span>
-                            </button>
-                            <button class="btn btn-outline">
-                                معاينة القالب
-                            </button>
-                        </div>
+                     
+
+                        <ThemeOptionsForm v-model="options" :options="options" :themeOptions="selectedTheme.optionFields" :themeId="selectedTheme.id" />
+
+
                     </div>
 
                     <!-- Mobile Preview Section -->
@@ -111,15 +118,17 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import axios from 'axios'
 import { useAuthStore } from '@/stores/auth'
+import { storeToRefs } from 'pinia'
 
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
+const { tenant } = storeToRefs(authStore)
 
 useHead({
   title: 'تخصيص التصميم',
@@ -134,12 +143,15 @@ const options = ref({})
 
 const selectedTheme = ref(null)
 const isLoading = ref(false)
-const currentThemeId = ref(null)
+ 
+const currentThemeId = computed(() => {
+    return   tenant.value?.theme_id ?? null
+})
 
 // Initialize theme from URL or default to first theme
 const initializeTheme = () => {
     // Get current theme from auth store
-    currentThemeId.value = authStore.tenant?.theme_id || null
+    currentThemeId.value = tenant.value?.theme_id || null
     
     const themeId = route.query.theme ? parseInt(route.query.theme) : null
     const theme = themeId ? themes.value.find(t => t.id === themeId) : themes.value[0]
