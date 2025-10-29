@@ -78,15 +78,42 @@ Route::get('/themes', function () {
                 'name' => $theme->name,
                 'slug' => $theme->slug ?? null,
                 'image' => $theme->image, // accessor on model
-                'price' => data_get($theme, 'meta.price', null),
+                'price' => data_get($theme, 'price', null),
                 'description' => data_get($theme, 'meta.description', null),
                 'category' => data_get($theme, 'meta.category', null),
                 'features' => (array) data_get($theme, 'meta.features', []),
+                'optionFields' => $theme->optionFields  , // Get options from options.json file
+                'tenantOptions' => $theme->tenantOptions,
             ];
         });
 
     return response()->json([
         'data' => $themes,
+    ]);
+})->middleware('auth:sanctum');
+
+// Save theme options
+Route::post('/theme-options', function (Request $request) {
+    $request->validate([
+        'theme_id' => 'required|exists:themes,id',
+        'options' => 'required|array',
+    ]);
+
+    // Get or create theme option record
+    $themeOption = \App\Models\ThemeOption::firstOrCreate([
+        'model_id' => $request->user()->tenant->id,
+        'model_type' => \App\Models\Tenant::class,
+        'theme_id' => $request->theme_id,
+    ]);
+
+    // Update the config with new options
+    $themeOption->update([
+        'config' => $request->options
+    ]);
+
+    return response()->json([
+        'message' => 'Theme options updated successfully',
+        'options' => $themeOption->config,
     ]);
 })->middleware('auth:sanctum');
 

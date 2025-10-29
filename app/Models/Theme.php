@@ -13,6 +13,8 @@ class Theme extends Model
         'meta' => SchemalessAttributes::class,
         'active' => 'boolean',
     ];
+
+    protected $appends = ['optionFields'];
  
     public function options()
     {
@@ -36,5 +38,25 @@ class Theme extends Model
         }
 
         return asset('assets/images/theme-image.webp');
+    }
+
+    public function getOptionFieldsAttribute() 
+    {
+        $path = public_path('themes/' . $this->slug . '/options.json');
+ 
+        if (\File::exists($path)) {
+ 
+            $jsonFile = json_decode(file_get_contents($path), true);
+            $optionFields = $jsonFile ?: [];
+
+            return $optionFields;
+        }
+
+        return [];
+    }
+
+    public function getTenantOptionsAttribute()
+    {
+        return $this->options->first()?->config ?? [];
     }
 }

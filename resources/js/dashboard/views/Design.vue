@@ -31,7 +31,9 @@
                     <div class="text-center">
                         <h3 class="text-sm font-semibold text-gray-800 mb-1">{{ theme.name }}</h3>
                         <p class="text-xs text-gray-500 mb-2">{{ theme.category }}</p>
-                        <p class="text-lg font-bold text-green-600">${{ theme.price }}</p>
+                        <p class="text-lg font-bold text-green-600">
+                            {{ theme.price == 0 ? 'مجاني' : '$' + theme.price }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -51,13 +53,18 @@
                                     القالب الحالي
                                 </span>
                             </div>
-                            <span class="text-3xl font-bold text-green-600">${{ selectedTheme.price }}</span>
+                            <span class="text-3xl font-bold text-green-600">
+                                {{ selectedTheme.price == 0 ? 'مجاني' : '$' + selectedTheme.price }}
+                            </span>
                         </div>
                         <span class="inline-block bg-primary-500 text-white px-3 py-1 rounded-full text-xs font-medium mb-4">
                             {{ selectedTheme.category }}
                         </span>
                         <p class="text-gray-600 leading-relaxed mb-6">{{ selectedTheme.description }}</p>
-                        
+                       
+                            <ThemeOptionsForm v-model="options" :options="options" :themeOptions="selectedTheme.optionFields" :themeId="selectedTheme.id" />
+                           
+
                         <div class="mb-8">
                             <h4 class="text-base font-semibold text-gray-800 mb-3">المميزات:</h4>
                             <ul class="space-y-2">
@@ -123,6 +130,7 @@ useHead({
 
 // Themes from API
 const themes = ref([])
+const options = ref({})
 
 const selectedTheme = ref(null)
 const isLoading = ref(false)
@@ -136,6 +144,8 @@ const initializeTheme = () => {
     const themeId = route.query.theme ? parseInt(route.query.theme) : null
     const theme = themeId ? themes.value.find(t => t.id === themeId) : themes.value[0]
     selectedTheme.value = theme
+
+    options.value = theme.tenantOptions || {}
     
     // Update URL if no theme in query params
     if (!route.query.theme) {
@@ -151,6 +161,8 @@ const selectTheme = (theme) => {
 
 const setCurrentTheme = async () => {
     if (!selectedTheme.value) return
+
+    console.log(selectedTheme)
     
     isLoading.value = true
     try {
@@ -166,6 +178,8 @@ const setCurrentTheme = async () => {
         
         // Show success message (you can add a toast notification here)
         console.log('Theme updated successfully:', response.data)
+        document.getElementById('preview-iframe').contentWindow.location.reload();
+
         
     } catch (error) {
         console.error('Error updating theme:', error)
@@ -195,7 +209,9 @@ onMounted(() => {
             price: t.price ?? 0,
             description: t.description || '',
             preview: t.image,
-            features: Array.isArray(t.features) ? t.features : []
+            optionFields: t.optionFields,
+            features: Array.isArray(t.features) ? t.features : [],
+            tenantOptions: t.tenantOptions
         }))
         initializeTheme()
     }).catch(() => {
