@@ -13,6 +13,9 @@ class UpdateFeatures
     public function rules(): array
     {
         return [
+            'active' => ['nullable', 'boolean'],
+            'title' => ['nullable', 'string', 'max:200'],
+            'subtitle' => ['nullable', 'string', 'max:500'],
             'features' => ['required', 'array'],
             'features.*.icon' => ['required', 'string', 'max:100'],
             'features.*.title' => ['required', 'string', 'max:200'],
@@ -24,7 +27,7 @@ class UpdateFeatures
     public function handle(Request $request)
     {
         $block = Block::firstOrCreate(['name' => 'features']);
-        
+
         $sanitized = collect($request->features)->map(function ($feature) {
             return [
                 'icon' => data_get($feature, 'icon'),
@@ -35,13 +38,20 @@ class UpdateFeatures
         })->values()->all();
 
         $block->config = [
+            'title' => $request->title,
+            'subtitle' => $request->subtitle,
             'features' => $sanitized,
         ];
+        $block->active = (bool) $request->active;
         $block->save();
 
         return response()->json([
             'message' => 'Features block updated successfully',
             'data' => [
+                'id' => $block->id,
+                'active' => $block->active,
+                'title' => data_get($block, 'config.title', ''),
+                'subtitle' => data_get($block, 'config.subtitle', ''),
                 'features' => $block->config['features'],
             ],
         ]);
@@ -50,6 +60,8 @@ class UpdateFeatures
     public function getValidationAttributes(): array
     {
         return [
+            'title' => 'عنوان القسم',
+            'subtitle' => 'العنوان الفرعي',
             'features' => 'المميزات',
             'features.*.icon' => 'الأيقونة',
             'features.*.title' => 'العنوان',

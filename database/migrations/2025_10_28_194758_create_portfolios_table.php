@@ -26,12 +26,5 @@ return new class extends Migration
             $table->index(['tenant_id', 'active', 'sort']);
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('portfolios');
-    }
+ 
 };

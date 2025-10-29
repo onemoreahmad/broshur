@@ -5,17 +5,59 @@
         </div>
         <div v-else>
             <div class="flex flex-col gap-4">
-                <div class="flex items-center justify-between">
+                <div class="flex items-center justify-between border-b-2 border-gray-200 pb-3 border-dotted">
                     <h2 class="text-lg font-semibold text-gray-800">المميزات</h2>
-                    <button 
-                        @click="addFeature"
-                        class="btn btn-primary btn-outline"
-                    >
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        إضافة ميزة
-                    </button>
+                    <div class="flex items-center gap-3">
+                        <label class="toggle toggle-lg" :class="{ 'toggle-primary': form.active, 'toggle-secondary': !form.active }">
+                            <input type="checkbox" v-model="form.active" />
+                            <svg aria-label="enabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18" />
+                                <path d="m6 6 12 12" />
+                            </svg>
+                            <svg aria-label="disabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="4" fill="none" stroke="currentColor">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                </g>
+                            </svg>
+                        </label>
+                        <button 
+                            @click="addFeature"
+                            class="btn btn-primary btn-outline"
+                        >
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            إضافة ميزة
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <label class="input w-full focus-within:ring-offset-0">
+                        <span class="label">عنوان القسم</span>
+                        <input 
+                            v-model="form.title" 
+                            type="text" 
+                            placeholder="مثال: مميزاتنا" 
+                            class="" 
+                        />
+                        <span v-if="errorsStore.errors && errorsStore.errors['title']" class="text-red-500 text-xs">
+                            {{ errorsStore.errors['title'][0] }}
+                        </span>
+                    </label>
+
+                    <label class="input w-full focus-within:ring-offset-0">
+                        <span class="label">العنوان الفرعي</span>
+                        <input 
+                            v-model="form.subtitle" 
+                            type="text" 
+                            placeholder="مثال: اكتشف ما يميزنا عن الآخرين" 
+                            class="" 
+                        />
+                        <span v-if="errorsStore.errors && errorsStore.errors['subtitle']" class="text-red-500 text-xs">
+                            {{ errorsStore.errors['subtitle'][0] }}
+                        </span>
+                    </label>
                 </div>
 
                 <div v-if="form.features.length === 0" class="text-center py-8 text-gray-500">
@@ -171,6 +213,10 @@ import { useErrorsStore } from '@/stores/errors'
 const errorsStore = useErrorsStore()
 
 const form = ref({
+    id: null,
+    active: true,
+    title: '',
+    subtitle: '',
     features: []
 })
 
@@ -268,6 +314,9 @@ const save = () => {
     axios.post('/api/blocks/features', form.value).then(response => {
         formLoading.value = false
         errorsStore.setErrors([]);
+        
+        // Update form with response data to get proper IDs
+        form.value = response.data.data
         
         // Reload preview iframe
         const previewIframe = document.getElementById('preview-iframe')

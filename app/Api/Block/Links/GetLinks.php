@@ -2,6 +2,8 @@
 
 namespace App\Api\Block\Links;
 
+use App\Models\Link;
+use App\Models\Block;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class GetLinks
@@ -10,20 +12,30 @@ class GetLinks
 
     public function handle()
     {
-        $block = \App\Models\Block::where('name', 'links')->first();
+        $block = Block::firstOrCreate([
+            'name' => 'links',
+        ]);
         
-        $links = collect(data_get($block, 'config.links', []))
+        // Get links for this block
+        $links = Link::where('block_id', $block->id)
+            ->where('type', 'link')
+            ->orderBy('sort')
+            ->get()
             ->map(function ($link) {
                 return [
-                    'url' => data_get($link, 'url', ''),
-                    'network' => data_get($link, 'network', ''),
-                    'label' => data_get($link, 'label', ''),
-                    'active' => (bool) data_get($link, 'active', true),
+                    'id' => $link->id,
+                    'url' => $link->link,
+                    'network' => data_get($link, 'meta.network', ''),
+                    'label' => data_get($link, 'meta.label', ''),
+                    'active' => $link->active,
+                    'sort' => $link->sort,
                 ];
-            })->values();
+            });
 
         return response()->json([
             'data' => [
+                'id' => $block->id,
+                'active' => $block->active,
                 'links' => $links,
             ],
         ]);

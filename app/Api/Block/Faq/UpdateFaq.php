@@ -13,6 +13,7 @@ class UpdateFaq
     public function rules(): array
     {
         return [
+            'active' => ['nullable', 'boolean'],
             'faqs' => ['required', 'array'],
             'faqs.*.question' => ['required', 'string', 'max:500'],
             'faqs.*.answer' => ['required', 'string', 'max:2000'],
@@ -35,11 +36,14 @@ class UpdateFaq
         $block->config = [
             'faqs' => $sanitized,
         ];
+        $block->active = (bool) $request->active;
         $block->save();
 
         return response()->json([
             'message' => 'FAQ block updated successfully',
             'data' => [
+                'id' => $block->id,
+                'active' => $block->active,
                 'faqs' => $block->config['faqs'],
             ],
         ]);

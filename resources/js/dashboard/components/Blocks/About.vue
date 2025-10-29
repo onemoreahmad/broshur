@@ -5,6 +5,21 @@
         </div>
         <div v-else>
             <div class="flex flex-col gap-3">
+                <div class="flex items-center justify-between border-b-2 border-gray-200 pb-3 border-dotted">
+                    <h2 class="text-lg font-semibold text-gray-800">من نحن</h2>
+                    <label class="toggle toggle-lg" :class="{ 'toggle-primary': form.active, 'toggle-secondary': !form.active }">
+                        <input type="checkbox" v-model="form.active" />
+                        <svg aria-label="enabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6 6 18" />
+                            <path d="m6 6 12 12" />
+                        </svg>
+                        <svg aria-label="disabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <g stroke-linejoin="round" stroke-linecap="round" stroke-width="4" fill="none" stroke="currentColor">
+                                <path d="M20 6 9 17l-5-5"></path>
+                            </g>
+                        </svg>
+                    </label>
+                </div> 
                 
                 <label class="input w-full focus-within:ring-offset-0">
                     <span class="label">العنوان</span>
@@ -30,19 +45,6 @@
                         {{ errorsStore.errors['text'][0] }}
                     </span>
                 </label>
-
-                <fieldset class="fieldset flex items-center gap-x-2">
-                    <input 
-                            id="about-active" 
-                            type="checkbox" 
-                            v-model="form.active" 
-                            class="toggle toggle-primary" 
-                        />
-                        
-                    <label for="about-active" class="text-sm text-gray-700">
-                        {{ form.active ? 'نشط' : 'غير نشط' }}
-                    </label>
-                </fieldset>
  
                 
                 <div class="flex justify-end w-full">

@@ -2,6 +2,7 @@
 
 namespace App\Api\Block\Features;
 
+use App\Models\Block;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class GetFeatures
@@ -10,10 +11,14 @@ class GetFeatures
 
     public function handle()
     {
-        $block = \App\Models\Block::where('name', 'features')->first();
+        $block = Block::firstOrCreate(['name' => 'features']);
         
         return response()->json([
             'data' => [
+                'id' => $block->id,
+                'active' => $block->active,
+                'title' => data_get($block, 'config.title', ''),
+                'subtitle' => data_get($block, 'config.subtitle', ''),
                 'features' => data_get($block, 'config.features', []),
             ],
         ]);
