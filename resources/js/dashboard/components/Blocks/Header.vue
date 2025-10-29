@@ -26,6 +26,13 @@
                 <span v-if="errorsStore.errors && errorsStore.errors['slogan']" class="text-red-500 text-xs">   {{ errorsStore.errors['slogan'][0] }} </span>
             </label>
   
+            <UiUploadImage 
+                v-model="form.newCover"
+                name="cover'"
+                mediaCollection="cover"
+                :preview="form.cover || ''"
+            />
+
             <div class="flex justify-end w-full">
                 <button @click="save" class="btn btn-primary" :disabled="formLoading" > 
                     <span v-if="!formLoading"> حفظ </span>
@@ -96,6 +103,7 @@ const save = () => {
             name: response.data.data.name,
             slogan: response.data.data.slogan,
             logo: response.data.data.logo,
+            cover: response.data.data.cover,
         })
 
         document.getElementById('preview-iframe').contentWindow.location.reload();

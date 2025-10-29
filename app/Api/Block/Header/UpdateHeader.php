@@ -16,7 +16,6 @@ class UpdateHeader
             'name' => ['required', 'min:3', 'max:150'],
             'slogan' => ['nullable', 'min:1', 'max:255'],
             'newLogo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:6048'],
-            'newCover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:6048'],
         ];
     }
 
@@ -33,8 +32,9 @@ class UpdateHeader
         if ($request->hasFile('newLogo')) {
             tenant()->logo = $request->newLogo->store('logo');
         }
-       
-        // tenant()->logo = $request->newLogo ? $request->newLogo : null;
+        tenant()->meta->set('cover', data_get($request, 'newCover', null));
+        
+
         tenant()->save();
 
         return response()->json([
@@ -43,7 +43,7 @@ class UpdateHeader
                 'name' => currentTenant()->name,
                 'slogan' => data_get(currentTenant(), 'meta.slogan.'.app()->getLocale()),
                 'logo' => data_get(currentTenant(), 'logo'),
-                'cover' => data_get($block, 'config.cover'),
+                'cover' => data_get(currentTenant(), 'meta.cover'),
             ],
         ]);
     }

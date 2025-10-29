@@ -65,8 +65,8 @@ const props = defineProps({
         required: true
     },
     modelId: {
-        type: [String, Number],
-        required: true
+        type: [String, Number, null],
+        required: false
     }
 })
 
@@ -122,8 +122,8 @@ const handleFileChange = async (event) => {
 }
 
 const removeImage = () => {
-    emit('update:modelValue', '')
-    emit('uploaded', '')
+    preview.value = null
+    emit('update:modelValue', null)
 }
 
 // Watch for external preview changes

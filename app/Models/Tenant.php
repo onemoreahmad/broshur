@@ -61,6 +61,13 @@ class Tenant extends Model
         return 'https://ui-avatars.com/api/?background=219EBD&color=fff&name=' . data_get($this, 'name');
     }
 
+    public function getCoverAttribute()
+    {
+        if (data_get($this, 'meta.cover')) {
+            return Storage::url(data_get($this, 'meta.cover'));
+        }
+    }
+
     public function getSiteUrlAttribute()
     {
         return 'https://' . $this->handle . '.' . config('app.domain');
