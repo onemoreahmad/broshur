@@ -54,7 +54,7 @@ import axios from 'axios'
 
 const errorsStore = useErrorsStore()
 
-const emit = defineEmits(['update:modelValue', 'uploaded'])
+const emit = defineEmits(['update:modelValue', 'uploaded', 'update:removed'])
 const props = defineProps({
     preview: {
         type: String,
@@ -124,6 +124,7 @@ const handleFileChange = async (event) => {
 const removeImage = () => {
     preview.value = null
     emit('update:modelValue', null)
+    emit('update:removed', true)
 }
 
 // Watch for external preview changes

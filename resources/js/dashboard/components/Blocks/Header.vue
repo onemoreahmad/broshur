@@ -31,6 +31,7 @@
                 name="cover'"
                 mediaCollection="cover"
                 :preview="form.cover || ''"
+                @update:removed="form.coverRemoved = true"
             />
 
             <div class="flex justify-end w-full">
@@ -63,6 +64,7 @@ const form = ref({
     newLogo: null,
     cover: null,
     newCover: null,
+    coverRemoved: false,
 })
 const loading = ref(false)
 const formLoading = ref(false)
@@ -107,7 +109,6 @@ const save = () => {
         })
 
         document.getElementById('preview-iframe').contentWindow.location.reload();
-        
     })
     .catch(error => {
         console.error(error.response.data.errors)

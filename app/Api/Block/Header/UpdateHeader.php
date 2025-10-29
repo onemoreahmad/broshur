@@ -32,9 +32,15 @@ class UpdateHeader
         if ($request->hasFile('newLogo')) {
             tenant()->logo = $request->newLogo->store('logo');
         }
-        tenant()->meta->set('cover', data_get($request, 'newCover', null));
-        
+       
+        if ($request->coverRemoved) {
+            tenant()->meta->set('cover', null );
+        }
 
+        if ($request->newCover) {
+            tenant()->meta->set('cover', $request->newCover);
+        }
+ 
         tenant()->save();
 
         return response()->json([
