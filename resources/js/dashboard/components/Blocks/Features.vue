@@ -6,7 +6,9 @@
         <div v-else>
             <div class="flex flex-col gap-4">
                 <div class="flex items-center justify-between border-b-2 border-gray-200 pb-3 border-dotted">
-                    <h2 class="text-lg font-semibold text-gray-800">المميزات</h2>
+                    <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-x-2">
+                        <svg viewBox="0 0 24 24" fill="none" class="size-6" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11.8114 6.7267C12.8247 4.9089 13.3314 4 14.0889 4C14.8464 4 15.353 4.9089 16.3663 6.7267L16.6285 7.19699C16.9164 7.71355 17.0604 7.97183 17.2849 8.14225C17.5094 8.31266 17.789 8.37592 18.3482 8.50244L18.8572 8.61762C20.825 9.06284 21.8089 9.28545 22.0429 10.0382C22.277 10.7909 21.6063 11.5753 20.2648 13.1439L19.9177 13.5498C19.5365 13.9955 19.3459 14.2184 19.2602 14.4942C19.1744 14.7699 19.2032 15.0673 19.2609 15.662L19.3134 16.2035C19.5162 18.2965 19.6176 19.343 19.0047 19.8082C18.3919 20.2734 17.4707 19.8492 15.6283 19.0009L15.1517 18.7815C14.6281 18.5404 14.3664 18.4199 14.0889 18.4199C13.8114 18.4199 13.5496 18.5404 13.0261 18.7815L12.5494 19.0009C10.707 19.8492 9.78581 20.2734 9.17299 19.8082C8.56016 19.343 8.66157 18.2965 8.86438 16.2035L8.91685 15.662C8.97449 15.0673 9.0033 14.7699 8.91756 14.4942C8.83181 14.2184 8.64121 13.9955 8.26 13.5498L7.91295 13.1439C6.57147 11.5753 5.90073 10.7909 6.1348 10.0382C6.36888 9.28545 7.35275 9.06284 9.3205 8.61762L9.82958 8.50244C10.3887 8.37592 10.6683 8.31266 10.8928 8.14225C11.1173 7.97183 11.2613 7.71355 11.5492 7.19699L11.8114 6.7267Z" stroke="#1C274C" stroke-width="1.5"></path> <path opacity="0.5" d="M2.08887 16C3.20445 15.121 4.68639 14.7971 6.08887 15.1257" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M2.08887 10.5C3.08887 10 3.37862 10.0605 4.08887 10" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M2 5.60867L2.20816 5.48676C4.41383 4.19506 6.75032 3.84687 8.95304 4.48161L9.16092 4.54152" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+                        المميزات</h2>
                     <div class="flex items-center gap-3">
                         <label class="toggle toggle-lg" :class="{ 'toggle-primary': form.active, 'toggle-secondary': !form.active }">
                             <input type="checkbox" v-model="form.active" />
@@ -20,19 +22,11 @@
                                 </g>
                             </svg>
                         </label>
-                        <button 
-                            @click="addFeature"
-                            class="btn btn-primary btn-outline"
-                        >
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                            </svg>
-                            إضافة ميزة
-                        </button>
+                      
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="grid grid-cols-1  gap-3">
                     <label class="input w-full focus-within:ring-offset-0">
                         <span class="label">عنوان القسم</span>
                         <input 
@@ -102,7 +96,7 @@
                                         <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832l-3.71 3.938a.75.75 0 11-1.08-1.04l4.24-4.5a.75.75 0 011.08 0l4.24 4.5c.28.297.27.765-.02 1.06z" clip-rule="evenodd" />
                                     </svg>
                                 </button>
-                                <span class="text-sm font-medium text-gray-600">ميزة {{ index + 1 }}</span>
+                                <span class="text-sm font-medium text-gray-600">  #{{ index + 1 }}</span>
                                 <div class="flex items-center gap-2">
                                     <label class="toggle toggle-lg" :class="{ 'toggle-primary': feature.active, 'toggle-secondary': !feature.active }">
                                         <input type="checkbox" v-model="feature.active" />
@@ -129,12 +123,13 @@
                         </div>
 
                         <div :id="`feature-panel-${index}`" v-show="!collapsed[index]" class="space-y-3">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">الأيقونة</label>
+                            <div class="grid grid-cols-1  gap-3">
+                            <label class="input w-full focus-within:ring-offset-0">
+                                <span class="label">الأيقونة</span>
                                 <input 
                                     v-model="feature.icon" 
                                     type="text" 
-                                    class="input w-full"
+                                    class=" w-full"
                                     :class="{ 'border-red-500': errorsStore.errors && errorsStore.errors[`features.${index}.icon`] }"
                                     placeholder="مثال: ⭐ أو 🚀 أو 📱"
                                 />
@@ -142,24 +137,23 @@
                                     {{ errorsStore.errors[`features.${index}.icon`][0] }}
                                 </span>
                                 <p class="text-xs text-gray-500 mt-1">يمكنك استخدام الرموز التعبيرية أو أي نص كأيقونة</p>
-                            </div>
+                            </label>
 
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">العنوان</label>
+                            <label class="input w-full focus-within:ring-offset-0">
+                                <span class="label">العنوان</span>
                                 <input 
                                     v-model="feature.title" 
                                     type="text" 
-                                    class="input w-full font-medium"
+                                    class="w-full"
                                     :class="{ 'border-red-500': errorsStore.errors && errorsStore.errors[`features.${index}.title`] }"
                                     placeholder="اكتب عنوان الميزة هنا..."
                                 />
                                 <span v-if="errorsStore.errors && errorsStore.errors[`features.${index}.title`]" class="text-red-500 text-xs">
                                     {{ errorsStore.errors[`features.${index}.title`][0] }}
                                 </span>
-                            </div>
+                            </label>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">الوصف</label>
                                 <textarea 
                                     v-model="feature.description" 
                                     class="textarea w-full resize-none"
@@ -169,28 +163,24 @@
                                 ></textarea>
                                 <span v-if="errorsStore.errors && errorsStore.errors[`features.${index}.description`]" class="text-red-500 text-xs">
                                     {{ errorsStore.errors[`features.${index}.description`][0] }}
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Preview -->
-                        <div v-if="feature.icon && feature.title && feature.description" class="mt-3 p-3 bg-white rounded border">
-                            <div class="flex items-center gap-2 text-sm mb-2">
-                                <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
-                                <span class="font-medium">معاينة الميزة</span>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <div class="text-2xl">{{ feature.icon }}</div>
-                                <div class="flex-1">
-                                    <div class="font-medium text-gray-800 mb-1">{{ feature.title }}</div>
-                                    <div class="text-sm text-gray-600">{{ feature.description }}</div>
+                                    </span>
                                 </div>
                             </div>
                         </div>
+ 
                     </div>
                 </div>
                 
-                <div class="flex justify-end w-full pt-4">
+                <div class="flex items-center justify-between w-full pt-2">
+                    <button 
+                            @click="addFeature"
+                            class="btn btn-primary btn-outline"
+                        >
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            إضافة ميزة
+                        </button>
                     <button 
                         @click="save" 
                         class="btn btn-primary" 

@@ -5,8 +5,11 @@
         </div>
         <div v-else>
             <div class="flex flex-col gap-4">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-lg font-semibold text-gray-800">المعرض</h2>
+                <div class="flex items-center justify-between border-b-2 border-gray-200 pb-3 border-dotted">
+                    <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-x-2">
+                        <svg viewBox="0 0 24 24" class="size-5" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2.38351 13.793C1.93748 10.6294 1.71447 9.04765 2.66232 8.02383C3.61017 7 5.29758 7 8.67239 7H15.3276C18.7024 7 20.3898 7 21.3377 8.02383C22.2855 9.04765 22.0625 10.6294 21.6165 13.793L21.1935 16.793C20.8437 19.2739 20.6689 20.5143 19.7717 21.2572C18.8745 22 17.5512 22 14.9046 22H9.09536C6.44881 22 5.12553 22 4.22834 21.2572C3.33115 20.5143 3.15626 19.2739 2.80648 16.793L2.38351 13.793Z" stroke="#1C274C" stroke-width="1.5"></path> <path opacity="0.5" d="M19.5617 7C19.7904 5.69523 18.7863 4.5 17.4617 4.5H6.53788C5.21323 4.5 4.20922 5.69523 4.43784 7M17.4999 4.5C17.5283 4.24092 17.5425 4.11135 17.5427 4.00435C17.545 2.98072 16.7739 2.12064 15.7561 2.01142C15.6497 2 15.5194 2 15.2588 2H8.74099C8.48035 2 8.35002 2 8.24362 2.01142C7.22584 2.12064 6.45481 2.98072 6.45704 4.00434C6.45727 4.11135 6.47146 4.2409 6.49983 4.5" stroke="#1C274C" stroke-width="1.5"></path> <circle opacity="0.5" cx="16.5" cy="11.5" r="1.5" stroke="#1C274C" stroke-width="1.5"></circle> <path opacity="0.5" d="M19.9999 20L17.1157 17.8514C16.1856 17.1586 14.8004 17.0896 13.7766 17.6851L13.5098 17.8403C12.7984 18.2542 11.8304 18.1848 11.2156 17.6758L7.37738 14.4989C6.6113 13.8648 5.38245 13.8309 4.5671 14.4214L3.24316 15.3803" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+                        المعرض
+                    </h2>
                     <label class="toggle toggle-lg" :class="{ 'toggle-primary': form.active, 'toggle-secondary': !form.active }">
                         <input type="checkbox" v-model="form.active" />
                         <svg aria-label="enabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
@@ -21,18 +24,7 @@
                     </label>
                 </div>
 
-                <div class="flex items-center justify-between">
-                    <p class="text-sm text-gray-600">أضف أعمالك مع صورة ووصف اختياري لكل عنصر</p>
-                    <button 
-                        @click="addItem"
-                        class="btn btn-primary btn-outline"
-                    >
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        إضافة عنصر
-                    </button>
-                </div>
+                 
 
                 <div v-if="form.items.length === 0" class="text-center py-8 text-gray-500">
                     <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,7 +55,7 @@
                                     </svg>
                                 </div>
 
-                                <span class="text-sm font-medium text-gray-600">عنصر {{ index + 1 }}</span>
+                                <span class="text-sm font-medium text-gray-600"> #{{ index + 1 }}</span>
                                 <div class="flex items-center gap-2">
                                     <label class="toggle toggle-lg" :class="{ 'toggle-primary': item.active, 'toggle-secondary': !item.active }">
                                         <input type="checkbox" v-model="item.active" />
@@ -89,53 +81,69 @@
                             </button>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <div>
-                                <UiUploadImage 
-                                    v-model="item.image"
-                                    :name="`items.${index}.image`"
-                                    :modelId="form.id"
-                                    mediaCollection="portfolio"
-                                    :preview="item.image_url || ''"
-                                />
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">الوصف (اختياري)</label>
+                        <div class="grid grid-cols-1  gap-3">
+                            <label class="input w-full focus-within:ring-offset-0">
+                                <span class="label">الاسم</span>
                                 <input 
-                                    v-model="item.caption"
+                                    v-model="item.name"
                                     type="text"
-                                    class="input w-full"
-                                    placeholder="وصف قصير للعنصر"
-                                    :class="{ 'border-red-500': errorsStore.errors && errorsStore.errors[`items.${index}.caption`] }"
+                                    class="w-full"
+                                    placeholder="اسم العنصر"
+                                    :class="{ 'border-red-500': errorsStore.errors && errorsStore.errors[`items.${index}.name`] }"
                                 />
-                                <span v-if="errorsStore.errors && errorsStore.errors[`items.${index}.caption`]" class="text-red-500 text-xs">
-                                    {{ errorsStore.errors[`items.${index}.caption`][0] }}
+                                <span v-if="errorsStore.errors && errorsStore.errors[`items.${index}.name`]" class="text-red-500 text-xs">
+                                    {{ errorsStore.errors[`items.${index}.name`][0] }}
                                 </span>
-                            </div>
-                        </div>
+                            </label>
 
-                        <!-- Preview
-                        <div v-if="item.image" class="mt-3 p-3 bg-white rounded border">
-                            <div class="flex items-start gap-3">
-                                <img :src="item.image" alt="portfolio item" class="w-24 h-24 object-cover rounded border" />
-                                <div class="flex-1">
-                                    <div class="font-medium text-gray-800 mb-1">{{ item.caption || 'صورة بدون وصف' }}</div>
-                                    <a :href="item.image" target="_blank" class="text-blue-600 hover:text-blue-800 text-xs">فتح الصورة</a>
-                                </div>
-                            </div>
-                        </div>
-                         -->
+                           
+
+                        <label class="input w-full focus-within:ring-offset-0">
+                            <span class="label">الوصف (اختياري)</span>
+                            <input 
+                                v-model="item.caption"
+                                type="text"
+                                class=" w-full"
+                                placeholder="وصف قصير للعنصر"
+                                :class="{ 'border-red-500': errorsStore.errors && errorsStore.errors[`items.${index}.caption`] }"
+                            />
+                            <span v-if="errorsStore.errors && errorsStore.errors[`items.${index}.caption`]" class="text-red-500 text-xs">
+                                {{ errorsStore.errors[`items.${index}.caption`][0] }}
+                            </span>
+                        </label>
+                        
+
+                            <UiUploadImage 
+                                v-model="item.image"
+                                :name="`items.${index}.image`"
+                                :modelId="form.id"
+                                mediaCollection="portfolio"
+                                :preview="item.image_url || ''"
+                            />
+
+                        </div>  
+                          
+
+ 
                     </div>
                 </div>
 
-                <div class="flex justify-end w-full pt-4">
+                <div class="flex items-center justify-between w-full pt-2">
+                    <button 
+                        @click="addItem"
+                        class="btn btn-primary btn-outline"
+                    >
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        إضافة عنصر
+                    </button>
                     <button 
                         @click="save" 
                         class="btn btn-primary" 
                         :disabled="formLoading"
                     > 
-                        <span v-if="!formLoading">حفظ المعرض</span>
+                        <span v-if="!formLoading">حفظ</span>
                         <span v-if="formLoading" class="loading loading-spinner loading-xs"></span>
                     </button>
                 </div>
@@ -178,6 +186,7 @@ onMounted(() => {
 const addItem = () => {
     form.value.items.push({
         id: null, // Will be set by server when created
+        name: '',
         image: '',
         image_url: '',
         caption: '',

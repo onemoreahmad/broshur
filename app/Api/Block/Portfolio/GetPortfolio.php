@@ -21,6 +21,7 @@ class GetPortfolio
             ->map(function ($item) {
                 return [
                     'id' => $item->id,
+                    'name' => $item->name,
                     'image' => $item->image,
                     'image_url' => $item->image_url,
                     'caption' => $item->caption,

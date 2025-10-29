@@ -196,6 +196,8 @@ Route::middleware(['auth:sanctum','admin'])
               Route::post('features', Features\UpdateFeatures::class);
               Route::get('portfolio', Portfolio\GetPortfolio::class);
               Route::post('portfolio', Portfolio\UpdatePortfolio::class);
+              Route::get('reviews', Reviews\GetReviews::class);
+              Route::post('reviews', Reviews\UpdateReviews::class);
     });
 
  

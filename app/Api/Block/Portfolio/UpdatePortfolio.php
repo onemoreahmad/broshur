@@ -17,6 +17,7 @@ class UpdatePortfolio
         return [
             'items' => ['nullable', 'array'],
             'items.*.id' => ['nullable', 'integer', 'exists:portfolios,id'],
+            'items.*.name' => ['required', 'string', 'max:255'],
             'items.*.image' => ['required', 'string', 'max:1024'],
             'items.*.caption' => ['nullable', 'string', 'max:255'],
             'items.*.active' => ['nullable', 'boolean'],
@@ -55,6 +56,7 @@ class UpdatePortfolio
                     Portfolio::where('id', $itemId)
                         ->where('tenant_id', $tenantId)
                         ->update([
+                            'name' => data_get($itemData, 'name'),
                             'image' => data_get($itemData, 'image'),
                             'caption' => data_get($itemData, 'caption'),
                             'active' => (bool) data_get($itemData, 'active', true),
@@ -64,6 +66,7 @@ class UpdatePortfolio
                     // Create new item
                     Portfolio::create([
                         'tenant_id' => $tenantId,
+                        'name' => data_get($itemData, 'name'),
                         'image' => data_get($itemData, 'image'),
                         'caption' => data_get($itemData, 'caption'),
                         'active' => (bool) data_get($itemData, 'active', true),
@@ -80,6 +83,7 @@ class UpdatePortfolio
             ->map(function ($item) {
                 return [
                     'id' => $item->id,
+                    'name' => $item->name,
                     'image' => $item->image,
                     'image_url' => $item->image_url,
                     'caption' => $item->caption,

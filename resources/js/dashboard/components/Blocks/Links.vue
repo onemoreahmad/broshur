@@ -5,8 +5,11 @@
         </div>
         <div v-else>
             <div class="flex flex-col gap-4">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-lg font-semibold text-gray-800">الروابط الاجتماعية</h2>
+                <div class="flex items-center justify-between border-b-2 border-gray-200 pb-3 border-dotted">
+                    <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-x-2">
+                        <svg viewBox="0 0 24 24" class="size-5" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11.3357 5.47875L7.36344 9.00968C5.79482 10.404 5.0105 11.1012 5.0105 11.9993C5.0105 12.8975 5.79481 13.5946 7.36344 14.989L11.3357 18.5199C12.0517 19.1563 12.4098 19.4746 12.7049 19.342C13.0001 19.2095 13.0001 18.7305 13.0001 17.7725V15.4279C16.6001 15.4279 20.5001 17.1422 22.0001 19.9993C22.0001 10.8565 16.6668 8.57075 13.0001 8.57075V6.22616C13.0001 5.26817 13.0001 4.78917 12.7049 4.65662C12.4098 4.52407 12.0517 4.8423 11.3357 5.47875Z" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="0.5" d="M8.46129 4.5L3.24509 9.34362C2.45098 10.081 1.99976 11.1158 1.99976 12.1994C1.99976 13.3418 2.50097 14.4266 3.37087 15.1671L8.46129 19.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+                        الروابط الاجتماعية
+                    </h2>
                     <label class="toggle toggle-lg" :class="{ 'toggle-primary': form.active, 'toggle-secondary': !form.active }">
                         <input type="checkbox" v-model="form.active" />
                         <svg aria-label="enabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
@@ -253,10 +256,16 @@ const getNetworkLabel = (network) => {
 
 const save = () => {
     formLoading.value = true;
+    
+    // Debug: Log the form data being sent
+    console.log('Saving links with data:', form.value);
  
     axios.post('/api/blocks/links', form.value).then(response => {
         formLoading.value = false
         errorsStore.setErrors([]);
+        
+        // Debug: Log the response
+        console.log('Links saved successfully:', response.data);
         
         // Update form with response data to get proper IDs
         form.value = response.data.data
@@ -269,7 +278,7 @@ const save = () => {
         
     })
     .catch(error => {
-        console.error(error.response.data.errors)
+        console.error('Error saving links:', error.response?.data?.errors || error.message)
         formLoading.value = false;
         if (error.response) {
             errorsStore.setErrors(error.response.data.errors);

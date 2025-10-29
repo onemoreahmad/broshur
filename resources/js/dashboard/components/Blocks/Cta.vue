@@ -5,7 +5,12 @@
         </div>
         <div v-else>
             <div class="flex flex-col gap-6">
-                <h2 class="text-lg font-semibold text-gray-800">أزرار التواصل</h2>
+                <div class="flex items-center justify-between border-b-2 border-gray-200 pb-3 border-dotted">
+                    <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-x-2"> 
+                        <svg viewBox="0 0 24 24" fill="none" class="size-6" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.70399 3.5H17.5C18.9045 3.5 19.6067 3.5 20.1111 3.83706C20.3295 3.98298 20.517 4.17048 20.6629 4.38886C21 4.89331 21 5.59554 21 7C21 8.40446 21 9.10669 20.6629 9.61114C20.517 9.82952 20.3295 10.017 20.1111 10.1629C19.6067 10.5 18.9045 10.5 17.5 10.5H6.70399C6.04642 10.5 5.71764 10.5 5.41593 10.4018C5.28282 10.3585 5.15463 10.3013 5.03346 10.2312C4.75882 10.0723 4.53915 9.8277 4.09981 9.33844C3.24911 8.39107 2.82376 7.91738 2.72136 7.36381C2.67687 7.12331 2.67687 6.87669 2.72136 6.63619C2.82376 6.08262 3.24911 5.60894 4.09981 4.66156C4.53915 4.1723 4.75882 3.92767 5.03346 3.76879C5.15463 3.6987 5.28282 3.64152 5.41593 3.5982C5.71764 3.5 6.04642 3.5 6.70399 3.5Z" stroke="#1C274C" stroke-width="1.5"></path> <path d="M17.296 12.5H6.5C5.09554 12.5 4.39331 12.5 3.88886 12.8371C3.67048 12.983 3.48298 13.1705 3.33706 13.3889C3 13.8933 3 14.5955 3 16C3 17.4045 3 18.1067 3.33706 18.6111C3.48298 18.8295 3.67048 19.017 3.88886 19.1629C4.39331 19.5 5.09554 19.5 6.5 19.5H17.296C17.9536 19.5 18.2824 19.5 18.5841 19.4018C18.7172 19.3585 18.8454 19.3013 18.9665 19.2312C19.2412 19.0723 19.4608 18.8277 19.9002 18.3384C20.7509 17.3911 21.1762 16.9174 21.2786 16.3638C21.3231 16.1233 21.3231 15.8767 21.2786 15.6362C21.1762 15.0826 20.7509 14.6089 19.9002 13.6616C19.4608 13.1723 19.2412 12.9277 18.9665 12.7688C18.8454 12.6987 18.7172 12.6415 18.5841 12.5982C18.2824 12.5 17.9536 12.5 17.296 12.5Z" stroke="#1C274C" stroke-width="1.5"></path> <path opacity="0.5" d="M12.75 2C12.75 1.58579 12.4142 1.25 12 1.25C11.5858 1.25 11.25 1.58579 11.25 2H12.75ZM12.75 11C12.75 10.5858 12.4142 10.25 12 10.25C11.5858 10.25 11.25 10.5858 11.25 11H12.75ZM12.75 20C12.75 19.5858 12.4142 19.25 12 19.25C11.5858 19.25 11.25 19.5858 11.25 20H12.75ZM14 22.75C14.4142 22.75 14.75 22.4142 14.75 22C14.75 21.5858 14.4142 21.25 14 21.25V22.75ZM10 21.25C9.58579 21.25 9.25 21.5858 9.25 22C9.25 22.4142 9.58579 22.75 10 22.75V21.25ZM11.25 2V3H12.75V2H11.25ZM11.25 11V12H12.75V11H11.25ZM11.25 20V22H12.75V20H11.25ZM14 21.25H10V22.75H14V21.25Z" fill="#1C274C"></path> </g></svg>
+                        أزرار التواصل
+                    </h2>
+                </div>
 
                 <!-- WhatsApp Button Section -->
                 <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
@@ -33,12 +38,12 @@
                     </div>
 
                     <div v-if="form.whatsapp_enabled" class="space-y-3">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">رقم واتساب</label>
+                        <label class="input w-full focus-within:ring-offset-0">
+                            <span class="label">رقم الهاتف</span>
                             <input 
                                 v-model="form.whatsapp_number"
                                 type="tel" 
-                                class="input w-full"
+                                class=" w-full"
                                 dir="ltr"
                                 placeholder="+966501234567"
                                 :class="{ 'border-red-500': errorsStore.errors && errorsStore.errors['whatsapp_number'] }"
@@ -46,13 +51,13 @@
                             <span v-if="errorsStore.errors && errorsStore.errors['whatsapp_number']" class="text-red-500 text-xs">
                                 {{ errorsStore.errors['whatsapp_number'][0] }}
                             </span>
-                        </div>
+                        </label>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">الرسالة الافتراضية (اختيارية)</label>
                             <textarea 
                                 v-model="form.whatsapp_message"
-                                class="textarea w-full resize-none"
+                                class="textarea w-full"
                                 rows="3"
                                 placeholder="مرحباً، أريد الاستفسار عن..."
                                 :class="{ 'border-red-500': errorsStore.errors && errorsStore.errors['whatsapp_message'] }"
@@ -62,20 +67,6 @@
                             </span>
                         </div>
 
-                        <!-- WhatsApp Preview -->
-                        <div v-if="form.whatsapp_number" class="p-3 bg-white rounded border">
-                            <div class="flex items-center gap-2 text-sm mb-2">
-                                <div class="w-4 h-4 bg-green-500 rounded-full"></div>
-                                <span class="font-medium">زر واتساب</span>
-                            </div>
-                            <a 
-                                :href="`https://wa.me/${form.whatsapp_number.replace(/[^0-9]/g, '')}${form.whatsapp_message ? '?text=' + encodeURIComponent(form.whatsapp_message) : ''}`" 
-                                target="_blank" 
-                                class="text-green-600 hover:text-green-800 text-sm"
-                            >
-                                {{ form.whatsapp_number }}
-                            </a>
-                        </div>
                     </div>
                 </div>
 
@@ -105,12 +96,12 @@
                     </div>
 
                     <div v-if="form.contact_enabled" class="space-y-3">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>
+                        <label class="input w-full focus-within:ring-offset-0">
+                            <span class="label">البريد الإلكتروني</span>
                             <input 
                                 v-model="form.contact_email"
                                 type="email" 
-                                class="input w-full"
+                                class="w-full"
                                 dir="ltr"
                                 placeholder="contact@example.com"
                                 :class="{ 'border-red-500': errorsStore.errors && errorsStore.errors['contact_email'] }"
@@ -118,7 +109,7 @@
                             <span v-if="errorsStore.errors && errorsStore.errors['contact_email']" class="text-red-500 text-xs">
                                 {{ errorsStore.errors['contact_email'][0] }}
                             </span>
-                        </div>
+                        </label>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">موضوع الرسالة الافتراضي (اختياري)</label>
@@ -134,19 +125,6 @@
                             </span>
                         </div>
 
-                        <!-- Contact Preview -->
-                        <div v-if="form.contact_email" class="p-3 bg-white rounded border">
-                            <div class="flex items-center gap-2 text-sm mb-2">
-                                <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
-                                <span class="font-medium">زر التواصل</span>
-                            </div>
-                            <a 
-                                :href="`mailto:${form.contact_email}${form.contact_subject ? '?subject=' + encodeURIComponent(form.contact_subject) : ''}`" 
-                                class="text-blue-600 hover:text-blue-800 text-sm"
-                            >
-                                {{ form.contact_email }}
-                            </a>
-                        </div>
                     </div>
                 </div>
                 

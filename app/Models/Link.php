@@ -13,8 +13,18 @@ class Link extends Model
  
     public $casts = [
         'meta' => SchemalessAttributes::class,
+        'active' => 'boolean',
     ];
 
+    protected $fillable = [
+        'tenant_id',
+        'block_id',
+        'type',
+        'link',
+        'meta',
+        'active',
+        'sort',
+    ];
     protected $clone_exempt_attributes = ['slug'];
 
     protected $guarded = [];

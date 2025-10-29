@@ -1,6 +1,5 @@
 <template>
     <div class="space-y-2">
-        <label class="block text-sm font-medium text-gray-700">الصورة</label>
         
         <!-- Current Image Preview -->
         <div v-if="preview" class="relative">

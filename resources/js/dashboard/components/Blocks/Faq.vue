@@ -6,7 +6,10 @@
         <div v-else>
             <div class="flex flex-col gap-4">
                 <div class="flex items-center justify-between border-b-2 border-gray-200 pb-3 border-dotted">
-                    <h2 class="text-lg font-semibold text-gray-800">الأسئلة الشائعة</h2>
+                    <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-x-2">
+                        <svg viewBox="0 0 24 24" class="size-5" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.5" d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="#1C274C" stroke-width="1.5"></path> <path d="M10.125 8.875C10.125 7.83947 10.9645 7 12 7C13.0355 7 13.875 7.83947 13.875 8.875C13.875 9.56245 13.505 10.1635 12.9534 10.4899C12.478 10.7711 12 11.1977 12 11.75V13" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <circle cx="12" cy="16" r="1" fill="#1C274C"></circle> </g></svg>
+                        الأسئلة الشائعة
+                    </h2>
                     <div class="flex items-center gap-3">
                         <label class="toggle toggle-lg" :class="{ 'toggle-primary': form.active, 'toggle-secondary': !form.active }">
                             <input type="checkbox" v-model="form.active" />
@@ -20,15 +23,7 @@
                                 </g>
                             </svg>
                         </label>
-                        <button 
-                            @click="addFaq"
-                            class="btn btn-primary btn-outline"
-                        >
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                            </svg>
-                            إضافة سؤال
-                        </button>
+                       
                     </div>
                 </div>
 
@@ -74,7 +69,7 @@
                                         <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832l-3.71 3.938a.75.75 0 11-1.08-1.04l4.24-4.5a.75.75 0 011.08 0l4.24 4.5c.28.297.27.765-.02 1.06z" clip-rule="evenodd" />
                                     </svg>
                                 </button>
-                                <span class="text-sm font-medium text-gray-600">سؤال {{ index + 1 }}</span>
+                                <span class="text-sm font-medium text-gray-600">  #{{ index + 1 }}</span>
                                 <div class="flex items-center gap-2">
                                     <label class="toggle toggle-lg" :class="{ 'toggle-primary': faq.active, 'toggle-secondary': !faq.active }">
                                         <input type="checkbox" v-model="faq.active" />
@@ -128,21 +123,20 @@
                             </div>
                         </div>
 
-                        <!-- Preview -->
-                        <div v-if="faq.question && faq.answer" class="mt-3 p-3 bg-white rounded border">
-                            <div class="flex items-center gap-2 text-sm mb-2">
-                                <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
-                                <span class="font-medium">معاينة السؤال</span>
-                            </div>
-                            <div class="text-sm">
-                                <div class="font-medium text-gray-800 mb-1">{{ faq.question }}</div>
-                                <div class="text-gray-600">{{ faq.answer }}</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 
-                <div class="flex justify-end w-full pt-4">
+                <div class="flex justify-between items-center w-full pt-4">
+                    <button 
+                            @click="addFaq"
+                            class="btn btn-primary btn-outline"
+                        >
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            إضافة سؤال
+                    </button>
+
                     <button 
                         @click="save" 
                         class="btn btn-primary" 

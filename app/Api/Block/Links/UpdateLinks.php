@@ -58,6 +58,9 @@ class UpdateLinks
                 foreach ($request->links as $index => $linkData) {
                     $linkId = data_get($linkData, 'id');
                     
+                    // Debug: Log the link data being processed
+                    \Log::info('Processing link data:', $linkData);
+                    
                     if ($linkId) {
                         // Update existing link
                         Link::where('id', $linkId)
@@ -68,7 +71,7 @@ class UpdateLinks
                                     'network' => data_get($linkData, 'network'),
                                     'label' => data_get($linkData, 'label'),
                                 ],
-                                'active' => (bool) data_get($linkData, 'active', true),
+                                'active' => (bool) data_get($linkData, 'active'),
                                 'sort' => $index,
                             ]);
                     } else {
@@ -82,7 +85,7 @@ class UpdateLinks
                                 'network' => data_get($linkData, 'network'),
                                 'label' => data_get($linkData, 'label'),
                             ],
-                            'active' => (bool) data_get($linkData, 'active', true),
+                            'active' => (bool) data_get($linkData, 'active'),
                             'sort' => $index,
                         ]);
                     }
