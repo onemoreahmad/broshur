@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gray-200 flex flex-col items-center py-12 md:pt-32">
+<div class="min-h-screen bg-stone-300 flex flex-col items-center py-12 md:pt-32">
     <ui:brand logo="{{ asset('assets/images/logo.svg') }}" wire:navigate size="14" href="{{ route('site.home') }}" />
     <ui:brand name="{{ config('app.name') }}" href="{{ route('site.home') }}" wire:navigate class="text-3xl mt-4" />
 

@@ -8,7 +8,7 @@ Route::as('site.')
 ->domain(config('app.domain'))
 ->middleware(['web'])
 ->group(function () {
-    Volt::route('/', 'site.home')->name('home');
+    Volt::route('/', 'site.landing')->name('home');
 
     Volt::route('about', 'site.page.about')->name('page.about');
     Volt::route('contact', 'site.page.contact')->name('page.contact');
