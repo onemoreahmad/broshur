@@ -1,9 +1,9 @@
 <template>
     <div>
-   
+     
         <h4 class="text-base font-semibold text-gray-800 mb-3 border-b-2 border-gray-200 pb-3 border-dashed"> خيارات القالب </h4>
         <div class="space-y-3 flex flex-col gap-3 w-full">
-            <div v-for="(option, name) in themeOptions" :key="name" class="relative">
+            <div v-for="(option, name) in themeOptions" :key="name" >
                 <UiRadioField  class="bg-white my-1" 
                     v-if="option.type == 'radio'" 
                     :options="option.options" 
@@ -13,7 +13,7 @@
                     placeholder="" 
                     help="" />
 
-                <UiPickColor  class="bg-white my-1" 
+                <UiPickColor   
                     v-if="option.type == 'picker-color'" 
                     :options="option.options" 
                     v-model="modelValue[name]" 

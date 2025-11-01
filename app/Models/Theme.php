@@ -57,6 +57,6 @@ class Theme extends Model
 
     public function getTenantOptionsAttribute()
     {
-        return $this->options->first()?->config ?? [];
+        return $this->options->first()?->config ?? null;
     }
 }
