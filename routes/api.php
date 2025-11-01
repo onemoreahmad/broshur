@@ -64,7 +64,7 @@ Route::post('/tenant/handle', function (Request $request) {
         'message' => 'Handle updated successfully',
         'tenant' => TenantResource::make($tenant),
     ]);
-})->middleware('auth:sanctum');
+})->middleware('auth:sanctum', 'admin');
 
 // Themes
 Route::get('/themes', function () {
@@ -89,7 +89,7 @@ Route::get('/themes', function () {
     return response()->json([
         'data' => $themes,
     ]);
-})->middleware('auth:sanctum');
+})->middleware('auth:sanctum', 'admin');
 
 // Save theme options
 Route::post('/theme-options', function (Request $request) {
@@ -114,7 +114,7 @@ Route::post('/theme-options', function (Request $request) {
         'message' => 'Theme options updated successfully',
         'options' => $themeOption->config,
     ]);
-})->middleware('auth:sanctum');
+})->middleware('auth:sanctum', 'admin');
 
 Route::get('/orders', function (Request $request) {
     $orders = \App\Models\Order::where('tenant_id', $request->user()->tenant->id)
