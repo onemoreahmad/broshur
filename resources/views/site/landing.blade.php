@@ -626,3 +626,11 @@
 </footer>
 
 </div>
+
+<?php 
+ 
+new 
+#[\Livewire\Attributes\Title('أنشئ بروشور لأعمالك، يبيع عنّك بدقائق!')]
+class extends \Livewire\Volt\Component {
+     
+}; ?>
