@@ -17,12 +17,13 @@ class ThemeSeeder extends Seeder
             [
                 'slug' => 'default',
                 'name' => 'إفتراضي',
+                'active' => true,
             ],
             [
                 'slug' => 'light',
                 'name' => 'بسيط',
+                'active' => false,
             ],
-       
         ],['slug','app','type']);
     }
 }
