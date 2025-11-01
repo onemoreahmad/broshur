@@ -15,6 +15,9 @@ class UpdatePortfolio
     public function rules(): array
     {
         return [
+            'active' => ['nullable', 'boolean'],
+            'title' => ['nullable', 'string', 'max:200'],
+            'subtitle' => ['nullable', 'string', 'max:500'],
             'items' => ['nullable', 'array'],
             'items.*.id' => ['nullable', 'integer', 'exists:portfolios,id'],
             'items.*.name' => ['required', 'string', 'max:255'],
@@ -32,9 +35,12 @@ class UpdatePortfolio
             'name' => 'portfolio',
         ]);
 
-        $block->update([
-            'active' => $request->active,
-        ]);
+        $block->config = [
+            'title' => $request->title,
+            'subtitle' => $request->subtitle,
+        ];
+        $block->active = (bool) $request->active;
+        $block->save();
 
         DB::transaction(function () use ($request, $tenantId) {
             // Get existing portfolio IDs
@@ -98,6 +104,8 @@ class UpdatePortfolio
             'data' => [
                 'id' => $block->id,
                 'active' => $block->active,
+                'title' => data_get($block, 'config.title', ''),
+                'subtitle' => data_get($block, 'config.subtitle', ''),
                 'items' => $items,
             ],
         ]);
@@ -106,7 +114,10 @@ class UpdatePortfolio
     public function getValidationAttributes(): array
     {
         return [
+            'title' => 'عنوان القسم',
+            'subtitle' => 'العنوان الفرعي',
             'items' => 'العناصر',
+            'items.*.name' => 'الاسم',
             'items.*.image' => 'الصورة',
             'items.*.caption' => 'الوصف',
             'items.*.active' => 'الحالة',

@@ -24,7 +24,33 @@
                     </label>
                 </div>
 
-                 
+                <div class="grid grid-cols-1 gap-3">
+                    <label class="input w-full focus-within:ring-offset-0">
+                        <span class="label">عنوان القسم</span>
+                        <input 
+                            v-model="form.title" 
+                            type="text" 
+                            placeholder="مثال: معرض أعمالنا" 
+                            class="" 
+                        />
+                        <span v-if="errorsStore.errors && errorsStore.errors['title']" class="text-red-500 text-xs">
+                            {{ errorsStore.errors['title'][0] }}
+                        </span>
+                    </label>
+
+                    <label class="input w-full focus-within:ring-offset-0">
+                        <span class="label">العنوان الفرعي</span>
+                        <input 
+                            v-model="form.subtitle" 
+                            type="text" 
+                            placeholder="مثال: اكتشف مجموعة من أعمالنا المميزة" 
+                            class="" 
+                        />
+                        <span v-if="errorsStore.errors && errorsStore.errors['subtitle']" class="text-red-500 text-xs">
+                            {{ errorsStore.errors['subtitle'][0] }}
+                        </span>
+                    </label>
+                </div>
 
                 <div v-if="form.items.length === 0" class="text-center py-8 text-gray-500">
                     <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -163,6 +189,8 @@ const errorsStore = useErrorsStore()
 const form = ref({
     id: null,
     active: true,
+    title: '',
+    subtitle: '',
     items: []
 })
 

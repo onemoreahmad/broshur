@@ -37,7 +37,9 @@ class GetPortfolio
         return response()->json([
             'data' => [
                 'id' => $block->id,  
-                'active' => $block->active,  
+                'active' => $block->active,
+                'title' => data_get($block, 'config.title', ''),
+                'subtitle' => data_get($block, 'config.subtitle', ''),
                 'items' => $items,
             ],
         ]);

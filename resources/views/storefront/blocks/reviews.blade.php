@@ -13,8 +13,13 @@ new class extends Livewire\Volt\Component {
         
         $block = Block::where('name', 'reviews')->first();
         $reviews = Review::orderBy('id', 'desc')->where('active', true)->limit(6)->get();
+        
+        
+        if($block && $block->active){
+            return view()->first(['theme::blocks.'.$view, 'theme::blocks.reviews'], ['block' => $block, 'reviews' => $reviews]);      
+        }
 
-        return view()->first(['theme::blocks.'.$view, 'theme::blocks.reviews'], ['block' => $block, 'reviews' => $reviews]);      
+        return view('empty');
     } 
 
     function placeholder()

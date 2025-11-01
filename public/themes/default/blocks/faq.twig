@@ -1,7 +1,7 @@
  <!-- FAQ Section -->
- <div class="mt-6" x-data="{ openItem: 1 }">
+ <div  x-data="{ openItem: 1 }">
     {# <h3 class="text-lg font-bold text-gray-900 mb-3 px-5">الأسئلة المتكررة</h3> #}
-    <h3 class="text-xl font-bold text-gray-900 mb-6 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4"> الأسئلة المتكررة</h3>
+    <h3 class="text-xl font-bold text-gray-900 mb-6 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4  py-3 bg-gray-50 w-full"> الأسئلة المتكررة</h3>
 
     <div class="space-y-px divide-y divide-gray-200 divide-dashed">
 
@@ -28,8 +28,7 @@
                 x-show="openItem === {{loop.index}}"
                 class="p-4"
             >
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    {{item.answer}}
+                <p class="text-gray-600 text-sm leading-relaxed whitespace-pre-line">{{item.answer}}
                 </p>
             </div>
         </div>

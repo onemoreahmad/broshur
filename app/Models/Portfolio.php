@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Traits\Tenantable;
 
 class Portfolio extends Model
 {
+    use Tenantable;
+
     protected $fillable = [
-        'tenant_id',
-        'block_id',
         'name',
         'image',
         'caption',

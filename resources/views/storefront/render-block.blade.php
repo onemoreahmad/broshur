@@ -1,4 +1,5 @@
 <div>
+
     @if(data_get($block, 'active', true))
         @includeFirst(['theme::blocks.'.$component, 'empty'] , data_get($block, 'config', []))
     @endif

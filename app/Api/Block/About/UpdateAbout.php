@@ -13,9 +13,9 @@ class UpdateAbout
     public function rules(): array
     {
         return [
-            'title' => ['required', 'min:3', 'max:255'],
-            'text' => ['required', 'min:10', 'max:2000'],
             'active' => ['required', 'boolean'],
+            'title' => ['nullable', 'min:1', 'max:255'],
+            'text' => ['nullable', 'required_if:active,true', 'min:3', 'max:2000'],
         ];
     }
 
