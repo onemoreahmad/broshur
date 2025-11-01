@@ -2,8 +2,14 @@
     <div class=" max-w-7xl mx-auto">
         <!-- Theme Selection Section -->
         <div class="mb-8">
+            <!-- Loading State -->
+            <div v-if="isLoadingThemes" class="flex justify-center items-center py-12">
+                <span class="loading loading-spinner loading-lg"></span>
+                <!-- <span class="mr-3 text-gray-600">جاري تحميل القوالب...</span> -->
+            </div>
+            
             <!-- Horizontal Theme List -->
-            <div class="flex gap-3 md:gap-4 overflow-x-auto py-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+            <div v-else class="flex gap-3 md:gap-4 overflow-x-auto py-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
                 <div 
                     v-for="theme in themes" 
                     :key="theme.id"
@@ -143,6 +149,7 @@ const options = ref({})
 
 const selectedTheme = ref(null)
 const isLoading = ref(false)
+const isLoadingThemes = ref(false)
  
 const currentThemeId = computed(() => {
     return   tenant.value?.theme_id ?? null
@@ -213,6 +220,7 @@ watch(() => route.query.theme, (newThemeId) => {
 
 // Initialize on component mount
 onMounted(() => {
+    isLoadingThemes.value = true
     axios.get('/api/themes').then(response => {
         themes.value = response.data.data.map(t => ({
             id: t.id,
@@ -229,6 +237,8 @@ onMounted(() => {
     }).catch(() => {
         themes.value = []
         initializeTheme()
+    }).finally(() => {
+        isLoadingThemes.value = false
     })
 })
 </script>
