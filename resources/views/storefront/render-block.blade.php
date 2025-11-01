@@ -1,6 +1,6 @@
 <div>
 
-    @if(data_get($block, 'active', true))
+    @if(data_get($block, 'active'))
         @includeFirst(['theme::blocks.'.$component, 'empty'] , data_get($block, 'config', []))
     @endif
 </div>

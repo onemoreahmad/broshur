@@ -14,9 +14,9 @@ class UpdateFaq
     {
         return [
             'active' => ['nullable', 'boolean'],
-            'faqs' => ['nullable', 'required_if:active,true', 'array'],
-            'faqs.*.question' => ['nullable', 'required_if:active,true', 'string', 'max:500'],
-            'faqs.*.answer' => ['nullable', 'required_if:active,true', 'string', 'max:2000'],
+            'faqs' => ['nullable', 'array'],
+            'faqs.*.question' => ['nullable', 'string', 'max:500'],
+            'faqs.*.answer' => ['nullable',   'string', 'max:2000'],
             'faqs.*.active' => ['nullable', 'boolean'],
         ];
     }
