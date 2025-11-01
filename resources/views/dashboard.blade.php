@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/logo.svg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/broshur-logo-shape.webp') }}">
     <title>{{ $title ?? '' }} | {{config('app.name')}}</title>
     {{-- <script src="{{ asset('assets/js/twind.min.js') }}"></script>
     <script src="{{ asset('assets/js/twind.custom.js') }}"></script> --}}

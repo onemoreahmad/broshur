@@ -1,9 +1,9 @@
 <template>
-<div class="bg-white py-2 px-2 xl:px-0 !bg-purple-700 bg-gradient-to-r from-gray-900 via-indigo-800 to-indigo-900 !p-3 text-white" wire:ignore="">
+<div class="bg-white py-2 px-2 xl:px-0 !bg-purple-700 bg-gradient-to-l from-gray-900 via-indigo-800 to-blue-900 !p-3 text-white" wire:ignore="">
    <div class="max-w-7xl mx-auto flex items-center justify-between gap-x-2">
       <div class="flex items-center">
          <RouterLink :to="{ name: 'home' }" class="inline-flex items-center gap-2" wire:navigate="">
-            <img src="/assets/images/logo-shape-white.svg" alt="" class="size-6 !w-auto">
+            <img src="/assets/images/broshur-logo-shape.webp" alt="" class="size-6 !w-auto">
  
             <img src="/assets/images/logo-white-0.webp" alt="" class="size-6 !w-auto hidden md:block">
          </RouterLink>
