@@ -49,9 +49,9 @@ return [
                     ],
                 ],
                 "fontFamily" => [
-                    "sans" => "ibmps, tsh, sans-serif",
+                    "sans" => "tsh, ibmps, sans-serif",
                     "logo" => "allabbad",
-                    "almushaf" => "almushaf",
+                    "tsh" => "tsh",
                     "camel" => "camel",
                 ],
             ],

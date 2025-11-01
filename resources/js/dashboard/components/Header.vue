@@ -5,8 +5,7 @@
          <RouterLink :to="{ name: 'home' }" class="inline-flex items-center gap-2" wire:navigate="">
             <img src="/assets/images/logo-shape-white.svg" alt="" class="size-6 !w-auto">
  
-            <img src="/assets/images/logo-white.webp" alt="" class="size-6 !w-auto hidden md:block">
-           
+            <img src="/assets/images/logo-white-0.webp" alt="" class="size-6 !w-auto hidden md:block">
          </RouterLink>
          <RouterLink :to="{ name: 'orders' }"  title="الطلبات" class="text-white flex p-1 px-2 gap-x-2 items-center justify-center shrink-0 rounded-lg ms-4 lg:ms-8" activeClass="bg-black/40">
             <svg viewBox="0 0 24 24" class="size-5 text-white" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.5" d="M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <circle cx="19" cy="5" r="3" stroke="currentColor" stroke-width="1.5"></circle> <path d="M7 14H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M7 17.5H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
@@ -31,6 +30,85 @@
 
          </a>
    
+
+         <!--<div class="dropdown dropdown-bottom dropdown-end">
+            <div tabindex="0" role="button" class="cursor-pointer flex items-center gap-x-2">
+               <img src="https://ui-avatars.com/api/?background=219EBD&amp;color=fff&amp;name=Ahmad" alt="" class="object-cover rounded-full size-8 border-2 border-black/10 hover:border-black/20">
+               <span>
+                  <svg class="h-4 inline-block size-5 w-4 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                     <path d="M6 9l6 6l6 -6"></path>
+                  </svg>
+               </span>
+            </div>
+            <ul tabindex="-1" class="mt-4 dropdown-content menu bg-base-100 text-base-content rounded-b-box z-1 w-52 p-2 shadow-sm">
+               <div class="text-gray-500 p-2 mb-1">
+                     <h1 class="font-medium text-sm  text-gray-700">{{ currentUser?.user?.name }}</h1>
+                     <div class="text-gray-500 text-sm [*+&amp;]:mt-2">
+                        {{ currentUser?.user?.email }}
+                     </div>
+                  </div>
+               <li>
+                  <RouterLink :to="{ name: 'account' }">
+                        <span>
+                           <svg class="@if-&amp;&amp; !@if-$label @endif !h-5 !w-5 inline-block size-5 ltr:-ml-1 rtl:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                              <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                           </svg>
+                        </span>
+                        <span>
+                        حسابي
+                        </span>
+                     </RouterLink>
+                  </li>
+                     <li>
+                        <RouterLink :to="{ name: 'account' }">
+                        <span>
+                           <svg class="@if-&amp;&amp; !@if-$label @endif !h-5 !w-5 inline-block size-5 ltr:-ml-1 rtl:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                              <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                           </svg>
+                        </span>
+                        <span>
+                        حسابي
+                        </span>
+                     </RouterLink>
+                     </li>
+                     <li>
+                     <a href="/" >
+                        <span>
+                           <svg class="@if-&amp;&amp; !@if-$label @endif !h-5 !w-5 inline-block size-5 ltr:-ml-1 rtl:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                              <path d="M5 12l-2 0l9 -9l9 9l-2 0"></path>
+                              <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path>
+                              <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path>
+                           </svg>
+                        </span>
+                        <span>
+                        بروشور
+                        </span>
+                     </a>
+                     </li>
+                     <li>
+                     <a href="/logout" >
+                        <span>
+                           <svg class="@if-&amp;&amp; !@if-$label @endif !h-5 !w-5 inline-block size-5 ltr:-ml-1 rtl:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                              <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+                              <path d="M9 12h12l-3 -3"></path>
+                              <path d="M18 15l3 -3"></path>
+                           </svg>
+                        </span>
+                        <span>
+                        خروج
+                        </span>
+                    </a>
+                    </li>
+            </ul>
+         </div>-->
+
          <div class="relative" ref="dropdownRef">
             <div class="cursor-pointer flex items-center gap-x-2" @click="toggleDropdown" icon:trailing="chevron-down">
                <img src="https://ui-avatars.com/api/?background=219EBD&amp;color=fff&amp;name=Ahmad" alt="" class="object-cover rounded-full size-8 border-2 border-black/10 hover:border-black/20">
@@ -41,7 +119,7 @@
                   </svg>
                </span>
             </div>
-            <div v-show="openDropdown" class="absolute  z-40 left-0" x-transition="" >
+            <div v-show="openDropdown" class="absolute mt-3 z-40 left-0" x-transition="" >
                <div class="p-0.5 bg-white rounded-b-md mt-px w-48 text-sm">
                   <div class="text-gray-500 p-2 mb-1">
                      <h1 class="font-medium text-sm  text-gray-500">{{ currentUser?.user?.name }}</h1>
@@ -49,7 +127,7 @@
                         {{ currentUser?.user?.email }}
                      </div>
                   </div>
-                  <div class="grid gap-y-px">
+                  <div class="grid gap-y-px" @click="toggleDropdown">
                      <RouterLink :to="{ name: 'account' }" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex bg-black/10 bg-gray-100 px-4 py-2 text-sm transition-all transition-colors duration-300 items-center justify-center justify-start whitespace-nowrap rounded-md hover:bg-black/20 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none" wire:navigate="">
                         <span>
                            <svg class="@if-&amp;&amp; !@if-$label @endif !h-5 !w-5 inline-block size-5 ltr:-ml-1 rtl:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

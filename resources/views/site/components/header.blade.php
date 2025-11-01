@@ -1,10 +1,10 @@
-<header class="py-3 @if(!request()->routeIs('site.home')) bg-black/80 @endif text-white sm:py-6 fixedX w-full " x-data="{expanded: false}">
+<header class="py-2 @if(!request()->routeIs('site.home')) bg-black/80 @endif text-white sm:py-3 fixedX w-full " x-data="{expanded: false}">
         <div class="px-2 lg:px-0 mx-auto max-w-7xl">
             <div class="flex items-center justify-between">
                 <div class="shrink-0 flex items-center gap-x-2">
                     <a href="{{ route('site.home') }}" wire:navigate title="" class="flex items-center gap-x-3  ">
-                        <img class="w-auto h-10" src="{{ asset('assets/images/logo-shape-white.svg') }}" alt="" />
-                        <img class="w-auto h-10" src="{{ asset('assets/images/logo-white.webp') }}" alt="" />
+                        <img class="w-auto h-7" src="{{ asset('assets/images/logo-shape-white.svg') }}" alt="" />
+                        <img class="w-auto h-7" src="{{ asset('assets/images/logo-white-0.webp') }}" alt="" />
                         {{-- <span class=" font-bold">
                             {{ config('app.name') }} 
                         </span> --}}

@@ -45,33 +45,10 @@
                 </div>
 
                 <div>
-                    <div class="relative mx-auto max-w-xl rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 bg-white">
-                        <div class="aspect-[4/3] bg-stone-200">
-                            <!-- placeholder visual -->
-                            <div class="size-full bg-cover bg-center" style="background-image: radial-gradient(1200px 400px at 50% 10%, rgba(168,85,247,.15), transparent), radial-gradient(600px 200px at 80% 80%, rgba(0,0,0,.06), transparent);"></div>
-                        </div>
-                        
-                        <div class="absolute top-6 left-6">
-                            <div class="rounded-xl bg-white shadow-md ring-1 ring-black/5 px-4 py-3">
-                                <div class="text-stone-900 font-bold">8.5M+</div>
-                                <div class="text-xs text-stone-500">Join 8.5M+ professionals and teams using our platform.</div>
-                            </div>
-                        </div>
-
-                        <div class="absolute bottom-5 left-5 right-5">
-                            <div class="rounded-2xl bg-white/95 backdrop-blur shadow-md ring-1 ring-black/5 p-4">
-                                <div class="text-xs text-stone-500">Calendar</div>
-                                <div class="mt-1 text-sm font-medium text-stone-900">January, 2024</div>
-                                <div class="mt-3 grid grid-cols-5 gap-2 text-center text-xs">
-                                    <div class="rounded-md bg-stone-100 py-2">MON<br><span class="font-semibold">12</span></div>
-                                    <div class="rounded-md bg-stone-100 py-2">TUE<br><span class="font-semibold">13</span></div>
-                                    <div class="rounded-md bg-stone-100 py-2">WED<br><span class="font-semibold">14</span></div>
-                                    <div class="rounded-md bg-stone-900 text-white py-2">THU<br><span class="font-semibold">15</span></div>
-                                    <div class="rounded-md bg-stone-100 py-2">FRI<br><span class="font-semibold">16</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   <ui:mobile-dark>
+                        {{-- <img src="https://template.canva.com/EAEsa3Aii8U/4/0/900w-3QolSmpWFXk.jpg" class="w-full h-full object-cover" alt="" /> --}}
+                        <img src="https://template.canva.com/EAFqeAlAaHc/1/0/900w-2-Zw-73tvq4.jpg" class="w-full h-full object-cover" alt="" />
+                    </ui:mobile-dark>
                 </div>
 
                 <div class="lg:pt-24">
