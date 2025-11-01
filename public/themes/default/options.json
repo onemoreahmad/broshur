@@ -24,18 +24,5 @@
             "gray"
         ],
         "default": "blue"
-    },
-    "logoRadius": {
-        "type": "radio",
-        "label": "شكل انحناء الشعار",
-        "info": "قم باختيار طريقة عرض  حواف الشعار.",
-        "options": [
-            "rounded-full",
-            "rounded-2xl",
-            "rounded-lg",
-            "rounded-md",
-            "rounded-none"
-        ],
-        "default": "rounded-full"
     } 
 }
