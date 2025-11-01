@@ -44,7 +44,7 @@
 			</span>
 		</button>
        
-		<a :href="auth?.tenant?.site_url" class="btn btn-primary" target="_blank">
+		<a :href="auth?.tenant?.site_url" class="btn btn-primary hidden lg:flex" target="_blank">
 			<span>
 				<svg class="!h-5 !w-5 inline-block size-5 ltr:-ml-1 rtl:-mr-1"
 					xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -71,7 +71,7 @@
 	<div class="!block px-1 lg:!hidden">
 		<a :href="auth?.tenant?.site_url" class="focus-visible:ring-ring focus-visible:ring-1 text-white cursor-pointer gap-2 h-9 inline-flex w-full bg-green-500 bg-primary-600 px-4 py-2 text-sm transition-all transition-colors duration-300 items-center justify-center whitespace-nowrap rounded-md hover:bg-green-600 hover:bg-primary-700 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none" icon:trailing="arrow-up-left" target="_blank">
 			<span>
-				<svg class="!h-5 !w-5 inline-block size-5 ltr:-ml-1 rtl:-mr-1 dark:text-gray-500"
+				<svg class="!h-5 !w-5 inline-block size-5 ltr:-ml-1 rtl:-mr-1 text-white"
 					xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
 					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 					<path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
@@ -85,7 +85,7 @@
 
     
 			<span>
-				<svg class="!h-5 !w-5 inline-block size-5 rtl:-ml-1 ltr:-mr-1 dark:text-gray-500"
+				<svg class="!h-5 !w-5 inline-block size-5 rtl:-ml-1 ltr:-mr-1 text-white"
 					xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
 					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 					<path d="M7 7l10 10"></path>
