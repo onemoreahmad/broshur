@@ -53,7 +53,7 @@
  
          $user = User::whereId(auth()->id())->select('id')->with('tenant')->first();
   
-         $this->redirect(route('admin.home'));
+         $this->redirect(route('dashboard.home'));
      }
   
  }; ?>

@@ -11,7 +11,7 @@ Route::as('dashboard.')
     
     Route::get('/{pathMatch?}', function () {
         return view('dashboard');
-    })->where('pathMatch', '.*');
+    })->where('pathMatch', '.*')->name('home');
   
 });
   
