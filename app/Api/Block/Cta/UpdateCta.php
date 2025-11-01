@@ -14,11 +14,11 @@ class UpdateCta
     {
         return [
             'active' => ['required', 'boolean'],
-            'whatsapp_enabled' => ['required', 'boolean'],
-            'whatsapp_number' => ['required_if:whatsapp_enabled,true', 'string', 'max:20'],
+            'whatsapp_enabled' => ['nullable', 'boolean'],
+            'whatsapp_number' => ['nullable','required_if:whatsapp_enabled,true', 'string', 'max:20'],
             'whatsapp_message' => ['nullable', 'string', 'max:500'],
-            'contact_enabled' => ['required', 'boolean'],
-            'contact_email' => ['required_if:contact_enabled,true', 'email', 'max:255'],
+            'contact_enabled' => ['nullable', 'boolean'],
+            'contact_email' => ['nullable', 'required_if:contact_enabled,true', 'email', 'max:255'],
             'contact_subject' => ['nullable', 'string', 'max:200'],
         ];
     }
