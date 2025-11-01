@@ -6,7 +6,7 @@ use Livewire\Volt\Volt;
 // admin 
 Route::as('dashboard.')
 ->prefix('dashboard')
-->middleware(['auth'])
+->middleware(['auth', 'admin'])
 ->group(function () {
     
     Route::get('/{pathMatch?}', function () {
