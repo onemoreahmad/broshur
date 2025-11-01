@@ -16,10 +16,10 @@ class UpdateFeatures
             'active' => ['nullable', 'boolean'],
             'title' => ['nullable', 'string', 'max:200'],
             'subtitle' => ['nullable', 'string', 'max:500'],
-            'features' => ['required', 'array'],
-            'features.*.icon' => ['required', 'string', 'max:100'],
+            'features' => ['nullable', 'array'],
+            'features.*.icon' => ['nullable', 'string', 'max:100'],
             'features.*.title' => ['required', 'string', 'max:200'],
-            'features.*.description' => ['required', 'string', 'max:1000'],
+            'features.*.description' => ['nullable', 'string', 'max:1000'],
             'features.*.active' => ['nullable', 'boolean'],
         ];
     }
@@ -36,7 +36,7 @@ class UpdateFeatures
                 'active' => (bool) data_get($feature, 'active', true),
             ];
         })->values()->all();
-
+ 
         $block->config = [
             'title' => $request->title,
             'subtitle' => $request->subtitle,

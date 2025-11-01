@@ -9,7 +9,7 @@ Route::as('site.')
 ->middleware(['web'])
 ->group(function () {
     Volt::route('/', 'site.landing')->name('home');
-
+    Volt::route('/ui', 'site.ui')->name('ui');
     Volt::route('about', 'site.page.about')->name('page.about');
     Volt::route('contact', 'site.page.contact')->name('page.contact');
     Volt::route('faq', 'site.page.faq')->name('page.faq');
