@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "alaminfirdows/laravel-editorjs": "^2.3",
         "bkwld/cloner": "^3.14",
         "elegantly/laravel-media": "^4.4",
         "kra8/laravel-snowflake": "^2.4",

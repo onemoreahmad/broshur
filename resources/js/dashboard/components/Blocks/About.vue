@@ -38,7 +38,11 @@
                 </label>
 
                 <label class=" w-full h-full">
-                    <textarea 
+                   
+                    <!-- 
+                         <UiEditorjs v-model="form.text" />
+                      -->    
+                         <textarea 
                         v-model="form.text" 
                         placeholder="اكتب النص هنا..." 
                         rows="6"

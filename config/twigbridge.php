@@ -277,6 +277,7 @@ return [
             'cdn_asset',
             'settings',
             'themesPath',
+            'renderEditorJs',
         ],
 
         /*

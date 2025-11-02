@@ -178,6 +178,14 @@ if (!function_exists('editorStyle')) {
         return poseClass();
     }
 }
+
+if (!function_exists('renderEditorJs')) {
+    function renderEditorJs($data)
+    {
+        return \AlAminFirdows\LaravelEditorJs\Facades\LaravelEditorJs::render($data);
+    }
+}
+
   
 if (!function_exists('themesPath')) {
     function themesPath($theme)

@@ -22,6 +22,8 @@
         "vue-router": "^4.6.3"
     },
     "dependencies": {
+        "@editorjs/editorjs": "^2.31.0",
+        "@editorjs/list": "^2.0.8",
         "@kyvg/vue3-notification": "^3.4.2"
     }
 }
