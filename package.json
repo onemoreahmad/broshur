@@ -22,6 +22,6 @@
         "vue-router": "^4.6.3"
     },
     "dependencies": {
-        "vue-advanced-cropper": "^2.8.9"
+        "@kyvg/vue3-notification": "^3.4.2"
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Api\Block\Cta;
 
 use App\Models\Block;
+use App\Models\Link;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -25,30 +26,67 @@ class UpdateCta
 
     public function handle(Request $request)
     {
+        $tenantId = currentTenant()->id;
         $block = Block::firstOrCreate(['name' => 'cta']);
         
+        // Update block active status
         $block->active = (bool) $request->active;
-        $block->config = [
-            'whatsapp_enabled' => (bool) $request->whatsapp_enabled,
-            'whatsapp_number' => $request->whatsapp_number,
-            'whatsapp_message' => $request->whatsapp_message,
-            'contact_enabled' => (bool) $request->contact_enabled,
-            'contact_email' => $request->contact_email,
-            'contact_subject' => $request->contact_subject,
-        ];
-
         $block->save();
+
+        // Get sort values from request or use defaults
+        $whatsappSort = $request->whatsapp_sort ?? 1;
+        $contactSort = $request->contact_sort ?? 2;
+
+        // Update or create WhatsApp link
+        $whatsappLink = Link::updateOrCreate(
+            [
+                'block_id' => $block->id,
+                'type' => 'cta',
+                'slug' => 'whatsapp',
+            ],
+            [
+                'tenant_id' => $tenantId,
+                'name' => 'whatsapp',
+                'link' => $request->whatsapp_number ?? '',
+                'active' => (bool) $request->whatsapp_enabled,
+                'meta' => [
+                    'message' => $request->whatsapp_message ?? '',
+                ],
+                'sort' => $whatsappSort,
+            ]
+        );
+
+        // Update or create Contact link
+        $contactLink = Link::updateOrCreate(
+            [
+                'block_id' => $block->id,
+                'type' => 'cta',
+                'slug' => 'contact',
+            ],
+            [
+                'tenant_id' => $tenantId,
+                'name' => 'contact',
+                'link' => $request->contact_email ?? '',
+                'active' => (bool) $request->contact_enabled,
+                'meta' => [
+                    'subject' => $request->contact_subject ?? '',
+                ],
+                'sort' => $contactSort,
+            ]
+        );
 
         return response()->json([
             'message' => 'CTA block updated successfully',
             'data' => [
                 'active' => $block->active,
-                'whatsapp_enabled' => $block->config['whatsapp_enabled'],
-                'whatsapp_number' => $block->config['whatsapp_number'],
-                'whatsapp_message' => $block->config['whatsapp_message'],
-                'contact_enabled' => $block->config['contact_enabled'],
-                'contact_email' => $block->config['contact_email'],
-                'contact_subject' => $block->config['contact_subject'],
+                'whatsapp_enabled' => $whatsappLink->active,
+                'whatsapp_number' => $whatsappLink->link,
+                'whatsapp_message' => data_get($whatsappLink->meta, 'message', ''),
+                'whatsapp_sort' => $whatsappLink->sort,
+                'contact_enabled' => $contactLink->active,
+                'contact_email' => $contactLink->link,
+                'contact_subject' => data_get($contactLink->meta, 'subject', ''),
+                'contact_sort' => $contactLink->sort,
             ],
         ]);
     }

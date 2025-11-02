@@ -6,7 +6,7 @@
         <div v-else>
             <div class="flex flex-col gap-4">
                 <div class="flex items-center justify-between border-b-2 border-gray-200 pb-3 border-dotted">
-                    <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-x-2">
+                    <h2 class="text-sm font-semibold text-gray-800 flex items-center gap-x-2">
                         <svg viewBox="0 0 24 24" class="size-5" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11.3357 5.47875L7.36344 9.00968C5.79482 10.404 5.0105 11.1012 5.0105 11.9993C5.0105 12.8975 5.79481 13.5946 7.36344 14.989L11.3357 18.5199C12.0517 19.1563 12.4098 19.4746 12.7049 19.342C13.0001 19.2095 13.0001 18.7305 13.0001 17.7725V15.4279C16.6001 15.4279 20.5001 17.1422 22.0001 19.9993C22.0001 10.8565 16.6668 8.57075 13.0001 8.57075V6.22616C13.0001 5.26817 13.0001 4.78917 12.7049 4.65662C12.4098 4.52407 12.0517 4.8423 11.3357 5.47875Z" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="0.5" d="M8.46129 4.5L3.24509 9.34362C2.45098 10.081 1.99976 11.1158 1.99976 12.1994C1.99976 13.3418 2.50097 14.4266 3.37087 15.1671L8.46129 19.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
                         الروابط الاجتماعية
                     </h2>
@@ -35,11 +35,33 @@
                 <div v-else class="space-y-3">
                     <div 
                         v-for="(link, index) in form.links" 
-                        :key="index"
-                        class="bg-gray-50 rounded-lg p-4 border border-gray-200"
+                        :key="`link-${link.id || index}`"
+                        :draggable="true"
+                        @dragstart="handleDragStart($event, index)"
+                        @dragover.prevent="handleDragOver($event, index)"
+                        @dragenter.prevent="handleDragEnter($event, index)"
+                        @dragleave="handleDragLeave($event, index)"
+                        @drop="handleDrop($event, index)"
+                        @dragend="handleDragEnd($event)"
+                        :class="[
+                            'bg-gray-50 rounded-lg p-4 border border-gray-200 transition-all',
+                            dragOverIndex === index ? 'border-blue-500 bg-blue-50' : '',
+                            draggedIndex === index ? 'opacity-50' : ''
+                        ]"
                     >
                         <div class="flex items-center justify-between mb-3">
                             <div class="flex items-center gap-3">
+                                <div class="flex flex-col items-center gap-1">
+                                    <svg 
+                                        class="w-5 h-5 text-gray-400 cursor-grab active:cursor-grabbing" 
+                                        fill="none" 
+                                        stroke="currentColor" 
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path>
+                                    </svg>
+                                    <span class="text-xs text-gray-400 hidden">{{ index + 1 }}</span>
+                                </div>
                                 <button 
                                     class="btn btn-xs btn-ghost"
                                     @click="toggleCollapse(index)"
@@ -49,7 +71,7 @@
                                     <svg v-if="collapsed[index]" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                                     <svg v-else class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832l-3.71 3.938a.75.75 0 11-1.08-1.04l4.24-4.5a.75.75 0 011.08 0l4.24 4.5c.28.297.27.765-.02 1.06z" clip-rule="evenodd" /></svg>
                                 </button>
-                                <span class="text-sm font-medium text-gray-600"> {{ link.network }} {{ index + 1 }}</span>
+                                <span class="text-sm font-medium text-gray-600"> {{ link.network || 'رابط جديد' }}</span>
                                 <div class="flex items-center gap-2">
 
                                 <label class="toggle toggle-lg" :class="{ 'toggle-primary': link.active, 'toggle-secondary': !link.active }">
@@ -104,7 +126,7 @@
                                 >
                                     <option value="">اختر الشبكة</option>
                                     <option value="facebook">فيسبوك</option>
-                                    <option value="twitter">تويتر</option>
+                                    <option value="x">X (تويتر)</option>
                                     <option value="instagram">إنستغرام</option>
                                     <option value="linkedin">لينكد إن</option>
                                     <option value="youtube">يوتيوب</option>
@@ -195,6 +217,10 @@ const loading = ref(false)
 const formLoading = ref(false)
 const collapsed = ref([])
 const COLLAPSE_STORAGE_KEY = 'dashboard.links_block.collapsed'
+
+// Drag and drop state
+const draggedIndex = ref(null)
+const dragOverIndex = ref(null)
  
 onMounted(() => {
     loading.value = true
@@ -238,7 +264,7 @@ const removeLink = (index) => {
 const getNetworkLabel = (network) => {
     const labels = {
         'facebook': 'فيسبوك',
-        'twitter': 'تويتر',
+        'x': 'X (تويتر)',
         'instagram': 'إنستغرام',
         'linkedin': 'لينكد إن',
         'youtube': 'يوتيوب',
@@ -289,6 +315,75 @@ const save = () => {
 const toggleCollapse = (index) => {
     collapsed.value[index] = !collapsed.value[index]
     localStorage.setItem(COLLAPSE_STORAGE_KEY, JSON.stringify(collapsed.value))
+}
+
+// Drag and drop handlers
+const handleDragStart = (event, index) => {
+    draggedIndex.value = index
+    event.dataTransfer.effectAllowed = 'move'
+    event.dataTransfer.setData('text/html', index)
+}
+
+const handleDragOver = (event, index) => {
+    if (draggedIndex.value === null) return
+    if (draggedIndex.value !== index) {
+        dragOverIndex.value = index
+    }
+}
+
+const handleDragEnter = (event, index) => {
+    if (draggedIndex.value === null) return
+    if (draggedIndex.value !== index) {
+        dragOverIndex.value = index
+    }
+}
+
+const handleDragLeave = (event, index) => {
+    // Only remove highlight if we're leaving the element (not entering a child)
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+        if (dragOverIndex.value === index) {
+            dragOverIndex.value = null
+        }
+    }
+}
+
+const handleDrop = (event, dropIndex) => {
+    event.preventDefault()
+    
+    if (draggedIndex.value === null || draggedIndex.value === dropIndex) {
+        dragOverIndex.value = null
+        return
+    }
+
+    const dragIndex = draggedIndex.value
+    
+    // Move the link in the array
+    const linkToMove = form.value.links[dragIndex]
+    const collapsedStateToMove = collapsed.value[dragIndex]
+    
+    // Remove from old position
+    form.value.links.splice(dragIndex, 1)
+    collapsed.value.splice(dragIndex, 1)
+    
+    // Insert at new position
+    form.value.links.splice(dropIndex, 0, linkToMove)
+    collapsed.value.splice(dropIndex, 0, collapsedStateToMove)
+    
+    // Update sort values
+    form.value.links.forEach((link, index) => {
+        link.sort = index
+    })
+    
+    dragOverIndex.value = null
+    draggedIndex.value = null
+    
+    // Update collapsed state in localStorage
+    localStorage.setItem(COLLAPSE_STORAGE_KEY, JSON.stringify(collapsed.value))
+}
+
+const handleDragEnd = (event) => {
+    draggedIndex.value = null
+    dragOverIndex.value = null
 }
 
 // persist whenever collapsed changes in length/content

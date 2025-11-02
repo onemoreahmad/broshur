@@ -23,6 +23,8 @@ class Link extends Model
         'link',
         'meta',
         'active',
+        'name',
+        'slug',
         'sort',
     ];
     protected $clone_exempt_attributes = ['slug'];

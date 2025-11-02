@@ -61,14 +61,18 @@ class UpdateLinks
                     // Debug: Log the link data being processed
                     \Log::info('Processing link data:', $linkData);
                     
+                    $network = data_get($linkData, 'network', '');
+                    
                     if ($linkId) {
                         // Update existing link
                         Link::where('id', $linkId)
                             ->update([
+                                'name' => $network,
+                                'slug' => $network,
                                 'link' => data_get($linkData, 'url'),
                                 'block_id' => $block->id,
                                 'meta' => [
-                                    'network' => data_get($linkData, 'network'),
+                                    'network' => $network,
                                     'label' => data_get($linkData, 'label'),
                                 ],
                                 'active' => (bool) data_get($linkData, 'active'),
@@ -79,10 +83,12 @@ class UpdateLinks
                         Link::create([
                             'tenant_id' => $tenantId,
                             'type' => 'link',
+                            'name' => $network,
+                            'slug' => $network,
                             'link' => data_get($linkData, 'url'),
                             'block_id' => $block->id,
                             'meta' => [
-                                'network' => data_get($linkData, 'network'),
+                                'network' => $network,
                                 'label' => data_get($linkData, 'label'),
                             ],
                             'active' => (bool) data_get($linkData, 'active'),
