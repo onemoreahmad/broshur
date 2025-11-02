@@ -15,7 +15,7 @@ new class extends Livewire\Volt\Component {
         $portfolio = Portfolio::orderBy('sort', 'desc')->where('active', true)->get();
         
         
-        if($block->active){
+        if($block && $block->active){
             return view()->first(['theme::blocks.'.$view, 'theme::blocks.portfolio'], ['block' => $block, 'portfolio' => $portfolio, 'title' => data_get($block, 'config.title', ''), 'subtitle' => data_get($block, 'config.subtitle', '')]);      
         }
 
