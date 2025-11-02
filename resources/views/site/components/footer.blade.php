@@ -3,8 +3,9 @@
     <div class="px-4 mx-auto container sm:px-6 lg:px-8">
     
         <div class="lg:flex lg:items-center lg:justify-between  ">
-            <div>
-                <img class="w-auto h-8 mx-auto lg:mx-0" src="{{ asset('assets/images/logo.svg') }}" alt="" />
+            <div class="flex items-center gap-x-4">
+                <img class="w-auto h-8 mx-auto lg:mx-0" src="{{ asset('assets/images/broshur-logo-shape.webp') }}" alt="" />
+                <img class="w-auto h-8 mx-auto lg:mx-0" src="{{ asset('assets/images/logo.webp') }}" alt="" />
             </div>
 
             {{-- <ul class="flex items-center justify-center mt-8 gap-x-6 sm:mt-12 sm:gap-x-16 lg:mt-0">

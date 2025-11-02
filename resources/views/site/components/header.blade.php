@@ -3,7 +3,7 @@
             <div class="flex items-center justify-between">
                 <div class="shrink-0 flex items-center gap-x-2">
                     <a href="{{ route('site.home') }}" wire:navigate title="" class="flex items-center gap-x-3  ">
-                        <img class="w-auto h-7" src="{{ asset('assets/images/logo-shape-white.svg') }}" alt="" />
+                        <img class="w-auto h-7" src="{{ asset('assets/images/broshur-logo-shape.webp') }}" alt="" />
                         <img class="w-auto h-7" src="{{ asset('assets/images/logo-white-0.webp') }}" alt="" />
                         {{-- <span class=" font-bold">
                             {{ config('app.name') }} 

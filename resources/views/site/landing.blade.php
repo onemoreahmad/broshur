@@ -1,4 +1,4 @@
-<div class="bg-stone-300  min-h-screen pt-10 lg:pt-12 px-1 lg:px-0">
+<div class="bg-stone-300/50  min-h-screen pt-10 lg:pt-12 px-1 lg:px-0">
     <section class="relative xbg-white/50 pb-32 mx-auto max-w-7xl rounded-3xl   bg-gradient-to-b from-[#f4f4f4]  via-teal-300/10 to-transparent">
         <div class="absolute inset-0 -z-10 opacity-40 pointer-events-none">
             <svg class="size-full text-stone-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -99,7 +99,7 @@
                 <div class="mt-6 flex items-center justify-center gap-3">
                     <a href="{{ route('auth.register')}}" wire:navigate class="inline-flex items-center gap-3 rounded-full bg-primary-600 text-white px-3 py-3 text-2xl ps-6 font-semiboldx shadow-sm hover:bg-primary-700">
                         أنشئ صفحتك مجاناً 
-                        <ui:icon name="arrow-left" size="10" class="bg-amber-400 rounded-full p-1" />
+                        <ui:icon name="arrow-left" size="10" class="bg-teal-400 rounded-full p-1" />
                     </a>
                 </div>
                 <p class="mt-2 text-xs text-stone-500/50">خطة مجانية •  أنشئ صفحتك بثواني</p>
@@ -212,7 +212,7 @@
 
      <div class="mx-auto max-w-3xl text-center relative z-10">
         <h1 class="text-3xl sm:text-4xl  text-gray-800">
-            <b class="font-bold inline-block mb-7 text-5xl lg:text-6xl">لا تفوّت عميل!</b>
+            <b class="font-normal inline-block mb-7 text-5xl lg:text-6xl">لا تفوّت عميل!</b>
             <br class="" />
             استقبل طلبات عملائك وجاوب على كل أسئلتهم.
         </h1>
@@ -230,17 +230,22 @@
     <!-- Features section -->
     <section class="px-4 mx-auto max-w-7xl mt-12 lg:mt-20">
         <div class="rounded-[28px] bg-base-500/5 shadow-sm  p-4 sm:p-6 lg:p-8">
-            <div class="grid grid-cols-12 gap-4 sm:gap-5 lg:gap-6 auto-rows-[130px] sm:auto-rows-[160px] lg:auto-rows-[180px]">
+            <div class="grid grid-cols-12 gap-4 sm:gap-5 lg:gap-6 xauto-rows-[130px] sm:auto-rows-[160px] lg:auto-rows-[180px]">
                 <!-- Maximize Card Rewards -->
                 <div class="col-span-12 md:col-span-6 lg:col-span-5 row-span-3 rounded-3xl bg-violet-100/70 p-6 sm:p-7 lg:p-8 flex flex-col">
                     <div class="flex-1">
                         <h3 class="text-2xl lg:text-3xl font-black tracking-tight text-black"> نموذج للحجز</h3>
-                        <p class="mt-4 text-stone-600 text-sm leading-6 max-w-sm">
-                        لا تفوّت بعد اليوم ، استقبل طلبات وحجوزات وتواصل عملائك من خلال نماذج ذكية.</p>
+                        <p class="mt-4 text-stone-600 text-base font-thin leading-6 max-w-sm">
+                         أنشئ نماذج حجز ذكية 
+                         لاستقبال طلبات وحجوزات عملائك 
+                         مهما كان مجال عملك.
+                         مع إمكانية التحكم في النماذج والتعديل عليها بسهولة.
+                        </p>
  
                     </div>
                     <div class="mt-6 self-end">
-                        <img src="{{asset('assets/images/home/1.svg')}}" class="w-screen " />
+                        <img src="{{asset('assets/images/home/booking.svg')}}" class="lg:w-screen w-full" />
+                        {{-- <img src="{{asset('assets/images/home/1.svg')}}" class="w-screen " /> --}}
                         {{-- <!-- credit card illustration -->
                         <svg class="w-40 h-28 sm:w-48 sm:h-32 text-violet-500" viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" fill="none">
                             <rect x="10" y="20" rx="14" ry="14" width="180" height="100" fill="currentColor" opacity="0.25"/>
@@ -251,76 +256,115 @@
                         </svg> --}}
                     </div>
                 </div>
+ 
 
                 <!-- Manage Cards (wide) -->
-                <div class="col-span-12 md:col-span-6 lg:col-span-7 row-span-1 rounded-3xl bg-pink-100 p-6 sm:p-7 lg:p-8 flex items-center justify-between">
-                    <div>
-                        <h3 class="text-2xl font-black text-black"> رسالة واتساب </h3>
-                        <p class="mt-2 text-stone-600 text-sm"> أضف زر تواصل واتساب لصفحتك لسهولة تواصل العملاء معك من خلال المحادثة المباشرة على واتساب.</p>
+                <div class="col-span-12 md:col-span-6 lg:col-span-7 row-span-1 rounded-3xl bg-green-100 p-6 sm:p-7 lg:p-8 ">
+
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-2xl font-black text-black"> رسالة واتساب </h3>
+                            <p class="mt-2 text-stone-600 text-base font-thin"> أضف زر تواصل واتساب لصفحتك لسهولة تواصل العملاء معك من خلال المحادثة المباشرة على واتساب. 
+                            وتتبع عدد الضغات والزيارات لكل طريقة تواصل.
+                            </p>
+                        </div>
+                        
+                        {{-- <img src="https://template.canva.com/EAE1Pp8_lIQ/2/0/900w-cn4UI_o1JqU.jpg" class="w-28" /> --}}
+
+                        <div class="flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-28 h-28 text-green-600" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+                                <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+                            </svg>
+                        </div>
                     </div>
-                    <svg class="w-28 h-28 text-pink-500" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
-                        <rect x="12" y="36" width="96" height="56" rx="10" fill="currentColor" opacity="0.25"/>
-                        <rect x="20" y="48" width="80" height="10" rx="3" fill="currentColor"/>
-                        <rect x="20" y="64" width="42" height="8" rx="3" fill="currentColor" opacity="0.7"/>
-                        <rect x="70" y="62" width="22" height="16" rx="4" fill="#ec4899"/>
-                    </svg>
+                    
+                    {{-- <img src="https://www.hello-charles.com/hs-fs/hubfs/ServiceAIv2.png?width=1150&height=1040&name=ServiceAIv2.png" class="xw-full" /> --}}
+
                 </div>
 
                 <!-- Set Goals -->
-                <div class="col-span-12 sm:col-span-6 lg:col-span-3 row-span-2 rounded-3xl bg-yellow-100 p-6 sm:p-7 lg:p-8 flex items-center justify-between">
+                <div class="col-span-12 sm:col-span-6 lg:col-span-3 row-span-2 overflow-hidden rounded-3xl bg-yellow-100 pt-6 px-6 sm:px-7 lg:px-8 flex flex-col items-center justify-between">
                     <div>
-                        <h3 class="text-xl font-extrabold text-black"> حجز موعد </h3>
-                        <p class="mt-2 text-stone-700 text-sm">Set trip goals or target annual fee waivers.</p>
+                        <h3 class="text-xl font-extrabold text-black"> تحميل ملف </h3>
+                        <p class="mt-2 text-stone-700 text-sm font-thin text-justify"> 
+                            اسمح لعملائك بتحميل ملف البروفايل أو كتاب  أو أي ملف بشكل مباشر من صفحتك. 
+                            يمكن طلب بيانات التواصل قبل التحميل لإعادة استهدافهم لاحقاً، 
+                            كما يمكنك تتبع عدد التحميلات والزيارات لكل ملف
+                        .</p>
                     </div>
-                    <svg class="w-20 h-20 text-yellow-500" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" fill="none">
+                    <img src="{{asset('assets/images/home/download.svg')}}" class="w-[99%]" />
+
+                    {{-- <svg class="w-20 h-20 text-yellow-500" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" fill="none">
                         <circle cx="48" cy="48" r="28" stroke="currentColor" stroke-width="6"/>
                         <circle cx="48" cy="48" r="16" stroke="currentColor" stroke-width="6"/>
                         <path d="M48 20v-8M76 48h8M48 84v8M12 48H4" stroke="#eab308" stroke-width="6" stroke-linecap="round"/>
                         <path d="M69 27 86 14" stroke="#eab308" stroke-width="6" stroke-linecap="round"/>
-                    </svg>
+                    </svg> --}}
                 </div>
 
                 <!-- Lounges -->
-                <div class="col-span-12 sm:col-span-6 lg:col-span-4 row-span-2 rounded-3xl bg-lime-100 p-6 sm:p-7 lg:p-8 flex items-center justify-between">
+                <div class="col-span-12 sm:col-span-6 lg:col-span-4 overflow-hidden row-span-2 rounded-3xl bg-pink-100  pt-6 px-6 sm:px-7 lg:px-8 flex flex-col items-center justify-between">
                     <div>
                         <h3 class="text-xl font-extrabold text-black"> شراء مباشر </h3>
-                        <p class="mt-2 text-stone-700 text-sm">Track & find eligible airport & railway lounge access.</p>
+                        <p class="mt-2 text-stone-700 text-base font-thin">
+                        أضف زر للشراء والدفع مباشرة من خلال صفحتك، سواء من خلال منصة بروشور أو 
+                        باستخدام منصات البيع والدفع الخارجية.
+                        .</p>
                     </div>
-                    <svg class="w-24 h-24 text-lime-600" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
+                    <img src="{{asset('assets/images/home/buy.svg')}}" class="w-[85%]" />
+
+                    {{-- <svg class="w-24 h-24 text-lime-600" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
                         <rect x="10" y="50" width="100" height="22" rx="6" fill="currentColor" opacity="0.25"/>
                         <rect x="20" y="40" width="40" height="10" rx="3" fill="currentColor"/>
                         <rect x="20" y="76" width="40" height="10" rx="3" fill="currentColor"/>
                         <path d="M88 40v46" stroke="#65a30d" stroke-width="8" stroke-linecap="round"/>
                         <path d="M76 56h24" stroke="#65a30d" stroke-width="8" stroke-linecap="round"/>
-                    </svg>
+                    </svg> --}}
                 </div>
 
                 <!-- Credit Card Strategy -->
-                <div class="col-span-12 lg:col-span-7 row-span-2 rounded-3xl bg-orange-100 p-6 sm:p-7 lg:p-8 flex items-center justify-between">
+                <div class="col-span-12 lg:col-span-7 row-span-2 rounded-3xl order-last lg:order-5 bg-orange-100 pt-8 px-6 sm:px-7 lg:px-8 flex flex-col justify-between">
                     <div>
                         <h3 class="text-2xl lg:text-3xl font-black text-black"> نماذج متعددة للاستحواذ على عميلك </h3>
-                        <p class="mt-4 text-stone-700 text-sm max-w-md">Personalized credit card plan that fits your lifestyle.</p>
+                        <p class="mt-4 text-stone-700 text-base font-thin max-w-mdx">
+                            لأن كل منتج وخدمة وحملة إعلانية تختلف أهدافها وطرق الإستحواذ على العملاء.
+                             
+                          
+                            يمكنك إنشاء نماذج مختلفة للاستحواذ على عملائك بناء على أهدافك ومتطلباتك.
+                            مثل زر شراء مباشر، حجز خدمة مع الدفع، حجز استشارة أو موعد.. 
+                             
+                            ويمكنك تتبع عدد الزيارات والتفعاعل لكل نموذج.
+
+
+                        .</p>
                     </div>
-                    <svg class="w-40 h-28 text-orange-500" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" fill="none">
+                    
+                    <img src="{{asset('assets/images/home/form.svg')}}" class="lg:w-1/2 w-full" />
+
+                    {{-- <svg class="w-40 h-28 text-orange-500" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" fill="none">
                         <rect x="16" y="20" width="24" height="80" rx="4" fill="currentColor" opacity="0.3"/>
                         <rect x="60" y="44" width="24" height="56" rx="4" fill="currentColor"/>
                         <rect x="104" y="32" width="24" height="68" rx="4" fill="currentColor" opacity="0.6"/>
                         <path d="M24 22c36 0 60 20 92 20 20 0 40-8 68-20" stroke="#f97316" stroke-width="6" stroke-linecap="round"/>
-                    </svg>
+                    </svg> --}}
                 </div>
 
                 <!-- Find, Compare & Apply -->
-                <div class="col-span-12 lg:col-span-5 row-span-2 rounded-3xl bg-sky-100 p-6 sm:p-7 lg:p-8 flex items-center justify-between">
+                <div class="col-span-12 lg:col-span-5 lg:row-span-2 rounded-3xl overflow-hidden bg-sky-100 order-5 lg:order-last pt-8 px-6 sm:px-7 lg:px-8 flex flex-col justify-between">
                     <div>
                         <h3 class="text-2xl lg:text-3xl font-black text-black"> تسجيل اهتمام </h3>
-                        <p class="mt-4 text-stone-700 text-sm max-w-md">Discover ideal cards. Compare features and apply in minutes.</p>
+                        <p class="mt-4 text-stone-700 text-base font-thin max-w-md">
+                        أضف زر تسجيل اهتمام لصفحتك لسهولة تسجيل العملاء المهتمين بمنتجك أو خدمتك.
+                        يمكنك تتبع عدد الزيارات والتفعاعل لكل زر
+                        .</p>
                     </div>
-                    <svg class="w-40 h-28 text-sky-500" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" fill="none">
-                        <rect x="22" y="44" width="110" height="18" rx="9" fill="currentColor"/>
-                        <rect x="22" y="70" width="70" height="12" rx="6" fill="currentColor" opacity="0.6"/>
-                        <circle cx="150" cy="80" r="20" stroke="#0ea5e9" stroke-width="8"/>
-                        <path d="M164 94l14 14" stroke="#0ea5e9" stroke-width="8" stroke-linecap="round"/>
-                    </svg>
+                        
+                    <div class="w-full ">
+                        <img src="{{asset('assets/images/home/interest.svg')}}" class="lg:w-[70%]" />
+                    </div>
+ 
                 </div>
             </div>
         </div>
@@ -331,7 +375,7 @@
     <section class="py-16 lg:py-20 xl:py-32">
         <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-6xl">
             <div class="max-w-2xl mx-auto text-center">
-                <h2 class="text-3xl font-semibold text-gray-900 sm:text-4xl lg:text-5xl"> الأسئلة المتكررة  </h2>
+                <h2 class="text-3xl font-normal text-gray-900 sm:text-4xl lg:text-5xl"> الأسئلة المتكررة  </h2>
                 <p class="mt-4 text-base font-thin leading-7 text-gray-600/60 lg:text-xl lg:mt-6 lg:leading-8"> هنا قائمة بإجاباتنا على أكثر الأسئلة تكراراً، إذا لم تجد إجابة لسؤالك 
                 <a href="{{route('site.page.contact')}}" wire:navigate class="text-primary-700 hover:text-primary-600"> تواصل معنا</a>
                  في أي وقت.</p>
@@ -368,7 +412,7 @@
     
                     <div x-show="expanded" x-collapse>
                         <div class="px-6 pb-6">
-                            <p class="text-sm lg:text-base text-gray-600">
+                            <p class="text-sm font-thin lg:text-base text-gray-600">
 بروشور هو منصة تساعدك على إنشاء صفحة تجارية مخصصة لمتجرك أو مشروعك، يمكنك تصميمها بنفسك، تعديل الألوان والعناصر، وعرض منتجاتك وخدماتك بطريقة جذابة وسهلة المشاركة.
 
                             </p>
@@ -407,7 +451,7 @@
     
                     <div x-show="expanded" x-collapse>
                         <div class="px-6 pb-6">
-                            <p class="text-sm lg:text-base text-gray-600">
+                            <p class="text-sm font-thin lg:text-base text-gray-600">
                             لا، المنصة مصممة لتكون سهلة الاستخدام. يمكنك إنشاء صفحتك وتخصيصها خلال دقائق بدون أي معرفة تقنية.
                              </p>
                         </div>
@@ -445,7 +489,7 @@
     
                     <div x-show="expanded" x-collapse>
                         <div class="px-6 pb-6">
-                            <p class="text-sm lg:text-base text-gray-600">
+                            <p class="text-sm font-thin lg:text-base text-gray-600">
                                 لا،
                                 نقدم خطة أساسية مجانية لإنشاء صفحتك بسرعة. كما توجد خيارات للترقية للاستفادة من مزايا إضافية مثل دومين مخصص وقوالب مخصصة وغيره
                             </p>
@@ -483,7 +527,7 @@
     
                     <div x-show="expanded" x-collapse>
                         <div class="px-6 pb-6">
-                            <p class="text-sm lg:text-base text-gray-600"> 
+                            <p class="text-sm font-thin text-gray-600 lg:text-base"> 
                                 نعم، في باقة بريميوم
                                 يمكنك ربط نطاقك (company.com) للاستخدام في الصفحة بدل 
                                 من رابط بروشور الافتراضي.
@@ -522,7 +566,7 @@
     
                     <div x-show="expanded" x-collapse>
                         <div class="px-6 pb-6">
-                            <p class="text-sm lg:text-base text-gray-600"> 
+                            <p class="text-sm font-thin text-gray-600 lg:text-base"> 
                              لا توجد قيود على الدول. يمكنك استخدام منصة بروشور من أي مكان به انترنت.
                              <br>
 القيود ستكون عند تعاملك مع شركات الأطراف الخارجية مثل بوابات الدفع والمنصات الأخرى التي تود ربطها في مع بروشور. 
@@ -600,28 +644,19 @@
                     <a href="{{ route('site.page.contact') }}" wire:navigate title="" class="text-sm font-medium text-gray-900 transition-all duration-200 font-pj hover:text-gray-600"> اتصل بنا </a>
                 </li>
             </ul> --}}
+            
 
             <ul class="flex items-center justify-center mt-8 gap-x-3 sm:mt-12 lg:justify-end lg:mt-0">
                 <li>
-                    <a href="#" target="_blank" title="" class="inline-flex items-center justify-center w-10 h-10 text-gray-900 transition-all duration-200 rounded-full hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200" rel="noopener">
+                    <a href="https://x.com/broshurcom" target="_blank" title="" class="inline-flex items-center justify-center w-10 h-10 text-gray-900 transition-all duration-200 rounded-full hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200" rel="noopener">
                         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M19.633 7.997c.013.175.013.349.013.523 0 5.325-4.053 11.461-11.46 11.461-2.282 0-4.402-.661-6.186-1.809.324.037.636.05.973.05a8.07 8.07 0 0 0 5.001-1.721 4.036 4.036 0 0 1-3.767-2.793c.249.037.499.062.761.062.361 0 .724-.05 1.061-.137a4.027 4.027 0 0 1-3.23-3.953v-.05c.537.299 1.16.486 1.82.511a4.022 4.022 0 0 1-1.796-3.354c0-.748.199-1.434.548-2.032a11.457 11.457 0 0 0 8.306 4.215c-.062-.3-.1-.611-.1-.923a4.026 4.026 0 0 1 4.028-4.028c1.16 0 2.207.486 2.943 1.272a7.957 7.957 0 0 0 2.556-.973 4.02 4.02 0 0 1-1.771 2.22 8.073 8.073 0 0 0 2.319-.624 8.645 8.645 0 0 1-2.019 2.083z"
-                            ></path>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg>
                         </svg>
                     </a>
                 </li>
-
+ 
                 <li>
-                    <a href="#" target="_blank" title="" class="inline-flex items-center justify-center w-10 h-10 text-gray-900 transition-all duration-200 rounded-full hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200" rel="noopener">
-                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z"></path>
-                        </svg>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#" target="_blank" title="" class="inline-flex items-center justify-center w-10 h-10 text-gray-900 transition-all duration-200 rounded-full hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200" rel="noopener">
+                    <a href="https://www.instagram.com/broshurcom" target="_blank" title="" class="inline-flex items-center justify-center w-10 h-10 text-gray-900 transition-all duration-200 rounded-full hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200" rel="noopener">
                         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M11.999 7.377a4.623 4.623 0 1 0 0 9.248 4.623 4.623 0 0 0 0-9.248zm0 7.627a3.004 3.004 0 1 1 0-6.008 3.004 3.004 0 0 1 0 6.008z"></path>
                             <circle cx="16.806" cy="7.207" r="1.078"></circle>
