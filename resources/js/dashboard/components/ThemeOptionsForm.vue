@@ -26,8 +26,8 @@
                 
         <!-- {{ modelValue }} -->
 
-        <div class="flex justify-end mt-4">
-            <button @click="save" class="btn btn-primary" :disabled="formLoading" > 
+        <div class="flex justify-end mt-10">
+            <button @click="save" class="btn btn-primary w-full" :disabled="formLoading" > 
                 <span v-if="!formLoading"> حفظ </span>
                 <span v-if="formLoading" class="loading loading-spinner loading-xs"></span>
             </button>
