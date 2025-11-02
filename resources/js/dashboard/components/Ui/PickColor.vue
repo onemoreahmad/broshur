@@ -23,8 +23,9 @@ bg-fuchsia-200 hover:bg-fuchsia-100 border-fuchsia-300
 bg-pink-200 hover:bg-pink-100 border-pink-300
 bg-rose-200 hover:bg-rose-100 border-rose-300
     "></div>
-    <div class="">
-        <label for="name" class="block text-sm font-bold leading-5 text-gray-500 p-2 sm:w-48"> {{label}} </label>
+    <fieldset class="fieldset bg-base-200/50 rounded-box p-4">
+        <legend class="fieldset-legend">{{ label }}</legend>
+     
         <div class="w-full mt-1 flex items-center gap-2 flex-wrap">
 
             <label class="input radio-input radio-input-sm w-fit cursor-pointer "
@@ -43,7 +44,7 @@ bg-rose-200 hover:bg-rose-100 border-rose-300
 
             <div class="text-xs text-gray-400 leading-2 p-1" v-if="help">{{help}}</div>
         </div>            
-    </div>
+    </fieldset>
 </template>
 
 <script setup>

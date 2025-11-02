@@ -58,7 +58,8 @@ class Tenant extends Model
 
         // return 'https://ui-avatars.com/api?'.$parms;
 
-        return 'https://ui-avatars.com/api/?background=219EBD&color=fff&name=' . data_get($this, 'name');
+        // return 'https://ui-avatars.com/api/?background=219EBD&color=fff&name=' . data_get($this, 'name');
+        return asset('assets/images/page-logo.webp');
     }
 
     public function getCoverAttribute()

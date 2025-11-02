@@ -24,5 +24,11 @@
             "gray"
         ],
         "default": "blue"
-    } 
+    },
+    "headerImage": {
+        "type": "upload-single-image",
+        "label": "صورة الهيدر",
+        "info": "إذا كنت ترغب بإظهار صورة في أعلى الموقع.",
+        "default": ""
+    }
 }

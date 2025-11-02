@@ -18,6 +18,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'storageUrl' => storage(),
             // 'tenant' => $this->tenant,
             // 'tenant' => TenantResource::make($this->tenant),
         ];

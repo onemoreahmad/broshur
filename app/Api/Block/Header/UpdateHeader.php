@@ -33,13 +33,13 @@ class UpdateHeader
             tenant()->logo = $request->newLogo->store('logo');
         }
        
-        if ($request->coverRemoved) {
-            tenant()->meta->set('cover', null );
-        }
+        // if ($request->coverRemoved) {
+        //     tenant()->meta->set('cover', null );
+        // }
 
-        if ($request->newCover) {
-            tenant()->meta->set('cover', $request->newCover);
-        }
+        // if ($request->newCover) {
+        //     tenant()->meta->set('cover', $request->newCover);
+        // }
  
         tenant()->save();
 
@@ -49,7 +49,7 @@ class UpdateHeader
                 'name' => currentTenant()->name,
                 'slogan' => data_get(currentTenant(), 'meta.slogan.'.app()->getLocale()),
                 'logo' => data_get(currentTenant(), 'logo'),
-                'cover' => data_get(currentTenant(), 'meta.cover'),
+                // 'cover' => data_get(currentTenant(), 'meta.cover'),
             ],
         ]);
     }

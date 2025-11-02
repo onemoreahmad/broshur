@@ -30,11 +30,12 @@
                 
             {% include 'theme::_language-buttons-mobile' %}
 
-            {% if tenant('cover') %}
-                <img src="{{ tenant('cover') }}" 
-                    alt="BMW Cars Header" 
-                    class="w-full min-h-48 max-h-56 object-cover md:rounded-t-xl shadow-lg">
+            {% if option('headerImage') %}
+            <img src="{{ storage(option('headerImage')) }}" 
+                    alt="{{tenant('name')}}" 
+                    class="w-full h-48 object-cover md:rounded-t-xl shadow-lg">
             {% endif %}
+             
         </div>
 
         <div class="md:max-w-2xl w-full Xborder-b-4 border-white/90 bg-white py-4 lg:rounded-b-xl  z-50">

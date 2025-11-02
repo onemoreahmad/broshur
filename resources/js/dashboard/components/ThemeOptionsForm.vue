@@ -21,6 +21,22 @@
                     :label="option.label" 
                     placeholder="" 
                     help="" />
+
+               
+                <UiUploadImage
+                    v-if="option.type == 'upload-single-image'" 
+                    v-model="modelValue[name]" 
+                    :name="name"
+                    :preview="storageUrl +  modelValue[name]"
+                    :model="name" 
+                    :label="option.label" 
+                    placeholder="option.placeholder" 
+                    help="option.info" 
+                    :modelId="props.modelId"
+                    modelType="tenant"
+                    mediaCollection="theme-media"
+                    collection="theme-media"
+                />
             </div>            
         </div>
                 
@@ -37,13 +53,18 @@
  
 <script setup>
 
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import axios from 'axios'
  
 const formLoading = ref(false)
 
 const props = defineProps(['modelValue', 'options', 'themeOptions', 'themeId'])
+import { useAuthStore } from '@/stores/auth'
+import { storeToRefs } from 'pinia'
 
+const { user } = storeToRefs(useAuthStore())
+
+const storageUrl = computed(() => user.value?.storageUrl ?? '') 
 
 const save = () => {
     formLoading.value = true

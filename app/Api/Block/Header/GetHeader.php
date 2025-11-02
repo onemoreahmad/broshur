@@ -15,7 +15,7 @@ class GetHeader
                 'name' => currentTenant()->name,
                 'slogan' => data_get(currentTenant(), 'meta.slogan.'.app()->getLocale()),
                 'logo' => data_get(currentTenant(), 'logo'),
-                'cover' => data_get(currentTenant(), 'cover'),
+                // 'cover' => data_get(currentTenant(), 'cover'),
             ],
         ]);
     }
