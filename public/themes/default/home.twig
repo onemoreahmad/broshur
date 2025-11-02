@@ -21,14 +21,14 @@
 
         {{renderBlock('links')}}
     
-        {% include 'theme::_language-buttons' %}
+        {# {% include 'theme::_language-buttons' %} #}
 
         <!-- Header Image -->
         <div class="w-full min-h-[6rem] object-cover md:rounded-t-xl bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-{{ options.primaryColor ?? 'primary' }}-600 via-{{ options.primaryColor ?? 'primary' }}-700 to-{{ options.primaryColor ?? 'primary' }}-900 relative">
         
             {{renderBlock('links', 'links-mobile')}}
                 
-            {% include 'theme::_language-buttons-mobile' %}
+            {# {% include 'theme::_language-buttons-mobile' %} #}
 
             {% if option('headerImage') %}
             <img src="{{ storage(option('headerImage')) }}" 

@@ -2,11 +2,11 @@
 <div class="md:hidden absolute top-2 right-2 flex items-center gap-2 z-20">
     {% for link in links %}
         {% if data_get(link, 'meta.network') == 'website' %}
-            <a href="{{link.link}}" target="_blank" class="flex items-center  text-white/80 p-2  rounded-xl bg-black/40  hover:bg-black/30">
+            <a href="{{link.link}}" target="_blank" class="flex items-center  text-white/80 hover:text-{{option('primaryColor')}}-400 p-2  rounded-xl bg-black/70  hover:bg-black/90">
                 <span class="size-6">{% include 'assets/icons/tabler/link.svg' ignore missing %}   </span>
             </a>
         {% else %}
-            <a href="{{link.link}}" target="_blank" class="flex items-center  text-white/80 p-2  rounded-xl bg-black/40  hover:bg-black/30">
+            <a href="{{link.link}}" target="_blank" class="flex items-center  text-white/80 hover:text-{{option('primaryColor')}}-400 p-2  rounded-xl bg-black/70  hover:bg-black/90">
                 <span class="size-6">{% include 'assets/icons/social/brand-'~data_get(link, 'meta.network')~'.svg' ignore missing %}   </span>
             </a>
         {% endif %}

@@ -395,7 +395,7 @@
                     role="region"
                 >
                     <h3>
-                        <button @click="expanded = !expanded" :aria-expanded="expanded" class="flex items-center justify-between w-full px-6 py-5 text-sm lg:text-lg font-semibold  text-gray-900 sm:p-6">
+                        <button @click="expanded = !expanded" :aria-expanded="expanded" class="flex items-center justify-between w-full px-6 py-5 text-sm lg:text-lg  text-gray-900 sm:p-6">
                             <span>  ما هو بروشور؟  </span>
                             <span x-show="expanded" aria-hidden="true" class="ms-4">
                                 <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -433,7 +433,7 @@
                     role="region"
                 >
                     <h3>
-                        <button @click="expanded = !expanded" :aria-expanded="expanded" class="flex items-center justify-between w-full px-6 py-5 text-sm lg:text-lg font-semibold  text-gray-900 sm:p-6">
+                        <button @click="expanded = !expanded" :aria-expanded="expanded" class="flex items-center justify-between w-full px-6 py-5 text-sm lg:text-lg  text-gray-900 sm:p-6">
                            
                             <span>   هل أحتاج لأي خبرة تقنية لإنشاء صفحتي؟ </span>
                             <span x-show="expanded" aria-hidden="true" class="ms-4">
@@ -471,7 +471,7 @@
                     role="region"
                 >
                     <h3>
-                        <button @click="expanded = !expanded" :aria-expanded="expanded" class="flex items-center justify-between w-full px-6 py-5 text-sm lg:text-lg font-semibold  text-gray-900 sm:p-6">
+                        <button @click="expanded = !expanded" :aria-expanded="expanded" class="flex items-center justify-between w-full px-6 py-5 text-sm lg:text-lg  text-gray-900 sm:p-6">
                            
                             <span>  هل أحتاج لدفع رسوم لإنشاء الصفحة؟ </span>
                             <span x-show="expanded" aria-hidden="true" class="ms-4">
@@ -510,7 +510,7 @@
                     role="region"
                 >
                     <h3>
-                        <button @click="expanded = !expanded" :aria-expanded="expanded" class="flex items-center justify-between w-full px-6 py-5 text-sm lg:text-lg font-semibold  text-gray-900 sm:p-6">
+                        <button @click="expanded = !expanded" :aria-expanded="expanded" class="flex items-center justify-between w-full px-6 py-5 text-sm lg:text-lg  text-gray-900 sm:p-6">
                             <span> هل أستطيع استخدام رابط ونطاق مخصص لهويتي مثل company.com ؟  </span>
                             <span x-show="expanded" aria-hidden="true" class="ms-4">
                                 <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -549,7 +549,7 @@
                     role="region"
                 >
                     <h3>
-                        <button @click="expanded = !expanded" :aria-expanded="expanded" class="flex items-center justify-between w-full px-6 py-5 text-sm lg:text-lg font-semibold  text-gray-900 sm:p-6">
+                        <button @click="expanded = !expanded" :aria-expanded="expanded" class="flex items-center justify-between w-full px-6 py-5 text-sm lg:text-lg  text-gray-900 sm:p-6">
                             <span> ماهي الدول المسموح بها لاستخدام منصة بروشور ؟ </span>
                             <span x-show="expanded" aria-hidden="true" class="ms-4">
                                 <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
