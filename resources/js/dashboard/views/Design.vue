@@ -1,7 +1,7 @@
 <template>
-    <div class=" max-w-7xl mx-auto">
+    <div class="max-w-7xl mx-auto mt-4">
         <!-- Theme Selection Section -->
-        <div class="mb-8">
+        <div class="mb-4">
             <!-- Loading State -->
             <div v-if="isLoadingThemes" class="flex justify-center items-center py-12">
                 <span class="loading loading-spinner loading-lg"></span>
@@ -28,18 +28,19 @@
                         القالب الحالي 
                     </div>
                     
-                    <div class="w-full h-28 bg-gray-50 rounded-lg overflow-hidden mb-3">
+                    <div class="w-full h-42 bg-gray-50 rounded-lg overflow-hidden mb-3">
                         <img 
                             :src="theme.preview" 
                             :alt="theme.name"
-                            class="w-full h-full object-cover"
-                        />
+                            class="w-full h-full object-cover object-top"
+                        /> 
                     </div>
-                    <div class="text-center">
-                        <h3 class="text-sm font-semibold text-gray-800 mb-1">{{ theme.name }}</h3>
-                        <p class="text-xs text-gray-500 mb-2">{{ theme.category }}</p>
-                        <p class="text-lg font-bold text-green-600">
-                            {{ theme.price == 0 ? 'مجاني' : '$' + theme.price }}
+                    <div class="text-center flex items-center justify-between p-1">
+                        <h3 class="text-xs font-semibold text-gray-800 truncate">{{ theme.name }}</h3>
+                        <p class="text-[10px] badge badge-sm badge-soft badge-success">
+                            <span class=" ">
+                                {{ theme.price == 0 ? 'مجاني' : '$' + theme.price }}
+                            </span>
                         </p>
                     </div>
                 </div>
