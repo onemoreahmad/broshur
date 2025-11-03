@@ -17,6 +17,7 @@
             scroll-behavior: smooth;
         }
     </style>
+    @livewireStyles
 </head>
 <body>
     {{$slot}}
@@ -29,6 +30,8 @@
             </a>
         </div>
     </div>
+
+    @livewireScripts
 
 </body>
 </html>

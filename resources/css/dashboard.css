@@ -68,7 +68,7 @@
   themes: emerald, cmyk --default,  cupcake;
 }
  
-.input {
+.input, .textarea, .select {
     &:focus, &:focus-within {
         outline: 1px solid var(--input-color);
         outline-offset: 0px;

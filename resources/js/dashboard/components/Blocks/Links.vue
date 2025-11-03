@@ -4,25 +4,20 @@
             <span class="loading loading-spinner loading-lg opacity-75"></span>
         </div>
         <div v-else>
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-1">
                 <div class="flex items-center justify-between border-b-2 border-gray-200 pb-3 border-dotted">
                     <h2 class="text-sm font-semibold text-gray-800 flex items-center gap-x-2">
-                        <svg viewBox="0 0 24 24" class="size-5" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11.3357 5.47875L7.36344 9.00968C5.79482 10.404 5.0105 11.1012 5.0105 11.9993C5.0105 12.8975 5.79481 13.5946 7.36344 14.989L11.3357 18.5199C12.0517 19.1563 12.4098 19.4746 12.7049 19.342C13.0001 19.2095 13.0001 18.7305 13.0001 17.7725V15.4279C16.6001 15.4279 20.5001 17.1422 22.0001 19.9993C22.0001 10.8565 16.6668 8.57075 13.0001 8.57075V6.22616C13.0001 5.26817 13.0001 4.78917 12.7049 4.65662C12.4098 4.52407 12.0517 4.8423 11.3357 5.47875Z" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="0.5" d="M8.46129 4.5L3.24509 9.34362C2.45098 10.081 1.99976 11.1158 1.99976 12.1994C1.99976 13.3418 2.50097 14.4266 3.37087 15.1671L8.46129 19.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+                        <svg viewBox="0 0 24 24" class="size-6" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11.3357 5.47875L7.36344 9.00968C5.79482 10.404 5.0105 11.1012 5.0105 11.9993C5.0105 12.8975 5.79481 13.5946 7.36344 14.989L11.3357 18.5199C12.0517 19.1563 12.4098 19.4746 12.7049 19.342C13.0001 19.2095 13.0001 18.7305 13.0001 17.7725V15.4279C16.6001 15.4279 20.5001 17.1422 22.0001 19.9993C22.0001 10.8565 16.6668 8.57075 13.0001 8.57075V6.22616C13.0001 5.26817 13.0001 4.78917 12.7049 4.65662C12.4098 4.52407 12.0517 4.8423 11.3357 5.47875Z" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path opacity="0.5" d="M8.46129 4.5L3.24509 9.34362C2.45098 10.081 1.99976 11.1158 1.99976 12.1994C1.99976 13.3418 2.50097 14.4266 3.37087 15.1671L8.46129 19.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
                         الروابط الاجتماعية
                     </h2>
-                    <label class="toggle toggle-lg" :class="{ 'toggle-primary': form.active, 'toggle-secondary': !form.active }">
-                        <input type="checkbox" v-model="form.active" />
-                        <svg aria-label="enabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 6 6 18" />
-                            <path d="m6 6 12 12" />
-                        </svg>
-                        <svg aria-label="disabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <g stroke-linejoin="round" stroke-linecap="round" stroke-width="4" fill="none" stroke="currentColor">
-                                <path d="M20 6 9 17l-5-5"></path>
-                            </g>
-                        </svg>
-                    </label>
+                     
                 </div>
+
+                <UiToggle name="active" label="تفعيل القسم" v-model="form.active"   />
+
+                <section v-if="form.active" class="flex flex-col gap-1">
+
+                <div class="divider text-xs">قائمة الروابط</div>
 
                 <div v-if="form.links.length === 0" class="text-center py-8 text-gray-500">
                     <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,7 +27,7 @@
                     <p class="text-sm">اضغط على "إضافة رابط" لبدء إضافة الروابط</p>
                 </div>
 
-                <div v-else class="space-y-3">
+                <div v-else class="space-y-3 mt-5">
                     <div 
                         v-for="(link, index) in form.links" 
                         :key="`link-${link.id || index}`"
@@ -44,14 +39,14 @@
                         @drop="handleDrop($event, index)"
                         @dragend="handleDragEnd($event)"
                         :class="[
-                            'bg-gray-50 rounded-lg p-4 border border-gray-200 transition-all',
+                            'bg-base-50 rounded-lg p-2 border-2 border-base-200 cursor-move hover:bg-base-100 transition-colors transition-all',
                             dragOverIndex === index ? 'border-blue-500 bg-blue-50' : '',
                             draggedIndex === index ? 'opacity-50' : ''
                         ]"
                     >
                         <div class="flex items-center justify-between mb-3">
                             <div class="flex items-center gap-3">
-                                <div class="flex flex-col items-center gap-1">
+                                <div hidden class="flex flex-col items-center gap-1">
                                     <svg 
                                         class="w-5 h-5 text-gray-400 cursor-grab active:cursor-grabbing" 
                                         fill="none" 
@@ -63,6 +58,7 @@
                                     <span class="text-xs text-gray-400 hidden">{{ index + 1 }}</span>
                                 </div>
                                 <button 
+                                    hidden
                                     class="btn btn-xs btn-ghost"
                                     @click="toggleCollapse(index)"
                                     :aria-expanded="!collapsed[index]"
@@ -73,58 +69,31 @@
                                 </button>
                                 <span class="text-sm font-medium text-gray-600"> {{ link.network || 'رابط جديد' }}</span>
                                 <div class="flex items-center gap-2">
-
-                                <label class="toggle toggle-lg" :class="{ 'toggle-primary': link.active, 'toggle-secondary': !link.active }">
-                                    <input type="checkbox" v-model="link.active" />
-
-                                    <svg
-                                        aria-label="enabled"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="4"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    >
-                                        <path d="M18 6 6 18" />
-                                        <path d="m6 6 12 12" />
-                                    </svg>
-                                    <svg aria-label="disabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <g
-                                        stroke-linejoin="round"
-                                        stroke-linecap="round"
-                                        stroke-width="4"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        >
-                                        <path d="M20 6 9 17l-5-5"></path>
-                                        </g>
-                                    </svg>
-                                    </label>
-
-                                    <!-- <input type="checkbox" v-model="link.active" class="toggle toggle-primary toggle-sm" /> -->
-                                    <!-- <span class="text-xs text-gray-600">{{ link.active ? 'ظاهر' : 'مخفي' }}</span> -->
+ 
                                 </div>
+ 
                             </div>
-                            <button 
-                                @click="removeLink(index)"
-                                class="btn btn-sm btn-outline text-red-600 hover:bg-red-50"
-                            >
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                </svg>
-                            </button>
+ 
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs badge badge-ghost">#{{ index + 1 }}</span>
+                                <button @click="removeLink(index)" class="btn btn-xs btn-soft btn-error">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
 
-                        <div :id="`link-panel-${index}`" v-show="!collapsed[index]" class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <div>
+                        <UiToggle :name="`links.${index}.active`" label="تفعيل الرابط" v-model="link.active" />
+ 
+                        <div v-if="link.active" :id="`link-panel-${index}`" XXv-show="!collapsed[index]" class="mt-1 flex flex-col gap-1">
+                            <UiField label="المنصة" :name="`links.${index}.network`">
                                 <select 
                                     v-model="link.network" 
                                     class="select w-full"
                                     :class="{ 'border-red-500': errorsStore.errors && errorsStore.errors[`links.${index}.network`] }"
                                 >
-                                    <option value="">اختر الشبكة</option>
+                                    <option value="">اختر المنصة</option>
                                     <option value="facebook">فيسبوك</option>
                                     <option value="x">X (تويتر)</option>
                                     <option value="instagram">إنستغرام</option>
@@ -142,43 +111,19 @@
                                 <span v-if="errorsStore.errors && errorsStore.errors[`links.${index}.network`]" class="text-red-500 text-xs">
                                     {{ errorsStore.errors[`links.${index}.network`][0] }}
                                 </span>
-                            </div>
-
-                            <div>
-                                <input 
-                                    v-model="link.label" 
-                                    type="text" 
-                                    class="input w-full"
-                                    :class="{ 'border-red-500': errorsStore.errors && errorsStore.errors[`links.${index}.label`] }"
-                                    placeholder="مسمى الرابط (اختياري)"
-                                />
-                                <span v-if="errorsStore.errors && errorsStore.errors[`links.${index}.label`]" class="text-red-500 text-xs">
-                                    {{ errorsStore.errors[`links.${index}.label`][0] }}
-                                </span>
-                            </div>
+                            </UiField>
+                            <UiInput :name="`links.${index}.url`" label="الرابط" v-model="link.url" placeholder="https://example.com"  />
+                            <UiInput :name="`links.${index}.label`" label="مسمى الرابط" v-model="link.label" placeholder="مسمى الرابط (اختياري)"  />
+ 
                         </div>
-
-                        <div v-show="!collapsed[index]" class="mt-3">
-                            <input 
-                                v-model="link.url" 
-                                type="url" 
-                                dir="ltr"
-                                class="input w-full"
-                                :class="{ 'border-red-500': errorsStore.errors && errorsStore.errors[`links.${index}.url`] }"
-                                placeholder="https://example.com"
-                            />
-                            <span v-if="errorsStore.errors && errorsStore.errors[`links.${index}.url`]" class="text-red-500 text-xs">
-                                {{ errorsStore.errors[`links.${index}.url`][0] }}
-                            </span>
-                        </div>
+ 
  
                     </div>
                 </div>
                 
-                <div class="flex justify-between w-full pt-4">
-                    <button 
+                <button 
                         @click="addLink"
-                        class="btn btn-primary btn-outline"
+                        class="btn btn-primary btn-outline w-full mt-2"
                     >
                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -186,6 +131,11 @@
                         إضافة رابط
                     </button>
 
+
+            </section>
+                <div class="flex justify-end w-full pt-6">
+                   
+                    
                     <button 
                         @click="save" 
                         class="btn btn-primary" 
@@ -202,7 +152,7 @@
 
 <script setup>
 import axios from 'axios'
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, useId } from 'vue'
 import { useErrorsStore } from '@/stores/errors'
 
 const errorsStore = useErrorsStore()

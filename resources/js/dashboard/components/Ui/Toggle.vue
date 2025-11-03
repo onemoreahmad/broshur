@@ -1,0 +1,27 @@
+<template>
+    <UiField :name="name" :label="label"> 
+        <label class="toggle toggle-lg" :class="{ 'toggle-primary': model, 'toggle-secondary': !model }">
+            <input type="checkbox" v-model="model"   />
+            <svg aria-label="enabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+            </svg>
+            <svg aria-label="disabled" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="4" fill="none" stroke="currentColor">
+                    <path d="M20 6 9 17l-5-5"></path>
+                </g>
+            </svg>
+        </label>
+    </UiField>
+</template>
+
+<script setup>
+ 
+const model = defineModel()
+ 
+defineProps({
+    name: String,
+    label: String,
+});
+ 
+</script>

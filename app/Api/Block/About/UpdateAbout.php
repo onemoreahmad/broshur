@@ -14,8 +14,15 @@ class UpdateAbout
     {
         return [
             'active' => ['required', 'boolean'],
-            'title' => ['nullable', 'min:1', 'max:255'],
+            'title' => ['nullable', 'min:3', 'max:255'],
             'text' => ['nullable', 'required_if:active,true', 'min:3', 'max:2000'],
+        ];
+    }
+ 
+    public function getValidationMessages(): array
+    {
+        return [
+            'text.required_if' => 'يجب أن يكون لديك نص للعرض عند تفعيل القسم',
         ];
     }
 
@@ -27,7 +34,7 @@ class UpdateAbout
             'title' => $request->title,
             'text' => $request->text,
         ];
-        $block->active = (bool) $request->active;
+        $block->active = (boolean) $request->active;
         $block->save();
 
         return response()->json([
@@ -35,7 +42,7 @@ class UpdateAbout
             'data' => [
                 'title' => $block->config['title'],
                 'text' => $block->config['text'],
-                'active' => (bool) $block->active,
+                'active' => (boolean) $block->active,
             ],
         ]);
     }

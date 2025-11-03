@@ -1,11 +1,12 @@
  <!-- FAQ Section -->
  <div  x-data="{ openItem: 1 }">
     {# <h3 class="text-lg font-bold text-gray-900 mb-3 px-5">الأسئلة المتكررة</h3> #}
-    <h3 class="text-xl font-bold text-gray-900 mb-6 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4  py-3 bg-gray-50 w-full"> الأسئلة المتكررة</h3>
+    <h3 class="text-base font-bold text-gray-900 mb-6 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4  py-3 bg-gray-50 w-full"> الأسئلة المتكررة</h3>
 
     <div class="space-y-px divide-y divide-gray-200 divide-dashed">
 
         {% for item in faqs %}
+        {% if item.active %}
 
         <!-- FAQ Item   -->
         <div class="">
@@ -32,6 +33,7 @@
                 </p>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
 
       

@@ -1,7 +1,7 @@
 
 <!-- Storefront Products Section -->
    <div class="px-5" x-data="{ selectedCategory: 'All', favorites: [], cart: [] }" dir="{{ locale() == 'ar' ? 'rtl' : 'ltr' }}">
-    <h3 class="text-xl font-bold text-gray-900 mb-4 -mx-5 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4 py-3 bg-gray-50 w-full">{{title}}</h3>
+    <h3 class="text-base font-bold text-gray-900 mb-4 -mx-5 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'primary') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'primary') }}-800 ps-4 py-3 bg-gray-50 w-full">{{title}}</h3>
     {# {% if subtitle %}
     <p class="text-gray-600 mb-6 text-sm leading-relaxed">{{subtitle}}</p>
     {% endif %} #}
@@ -21,8 +21,8 @@
             
             <!-- Product Details -->
             <div class="p-3">
-                <h4 class="font-semibold text-gray-900 mb-1">{{item.name}}</h4>
-                <div class="text-lg font-bold text-gray-900">{{item.caption}}</div>
+                <h4 class="font-semibold text-sm text-gray-900 mb-1">{{item.name}}</h4>
+                <div class="text-sm font-thin text-gray-900">{{item.caption}}</div>
             </div>
         </div>
         {% endif %}

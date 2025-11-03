@@ -1,8 +1,7 @@
 <template>
     <div class="space-y-2">
-        <fieldset class="fieldset bg-base-200/50 rounded-box p-4">
-            <legend class="fieldset-legend">{{ label }}</legend>
-    
+        <UiField :name="name" :label="label"    >
+         
             <!-- Current Image Preview -->
             <div v-if="preview" class="relative">
                 <img :src="preview" alt="" class="w-full min-h-32 max-h-56 object-cover rounded-lg border border-gray-200" />
@@ -35,18 +34,13 @@
                     <p class="text-xs text-gray-500 mt-1">PNG, JPG, GIF حتى 5MB</p>
                 </div>
             </div>
-            
-            <!-- Error Message -->
-            <span v-if="errorsStore.errors && errorsStore.errors[props.name]" class="text-red-500 text-xs">
-                {{ errorsStore.errors[props.name][0] }}
-            </span>
-            
+             
             <!-- Upload Progress -->
             <div v-if="uploading" class="flex items-center gap-2 text-sm text-gray-600">
                 <span class="loading loading-spinner loading-sm"></span>
                 <span>جاري رفع الصورة...</span>
             </div>
-        </fieldset>
+        </UiField>
     </div>
 </template>
 

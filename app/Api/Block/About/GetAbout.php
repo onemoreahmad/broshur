@@ -16,7 +16,7 @@ class GetAbout
             'data' => [
                 'title' => data_get($block, 'config.title', ''),
                 'text' => data_get($block, 'config.text', ''),
-                'active' => (bool) data_get($block, 'active', true),
+                'active' => (boolean) data_get($block, 'active', true),
             ],
         ]);
     }

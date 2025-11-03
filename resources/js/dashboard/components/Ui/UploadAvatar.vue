@@ -1,14 +1,11 @@
 <template>
-    <label class="block cursor-pointer" for="upload_avatar">
-        <div class="shrink-0">
-            <img id='preview_img' class="h-16 w-16 object-cover rounded-full" :src="preview" alt="Current profile photo" />
-        </div>
-        <span class="sr-only">اختر صورة</span>
+    <UiField class="block cursor-pointer" for="upload_avatar" :name="name" :label="label">
+        <label for="upload_avatar" class="shrink-0 cursor-pointer ">
+            <img id='preview_img' class="size-20 object-cover rounded-xl" :src="preview" alt="Current profile photo" />
+            <span v-if="preview" class="btn btn-xs mt-2"> تعديل الشعار </span>
+        </label> 
         <input type="file" @change="handleFileChange" class="sr-only" id="upload_avatar" />
-        <span v-if="errorsStore.errors && errorsStore.errors[props.name]" class="text-red-500 text-xs">  
-             {{ errorsStore.errors[props.name][0] }} 
-        </span>
-    </label>
+    </UiField>
 </template>
 
 <script setup>

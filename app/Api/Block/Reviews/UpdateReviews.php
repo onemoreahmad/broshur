@@ -111,4 +111,29 @@ class UpdateReviews
             ],
         ]);
     }
+
+
+    public function getValidationMessages(): array
+    {
+        return [
+            'reviews.*.review_text.required' => 'الرجاء إدخال نص التقييم  ',
+            'reviews.*.score.required' => 'الرجاء إدخال تقييم للعرض',
+            'reviews.*.score.integer' => 'الرجاء إدخال تقييم صالح',
+            'reviews.*.score.min' => 'الرجاء إدخال تقييم بين 1 و 5',
+            'reviews.*.score.max' => 'الرجاء إدخال تقييم بين 1 و 5',
+            'reviews.*.client_name.required' => 'الرجاء إدخال اسم العميل    ',
+            'reviews.*.client_email.email' => 'الرجاء إدخال بريد الكتروني صالح',
+            'reviews.*.client_phone.string' => 'الرجاء إدخال رقم هاتف صالح',
+        ];
+    }
+
+    public function getValidationAttributes(): array
+    {
+        return [
+            'reviews.*.client_name' => 'اسم العميل',
+            'reviews.*.client_email' => 'البريد الإلكتروني',
+            'reviews.*.client_phone' => 'رقم الهاتف',
+        ];
+    }
+
 }
