@@ -149,7 +149,8 @@
                     <div class="order-1 lg:order-none">
                     <ui:mobile-dark>
                             {{-- <img src="https://template.canva.com/EAEsa3Aii8U/4/0/900w-3QolSmpWFXk.jpg" class="w-full h-full object-cover" alt="" /> --}}
-                            <img src="https://template.canva.com/EAFqeAlAaHc/1/0/900w-2-Zw-73tvq4.jpg" class="w-full h-full object-cover" alt="" />
+                            {{-- <img src="https://template.canva.com/EAFqeAlAaHc/1/0/900w-2-Zw-73tvq4.jpg" class="w-full h-full object-cover" alt="" /> --}}
+                            <img src="{{ asset('assets/images/demo.webp') }}" class="w-full h-full object-contain object-top" alt="" />
                         </ui:mobile-dark>
                     </div>
 
@@ -325,7 +326,7 @@
                 </div>
 
                 <!-- Credit Card Strategy -->
-                <div class="col-span-12 lg:col-span-7 row-span-2 rounded-3xl order-last lg:order-5 bg-orange-100 pt-8 px-6 sm:px-7 lg:px-8 flex flex-col justify-between">
+                <div class="col-span-12 lg:col-span-7 row-span-2 overflow-hidden rounded-3xl order-last lg:order-5 bg-orange-100 pt-8 px-6 sm:px-7 lg:px-8 flex flex-col justify-between">
                     <div>
                         <h3 class="text-2xl lg:text-3xl font-black text-black"> نماذج متعددة للاستحواذ على عميلك </h3>
                         <p class="mt-4 text-stone-700 text-base font-thin max-w-mdx">
@@ -372,7 +373,46 @@
 
 
 
-    <section class="py-16 lg:py-20 xl:py-32">
+ <!-- broshur review -->
+
+     <div class="mx-auto max-w-3xl text-center relative z-10 mt-32">
+        <h1 class="text-3xl sm:text-4xl  text-gray-800">
+            <b class="font-normal inline-block mb-7 text-5xl lg:text-6xl">صممّها بنفسك!</b>
+         </h1>
+        <p class="  text-gray-600 leading-7 text-xl font-thin max-w-lg mx-auto">
+            ما تحتاج خبير تقني،
+            أنشئ صفحتك وأضف المحتويات حسب مجال عملك بسرعة وبسهولة، بدقائق صفحتك جاهزة للنشر والبيع 🚀
+        </p>
+    </div>
+
+    <div class="mt-24">
+        <div class="relative mx-auto max-w-5xl">
+            <div class="absolute inset-x-10 -top-6 -z-10 h-6 rounded-3xl bg-white shadow-lg ring-1 ring-black/10"></div>
+            <div class="absolute inset-x-6 -top-3 -z-10 h-8 rounded-3xl bg-white shadow-lg ring-1 ring-black/10"></div>
+            <div class="rounded-3xl bg-white shadow-xl ring-1 ring-black/10 overflow-hidden">
+                <div class="border-b border-stone-200 px-4 sm:px-6 py-3 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="size-2.5 rounded-full bg-red-400"></span>
+                        <span class="size-2.5 rounded-full bg-yellow-400"></span>
+                        <span class="size-2.5 rounded-full bg-green-400"></span>
+                    </div>
+                    <div class="text-xs text-stone-400">{{ now()->format('F Y') }}</div>
+                    {{-- <div class="flex items-center gap-2">
+                        <span class="rounded-md bg-stone-100 text-stone-700 text-xs px-2 py-1">أنشر</span>
+                        <span class="rounded-md bg-stone-100 text-stone-700 text-xs px-2 py-1">شارك</span>
+                    </div> --}}
+                </div>
+                <div class="aspect-[16/10.3] bg-white">
+                    <div class="h-full w-full bg-gradient-to-br from-stone-50 to-stone-100">
+                    <img src="{{ asset('assets/images/dashboard.webp') }}" class="w-full h-full object-contain object-top" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="py-16 lg:py-20 xl:py-32 lg:mt-5 mt-12">
         <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-6xl">
             <div class="max-w-2xl mx-auto text-center">
                 <h2 class="text-3xl font-normal text-gray-900 sm:text-4xl lg:text-5xl"> الأسئلة المتكررة  </h2>
@@ -581,30 +621,7 @@
     </section>
 
 
-    <!-- broshur review -->
-    {{-- <div class="mt-10">
-        <div class="relative mx-auto max-w-6xl">
-            <div class="absolute inset-x-10 -top-6 -z-10 h-6 rounded-3xl bg-white shadow-lg ring-1 ring-black/10"></div>
-            <div class="absolute inset-x-6 -top-3 -z-10 h-8 rounded-3xl bg-white shadow-lg ring-1 ring-black/10"></div>
-            <div class="rounded-3xl bg-white shadow-xl ring-1 ring-black/10 overflow-hidden">
-                <div class="border-b border-stone-200 px-4 sm:px-6 py-3 flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <span class="size-2.5 rounded-full bg-red-400"></span>
-                        <span class="size-2.5 rounded-full bg-yellow-400"></span>
-                        <span class="size-2.5 rounded-full bg-green-400"></span>
-                    </div>
-                    <div class="text-xs text-stone-500">February 2023</div>
-                    <div class="flex items-center gap-2">
-                        <span class="rounded-md bg-stone-100 text-stone-700 text-xs px-2 py-1">Publish</span>
-                        <span class="rounded-md bg-stone-100 text-stone-700 text-xs px-2 py-1">Share</span>
-                    </div>
-                </div>
-                <div class="aspect-[16/9] bg-white">
-                    <div class="h-full w-full bg-gradient-to-br from-stone-50 to-stone-100"></div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+   
 
 
       <div class=" text-center max-w-sm lg:max-w-xl mx-auto">

@@ -37,7 +37,7 @@
                 {{-- <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-900 rounded-b-3xl z-30"></div> --}}
                 
                 <!-- Screen Content -->
-                <div class="absolute text-white bg-red-200 top-0 left-0 right-0 bottom-0   overflow-hidden">
+                <div class="absolute text-white bg-white top-0 left-0 right-0 bottom-0   overflow-hidden">
                     {{ $slot }}
                 </div>
 

@@ -33,8 +33,8 @@ class Theme extends Model
 
     public function getImageAttribute()
     {
-        if (file_exists(public_path('themes/' . $this->slug . '/image.png'))) {
-            return asset('themes/' . $this->slug . '/image.png');
+        if (file_exists(public_path('themes/' . $this->slug . '/image.webp'))) {
+            return asset('themes/' . $this->slug . '/image.webp');
         }
 
         return asset('assets/images/theme-image.webp');
