@@ -14,7 +14,7 @@ new class extends Livewire\Volt\Component {
         $block = Block::where('name', 'links')->first();
         $links = Link::orderBy('sort')->where('active', true)->where('type', 'link')->get();
 
-        if ($block->active) {
+        if (data_get($block, 'active', false)) {
             return view()->first(['theme::blocks.'.$view, 'theme::blocks.links'], ['block' => $block, 'links' => $links]);      
         }
 

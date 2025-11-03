@@ -5,6 +5,8 @@ namespace App\Actions;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Lorisleiva\Actions\Concerns\WithAttributes;
 use App\Models\Tenant;
+use App\Events\TenantCreated;
+
 // use App\Models\Plan;
 
 class CreateTenant
@@ -34,9 +36,9 @@ class CreateTenant
             'user_id' => $validatedData['user_id'],
             'theme_id' => 1,
             'traffic_website_id' => $websiteId,
-            // 'meta' => [
-            //     'traffic_website_id' => $websiteId,
-            // ],
+            'meta' => [
+                'slogan' =>  ['ar' => 'صفحة بروشور جديدة', 'en' => 'New Brochure Page'],
+            ],
         ]);
 
         // $plan = Plan::where('slug', 'basic')
@@ -47,6 +49,8 @@ class CreateTenant
         // if ($plan) {    
         //     $tenant->subscribeTo($plan);
         // }
+
+        event(new TenantCreated($tenant));
 
         return $tenant;
     }

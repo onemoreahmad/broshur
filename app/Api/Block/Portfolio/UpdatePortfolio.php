@@ -16,7 +16,7 @@ class UpdatePortfolio
     {
         return [
             'active' => ['nullable', 'boolean'],
-            'title' => ['nullable', 'string', 'max:200'],
+            'title' => ['required', 'string', 'max:200'],
             'subtitle' => ['nullable', 'string', 'max:500'],
             'items' => ['nullable', 'array'],
             'items.*.id' => ['nullable', 'integer', 'exists:portfolios,id'],

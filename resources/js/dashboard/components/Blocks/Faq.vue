@@ -62,50 +62,26 @@
                                             <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832l-3.71 3.938a.75.75 0 11-1.08-1.04l4.24-4.5a.75.75 0 011.08 0l4.24 4.5c.28.297.27.765-.02 1.06z" clip-rule="evenodd" />
                                         </svg>
                                     </button>
-
-
-                                    <div class="flex items-center gap-2">
-                                        <span class="text-xs badge badge-ghost">#{{ index + 1 }}</span>
-                                        <button @click="removeFaq(index)" class="btn btn-xs btn-soft btn-error">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
                                 </div>
+ 
+                                <div class="flex items-center gap-2 justify-between w-full">
+                                    <span class="text-xs badge badge-ghost">#{{ index + 1 }}</span>
+                                    <button @click="removeFaq(index)" class="btn btn-xs btn-soft btn-error">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            
                                 
                             </div>
 
                             <UiToggle :name="`faqs.${index}.active`" label="تفعيل السؤال" v-model="faq.active" />
 
                             <div v-if="faq.active" :id="`faq-panel-${index}`" XXv-show="!collapsed[index]" class=" mt-1 flex flex-col gap-1">
-                                <UiInput :name="`faqs.${index}.question`"  v-model="faq.question" placeholder="اكتب السؤال هنا..." />
-                                <UiTextarea :name="`faqs.${index}.answer`"  v-model="faq.answer" placeholder="اكتب الإجابة هنا..." />
-                                <div>
-                                    <input 
-                                        v-model="faq.question" 
-                                        type="text" 
-                                        class="input w-full font-medium"
-                                        :class="{ 'border-red-500': errorsStore.errors && errorsStore.errors[`faqs.${index}.question`] }"
-                                        placeholder="اكتب السؤال هنا..."
-                                    />
-                                    <span v-if="errorsStore.errors && errorsStore.errors[`faqs.${index}.question`]" class="text-red-500 text-xs">
-                                        {{ errorsStore.errors[`faqs.${index}.question`][0] }}
-                                    </span>
-                                </div>
-
-                                <div>
-                                    <textarea 
-                                        v-model="faq.answer" 
-                                        class="textarea w-full resize-none"
-                                        rows="4"
-                                        :class="{ 'border-red-500': errorsStore.errors && errorsStore.errors[`faqs.${index}.answer`] }"
-                                        placeholder="اكتب الإجابة هنا..."
-                                    ></textarea>
-                                    <span v-if="errorsStore.errors && errorsStore.errors[`faqs.${index}.answer`]" class="text-red-500 text-xs">
-                                        {{ errorsStore.errors[`faqs.${index}.answer`][0] }}
-                                    </span>
-                                </div>
+                                <UiInput :name="`faqs.${index}.question`"  v-model="faq.question" placeholder="اكتب السؤال هنا.." />
+                                <UiTextarea :name="`faqs.${index}.answer`"  v-model="faq.answer" placeholder="اكتب الإجابة هنا.." />
+                                 
                             </div>
 
                         </div>

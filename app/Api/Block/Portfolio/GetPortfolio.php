@@ -15,8 +15,7 @@ class GetPortfolio
         $tenantId = currentTenant()->id;
         
         // Get portfolio items for current tenant
-        $items = Portfolio::where('tenant_id', $tenantId)
-            ->orderBy('sort')
+        $items = Portfolio::orderBy('sort')
             ->get()
             ->map(function ($item) {
                 return [
@@ -32,7 +31,7 @@ class GetPortfolio
 
         $block = Block::firstOrCreate([
             'name' => 'portfolio',
-        ]);
+        ],['active' => false]);
 
         return response()->json([
             'data' => [

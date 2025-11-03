@@ -617,36 +617,21 @@
                 <p class="mt-2 text-xs text-stone-500/50">خطة مجانية •  أنشئ صفحتك بثواني</p>
         </div>
 
-<footer class="py-12 bg-white mt-32">
+<footer class="lg:py-2 py-6 bg-white mt-32">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-    
-        <div class="lg:flex lg:items-center lg:justify-between  ">
-            <div>
-                {{-- <img class="w-auto h-8 mx-auto lg:mx-0" src="{{ asset('assets/images/logo.svg') }}" alt="" /> --}}
-                <img class="w-auto h-12 mx-auto lg:mx-0" src="{{ asset('assets/images/broshur-logo-2.webp') }}" alt="" />
-            </div>
-
-            {{-- <ul class="flex items-center justify-center mt-8 gap-x-6 sm:mt-12 sm:gap-x-16 lg:mt-0">
+     
+        <div class=" md:flex md:items-center md:justify-between">
+            <ul class="flex items-center justify-center gap-x-6  order-4 md:justify-end">
                 <li>
-                    <a href="{{ route('site.page.about') }}" wire:navigate title="" class="text-sm font-medium text-gray-900 transition-all duration-200 font-pj hover:text-gray-600"> عن {{ config('app.name') }} </a>
+                    <a href="{{ route('site.page.terms') }}" wire:navigate title="" class="text-xs font-normal text-gray-600 transition-all duration-200 font-pj hover:text-gray-900"> الشروط والأحكام </a>
                 </li>
 
-                <li>
-                    <a href="{{ route('site.page.plans') }}" wire:navigate title="" class="text-sm font-medium text-gray-900 transition-all duration-200 font-pj hover:text-gray-600"> الأسعار </a>
-                </li>
+                {{-- <li>
+                    <a href="{{ route('site.page.privacy') }}" wire:navigate title="" class="text-xs font-normal text-gray-600 transition-all duration-200 font-pj hover:text-gray-900"> الخصوصية </a>
+                </li> --}}
+            </ul>
 
-                <li>
-                    <a href="{{ route('site.page.faq') }}" wire:navigate title="" class="text-sm font-medium text-gray-900 transition-all duration-200 font-pj hover:text-gray-600"> الأسئلة المتكررة </a>
-                </li>
- 
-
-                <li>
-                    <a href="{{ route('site.page.contact') }}" wire:navigate title="" class="text-sm font-medium text-gray-900 transition-all duration-200 font-pj hover:text-gray-600"> اتصل بنا </a>
-                </li>
-            </ul> --}}
-            
-
-            <ul class="flex items-center justify-center mt-8 gap-x-3 sm:mt-12 lg:justify-end lg:mt-0">
+            <ul class="flex items-center justify-center  gap-x-3 order-3 lg:justify-end mt-5 lg:mt-0">
                 <li>
                     <a href="https://x.com/broshurcom" target="_blank" title="" class="inline-flex items-center justify-center w-10 h-10 text-gray-900 transition-all duration-200 rounded-full hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-200" rel="noopener">
                         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -668,22 +653,8 @@
                 </li>
  
             </ul>
-        </div>
 
-        <hr class="mt-10 border-gray-200/75" />
-
-        <div class="mt-10 md:flex md:items-center md:justify-between">
-            <ul class="flex items-center justify-center gap-x-6 md:order-2 md:justify-end">
-                <li>
-                    <a href="{{ route('site.page.terms') }}" wire:navigate title="" class="text-xs font-normal text-gray-600 transition-all duration-200 font-pj hover:text-gray-900"> الشروط والأحكام </a>
-                </li>
-
-                {{-- <li>
-                    <a href="{{ route('site.page.privacy') }}" wire:navigate title="" class="text-xs font-normal text-gray-600 transition-all duration-200 font-pj hover:text-gray-900"> الخصوصية </a>
-                </li> --}}
-            </ul>
-
-            <p class="mt-8 text-sm font-normal text-center text-gray-600 md:text-left md:mt-0 md:order-1 font-pj">© الحقوق محفوظة {{ date('Y') }} </p>
+            <p class="text-xs font-normal text-center text-gray-400 md:text-start mt-3 lg:mt-0 md:order-3 font-pj"> © الحقوق محفوظة {{ date('Y') }} | <a href="https://broshur.com" class="text-primary-600 hover:text-primary-700"> بروشور </a> </p>
         </div>
     </div>
 </footer>

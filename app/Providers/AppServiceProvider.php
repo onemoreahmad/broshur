@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-
+ 
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -29,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
             \App\Http\Middleware\AdminMiddleware::class,
             \App\Http\Middleware\CurrentBroshur::class,
         ]);
+ 
     }
 }

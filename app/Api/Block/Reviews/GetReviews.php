@@ -15,8 +15,7 @@ class GetReviews
         $tenantId = currentTenant()->id;
         
         // Get reviews for current tenant
-        $reviews = Review::where('tenant_id', $tenantId)
-            ->orderBy('sort')
+        $reviews = Review::orderBy('sort')
             ->get()
             ->map(function ($review) {
                 return [
@@ -32,8 +31,8 @@ class GetReviews
             });
 
         $block = Block::firstOrCreate([
-            'name' => 'reviews',
-        ]);
+            'name' => 'reviews',    
+        ],['active' => false]);
 
         return response()->json([
             'data' => [

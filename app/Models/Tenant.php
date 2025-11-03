@@ -36,6 +36,11 @@ class Tenant extends Model
         'traffic_website_id',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function getUrlAttribute()
     {
         $protocol =  'https://' ;
