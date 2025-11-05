@@ -11,9 +11,7 @@ export const useAuthStore = defineStore('useAuthStore', () => {
         user.value = response.data.user
         tenant.value = response.data.tenant
     }
-
-
-
+ 
     const updateUser = (userData) => {
         user.value = { ...user.value, ...userData }
     }
@@ -22,9 +20,9 @@ export const useAuthStore = defineStore('useAuthStore', () => {
         tenant.value = { ...tenant.value, ...tenantData }
     } 
 
-    onMounted(() => {
-        setAuth()
-    })
+    // onMounted(() => {
+    //     setAuth()
+    // })
     
-    return { user, tenant, updateUser, updateTenant  }
+    return { user, tenant, updateUser, updateTenant, setAuth  }
   })

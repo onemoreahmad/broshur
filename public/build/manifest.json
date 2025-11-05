@@ -44,7 +44,7 @@
     ]
   },
   "resources/css/dashboard.css": {
-    "file": "assets/dashboard-BYRhdGD5.css",
+    "file": "assets/dashboard-BHZ1cMAG.css",
     "src": "resources/css/dashboard.css",
     "isEntry": true,
     "names": [
@@ -61,7 +61,7 @@
     ]
   },
   "resources/js/dashboard/index.js": {
-    "file": "assets/index-BkpacPrp.js",
+    "file": "assets/index-DjwDu6CW.js",
     "name": "index",
     "src": "resources/js/dashboard/index.js",
     "isEntry": true,

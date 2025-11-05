@@ -20,7 +20,6 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->statefulApi();
         // $middleware->validateCsrfTokens();
 
         $middleware->redirectGuestsTo(function ($request) {
@@ -30,6 +29,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'currentBroshur' => \App\Http\Middleware\CurrentBroshur::class,
         ]);
+
+        $middleware->statefulApi();
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

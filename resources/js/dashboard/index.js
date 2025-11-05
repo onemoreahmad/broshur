@@ -4,8 +4,10 @@ import router from './routes';
 import App from './layouts/Dashboard.vue';
 import { createHead } from '@unhead/vue/client'
 import Notifications from '@kyvg/vue3-notification'
-
+import { useAuthStore } from './stores/auth'
+ 
 const app = createApp(App);
+app.use(createPinia())
 
 const head = createHead( {
    titleTemplate: '%s | MySite'
@@ -25,9 +27,13 @@ for (const path in uiComponents) {
     app.component(`${componentName}`, uiComponents[path].default);
 }
  
-app.use(createPinia());
-app.use(router);
-app.use(head)
-app.use(Notifications)
+ 
+const { setAuth } = useAuthStore()
 
-app.mount('#app');
+setAuth().then(() => {
+    app.use(head)
+    app.use(Notifications)
+    app.use(router)
+      .mount('#app');
+})
+ 

@@ -1,5 +1,6 @@
     import { createRouter, createWebHistory } from 'vue-router';    
-  
+    import { useAuthStore } from '../stores/auth'
+
     import Home from '../views/Home.vue';
     import Orders from '../views/Orders.vue';
     import OrderDetail from '../views/OrderDetail.vue';
@@ -85,8 +86,15 @@
     });
 
     router.beforeEach((to, from, next) => {
-      document.title = to.meta.title || 'إدارة البروشور';
-      next();
-    });
+      const authStore = useAuthStore()
     
+      document.title = to.meta.title || 'إدارة البروشور';
+
+      if (!authStore.user) {
+        window.location.reload();
+      } else {
+        next();
+      }
+    });
+     
     export default router;
