@@ -24,25 +24,26 @@
         {# {% include 'theme::_language-buttons' %} #}
 
         <!-- Header Image -->
-            <div class="w-full sm:relative fixed object-cover md:rounded-t-xl bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-{{ option('primaryColor','blue') }}-600 via-{{ option('primaryColor','blue') }}-700 to-{{ option('primaryColor','blue') }}-900 ">
+            <div class="w-full sm:relative Xfixed Xobject-cover min-h-[100px] md:rounded-t-xl bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-{{ option('primaryColor','blue') }}-600 via-{{ option('primaryColor','blue') }}-700 to-{{ option('primaryColor','blue') }}-900 ">
         
             {{renderBlock('links', 'links-mobile')}}
                 
             {# {% include 'theme::_language-buttons-mobile' %} #}
 
             {% if option('headerImage') %}
-            <div class="w-full sm:h-80 h-56 md:rounded-t-xl shadow-lg bg-[url('{{ storage(option('headerImage')) }}')] bg-containX bg-cover   bg-no-repeat bg-center opacity-90"></div>
+            <img src="{{ storage(option('headerImage')) }}" alt="{{tenant('name')}}" class="w-full max-h-80 object-coverx md:rounded-t-xl opacity-90 ">
+            {# <div class="w-full sm:h-80 h-56 md:rounded-t-xl shadow-lg bg-[url('{{ storage(option('headerImage')) }}')] bg-containX bg-cover   bg-no-repeat bg-center opacity-90"></div> #}
             {% else %}
              
                 {% if option()|length  == 0 %}
-                    <div class="w-full sm:h-60 h-36 md:rounded-t-xl shadow-lg bg-[url('{{asset('assets/images/cover.png')}}')] bg-containX bg-cover   bg-no-repeat bg-center opacity-90"></div>
+                    <img src="{{asset('assets/images/cover.png')}}" alt="{{tenant('name')}}" class="w-full max-h-80 object-coverx md:rounded-t-xl  opacity-90">
                 {% endif %}
 
             {% endif %}
              
         </div>
 
-        <div class="md:max-w-2xl sm:mt-0 mt-56 w-full Xborder-b-4 border-white/90 bg-white min-h-[100vh] py-4 pb-20 lg:rounded-b-xl  z-50">
+        <div class="md:max-w-2xl sm:mt-0 xmt-56 w-full Xborder-b-4 border-white/90 bg-white min-h-[100vh] py-4 pb-20 rounded-b-xl  z-50">
  
             {% include 'theme::_header' %}
 
