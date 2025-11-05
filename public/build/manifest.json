@@ -36,7 +36,7 @@
     "src": "public/assets/fonts/tsh400.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-B77x4Mni.css",
+    "file": "assets/app-BLFhofKM.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "names": [
@@ -44,7 +44,7 @@
     ]
   },
   "resources/css/dashboard.css": {
-    "file": "assets/dashboard-BHZ1cMAG.css",
+    "file": "assets/dashboard-Bqd8C8ZM.css",
     "src": "resources/css/dashboard.css",
     "isEntry": true,
     "names": [

@@ -6,6 +6,16 @@ import { createHead } from '@unhead/vue/client'
 import Notifications from '@kyvg/vue3-notification'
 import { useAuthStore } from './stores/auth'
  
+// import axios from 'axios'
+
+// // axios.defaults.baseURL = 'https://laravel-sanctum-vue.test'
+// axios.defaults.withCredentials = true
+// axios.defaults.withXSRFToken = true
+// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+ 
+// axios.defaults.headers.common['X-CSRF-TOKEN'] = document.head.querySelector('meta[name="csrf-token"]');
+
+
 const app = createApp(App);
 app.use(createPinia())
 
