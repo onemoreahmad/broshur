@@ -17,7 +17,7 @@
                     v-if="option.type == 'picker-color'" 
                     :options="option.options" 
                     v-model="modelValue[name]" 
-                    :model="name" 
+                    :name="name" 
                     :label="option.label" 
                     placeholder="" 
                     help="" />

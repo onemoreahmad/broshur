@@ -36,7 +36,7 @@
     "src": "public/assets/fonts/tsh400.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-B1c3vRtD.css",
+    "file": "assets/app-B77x4Mni.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "names": [
@@ -44,7 +44,7 @@
     ]
   },
   "resources/css/dashboard.css": {
-    "file": "assets/dashboard-DpkTygdM.css",
+    "file": "assets/dashboard-BYRhdGD5.css",
     "src": "resources/css/dashboard.css",
     "isEntry": true,
     "names": [
@@ -61,7 +61,7 @@
     ]
   },
   "resources/js/dashboard/index.js": {
-    "file": "assets/index-Dt8b4U-s.js",
+    "file": "assets/index-BkpacPrp.js",
     "name": "index",
     "src": "resources/js/dashboard/index.js",
     "isEntry": true,

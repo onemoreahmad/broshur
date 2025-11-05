@@ -23,8 +23,8 @@ bg-fuchsia-200 hover:bg-fuchsia-100 border-fuchsia-300
 bg-pink-200 hover:bg-pink-100 border-pink-300
 bg-rose-200 hover:bg-rose-100 border-rose-300
     "></div>
-    <fieldset class="fieldset bg-base-200/50 rounded-box p-4">
-        <legend class="fieldset-legend">{{ label }}</legend>
+    <UiField :label="label"  :name="name"    >
+         
      
         <div class="w-full mt-1 flex items-center gap-2 flex-wrap">
 
@@ -36,20 +36,21 @@ bg-rose-200 hover:bg-rose-100 border-rose-300
                 <input
                     type="radio"
                     :value="item"
-                    :checked="modelValue == item"
-                    @change="$emit('update:modelValue', $event.target.value)"
+                    v-model="model"
                     class="radio radio-neutral radio-xs">
                     <span class="capitalize text-xs lg:block hidden">{{item}}  </span>
             </label>
 
             <div class="text-xs text-gray-400 leading-2 p-1" v-if="help">{{help}}</div>
         </div>            
-    </fieldset>
+    </UiField>
 </template>
 
 <script setup>
- 
-const props = defineProps(['modelValue',  'options', 'themeOptions', 'model', 'options',  'label', 'placeholder', 'validationErrors', 'help', 'ltr', 'female'])
+ const model = defineModel()
+
+
+const props = defineProps(['name',  'options', 'themeOptions', 'options',  'label', 'placeholder', 'validationErrors', 'help', 'ltr', 'female'])
   
 
 </script>

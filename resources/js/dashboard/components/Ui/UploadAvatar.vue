@@ -1,5 +1,5 @@
 <template>
-    <UiField class="block cursor-pointer" for="upload_avatar" :name="name" :label="label">
+    <UiField class="block cursor-pointer" for="upload_avatar" :name="name" >
         <label for="upload_avatar" class="shrink-0 cursor-pointer ">
             <img id='preview_img' class="size-20 object-cover rounded-xl" :src="preview" alt="Current profile photo" />
             <span v-if="preview" class="btn btn-xs mt-2"> تعديل الشعار </span>
