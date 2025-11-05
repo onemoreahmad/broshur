@@ -1,6 +1,12 @@
 <div class="min-h-screen bg-stone-300 flex flex-col items-center py-12 md:pt-32">
-    <ui:brand logo="{{ asset('assets/images/logo.svg') }}" wire:navigate size="14" href="{{ route('site.home') }}" />
-    <ui:brand name="{{ config('app.name') }}" href="{{ route('site.home') }}" wire:navigate class="text-3xl mt-4" />
+  
+    <a href="{{ route('site.home') }}" wire:navigate title="" class="flex flex-col items-center gap-y-4">
+        <img class="w-auto h-7" src="{{ asset('assets/images/broshur-logo-shape.webp') }}" alt="" />
+        <img class="w-auto h-9" src="{{ asset('assets/images/logo.webp') }}" alt="" />
+        {{-- <span class="text-xl lg:text-3xl font-camel font-extrabold">
+            {{ config('app.name') }} 
+        </span> --}}
+    </a>
 
     <ui:nav class="mt-12">
         <ui:button variant="ghost"  href="{{ route('auth.register') }}" icon="hexagon-plus" wire:navigate label="أنشئ بروشور جديد " wire:current="!bg-white" />

@@ -17,7 +17,7 @@
  
 
     <!-- Contact Card -->
-    <div class="relative md:my-4 z-10 flex flex-col items-center md:max-w-2xl md:rounded-2xl w-full md:border-4 border-black/20 mx-auto">
+    <div class="relative md:my-4 z-10 flex flex-col items-center md:max-w-xlX sm:max-w-2xl md:rounded-2xl w-full md:border-4 border-black/20 mx-auto">
 
         {{renderBlock('links')}} 
     
@@ -37,7 +37,8 @@
             {% else %}
              
                 {% if option()|length  == 0 %}
-                    <div class="w-full h-48   md:rounded-t-xl shadow-lg bg-[url('https://i.pinimg.com/1200x/5d/a3/3a/5da33a5a74fe8cd512854d3dcb54018e.jpg')] bg-containx bg-cover   bg-no-repeat bg-center">
+                    <div class="w-full sm:h-60 h-48 md:rounded-t-xl shadow-lg bg-[url('{{asset('assets/images/cover1.png')}}')] bg-containX bg-cover   bg-no-repeat bg-center">
+                    {# <div class="w-full h-48   md:rounded-t-xl shadow-lg bg-[url('https://i.pinimg.com/1200x/5d/a3/3a/5da33a5a74fe8cd512854d3dcb54018e.jpg')] bg-containx bg-cover   bg-no-repeat bg-center"> #}
                     
                     </div>
                 {% endif %}
