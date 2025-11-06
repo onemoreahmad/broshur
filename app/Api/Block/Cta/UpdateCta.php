@@ -6,6 +6,7 @@ use App\Models\Block;
 use App\Models\Link;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
+use Illuminate\Support\Facades\DB;
 
 class UpdateCta
 {
@@ -18,6 +19,11 @@ class UpdateCta
             'whatsapp_enabled' => ['nullable', 'boolean'],
             'whatsapp_number' => ['nullable','required_if:whatsapp_enabled,true', 'string', 'max:20'],
             'contact_enabled' => ['nullable', 'boolean'],
+            'custom_links' => ['nullable', 'array'],
+            'custom_links.*.id' => ['nullable', 'integer', 'exists:links,id'],
+            'custom_links.*.url' => ['required', 'url', 'max:500'],
+            'custom_links.*.label' => ['nullable', 'string', 'max:100'],
+            'custom_links.*.active' => ['nullable', 'boolean'],
             // 'whatsapp_message' => ['nullable', 'string', 'max:500'],
             // 'contact_email' => ['nullable', 'required_if:contact_enabled,true', 'email', 'max:255'],
             // 'contact_subject' => ['nullable', 'string', 'max:200'],
@@ -75,6 +81,76 @@ class UpdateCta
             ]
         );
 
+        // Handle custom links
+        if ($request->has('custom_links')) {
+            DB::transaction(function () use ($request, $tenantId, $block) {
+                // Get existing custom link IDs for this block (excluding whatsapp and contact)
+                $existingIds = Link::where('block_id', $block->id)
+                    ->where('type', 'cta')
+                    ->whereNotIn('slug', ['whatsapp', 'contact'])
+                    ->pluck('id')
+                    ->toArray();
+                $submittedIds = collect($request->custom_links)->pluck('id')->filter()->toArray();
+                
+                // Delete links that are no longer in the request
+                $linksToDelete = array_diff($existingIds, $submittedIds);
+                if (!empty($linksToDelete)) {
+                    Link::whereIn('id', $linksToDelete)->delete();
+                }
+                
+                // Update or create custom links
+                foreach ($request->custom_links as $index => $linkData) {
+                    $linkId = data_get($linkData, 'id');
+                    $slug = $linkId ? 'custom-' . $linkId : 'custom-' . uniqid();
+                    
+                    if ($linkId) {
+                        // Update existing link
+                        Link::where('id', $linkId)
+                            ->update([
+                                'link' => data_get($linkData, 'url'),
+                                'block_id' => $block->id,
+                                'meta' => [
+                                    'label' => data_get($linkData, 'label', ''),
+                                ],
+                                'active' => (bool) data_get($linkData, 'active'),
+                                'sort' => $index + 100, // Start after whatsapp/contact
+                            ]);
+                    } else {
+                        // Create new link
+                        Link::create([
+                            'tenant_id' => $tenantId,
+                            'type' => 'cta',
+                            'name' => 'custom',
+                            'slug' => $slug,
+                            'link' => data_get($linkData, 'url'),
+                            'block_id' => $block->id,
+                            'meta' => [
+                                'label' => data_get($linkData, 'label', ''),
+                            ],
+                            'active' => (bool) data_get($linkData, 'active'),
+                            'sort' => $index + 100, // Start after whatsapp/contact
+                        ]);
+                    }
+                }
+            });
+        }
+
+        // Get custom links for response
+        $customLinks = Link::where('block_id', $block->id)
+            ->where('type', 'cta')
+            ->whereNotIn('slug', ['whatsapp', 'contact'])
+            ->orderBy('sort')
+            ->get()
+            ->map(function ($link) {
+                return [
+                    'id' => $link->id,
+                    'url' => $link->link,
+                    'label' => data_get($link->meta, 'label', ''),
+                    'active' => (bool) $link->active,
+                    'sort' => $link->sort,
+                ];
+            });
+
         return response()->json([
             'message' => 'CTA block updated successfully',
             'data' => [
@@ -87,6 +163,7 @@ class UpdateCta
                 // 'contact_email' => $contactLink->link,
                 // 'contact_subject' => data_get($contactLink->meta, 'subject', ''),
                 'contact_sort' => $contactLink->sort,
+                'custom_links' => $customLinks,
             ],
         ]);
     }
@@ -101,6 +178,10 @@ class UpdateCta
             'contact_enabled' => 'تفعيل التواصل',
             'contact_email' => 'البريد الإلكتروني',
             'contact_subject' => 'موضوع الرسالة',
+            'custom_links' => 'الروابط المخصصة',
+            'custom_links.*.url' => 'رابط',
+            'custom_links.*.label' => 'التسمية',
+            'custom_links.*.active' => 'الحالة',
         ];
     }
 }

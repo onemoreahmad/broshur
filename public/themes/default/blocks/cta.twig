@@ -1,7 +1,7 @@
 
 <!-- Action Buttons -->
 
-<div class="flex items-center gap-x-2 {% if links|length > 0 %} p-4 {% endif %} bg-gray-100 " 
+<div class="flex flex-col gap-2 {% if links|length > 0 %} p-4 {% endif %} bg-gray-100 " 
      x-data="{ 
          contactModalOpen: false,
          closeModal() { this.contactModalOpen = false; document.body.style.overflow = ''; },
@@ -9,6 +9,7 @@
      }"
      @keydown.escape.window="closeModal()">
  
+        <div class="flex items-center gap-x-2"> 
         {% for link in links %}
             {% if link.type == 'cta'  %}
                 {% if data_get(link, 'slug') == 'whatsapp' and link.active %}
@@ -27,6 +28,23 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
+        </div>
+  
+
+
+        <div class="flex items-center gap-x-2"> 
+        {% for link in links %}             
+            {% if data_get(link, 'slug') starts with 'custom-' and link.active %}
+                <a href="{{link.link}}" target="_blank" class="w-full bg-white border-2 border-{{ option('primaryColor', 'blue') }}-700 text-{{ option('primaryColor', 'blue') }}-900 flex items-center gap-x-2 justify-center py-3 px-4 rounded-lg font-medium hover:bg-{{ option('primaryColor', 'blue') }}-700 hover:text-white transition-colors duration-200">
+                    {% if data_get(link, 'meta.label') %}
+                        {{data_get(link, 'meta.label')}}
+                    {% else %}
+                        رابط
+                    {% endif %}
+                </a>
+            {% endif %}
+        {% endfor %}
+        </div>
   
  
     <!-- Modal Overlay -->

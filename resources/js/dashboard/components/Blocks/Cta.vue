@@ -65,6 +65,67 @@
                         -->
                     </div>
                 </div>
+
+                <div class="divider text-xs">الروابط المخصصة</div>
+                <!-- Custom Links List -->
+                <div v-if="form.custom_links.length === 0" class="text-center py-8 text-gray-500">
+                    <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                    </svg>
+                    <p>لا توجد روابط مضافة بعد</p>
+                    <p class="text-sm">اضغط على "إضافة رابط" لبدء إضافة الروابط</p>
+                </div>
+
+                <div v-else class="space-y-3 mt-5">
+                    <div 
+                        v-for="(link, index) in form.custom_links" 
+                        :key="`link-${link.id || index}`"
+                        :draggable="true"
+                        @dragstart="handleDragStart($event, index)"
+                        @dragover.prevent="handleDragOver($event, index)"
+                        @dragenter.prevent="handleDragEnter($event, index)"
+                        @dragleave="handleDragLeave($event, index)"
+                        @drop="handleDrop($event, index)"
+                        @dragend="handleDragEnd($event)"
+                        :class="[
+                            'bg-base-50 rounded-lg p-2 border-2 border-base-200 cursor-move hover:bg-base-100 transition-all',
+                            dragOverIndex === index ? 'border-blue-500 bg-blue-50' : '',
+                            draggedIndex === index ? 'opacity-50' : ''
+                        ]"
+                    >
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <span class="text-sm font-medium text-gray-600">{{ link.label || 'رابط جديد' }}</span>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs badge badge-ghost">#{{ index + 1 }}</span>
+                                <button @click="removeCustomLink(index)" class="btn btn-xs btn-soft btn-error">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <UiToggle :name="`custom_links.${index}.active`" label="تفعيل الرابط" v-model="link.active" />
+ 
+                        <div v-if="link.active" class="mt-1 flex flex-col gap-1">
+                            <UiInput :name="`custom_links.${index}.url`" label="الرابط" v-model="link.url" placeholder="https://example.com"  />
+                            <UiInput :name="`custom_links.${index}.label`" label="مسمى الرابط" v-model="link.label" placeholder="مسمى الرابط (اختياري)"  />
+                        </div>
+                    </div>
+                </div>
+                
+                <button 
+                        @click="addCustomLink"
+                        class="btn btn-primary btn-outline w-full mt-2"
+                    >
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        إضافة رابط
+                    </button>
                 </section>
                 
                 <div class="flex justify-end w-full pt-6">
@@ -98,12 +159,14 @@ const form = ref({
     contact_enabled: false,
     // contact_email: '',
     // contact_subject: '',
-    contact_sort: 2
+    contact_sort: 2,
+    custom_links: []
 })
 
 const loading = ref(false)
 const formLoading = ref(false)
 const draggedIndex = ref(null)
+const dragOverIndex = ref(null)
 
 // Computed to get buttons as array sorted by sort value
 const sortedButtons = computed(() => {
@@ -132,6 +195,10 @@ onMounted(() => {
     loading.value = true
     axios.get('/api/blocks/cta').then(response => {
         form.value = response.data.data
+        // Ensure custom_links is always an array
+        if (!form.value.custom_links || !Array.isArray(form.value.custom_links)) {
+            form.value.custom_links = []
+        }
         loading.value = false
     })
     .catch(error => {
@@ -190,6 +257,84 @@ const drop = (dropIndex, event) => {
     draggedIndex.value = null
 }
 
+// Custom links functions
+const addCustomLink = () => {
+    form.value.custom_links.push({
+        id: null,
+        url: '',
+        label: '',
+        active: true,
+        sort: form.value.custom_links.length
+    })
+}
+
+const removeCustomLink = (index) => {
+    form.value.custom_links.splice(index, 1)
+}
+
+// Drag and drop handlers for custom links
+const handleDragStart = (event, index) => {
+    draggedIndex.value = index
+    event.dataTransfer.effectAllowed = 'move'
+    event.dataTransfer.setData('text/html', index)
+}
+
+const handleDragOver = (event, index) => {
+    if (draggedIndex.value === null) return
+    if (draggedIndex.value !== index) {
+        dragOverIndex.value = index
+    }
+}
+
+const handleDragEnter = (event, index) => {
+    if (draggedIndex.value === null) return
+    if (draggedIndex.value !== index) {
+        dragOverIndex.value = index
+    }
+}
+
+const handleDragLeave = (event, index) => {
+    // Only remove highlight if we're leaving the element (not entering a child)
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+        if (dragOverIndex.value === index) {
+            dragOverIndex.value = null
+        }
+    }
+}
+
+const handleDrop = (event, dropIndex) => {
+    event.preventDefault()
+    
+    if (draggedIndex.value === null || draggedIndex.value === dropIndex) {
+        dragOverIndex.value = null
+        return
+    }
+
+    const dragIndex = draggedIndex.value
+    
+    // Move the link in the array
+    const linkToMove = form.value.custom_links[dragIndex]
+    
+    // Remove from old position
+    form.value.custom_links.splice(dragIndex, 1)
+    
+    // Insert at new position
+    form.value.custom_links.splice(dropIndex, 0, linkToMove)
+    
+    // Update sort values
+    form.value.custom_links.forEach((link, index) => {
+        link.sort = index
+    })
+    
+    dragOverIndex.value = null
+    draggedIndex.value = null
+}
+
+const handleDragEnd = (event) => {
+    draggedIndex.value = null
+    dragOverIndex.value = null
+}
+
 const save = () => {
     // Update form from buttons before saving (in case any changes were made)
     sortedButtons.value.forEach(button => {
@@ -204,6 +349,11 @@ const save = () => {
         }
     })
     
+    // Ensure custom_links is always sent (even if empty array)
+    if (!form.value.custom_links) {
+        form.value.custom_links = []
+    }
+    
     formLoading.value = true;
  
     axios.post('/api/blocks/cta', form.value).then(response => {
@@ -212,6 +362,10 @@ const save = () => {
         
         // Update form with response data
         form.value = response.data.data
+        // Ensure custom_links is always an array
+        if (!form.value.custom_links || !Array.isArray(form.value.custom_links)) {
+            form.value.custom_links = []
+        }
         
         // Reload preview iframe
         const previewIframe = document.getElementById('preview-iframe')

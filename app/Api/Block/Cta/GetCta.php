@@ -27,6 +27,7 @@ class GetCta
         ];
         
         // Process each link
+        $customLinks = [];
         foreach ($links as $link) {
             if ($link->slug === 'whatsapp') {
                 $data['whatsapp_enabled'] = (bool) $link->active;
@@ -38,8 +39,19 @@ class GetCta
                 $data['contact_email'] = $link->link;
                 $data['contact_subject'] = data_get($link->meta, 'subject', '');
                 $data['contact_sort'] = $link->sort;
+            } else {
+                // Custom links (not whatsapp or contact)
+                $customLinks[] = [
+                    'id' => $link->id,
+                    'url' => $link->link,
+                    'label' => data_get($link->meta, 'label', ''),
+                    'active' => (bool) $link->active,
+                    'sort' => $link->sort,
+                ];
             }
         }
+        
+        $data['custom_links'] = $customLinks;
         
         // Set defaults if links don't exist
         if (!isset($data['whatsapp_enabled'])) {
