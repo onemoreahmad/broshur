@@ -1,365 +1,64 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
-use App\Http\Resources\TenantResource;
-use App\Http\Resources\UserResource;
-use App\Models\Block;
-
-Route::get('/auth', function (Request $request) {
-    $data = collect($request->user()->load('tenant')->only('id', 'name', 'email','tenant'));
-    return response()->json([
-        'tenant' => TenantResource::make($data->get('tenant')) ,
-        'user' => UserResource::make($request->user()) ,
-    ]);
-})->middleware('auth:sanctum');
+Route::get('/auth', \App\Api\Auth\GetAuth::class)->middleware('auth:sanctum');
 
 
-Route::post('/account', function (Request $request) {
-    $user = $request->user();
+Route::post('/account', \App\Api\Account\UpdateAccount::class)->middleware('auth:sanctum');
 
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4048',
-    ]);
-    
-    $data = $request->only(['name', 'email']);
-    
-    if ($request->hasFile('image')) {
-        // Delete old image if exists
-        if ($user->getRawOriginal('image') && Storage::disk('public')->exists($user->getRawOriginal('image'))) {
-            Storage::disk('public')->delete($user->getRawOriginal('image'));
-        }
-        
-        // Store new image
-        $data['image'] = $request->file('image')->store('users');
-    }
-    
-    $user->update($data);
-    
-    return response()->json([
-        'message' => 'Account updated successfully',
-        'user' => UserResource::make($user->fresh()) ,
-    ]);
-})->middleware('auth:sanctum');
+Route::post('/tenant/theme', \App\Api\Tenant\UpdateTheme::class)->middleware('auth:sanctum', 'admin');
 
-Route::post('/tenant/theme', function (Request $request) {
-    $request->validate([
-        'theme_id' => 'required|integer|min:1'
-    ]);
+Route::post('/tenant/handle', \App\Api\Tenant\UpdateHandle::class)->middleware('auth:sanctum', 'admin');
 
-    $tenant = currentTenant();
-    $tenant->theme_id = $request->theme_id;
-    $tenant->save();
+Route::get('/countries', \App\Api\Countries\GetCountries::class)->middleware('auth:sanctum');
 
-    return response()->json([
-        'message' => 'Theme updated successfully'
-    ]);
-})->middleware('auth:sanctum','admin');
+Route::post('/tenant/location', \App\Api\Tenant\UpdateLocation::class)->middleware('auth:sanctum', 'admin');
 
-Route::post('/tenant/handle', function (Request $request) {
-    $request->validate([
-        'handle' => [
-            'required',
-            'string',
-            'min:3',
-            'max:50',
-            'regex:/^[a-z0-9-]+$/',
-            'unique:tenants,handle,' . $request->user()->tenant->id
-        ]
-    ], [
-        'handle.regex' => 'اسم المستخدم يجب أن يحتوي على أحرف صغيرة وأرقام وشرطات فقط',
-        'handle.unique' => 'اسم المستخدم هذا مستخدم بالفعل',
-        'handle.min' => 'اسم المستخدم يجب أن يكون على الأقل 3 أحرف',
-        'handle.max' => 'اسم المستخدم يجب أن يكون أقل من 50 حرف'
-    ]);
-
-    $tenant = $request->user()->tenant;
-    $tenant->handle = $request->handle;
-    $tenant->save();
-
-    return response()->json([
-        'message' => 'Handle updated successfully',
-        'tenant' => TenantResource::make($tenant),
-    ]);
-})->middleware('auth:sanctum', 'admin');
-
-Route::get('/countries', function () {
-    $countries = require resource_path('lang/ar/countries.php');
-    return response()->json([
-        'data' => $countries,
-    ]);
-})->middleware('auth:sanctum');
-
-Route::post('/tenant/location', function (Request $request) {
-    $request->validate([
-        'country' => ['nullable', 'string', 'size:2'],
-        'city' => ['nullable', 'string', 'max:100'],
-    ]);
-
-    $tenant = $request->user()->tenant;
-    
-    if ($request->has('country')) {
-        $tenant->country = $request->country;
-    }
-    
-    if ($request->has('city')) {
-        $tenant->city = $request->city;
-    }
-    
-    $tenant->save();
-
-    return response()->json([
-        'message' => 'Location updated successfully',
-        'tenant' => TenantResource::make($tenant),
-    ]);
-})->middleware('auth:sanctum', 'admin');
-
-Route::post('/tenant/contact', function (Request $request) {
-    $request->validate([
-        'email' => ['required', 'email', 'max:255'],
-        'phone' => ['nullable', 'digits_between:9,12'],
-    ], [
-        'email.required' => 'البريد الإلكتروني مطلوب',
-        'email.email' => 'البريد الإلكتروني غير صالح',
-        'email.max' => 'البريد الإلكتروني يجب أن يكون أقل من 255 حرف',
-        'phone.digits_between' => 'رقم الهاتف يجب أن يكون بين 9 و 12 رقم',
-    ]);
-
-    $tenant = $request->user()->tenant;
-    
-    $tenant->email = $request->filled('email') ? $request->email : null;
-    $tenant->phone = $request->filled('phone') ? $request->phone : null;
-    
-    $tenant->save();
-
-    return response()->json([
-        'message' => 'Contact information updated successfully',
-        'tenant' => TenantResource::make($tenant),
-    ]);
-})->middleware('auth:sanctum', 'admin');
+Route::post('/tenant/contact', \App\Api\Tenant\UpdateContact::class)->middleware('auth:sanctum', 'admin');
 
 // Themes
-Route::get('/themes', function () {
-    $themes = \App\Models\Theme::where('active', true)
-        ->orderBy('id', 'asc')
-        ->get()
-        ->map(function ($theme) {
-            return [
-                'id' => $theme->id,
-                'name' => $theme->name,
-                'slug' => $theme->slug ?? null,
-                'image' => $theme->image, // accessor on model
-                'price' => data_get($theme, 'price', null),
-                'description' => data_get($theme, 'meta.description', null),
-                'category' => data_get($theme, 'meta.category', null),
-                'features' => (array) data_get($theme, 'meta.features', []),
-                'optionFields' => $theme->optionFields  , // Get options from options.json file
-                'tenantOptions' => $theme->tenantOptions,
-            ];
-        });
-
-    return response()->json([
-        'data' => $themes,
-    ]);
-})->middleware('auth:sanctum', 'admin');
+Route::get('/themes', \App\Api\Theme\GetThemes::class)->middleware('auth:sanctum', 'admin');
 
 // Save theme options
-Route::post('/theme-options', function (Request $request) {
-    $request->validate([
-        'theme_id' => 'required|exists:themes,id',
-        'options' => 'required|array',
-    ]);
+Route::post('/theme-options', \App\Api\Theme\UpdateThemeOptions::class)->middleware('auth:sanctum', 'admin');
 
-    // Get or create theme option record
-    $themeOption = \App\Models\ThemeOption::firstOrCreate([
-        'model_id' => $request->user()->tenant->id,
-        'model_type' => \App\Models\Tenant::class,
-        'theme_id' => $request->theme_id,
-    ]);
+Route::get('/orders', \App\Api\Order\GetOrders::class)->middleware('auth:sanctum');
 
-    // Update the config with new options
-    $themeOption->update([
-        'config' => $request->options
-    ]);
+Route::post('/orders', \App\Api\Order\CreateOrder::class)->middleware('auth:sanctum');
 
-    return response()->json([
-        'message' => 'Theme options updated successfully',
-        'options' => $themeOption->config,
-    ]);
-})->middleware('auth:sanctum', 'admin');
-
-Route::get('/orders', function (Request $request) {
-    $orders = \App\Models\Order::where('tenant_id', $request->user()->tenant->id)
-        ->with(['items' ])
-        ->orderBy('created_at', 'desc')
-        ->paginate(15);
-
-    return response()->json([
-        'data' => $orders->items(),
-        'pagination' => [
-            'current_page' => $orders->currentPage(),
-            'last_page' => $orders->lastPage(),
-            'per_page' => $orders->perPage(),
-            'total' => $orders->total(),
-            'has_more' => $orders->hasMorePages()
-        ]
-    ]);
-})->middleware('auth:sanctum');
-
-Route::post('/orders', function (Request $request) {
-    $request->validate([
-        'client_name' => 'required|string|max:255',
-        'client_phone' => 'nullable|string|max:20',
-        'client_email' => 'nullable|email|max:255',
-        'items' => 'required|array|min:1',
-        'items.*.name' => 'required|string|max:255',
-        'items.*.quantity' => 'required|integer|min:1',
-        'items.*.price' => 'required|numeric|min:0',
-        'total' => 'required|numeric|min:0',
-        'status' => 'required|string|in:pending,processing,completed,cancelled',
-        'notes' => 'nullable|string|max:1000'
-    ]);
-
-    $tenant = $request->user()->tenant;
-    
-    // Create the order
-    $order = \App\Models\Order::create([
-        'tenant_id' => $tenant->id,
-        'user_id' => $request->user()->id,
-        'total' => $request->total,
-        'meta' => [
-            'notes' => $request->notes,
-            'status' => $request->status,
-            'client_name' => $request->client_name,
-            'client_phone' => $request->client_phone,
-            'client_email' => $request->client_email,
-        ]
-    ]);
-
-    // Create order items
-    foreach ($request->items as $item) {
-        \App\Models\OrderItem::create([
-            'order_id' => $order->id,
-            'quantity' => $item['quantity'],
-            'amount' => $item['price'],
-            'total_pre_tax' => $item['quantity'] * $item['price'],
-            'data' => [
-                'name' => $item['name'],
-                'notes' => $request->notes,
-                'status' => $request->status,
-                'client_name' => $request->client_name,
-                'client_phone' => $request->client_phone,
-                'client_email' => $request->client_email,
-            ]
-        ]);
-    }
-
-    // Set order status
-    $order->setStatus($request->status);
-
-    return response()->json([
-        'message' => 'Order created successfully',
-        'order' => $order->load(['items'])
-    ]);
-})->middleware('auth:sanctum');
-
-Route::get('/orders/{id}', function (Request $request, $id) {
-    $order = \App\Models\Order::where('tenant_id', $request->user()->tenant->id)
-        ->with(['items'])
-        ->findOrFail($id);
-
-    return response()->json([
-        'data' => $order,
-    ]);
-})->middleware('auth:sanctum');
+Route::get('/orders/{id}', \App\Api\Order\GetOrder::class)->middleware('auth:sanctum');
 
 
 // Manage Blocks
 Route::middleware(['auth:sanctum','admin'])
     ->prefix('blocks')
     ->as('blocks.')
-    ->namespace('App\Api\Block')
+    ->namespace('App\Api\Block') 
     ->group(function () {
-       Route::get('header', Header\GetHeader::class);
-       Route::post('header', Header\UpdateHeader::class);
-       Route::get('about', About\GetAbout::class);
-       Route::post('about', About\UpdateAbout::class);
-       Route::get('links', Links\GetLinks::class);
-       Route::post('links', Links\UpdateLinks::class);
-       Route::get('cta', Cta\GetCta::class);
-       Route::post('cta', Cta\UpdateCta::class);
-       Route::get('faq', Faq\GetFaq::class);
-       Route::post('faq', Faq\UpdateFaq::class);
-              Route::get('features', Features\GetFeatures::class);
-              Route::post('features', Features\UpdateFeatures::class);
-              Route::get('portfolio', Portfolio\GetPortfolio::class);
-              Route::post('portfolio', Portfolio\UpdatePortfolio::class);
-              Route::get('reviews', Reviews\GetReviews::class);
-              Route::post('reviews', Reviews\UpdateReviews::class);
-              Route::get('team', Team\GetTeam::class);
-              Route::post('team', Team\UpdateTeam::class);
-              Route::get('agreement', Agreement\GetAgreement::class);
-              Route::post('agreement', Agreement\UpdateAgreement::class);
+        Route::get('header', Header\GetHeader::class);
+        Route::post('header', Header\UpdateHeader::class);
+        Route::get('about', About\GetAbout::class);
+        Route::post('about', About\UpdateAbout::class);
+        Route::get('links', Links\GetLinks::class);
+        Route::post('links', Links\UpdateLinks::class);
+        Route::get('cta', Cta\GetCta::class);
+        Route::post('cta', Cta\UpdateCta::class);
+        Route::get('faq', Faq\GetFaq::class);
+        Route::post('faq', Faq\UpdateFaq::class);
+        Route::get('features', Features\GetFeatures::class);
+        Route::post('features', Features\UpdateFeatures::class);
+        Route::get('portfolio', Portfolio\GetPortfolio::class);
+        Route::post('portfolio', Portfolio\UpdatePortfolio::class);
+        Route::get('reviews', Reviews\GetReviews::class);
+        Route::post('reviews', Reviews\UpdateReviews::class);
+        Route::get('team', Team\GetTeam::class);
+        Route::post('team', Team\UpdateTeam::class);
+        Route::get('agreement', Agreement\GetAgreement::class);
+        Route::post('agreement', Agreement\UpdateAgreement::class);
     });
 
 // Contact form endpoint (public)
-Route::post('/contact', function (Request $request) {
-    $request->validate([
-        'name' => 'required|string|max:255|min:1',
-        'email' => 'required|email|max:255',
-        'message' => 'required|string|max:1000|min:5',
-    ]);
-
-    // Get tenant from config or try to find by domain/handle
-    $tenant = currentTenant();
-    
-    // If tenant not in config, try to get from request
-    if (!$tenant) {
-        $host = $request->getHost();
-        $domain = data_get(explode('.', $host), '1') . '.' . data_get(explode('.', $host), '2');
-        $subdomain = $domain == config('app.domain') ? data_get(explode('.', $host), '0') : $host;
-        
-        $tenant = \App\Models\Tenant::where('handle', $subdomain)
-            ->orWhere(function ($q) use ($host) {
-                $q->where('domain', $host)->where('domain_status', 1);
-            })
-            ->first();
-    }
-    
-    $contactEmail = $tenant ? data_get($tenant, 'meta.contact_email', data_get($tenant, 'meta.email', 'info@broshur.com')) : 'info@broshur.com';
-    
-    $body = '
-    <html dir="rtl">
-        <div style="font-family: Tahoma, sans-serif; font-size: 15px; white-space: pre-line; background-color: #f4f4f4; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">        
-            <div>الاسم: ' . htmlspecialchars($request->name) . '</div>
-            <div>البريد الإلكتروني: ' . htmlspecialchars($request->email) . '</div>
-            <div>الرسالة: <hr /> <div style="padding: 10px; white-space: pre-line;"> ' . nl2br(htmlspecialchars($request->message)) . '</div></div>
-        </div>
-    </html>
-    ';
-    
-    try {
-        \Mail::html($body, function ($message) use ($request, $tenant, $contactEmail) {
-            $message->from('info@broshur.com', $request->name)
-                    ->to($contactEmail)
-                    ->replyTo($request->email, $request->name)
-                    ->subject('رسالة من موقع ' . ($tenant ? $tenant->name : 'بروشور'));
-        });
-        
-        return response()->json([
-            'message' => 'شكراً لك، تم ارسال رسالتك بنجاح. سيتم التواصل معك قريباً جداً.',
-            'success' => true
-        ]);
-    } catch (\Exception $e) {
-        return response()->json([
-            'message' => 'حدث خطأ أثناء إرسال الرسالة. الرجاء المحاولة مرة أخرى.',
-            'success' => false
-        ], 500);
-    }
-});
+Route::post('/contact', \App\Api\Contact\SubmitContact::class);
 
  
