@@ -224,6 +224,8 @@ Route::middleware(['auth:sanctum','admin'])
               Route::post('portfolio', Portfolio\UpdatePortfolio::class);
               Route::get('reviews', Reviews\GetReviews::class);
               Route::post('reviews', Reviews\UpdateReviews::class);
+              Route::get('team', Team\GetTeam::class);
+              Route::post('team', Team\UpdateTeam::class);
     });
 
  

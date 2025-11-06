@@ -1,0 +1,111 @@
+
+<!-- Team Section -->
+<div class="px-5" x-data="{ 
+    currentSlide: 0, 
+    members: {{members|json_encode}},
+    membersPerSlide: 2,
+    primaryColor: '{{ option('primaryColor', 'blue') }}',
+    get slides() {
+        const pairs = [];
+        for (let i = 0; i < this.members.length; i += this.membersPerSlide) {
+            pairs.push(this.members.slice(i, i + this.membersPerSlide));
+        }
+        return pairs;
+    },
+    get totalSlides() {
+        return Math.ceil(this.members.length / this.membersPerSlide);
+    },
+    getAvatarUrl(name) {
+        return `https://ui-avatars.com/api/?background=${this.primaryColor}600&color=fff&name=${encodeURIComponent(name)}`;
+    }
+}">
+
+<!-- Team Slider -->
+<div class="relative">
+
+    <div class="flex items-center justify-between mb-6">
+        {% if title %}
+        <h3 class="text-base font-bold text-gray-900 -mx-5 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'blue') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'blue') }}-800 ps-4 py-3 bg-gray-50 w-full">
+            {{title}}
+        </h3>
+        {% endif %}
+
+        <!-- Navigation Arrows -->
+        <div x-show="totalSlides > 1" class="flex justify-end gap-1">
+            <button 
+                @click="currentSlide = currentSlide > 0 ? currentSlide - 1 : totalSlides - 1"
+                class="size-8 bg-white border border-{{ option('primaryColor', 'blue') }}-600 rounded-md flex items-center justify-center hover:bg-gray-50 transition-colors"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-{{ option('primaryColor', 'blue') }}-600 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+            </button>
+            
+            <button 
+                @click="currentSlide = currentSlide < totalSlides - 1 ? currentSlide + 1 : 0"
+                class="size-8 bg-{{ option('primaryColor', 'blue') }}-600 border border-{{ option('primaryColor', 'blue') }}-600 rounded-md flex items-center justify-center hover:bg-{{ option('primaryColor', 'blue') }}-700 transition-colors"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Subtitle -->
+    {# {% if subtitle %}
+    <p class="text-gray-600 text-sm mb-6">{{subtitle}}</p>
+    {% endif %}
+     #}
+    <!-- Members Container -->
+    <div class="overflow-hidden">
+        <div 
+            class="flex transition-transform duration-300 ease-in-out"
+            :class="'{{ locale() == 'ar' ? 'flex-row-reverse' }}'"
+            :style="`transform: translateX(-${currentSlide * 100}%)`"
+        >
+            <template x-for="(slide, slideIndex) in slides" :key="slideIndex">
+                <div class="w-full flex-shrink-0">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <template x-for="(member, memberIndex) in slide" :key="member.id || memberIndex">
+                            <div class="bg-gray-50 rounded-2xl p-5">
+                                <!-- Member Image -->
+                                <div class="mb-4 flex justify-center">
+                                    <div class="relative">
+                                        <img 
+                                            :src="member.image_url || getAvatarUrl(member.name)"
+                                            :alt="member.name"
+                                            class="w-24 h-24 rounded-full object-cover border-4 border-{{ option('primaryColor', 'blue') }}-100"
+                                            @error="\$el.src = getAvatarUrl(member.name)"
+                                        />
+                                    </div>
+                                </div>
+                                
+                                <!-- Member Info -->
+                                <div class="text-center">
+                                    <h4 class="text-gray-900 font-bold text-lg mb-1" x-text="member.name"></h4>
+                                    <p class="text-{{ option('primaryColor', 'blue') }}-600 text-sm font-medium mb-3" x-text="member.job_title"></p>
+                                    {# <p class="text-gray-600 text-xs leading-relaxed" x-text="member.bio"></p> #}
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <!-- Dots Indicator -->
+    <div x-show="totalSlides > 1" class="flex justify-center mt-8 gap-2">
+        <template x-for="(slide, index) in slides" :key="index">
+            <button 
+                @click="currentSlide = index"
+                :class="`w-2 h-2 rounded-full transition-colors ${currentSlide === index ? 'bg-{{ option('primaryColor', 'blue') }}-600' : 'bg-gray-300'}`"
+            ></button>
+        </template>
+    </div>
+
+</div>
+
+</div>
+
