@@ -3,47 +3,33 @@
          
         <!-- Handle URL Settings -->
         <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-2">رابط الموقع</h2>
-            <p class="text-gray-600 mb-6">قم بتخصيص رابط موقعك الشخصي</p>
+            <h2 class="text-base-content font-semibold mb-2">رابط الموقع</h2>
+            <p class="text-gray-400 font-light mb-6 text-sm">قم بتخصيص رابط موقعك الشخصي</p>
             
             <form @submit.prevent="updateHandle" class="space-y-4">
                 <div class="flex items-end gap-4">
                     <div class="flex-1">
                         
-                        <div class="relative">
+                        <UiField name="handle" label="رابط الموقع" >
                             <label class="input w-full" dir="ltr">
                                 <span class="label">https://{{ domain }}/</span>
-                                <input v-model="form.handle" type="text" placeholder="URL" :disabled="isLoading" />
+                                <input v-model="form.handle" type="text" placeholder="URL"  />
                             </label>
-
-                            <!---<input 
-                                v-model="form.handle" 
-                                type="text" 
-                                :class="[
-                                    'input w-full',
-                                    errors.handle ? 'border-red-500' : 'border-gray-300'
-                                ]"
-                                placeholder="اسم المستخدم"
-                                :disabled="isLoading"
-                            />-->
-                           
-                        </div>
-                        <p v-if="errors.handle" class="text-red-500 text-xs mt-1">
-                            {{ errors.handle[0] }}
-                        </p>
+                        </UiField>
+                         
                         <p class="text-gray-500 text-xs mt-1">
-                            سيصبح رابط موقعك: <span class="font-mono text-blue-600">{{ previewUrl }}</span>
+                            رابط موقعك: <span class="font-mono text-blue-600">{{ previewUrl }}</span>
                         </p>
                     </div>
                 </div>
                 
-                <div class="flex gap-3">
+                <div class="flex justify-end gap-3">
                     <button 
                         type="submit" 
                         :disabled="isLoading || !form.handle"
                         class="btn btn-primary"
                     >
-                        <span v-if="!isLoading">حفظ التغييرات</span>
+                        <span v-if="!isLoading">حفظ رابط الموقع</span>
                         <span v-if="isLoading" class="flex items-center gap-2">
                             <span class="loading loading-spinner loading-xs"></span>
                         </span>
@@ -55,57 +41,50 @@
 
         <!-- Contact Information Settings -->
         <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-2">معلومات الاتصال</h2>
-            <p class="text-gray-600 mb-6">قم بتحديث معلومات الاتصال الخاصة بك</p>
-            
+            <h2 class="text-base-content font-semibold mb-2">معلومات الاتصال</h2>
+            <p class="text-gray-400 font-light mb-6 text-sm">قم بتحديث معلومات الاتصال الخاصة بك</p>
+                
             <form @submit.prevent="updateContact" class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            البريد الإلكتروني
-                        </label>
+                    <UiField name="email" label="البريد الإلكتروني" >
+                         
                         <input 
                             v-model="form.email" 
-                            type="email" 
+                             
                             :class="[
                                 'input input-bordered w-full',
-                                contactErrors.email ? 'border-red-500' : ''
+                                errorsStore.errors?.email ? 'border-red-500' : ''
                             ]"
                             placeholder="example@email.com"
                             :disabled="isLoadingContact"
+                            dir="ltr"
                         />
-                        <p v-if="contactErrors.email" class="text-red-500 text-xs mt-1">
-                            {{ contactErrors.email[0] }}
-                        </p>
-                    </div>
+                        
+                    </UiField>
                     
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            رقم الهاتف
-                        </label>
+                    <UiField name="phone" label="رقم الهاتف" >
                         <input 
                             v-model="form.phone" 
                             type="text" 
+                            dir="ltr"
                             :class="[
                                 'input input-bordered w-full',
-                                contactErrors.phone ? 'border-red-500' : ''
+                                errorsStore.errors?.phone ? 'border-red-500' : ''
                             ]"
                             placeholder="+966xxxxxxxxx"
                             :disabled="isLoadingContact"
                         />
-                        <p v-if="contactErrors.phone" class="text-red-500 text-xs mt-1">
-                            {{ contactErrors.phone[0] }}
-                        </p>
-                    </div>
+                        
+                    </UiField>
                 </div>
                 
-                <div class="flex gap-3">
+                <div class="flex justify-end gap-3">
                     <button 
                         type="submit" 
                         :disabled="isLoadingContact"
                         class="btn btn-primary"
                     >
-                        <span v-if="!isLoadingContact">حفظ التغييرات</span>
+                        <span v-if="!isLoadingContact">حفظ معلومات الاتصال</span>
                         <span v-if="isLoadingContact" class="flex items-center gap-2">
                             <span class="loading loading-spinner loading-xs"></span>
                         </span>
@@ -116,18 +95,15 @@
 
         <!-- Location Settings -->
         <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-2">الموقع الجغرافي</h2>
-            <p class="text-gray-600 mb-6">قم بتحديد موقعك الجغرافي</p>
+            <h2 class="text-base-content font-semibold mb-2">الموقع الجغرافي</h2>
+            <p class="text-gray-400 font-light mb-6 text-sm">قم بتحديد موقعك الجغرافي</p>
             
             <form @submit.prevent="updateLocation" class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            الدولة
-                        </label>
+                    <UiField name="country" label="الدولة" >
                         <select 
                             v-model="form.country" 
-                            :disabled="isLoadingLocation || !countries"
+                            :disabled="!countries"
                             class="select select-bordered w-full"
                         >
                             <option value="">اختر الدولة</option>
@@ -139,38 +115,30 @@
                                 {{ name }}
                             </option>
                         </select>
-                        <p v-if="locationErrors.country" class="text-red-500 text-xs mt-1">
-                            {{ locationErrors.country[0] }}
-                        </p>
-                    </div>
+                        
+                    </UiField>
                     
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            المدينة
-                        </label>
+                    <UiField name="city" label="المدينة" >
                         <input 
                             v-model="form.city" 
                             type="text" 
                             :class="[
                                 'input input-bordered w-full',
-                                locationErrors.city ? 'border-red-500' : ''
+                                errorsStore.errors?.city ? 'border-red-500' : ''
                             ]"
                             placeholder="اسم المدينة"
-                            :disabled="isLoadingLocation"
                         />
-                        <p v-if="locationErrors.city" class="text-red-500 text-xs mt-1">
-                            {{ locationErrors.city[0] }}
-                        </p>
-                    </div>
+                        
+                    </UiField>
                 </div>
                 
-                <div class="flex gap-3">
+                <div class="flex justify-end gap-3">
                     <button 
                         type="submit" 
                         :disabled="isLoadingLocation"
                         class="btn btn-primary"
                     >
-                        <span v-if="!isLoadingLocation">حفظ التغييرات</span>
+                        <span v-if="!isLoadingLocation">حفظ الموقع الجغرافي</span>
                         <span v-if="isLoadingLocation" class="flex items-center gap-2">
                             <span class="loading loading-spinner loading-xs"></span>
                         </span>
@@ -180,8 +148,8 @@
         </div>
 
         <!-- Current Settings Info -->
-        <div class="bg-gray-50 rounded-xl p-6">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">معلومات الحساب الحالي</h3>
+        <div class="bg-gray-400/10 rounded-xl p-6">
+            <h3 class="text-base-content font-semibold mb-4">معلومات الحساب الحالي</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700">اسم الموقع</label>
@@ -233,8 +201,10 @@ import { useHead } from '@unhead/vue'
 import axios from 'axios'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
+import { useErrorsStore } from '@/stores/errors'
 
 const { tenant } = storeToRefs(useAuthStore())
+const errorsStore = useErrorsStore()
  
 useHead({
   title: 'الإعدادات',
@@ -247,9 +217,6 @@ const authStore = useAuthStore()
 const isLoading = ref(false)
 const isLoadingLocation = ref(false)
 const isLoadingContact = ref(false)
-const errors = ref({})
-const locationErrors = ref({})
-const contactErrors = ref({})
 const countries = ref(null)
 const domain = 'broshur.com' // You can get this from config
  
@@ -285,8 +252,7 @@ const updateHandle = async () => {
     if (!form.value.handle) return
     
     isLoading.value = true
-    errors.value = {}
-    
+    errorsStore.setErrors([])
     try {
         const response = await axios.post('/api/tenant/handle', {
             handle: form.value.handle
@@ -305,7 +271,9 @@ const updateHandle = async () => {
         
     } catch (error) {
         if (error.response?.data?.errors) {
-            errors.value = error.response.data.errors
+            // errors.value = error.response.data.errors
+            errorsStore.setErrors(error.response.data.errors);
+
         } else {
             console.error('Error updating handle:', error)
         }
@@ -316,13 +284,12 @@ const updateHandle = async () => {
 
 const resetForm = () => {
     // form.value.handle = originalHandle.value
-    errors.value = {}
+    errorsStore.setErrors([])
 }
 
 const updateLocation = async () => {
     isLoadingLocation.value = true
-    locationErrors.value = {}
-    
+    errorsStore.setErrors([])
     try {
         const response = await axios.post('/api/tenant/location', {
             country: form.value.country || null,
@@ -335,7 +302,7 @@ const updateLocation = async () => {
         
     } catch (error) {
         if (error.response?.data?.errors) {
-            locationErrors.value = error.response.data.errors
+            errorsStore.setErrors(error.response.data.errors);
         } else {
             console.error('Error updating location:', error)
         }
@@ -346,8 +313,7 @@ const updateLocation = async () => {
 
 const updateContact = async () => {
     isLoadingContact.value = true
-    contactErrors.value = {}
-    
+    errorsStore.setErrors([])
     try {
         const response = await axios.post('/api/tenant/contact', {
             email: form.value.email || null,
@@ -360,7 +326,7 @@ const updateContact = async () => {
         
     } catch (error) {
         if (error.response?.data?.errors) {
-            contactErrors.value = error.response.data.errors
+            errorsStore.setErrors(error.response.data.errors);
         } else {
             console.error('Error updating contact information:', error)
         }

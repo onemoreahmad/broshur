@@ -99,8 +99,13 @@ Route::post('/tenant/location', function (Request $request) {
 
 Route::post('/tenant/contact', function (Request $request) {
     $request->validate([
-        'email' => ['nullable', 'email', 'max:255'],
-        'phone' => ['nullable', 'string', 'max:20'],
+        'email' => ['required', 'email', 'max:255'],
+        'phone' => ['nullable', 'digits_between:9,12'],
+    ], [
+        'email.required' => 'البريد الإلكتروني مطلوب',
+        'email.email' => 'البريد الإلكتروني غير صالح',
+        'email.max' => 'البريد الإلكتروني يجب أن يكون أقل من 255 حرف',
+        'phone.digits_between' => 'رقم الهاتف يجب أن يكون بين 9 و 12 رقم',
     ]);
 
     $tenant = $request->user()->tenant;
