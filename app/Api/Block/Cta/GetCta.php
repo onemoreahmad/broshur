@@ -39,8 +39,12 @@ class GetCta
                 $data['contact_email'] = $link->link;
                 $data['contact_subject'] = data_get($link->meta, 'subject', '');
                 $data['contact_sort'] = $link->sort;
+            } elseif ($link->slug === 'subscription') {
+                $data['subscription_enabled'] = (bool) $link->active;
+                $data['subscription_sort'] = $link->sort;
+                $data['subscription_message'] = data_get($link->meta, 'message', '');
             } else {
-                // Custom links (not whatsapp or contact)
+                // Custom links (not whatsapp, contact, or subscription)
                 $customLinks[] = [
                     'id' => $link->id,
                     'url' => $link->link,
@@ -65,6 +69,11 @@ class GetCta
             $data['contact_email'] = '';
             $data['contact_subject'] = '';
             $data['contact_sort'] = 2;
+        }
+        if (!isset($data['subscription_enabled'])) {
+            $data['subscription_enabled'] = false;
+            $data['subscription_sort'] = 3;
+            $data['subscription_message'] = '';
         }
         
         return response()->json([

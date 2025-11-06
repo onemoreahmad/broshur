@@ -57,6 +57,11 @@
                             <!-- <UiTextarea name="whatsapp_message" label="الرسالة الافتراضية" v-model="form.whatsapp_message" placeholder="مرحباً، أريد الاستفسار عن..." /> -->
                         </div>
 
+                        <!-- Subscription Fields -->
+                        <div v-if="button.type === 'subscription' && form.subscription_enabled" class="space-y-1 mt-1">
+                            <UiTextarea name="subscription_message" label="رسالة الاشتراك" v-model="form.subscription_message" placeholder="مرحباً، اشترك ليصلك كل جديد"  />
+                        </div>
+
                         <!-- Contact Fields 
                         <div v-if="button.type === 'contact' && form.contact_enabled" class="space-y-1 mt-1">
                             <UiInput name="contact_email" label="البريد الإلكتروني" v-model="form.contact_email" placeholder="contact@example.com"  />
@@ -160,6 +165,9 @@ const form = ref({
     // contact_email: '',
     // contact_subject: '',
     contact_sort: 2,
+    subscription_enabled: false,
+    subscription_message: '',
+    subscription_sort: 3,
     custom_links: []
 })
 
@@ -186,6 +194,13 @@ const sortedButtons = computed(() => {
             // email: form.value.contact_email,
             // subject: form.value.contact_subject,
             sort: form.value.contact_sort || 2
+        },
+        {
+            type: 'subscription',
+            label: 'زر الاشتراك',
+            enabled: form.value.subscription_enabled,
+            message: form.value.subscription_message,
+            sort: form.value.subscription_sort || 3
         }
     ]
     return buttons.sort((a, b) => a.sort - b.sort)
@@ -198,6 +213,9 @@ onMounted(() => {
         // Ensure custom_links is always an array
         if (!form.value.custom_links || !Array.isArray(form.value.custom_links)) {
             form.value.custom_links = []
+        }
+        if (typeof form.value.subscription_message !== 'string') {
+            form.value.subscription_message = ''
         }
         loading.value = false
     })
@@ -213,6 +231,8 @@ const updateButtonEnabled = (buttonType, enabled) => {
         form.value.whatsapp_enabled = enabled
     } else if (buttonType === 'contact') {
         form.value.contact_enabled = enabled
+    } else if (buttonType === 'subscription') {
+        form.value.subscription_enabled = enabled
     }
 }
 
@@ -243,14 +263,18 @@ const drop = (dropIndex, event) => {
     // Update form values directly
     if (draggedButton.type === 'whatsapp') {
         form.value.whatsapp_sort = newDraggedSort
-    } else {
+    } else if (draggedButton.type === 'contact') {
         form.value.contact_sort = newDraggedSort
+    } else if (draggedButton.type === 'subscription') {
+        form.value.subscription_sort = newDraggedSort
     }
     
     if (dropButton.type === 'whatsapp') {
         form.value.whatsapp_sort = newDropSort
-    } else {
+    } else if (dropButton.type === 'contact') {
         form.value.contact_sort = newDropSort
+    } else if (dropButton.type === 'subscription') {
+        form.value.subscription_sort = newDropSort
     }
     
     // Reset drag state
@@ -346,6 +370,9 @@ const save = () => {
             form.value.contact_enabled = button.enabled
             // form.value.contact_email = button.email
             // form.value.contact_subject = button.subject
+        } else if (button.type === 'subscription') {
+            form.value.subscription_enabled = button.enabled
+            form.value.subscription_message = button.message
         }
     })
     

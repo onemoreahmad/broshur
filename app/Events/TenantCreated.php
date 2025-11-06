@@ -67,6 +67,17 @@ class TenantCreated
             'subject' => 'Contact from website',
         ];
         $contactLink->save();
+
+        $subscriptionLink = new Link();
+        $subscriptionLink->tenant_id = $this->tenant->id;
+        $subscriptionLink->block_id = $block->id;
+        $subscriptionLink->active = false;
+        $subscriptionLink->name = 'subscription';
+        $subscriptionLink->slug = 'subscription';
+        $subscriptionLink->link = '';
+        $subscriptionLink->type = 'cta';
+        $subscriptionLink->sort = 3;
+        $subscriptionLink->save();
  
     }
    

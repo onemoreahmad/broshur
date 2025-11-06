@@ -2,7 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use Livewire\Livewire;
   
+Livewire::setUpdateRoute(function ($handle) {
+    return Route::post('/livewire/update', $handle)
+        ->middleware(App\Http\Middleware\CurrentBroshur::class);
+});
+
 // sitefront routes
 Volt::route('{tenant}/{lang?}', 'storefront.home')
     // ->domain('{tenant}.' . config('app.domain'))

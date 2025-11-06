@@ -19,6 +19,9 @@ class UpdateCta
             'whatsapp_enabled' => ['nullable', 'boolean'],
             'whatsapp_number' => ['nullable','required_if:whatsapp_enabled,true', 'string', 'max:20'],
             'contact_enabled' => ['nullable', 'boolean'],
+            'subscription_enabled' => ['nullable', 'boolean'],
+            'subscription_sort' => ['nullable', 'integer'],
+            'subscription_message' => ['nullable', 'string', 'max:500'],
             'custom_links' => ['nullable', 'array'],
             'custom_links.*.id' => ['nullable', 'integer', 'exists:links,id'],
             'custom_links.*.url' => ['required', 'url', 'max:500'],
@@ -42,6 +45,7 @@ class UpdateCta
         // Get sort values from request or use defaults
         $whatsappSort = $request->whatsapp_sort ?? 1;
         $contactSort = $request->contact_sort ?? 2;
+        $subscriptionSort = $request->subscription_sort ?? 3;
 
         // Update or create WhatsApp link
         $whatsappLink = Link::updateOrCreate(
@@ -81,13 +85,32 @@ class UpdateCta
             ]
         );
 
+        // Update or create Subscription link
+        $subscriptionLink = Link::updateOrCreate(
+            [
+                'block_id' => $block->id,
+                'type' => 'cta',
+                'slug' => 'subscription',
+            ],
+            [
+                'tenant_id' => $tenantId,
+                'name' => 'subscription',
+                'link' => $request->subscription_link ?? '',
+                'active' => (bool) $request->subscription_enabled,
+                'meta' => [
+                    'message' => $request->subscription_message ?? '',
+                ],
+                'sort' => $subscriptionSort,
+            ]
+        );
+
         // Handle custom links
         if ($request->has('custom_links')) {
             DB::transaction(function () use ($request, $tenantId, $block) {
-                // Get existing custom link IDs for this block (excluding whatsapp and contact)
+                // Get existing custom link IDs for this block (excluding whatsapp, contact, subscription)
                 $existingIds = Link::where('block_id', $block->id)
                     ->where('type', 'cta')
-                    ->whereNotIn('slug', ['whatsapp', 'contact'])
+                    ->whereNotIn('slug', ['whatsapp', 'contact', 'subscription'])
                     ->pluck('id')
                     ->toArray();
                 $submittedIds = collect($request->custom_links)->pluck('id')->filter()->toArray();
@@ -138,7 +161,7 @@ class UpdateCta
         // Get custom links for response
         $customLinks = Link::where('block_id', $block->id)
             ->where('type', 'cta')
-            ->whereNotIn('slug', ['whatsapp', 'contact'])
+            ->whereNotIn('slug', ['whatsapp', 'contact', 'subscription'])
             ->orderBy('sort')
             ->get()
             ->map(function ($link) {
@@ -163,6 +186,9 @@ class UpdateCta
                 // 'contact_email' => $contactLink->link,
                 // 'contact_subject' => data_get($contactLink->meta, 'subject', ''),
                 'contact_sort' => $contactLink->sort,
+                'subscription_enabled' => $subscriptionLink->active,
+                'subscription_sort' => $subscriptionLink->sort,
+                'subscription_message' => data_get($subscriptionLink->meta, 'message', ''),
                 'custom_links' => $customLinks,
             ],
         ]);
@@ -178,6 +204,7 @@ class UpdateCta
             'contact_enabled' => 'تفعيل التواصل',
             'contact_email' => 'البريد الإلكتروني',
             'contact_subject' => 'موضوع الرسالة',
+            'subscription_message' => 'رسالة الاشتراك',
             'custom_links' => 'الروابط المخصصة',
             'custom_links.*.url' => 'رابط',
             'custom_links.*.label' => 'التسمية',
