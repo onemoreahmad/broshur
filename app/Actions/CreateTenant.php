@@ -18,6 +18,7 @@ class CreateTenant
         return [
             'tenant_name' => 'required|min:2|max:200',
             'tenant_handle' => 'required|min:2|max:100|alpha_dash:ascii,unique:tenants,handle',
+            'email' => 'required|email|max:255',
             'user_id' => 'required|exists:users,id',
         ];
     }
@@ -33,6 +34,7 @@ class CreateTenant
         $tenant = Tenant::create([
             'name' => $validatedData['tenant_name'],
             'handle' => $validatedData['tenant_handle'],
+            'email' => $validatedData['email'],
             'user_id' => $validatedData['user_id'],
             'theme_id' => 1,
             'traffic_website_id' => $websiteId,

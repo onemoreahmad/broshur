@@ -34,6 +34,10 @@ class Tenant extends Model
         'meta',
         'active',
         'traffic_website_id',
+        'country',
+        'city',
+        'email',
+        'phone',
     ];
 
     public function user()

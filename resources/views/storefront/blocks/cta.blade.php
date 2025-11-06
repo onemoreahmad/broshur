@@ -13,8 +13,11 @@ new class extends Livewire\Volt\Component {
         
         $block = Block::where('name', 'cta')->first();
         $links = Link::orderBy('sort')->where('active', true)->where('type', 'cta')->get();
-
-        return view()->first(['theme::blocks.'.$view, 'theme::blocks.links'], ['block' => $block, 'links' => $links]);      
+        
+        if (data_get($block, 'active', false)) {
+            return view()->first(['theme::blocks.'.$view, 'theme::blocks.cta'], ['block' => $block, 'links' => $links]);      
+        }
+        return view('empty');      
     } 
 
     function placeholder()

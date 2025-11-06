@@ -25,6 +25,10 @@ class TenantResource extends JsonResource
             'storefront_url' => $this->storefront_url,
             'site_url' => $this->storefront_url,
             'preview_url' => $this->preview_url,
+            'country' => $this->country,
+            'city' => $this->city,
+            'email' => $this->email,
+            'phone' => $this->phone,
         ];
     }
 }

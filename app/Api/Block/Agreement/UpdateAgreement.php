@@ -16,16 +16,13 @@ class UpdateAgreement
             'active' => ['required', 'boolean'],
             'agreement_title' => ['nullable', 'min:3', 'max:255'],
             'agreement_content' => ['nullable', 'required_if:active,true', 'min:3', 'max:5000'],
-            'privacy_title' => ['nullable', 'min:3', 'max:255'],
-            'privacy_content' => ['nullable', 'required_if:active,true', 'min:3', 'max:5000'],
         ];
     }
  
     public function getValidationMessages(): array
     {
         return [
-            'agreement_content.required_if' => 'يجب أن يكون لديك محتوى اتفاقية للعرض عند تفعيل القسم',
-            'privacy_content.required_if' => 'يجب أن يكون لديك محتوى سياسة الخصوصية للعرض عند تفعيل القسم',
+            'agreement_content.required_if' => 'يجب أن يكون لديك محتوى اتفاقية وسياسة الخصوصية للعرض عند تفعيل القسم',
         ];
     }
 
@@ -36,8 +33,6 @@ class UpdateAgreement
         $block->config = [
             'agreement_title' => $request->agreement_title,
             'agreement_content' => $request->agreement_content,
-            'privacy_title' => $request->privacy_title,
-            'privacy_content' => $request->privacy_content,
         ];
         $block->active = (boolean) $request->active;
         $block->save();
@@ -47,8 +42,6 @@ class UpdateAgreement
             'data' => [
                 'agreement_title' => $block->config['agreement_title'],
                 'agreement_content' => $block->config['agreement_content'],
-                'privacy_title' => $block->config['privacy_title'],
-                'privacy_content' => $block->config['privacy_content'],
                 'active' => (boolean) $block->active,
             ],
         ]);
@@ -59,8 +52,6 @@ class UpdateAgreement
         return [
             'agreement_title' => 'عنوان الاتفاقية',
             'agreement_content' => 'محتوى الاتفاقية',
-            'privacy_title' => 'عنوان سياسة الخصوصية',
-            'privacy_content' => 'محتوى سياسة الخصوصية',
             'active' => 'الحالة',
         ];
     }

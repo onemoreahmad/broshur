@@ -333,6 +333,16 @@ if (!function_exists('component')) {
     }
 }
 
+if (!function_exists('render')) {
+    function render($component, $parms = [], $isLazy = false)
+    {
+        $html = \Livewire\Livewire::mount('storefront/components/' . $component, array_merge($parms, ['lazy' => $isLazy]));
+
+        return new \Twig\Markup($html, 'UTF-8');
+    }
+}
+
+
 if (!function_exists('money')) {
     function money($amount, $long = false)
     {

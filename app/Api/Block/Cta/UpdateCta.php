@@ -17,10 +17,10 @@ class UpdateCta
             'active' => ['required', 'boolean'],
             'whatsapp_enabled' => ['nullable', 'boolean'],
             'whatsapp_number' => ['nullable','required_if:whatsapp_enabled,true', 'string', 'max:20'],
-            'whatsapp_message' => ['nullable', 'string', 'max:500'],
             'contact_enabled' => ['nullable', 'boolean'],
-            'contact_email' => ['nullable', 'required_if:contact_enabled,true', 'email', 'max:255'],
-            'contact_subject' => ['nullable', 'string', 'max:200'],
+            // 'whatsapp_message' => ['nullable', 'string', 'max:500'],
+            // 'contact_email' => ['nullable', 'required_if:contact_enabled,true', 'email', 'max:255'],
+            // 'contact_subject' => ['nullable', 'string', 'max:200'],
         ];
     }
 
@@ -49,9 +49,9 @@ class UpdateCta
                 'name' => 'whatsapp',
                 'link' => $request->whatsapp_number ?? '',
                 'active' => (bool) $request->whatsapp_enabled,
-                'meta' => [
-                    'message' => $request->whatsapp_message ?? '',
-                ],
+                // 'meta' => [
+                //     // 'message' => $request->whatsapp_message ?? '',
+                // ],
                 'sort' => $whatsappSort,
             ]
         );
@@ -66,11 +66,11 @@ class UpdateCta
             [
                 'tenant_id' => $tenantId,
                 'name' => 'contact',
-                'link' => $request->contact_email ?? '',
+                'link' => $request->contact_email ?? tenant('email'),
                 'active' => (bool) $request->contact_enabled,
-                'meta' => [
-                    'subject' => $request->contact_subject ?? '',
-                ],
+                // 'meta' => [
+                //     // 'subject' => $request->contact_subject ?? '',
+                // ],
                 'sort' => $contactSort,
             ]
         );
@@ -81,11 +81,11 @@ class UpdateCta
                 'active' => $block->active,
                 'whatsapp_enabled' => $whatsappLink->active,
                 'whatsapp_number' => $whatsappLink->link,
-                'whatsapp_message' => data_get($whatsappLink->meta, 'message', ''),
+                // 'whatsapp_message' => data_get($whatsappLink->meta, 'message', ''),
                 'whatsapp_sort' => $whatsappLink->sort,
                 'contact_enabled' => $contactLink->active,
-                'contact_email' => $contactLink->link,
-                'contact_subject' => data_get($contactLink->meta, 'subject', ''),
+                // 'contact_email' => $contactLink->link,
+                // 'contact_subject' => data_get($contactLink->meta, 'subject', ''),
                 'contact_sort' => $contactLink->sort,
             ],
         ]);
@@ -97,7 +97,7 @@ class UpdateCta
             'active' => 'الحالة',
             'whatsapp_enabled' => 'تفعيل واتساب',
             'whatsapp_number' => 'رقم واتساب',
-            'whatsapp_message' => 'رسالة واتساب',
+            // 'whatsapp_message' => 'رسالة واتساب',
             'contact_enabled' => 'تفعيل التواصل',
             'contact_email' => 'البريد الإلكتروني',
             'contact_subject' => 'موضوع الرسالة',

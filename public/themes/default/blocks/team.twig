@@ -3,8 +3,11 @@
 <div class="px-5" x-data="{ 
     currentSlide: 0, 
     members: {{members|json_encode}},
-    membersPerSlide: 2,
+    windowWidth: window.innerWidth,
     primaryColor: '{{ option('primaryColor', 'blue') }}',
+    get membersPerSlide() {
+        return this.windowWidth >= 768 ? 3 : 2; // 3 on desktop (md+), 2 on mobile
+    },
     get slides() {
         const pairs = [];
         for (let i = 0; i < this.members.length; i += this.membersPerSlide) {
@@ -17,6 +20,11 @@
     },
     getAvatarUrl(name) {
         return `https://ui-avatars.com/api/?background=${this.primaryColor}600&color=fff&name=${encodeURIComponent(name)}`;
+    },
+    init() {
+        window.addEventListener('resize', () => {
+            this.windowWidth = window.innerWidth;
+        });
     }
 }">
 
@@ -66,7 +74,7 @@
         >
             <template x-for="(slide, slideIndex) in slides" :key="slideIndex">
                 <div class="w-full flex-shrink-0">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                         <template x-for="(member, memberIndex) in slide" :key="member.id || memberIndex">
                             <div class="bg-gray-50 rounded-2xl p-5">
                                 <!-- Member Image -->

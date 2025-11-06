@@ -54,16 +54,15 @@
                         <!-- WhatsApp Fields -->
                         <div v-if="button.type === 'whatsapp' && form.whatsapp_enabled" class="space-y-1 mt-1">
                             <UiInput name="whatsapp_number" label="رقم الهاتف" v-model="form.whatsapp_number" placeholder="+966501234567"  />
-                            <UiTextarea name="whatsapp_message" label="الرسالة الافتراضية" v-model="form.whatsapp_message" placeholder="مرحباً، أريد الاستفسار عن..." />
+                            <!-- <UiTextarea name="whatsapp_message" label="الرسالة الافتراضية" v-model="form.whatsapp_message" placeholder="مرحباً، أريد الاستفسار عن..." /> -->
                         </div>
 
-                        <!-- Contact Fields -->
+                        <!-- Contact Fields 
                         <div v-if="button.type === 'contact' && form.contact_enabled" class="space-y-1 mt-1">
                             <UiInput name="contact_email" label="البريد الإلكتروني" v-model="form.contact_email" placeholder="contact@example.com"  />
                             <UiTextarea name="contact_subject" label="موضوع الرسالة الافتراضية" v-model="form.contact_subject" placeholder="استفسار من الموقع"  />
-
-
                         </div>
+                        -->
                     </div>
                 </div>
                 </section>
@@ -94,11 +93,11 @@ const form = ref({
     active: true,
     whatsapp_enabled: false,
     whatsapp_number: '',
-    whatsapp_message: '',
+    // whatsapp_message: '',
     whatsapp_sort: 1,
     contact_enabled: false,
-    contact_email: '',
-    contact_subject: '',
+    // contact_email: '',
+    // contact_subject: '',
     contact_sort: 2
 })
 
@@ -114,15 +113,15 @@ const sortedButtons = computed(() => {
             label: 'زر محادثة واتساب',
             enabled: form.value.whatsapp_enabled,
             number: form.value.whatsapp_number,
-            message: form.value.whatsapp_message,
+            // message: form.value.whatsapp_message,
             sort: form.value.whatsapp_sort || 1
         },
         {
             type: 'contact',
             label: 'زر التواصل',
             enabled: form.value.contact_enabled,
-            email: form.value.contact_email,
-            subject: form.value.contact_subject,
+            // email: form.value.contact_email,
+            // subject: form.value.contact_subject,
             sort: form.value.contact_sort || 2
         }
     ]
@@ -197,11 +196,11 @@ const save = () => {
         if (button.type === 'whatsapp') {
             form.value.whatsapp_enabled = button.enabled
             form.value.whatsapp_number = button.number
-            form.value.whatsapp_message = button.message
+            // form.value.whatsapp_message = button.message
         } else if (button.type === 'contact') {
             form.value.contact_enabled = button.enabled
-            form.value.contact_email = button.email
-            form.value.contact_subject = button.subject
+            // form.value.contact_email = button.email
+            // form.value.contact_subject = button.subject
         }
     })
     

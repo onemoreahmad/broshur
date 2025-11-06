@@ -237,7 +237,7 @@ return [
             'siteComponent',
             'gravatar',
             'hideEmail',
-            // 'render',
+            'render',
             'cart',
             // 'cartItems',
             // 'cartConditions',

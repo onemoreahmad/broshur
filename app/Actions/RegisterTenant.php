@@ -38,6 +38,7 @@ class RegisterTenant
             $tenant = CreateTenant::run([
                 'tenant_name' => $validatedData['tenant_name'],
                 'tenant_handle' => $validatedData['tenant_handle'],
+                'email' => $validatedData['user_email'],
                 'user_id' => $user->id,
             ]); 
         }
