@@ -41,7 +41,7 @@
                         @dragover.prevent
                         @dragenter.prevent
                         @drop="drop(index, $event)"
-                        class="bg-base-50 rounded-lg p-2 border-2 border-base-200 cursor-move hover:bg-base-100 transition-colors transition-all"
+                        class="bg-base-50 rounded-lg p-2 border-2 border-base-200 cursor-move hover:bg-base-100 transition-all"
                         :class="{ 'opacity-50': draggedIndex === index }"
                     >
                         <div class="flex items-center justify-between mb-3">
@@ -89,6 +89,8 @@
                                 :modelId="form.id"
                                 mediaCollection="portfolio"
                                 :preview="item.image_url || ''"
+                                @upload-start="imageUploadingCount++"
+                                @upload-end="imageUploadingCount--"
                             />
 
                         </div>  
@@ -116,10 +118,10 @@
                     <button 
                         @click="save" 
                         class="btn btn-primary" 
-                        :disabled="formLoading"
+                        :disabled="formLoading || imageUploadingCount > 0"
                     > 
-                        <span v-if="!formLoading">حفظ</span>
-                        <span v-if="formLoading" class="loading loading-spinner loading-xs"></span>
+                        <span v-if="!formLoading && imageUploadingCount === 0">حفظ</span>
+                        <span v-else class="loading loading-spinner loading-xs"></span>
                     </button>
                 </div>
 
@@ -148,6 +150,7 @@ const form = ref({
 const loading = ref(false)
 const formLoading = ref(false)
 const draggedIndex = ref(null)
+const imageUploadingCount = ref(0)
 
 onMounted(() => {
     loading.value = true

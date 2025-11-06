@@ -20,6 +20,7 @@
     import ReviewsBlock from '../components/Blocks/Reviews.vue';
     import PortfolioBlock from '../components/Blocks/Portfolio.vue';
     import TeamBlock from '../components/Blocks/Team.vue';
+    import ServicesBlock from '../components/Blocks/Services.vue';
     import AgreementBlock from '../components/Blocks/Agreement.vue';
     
     const router = createRouter({
@@ -80,6 +81,11 @@
                       path: 'team',
                       name: 'blocks.team',
                       component: TeamBlock,
+                    },
+                    {
+                      path: 'services',
+                      name: 'blocks.services',
+                      component: ServicesBlock,
                     },
                     {
                       path: 'agreement',

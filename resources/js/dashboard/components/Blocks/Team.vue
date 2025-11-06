@@ -41,7 +41,7 @@
                 <div 
                     v-for="(member, index) in form.members" 
                     :key="member.id || index"
-                    class="bg-base-50 rounded-lg p-2 border-2 border-base-200 cursor-move hover:bg-base-100 transition-colors transition-all"
+                    class="bg-base-50 rounded-lg p-2 border-2 border-base-200 cursor-move hover:bg-base-100 transition-all"
                     draggable="true"
                     @dragstart="dragStart(index, $event)"
                     @dragover.prevent
@@ -76,6 +76,8 @@
                             :modelId="form.id"
                             mediaCollection="team"
                             :preview="member.image_url || ''"
+                            @upload-start="imageUploadingCount++"
+                            @upload-end="imageUploadingCount--"
                         />
 
                     </div>
@@ -100,9 +102,9 @@
                 <button 
                     @click="save" 
                     class="btn btn-primary" 
-                    :disabled="formLoading"
+                    :disabled="formLoading || imageUploadingCount > 0"
                 > 
-                    <span v-if="!formLoading">حفظ الفريق</span>
+                    <span v-if="!formLoading && imageUploadingCount === 0">حفظ الفريق</span>
                     <span v-else class="loading loading-spinner loading-sm"></span>
                 </button>
             </div>
@@ -124,6 +126,7 @@ const errorsStore = useErrorsStore()
 const formLoading = ref(false)
 const loading = ref(false)
 const draggedIndex = ref(null)
+const imageUploadingCount = ref(0)
 
 
 const form = ref({

@@ -51,7 +51,7 @@ import axios from 'axios'
 
 const errorsStore = useErrorsStore()
 
-const emit = defineEmits(['update:modelValue', 'uploaded', 'update:removed'])
+const emit = defineEmits(['update:modelValue', 'uploaded', 'update:removed', 'upload-start', 'upload-end'])
 const props = defineProps({
     label: {
         type: String,
@@ -107,6 +107,7 @@ const handleFileChange = async (event) => {
     }
     
     uploading.value = true
+    emit('upload-start')
     
     try {
         // Create FormData for file upload
@@ -135,6 +136,7 @@ const handleFileChange = async (event) => {
         errorsStore.setErrors({ [props.name]: ['حدث خطأ أثناء رفع الصورة'] })
     } finally {
         uploading.value = false
+        emit('upload-end')
     }
 }
 
