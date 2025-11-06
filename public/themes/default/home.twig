@@ -52,13 +52,14 @@
 
             <div class="flex flex-col gap-y-10 Xdivide-y-2 divide-gray-200 divide-dashed">
                 {{renderBlockComponent('about')}}
+                
                 {{renderBlockComponent('features')}}
-                {# {{renderBlockComponent('services')}} #}
+                {{renderBlock('services')}}
                 {{renderBlock('reviews')}}
                 {{renderBlock('team')}}
                 {{renderBlock('portfolio')}}
                 {{renderBlockComponent('faq')}}
-                {# {{renderBlockComponent('contact-info')}} #}
+                {{renderBlockComponent('contact-info')}}
             </div>
            
         </div>
