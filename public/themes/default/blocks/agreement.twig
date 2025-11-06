@@ -1,0 +1,13 @@
+<!-- About Section -->
+<div class="p-px">
+    {% if agreement_title %}
+    <h3 class="text-base font-bold text-gray-900 p-5 bg-gray-50 w-full">   
+         {{agreement_title}}
+    </h3>
+    {% endif %}
+    
+    <p class="text-gray-600 text-base leading-relaxed {{editorStyle()}} p-6 ">
+        {{agreement_content}}
+    </p>
+</div>
+ 
