@@ -84,7 +84,7 @@
                                             :src="member.image_url || getAvatarUrl(member.name)"
                                             :alt="member.name"
                                             class="w-24 h-24 rounded-full object-cover border-4 border-{{ option('primaryColor', 'blue') }}-100"
-                                            @error="\$el.src = getAvatarUrl(member.name)"
+                                            @error="$el.src = getAvatarUrl(member.name)"
                                         />
                                     </div>
                                 </div>

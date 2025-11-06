@@ -17,7 +17,7 @@
  
 
     <!-- Contact Card -->
-    <div class="relative md:my-4 z-10 flex flex-col items-center md:max-w-xlX sm:max-w-3xl md:rounded-2xl w-full md:border-4 border-black/20 mx-auto">
+    <div class="relative md:mt-4 z-10 flex flex-col items-center md:max-w-xlX sm:max-w-3xl md:rounded-2xl w-full md:border-4 border-black/20 mx-auto">
 
         {{renderBlock('links')}} 
     
@@ -67,14 +67,15 @@
     </div>
      
 
-    <footer class="sm:pb-6 py-2 px-2  flex items-center  justify-between mx-auto max-w-3xl w-full gap-x-4 relative z-50"
+    <footer class="sm:pb-6 py-3 px-2  flex items-center  justify-between mx-auto max-w-3xl w-full gap-x-4 relative z-50"
             x-data="{ 
-                agreementModalOpen: false,
-                closeAgreementModal() { this.agreementModalOpen = false; document.body.style.overflow = ''; },
-                openAgreementModal() { this.agreementModalOpen = true; document.body.style.overflow = 'hidden'; }
+                modalOpen: false,
+                closeModal() { this.modalOpen = false; document.body.style.overflow = ''; },
+                openModal() { this.modalOpen = true; document.body.style.overflow = 'hidden'; }
             }"
-            @keydown.escape.window="closeAgreementModal()">
-        <div class="text-xs font-normal text-center text-white/60 items-center  gap-x-2 flex">
+            @keydown.escape.window="closeModal()">
+          
+        <div class="text-xs font-normal text-center text-white/60 items-center  gap-x-1 flex">
                <span class="text-white/60">{{dt('Y')}}</span>
                ©
               <a href="{{tenant('storefront_url')}}" target="_blank" class="text-primary-200 hover:text-primary-400 inline-block">{{ tenant('name') }}</a>
@@ -89,27 +90,27 @@
         </div>
 
         <div>   
-            <button type="button" @click="openAgreementModal()" class="text-xs text-primary-200 hover:text-primary-400 inline-block"> الاتفاقية والخصوصية </button>
+            <button type="button" @click="openModal()" class="text-xs text-primary-200 hover:text-primary-400 inline-block"> الاتفاقية </button>
         </div>
       
         <!-- Agreement Modal Overlay -->
         <div 
-            x-show="agreementModalOpen" 
+            x-show="modalOpen" 
             x-cloak
-            @click="closeAgreementModal()"
+            @click="closeModal()"
             x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100"
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0"
-            class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-gray-900 bg-opacity-75 backdrop-blur-sm"
+            class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900 bg-opacity-75 backdrop-blur-sm"
             style="display: none;"
         >
             <!-- Modal Content -->
             <div 
                 @click.stop
-                x-show="agreementModalOpen"
+                x-show="modalOpen"
                 x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 scale-95 translate-y-4"
                 x-transition:enter-end="opacity-100 scale-100 translate-y-0"
@@ -121,7 +122,7 @@
             >
                 <!-- Close Button -->
                 <button 
-                    @click="closeAgreementModal()"
+                    @click="closeModal()"
                     type="button"
                     class="absolute top-4 left-4 z-10 rounded-full bg-gray-100 p-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-{{ option('primaryColor', 'blue') }}-500 focus:ring-offset-2 transition-colors duration-200"
                     aria-label="إغلاق"
