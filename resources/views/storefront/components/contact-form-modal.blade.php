@@ -1,10 +1,8 @@
-<div class="mt-6 overflow-hidden bg-white rounded-xl">
-    <div class="px-6 py-12 sm:p-12">
-        <img src="{{ asset('assets/icons/send.png') }}" class="w-20 h-20 mx-auto mb-6" alt="">
-        <h3 class="text-3xl font-semibold text-center text-gray-900">أرسل رسالة مباشرة</h3>
-
-        
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4 mt-14">
+<div class="overflow-hidden bg-white rounded-xl">
+    <div class="p-px">
+        <h3 class="text-base font-bold text-gray-900 p-5 bg-gray-50 w-full">أرسل رسالة مباشرة</h3>
+ 
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4 p-6">
                 <div>
                     <label for="" class="text-base font-medium text-gray-900"> اسمك </label>
                     <div class="mt-2.5 relative">
@@ -42,7 +40,7 @@
                         <div class="text-green-600 font-semibold text-base bg-green-500/10 p-3 rounded-md mt-1 w-full mx-auto">{{session('success-send')}}</div>
                     @endif
 
-                    <button wire:click="send" class="inline-flex items-center justify-center w-full px-4 py-4 mt-2 text-base font-semibold text-white transition-all duration-200 bg-primary-700 border border-transparent rounded-xl focus:outline-none hover:bg-primary-800 focus:bg-primary-700">
+                    <button wire:click="send" class="inline-flex items-center justify-center w-full px-4 py-4 mt-2 text-base font-semibold text-white transition-all duration-200 bg-{{ option('primaryColor', 'blue') }}-700 border border-transparent rounded-xl focus:outline-none hover:bg-{{ option('primaryColor', 'blue') }}-800 focus:bg-{{ option('primaryColor', 'blue') }}-700">
                         <span wire:loading.remove>أرسل</span>
                       
                         <span wire:loading>
