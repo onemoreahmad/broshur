@@ -20,6 +20,7 @@
     import ReviewsBlock from '../components/Blocks/Reviews.vue';
     import PortfolioBlock from '../components/Blocks/Portfolio.vue';
     import TeamBlock from '../components/Blocks/Team.vue';
+    import AgreementBlock from '../components/Blocks/Agreement.vue';
     
     const router = createRouter({
         history: createWebHistory('/dashboard'),
@@ -79,6 +80,11 @@
                       path: 'team',
                       name: 'blocks.team',
                       component: TeamBlock,
+                    },
+                    {
+                      path: 'agreement',
+                      name: 'blocks.agreement',
+                      component: AgreementBlock,
                     },
                   ],
              },

@@ -65,19 +65,15 @@
 
 
     </div>
-    
+     
 
-
- 
-
-    <footer class="sm:pb-6 py-2 px-2  flex items-center  justify-between mx-auto max-w-2xl w-full gap-x-4 relative z-50">
+    <footer class="sm:pb-6 py-2 px-2  flex items-center  justify-between mx-auto max-w-3xl w-full gap-x-4 relative z-50">
         <div class="text-xs font-normal text-center text-white/60 items-center  gap-x-2 flex">
                <span class="text-white/60">{{dt('Y')}}</span>
                ©
               <a href="{{tenant('storefront_url')}}" target="_blank" class="text-primary-200 hover:text-primary-400 inline-block">{{ tenant('name') }}</a>
         </div>
-      
-    
+
         <div class="flex items-center gap-x-2 text-xs text-white/60">
             باستخدام
             <a href="https://broshur.com" target="_blank" class="cursor-pointer items-center w-full inline-flex gap-x-2 font-semibold text-[#219EBC] hover:text-[#3daac5]">
@@ -85,6 +81,13 @@
                 بروشور
             </a>
         </div>
+
+        <div>   
+            <a href="{{route('storefront.agreement',{'tenant' : tenant('handle')})}}" class="text-xs text-primary-200 hover:text-primary-400 inline-block"> الاتفاقية والخصوصية </a>
+        </div>
+      
+    
+      
     </footer>
 
 </div>

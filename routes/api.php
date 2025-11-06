@@ -226,6 +226,8 @@ Route::middleware(['auth:sanctum','admin'])
               Route::post('reviews', Reviews\UpdateReviews::class);
               Route::get('team', Team\GetTeam::class);
               Route::post('team', Team\UpdateTeam::class);
+              Route::get('agreement', Agreement\GetAgreement::class);
+              Route::post('agreement', Agreement\UpdateAgreement::class);
     });
 
  

@@ -9,6 +9,10 @@ Volt::route('{tenant}/{lang?}', 'storefront.home')
     ->middleware(['currentBroshur'])
     ->name('storefront.home');
 
+Volt::route('{tenant}/agreement', 'storefront.agreement')
+    ->middleware(['currentBroshur'])
+    ->name('storefront.agreement');
+
 Volt::route('{tenant}/preview', 'storefront.home')
     // ->domain('{tenant}.' . config('app.domain'))
     ->middleware(['currentBroshur'])
