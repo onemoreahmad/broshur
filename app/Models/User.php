@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'current_tenant_id',
         'meta',
+        'image',
     ];
 
     /**
@@ -60,7 +61,7 @@ class User extends Authenticatable
             return Storage::url($value);
         }
 
-        return 'https://ui-avatars.com/api/?background=219EBD&color=fff&name=' . data_get($this, 'name');
+        return 'https://ui-avatars.com/api/?background=219EBD&color=fff&name=' . data_get($this, 'email');
     }
   
 

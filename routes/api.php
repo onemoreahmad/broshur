@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Resources\TenantResource;
 use App\Http\Resources\UserResource;
@@ -17,11 +18,31 @@ Route::get('/auth', function (Request $request) {
 
 
 Route::post('/account', function (Request $request) {
+    $user = $request->user();
 
-    $request->user()->update($request->all());
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4048',
+    ]);
+    
+    $data = $request->only(['name', 'email']);
+    
+    if ($request->hasFile('image')) {
+        // Delete old image if exists
+        if ($user->getRawOriginal('image') && Storage::disk('public')->exists($user->getRawOriginal('image'))) {
+            Storage::disk('public')->delete($user->getRawOriginal('image'));
+        }
+        
+        // Store new image
+        $data['image'] = $request->file('image')->store('users');
+    }
+    
+    $user->update($data);
+    
     return response()->json([
         'message' => 'Account updated successfully',
-        'user' => UserResource::make($request->user()) ,
+        'user' => UserResource::make($user->fresh()) ,
     ]);
 })->middleware('auth:sanctum');
 
