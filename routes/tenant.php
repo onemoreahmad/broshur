@@ -5,8 +5,8 @@ use Livewire\Volt\Volt;
 use Livewire\Livewire;
   
 Livewire::setUpdateRoute(function ($handle) {
-    return Route::post('/livewire/update', $handle)
-        ->middleware(App\Http\Middleware\CurrentBroshur::class);
+    return Route::post('{tenant}/livewire/update', $handle)
+        ->middleware(['currentBroshur']);
 });
 
 // sitefront routes
