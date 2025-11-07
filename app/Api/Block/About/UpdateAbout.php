@@ -40,6 +40,7 @@ class UpdateAbout
         return response()->json([
             'message' => 'About block updated successfully',
             'data' => [
+                'id' => $block->id,
                 'title' => $block->config['title'],
                 'text' => $block->config['text'],
                 'active' => (boolean) $block->active,

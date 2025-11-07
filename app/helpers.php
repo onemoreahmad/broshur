@@ -167,7 +167,8 @@ if (!function_exists('poseClass')) {
 			 prose-ul:list-disc prose-ul:list-inside prose-ul:ps-5 prose-img:rounded-2xl xl:prose-p:text-base prose-p:my-1xx  
              prose-figure:mx-auto prose-img:mx-auto prose-img:my-8 
              xl:prose-h1:text-4xl prose-h1:text-xl prose-h1:font-semibold prose-h2:font-semibold 
-             prose-h3:font-semibold  prose-h3:text-xl xl:prose-h2:text-2xl prose-h2:text-lg prose-headings:text-gray-800 prose-headings:my-2 prose-p:text-gray-700 xl:prose-p:leading-9
+             prose-ul:text-gray-600 prose-ul:font-thin prose-ol:text-gray-600 prose-ol:font-thin 
+             prose-h3:font-semibold  prose-h3:text-xl xl:prose-h2:text-2xl prose-h2:text-lg prose-headings:text-gray-800 prose-headings:my-2 prose-p:font-thin prose-p:text-gray-700 xl:prose-p:leading-9
         ';
     }
 }

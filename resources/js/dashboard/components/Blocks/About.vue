@@ -12,12 +12,38 @@
                     </h2>
                     
                 </div> 
-                
+                 
                 <UiToggle name="active" label="تفعيل القسم" v-model="form.active"   />
 
                 <section v-if="form.active" class="flex flex-col gap-1"> 
                     <UiInput name="title" label="العنوان" v-model="form.title" placeholder="مثال : من نحن ؟" />
-                    <UiTextarea name="text"  v-model="form.text" placeholder="اكتب نص من نحن هنا..." />
+                    <UiEditor name="text" 
+                        v-model="form.text" 
+                        placeholder="اكتب نص من نحن هنا..." 
+                        media-collection="block-editor-images" 
+                        model-type="block" 
+                        :model-id="form.id" 
+                        :toolbar="
+                        [
+                            'heading', '|', 'bold', 'italic', 'underline', '|',
+                            'fontColor', 'fontBackgroundColor', 'alignment',
+                            'link',
+                            '|',
+                            'mediaEmbed',
+                            'insertImage',
+                            '|',
+                           
+                            'bulletedList',
+                            'numberedList',
+
+                            'blockQuote',
+                          
+                            '|',
+                            'codeBlock',
+                            '|',
+                            'horizontalLine',
+                        ]"
+                    />
                 </section>
           
                 
@@ -47,6 +73,7 @@ const { notify }  = useNotification()
 const errorsStore = useErrorsStore()
 
 const form = ref({
+    id: null,
     title: '',
     text: '',
     active: true,

@@ -1,0 +1,49 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('media', function (Blueprint $table) {
+            $table->id();
+            $table->uuid('uuid')->unique();
+
+            $table->string('collection_name')->index();
+            $table->string('collection_group')->nullable();
+            $table->string('disk')->nullable();
+
+            $table->text('path')->nullable();
+            $table->string('name')->nullable();
+            $table->string('file_name')->nullable();
+            $table->string('extension')->nullable();
+            $table->string('mime_type')->nullable();
+            $table->string('type')->nullable();
+            $table->unsignedBigInteger('size')->nullable();
+            $table->unsignedBigInteger('width')->nullable();
+            $table->unsignedBigInteger('height')->nullable();
+            $table->decimal('aspect_ratio', 8, 2, true)->nullable();
+            $table->string('average_color')->nullable();
+            $table->decimal('duration', 19, 2, true)->nullable();
+
+            $table->unsignedBigInteger('order_column')->nullable()->index();
+            $table->json('metadata')->nullable();
+
+            $table->json('generated_conversions')->nullable();
+
+            $table->nullableMorphs('model');
+            $table->unsignedBigInteger('tenant_id')->nullable();
+
+            $table->timestamps();
+
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('media');
+    }
+};

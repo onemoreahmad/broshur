@@ -10,10 +10,11 @@ class GetAbout
 
     public function handle()
     {
-        $block = \App\Models\Block::where('name', 'about')->first();
+        $block = \App\Models\Block::firstOrCreate(['name' => 'about']);
         
         return response()->json([
             'data' => [
+                'id' => $block->id,
                 'title' => data_get($block, 'config.title', ''),
                 'text' => data_get($block, 'config.text', ''),
                 'active' => (boolean) data_get($block, 'active', true),

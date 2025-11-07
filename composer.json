@@ -12,7 +12,7 @@
         "php": "^8.2",
         "alaminfirdows/laravel-editorjs": "^2.3",
         "bkwld/cloner": "^3.14",
-        "elegantly/laravel-media": "^4.4",
+        "elegantly/laravel-media": "^4.5",
         "kra8/laravel-snowflake": "^2.4",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",

@@ -1,0 +1,51 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('media_conversions', function (Blueprint $table) {
+            $table->id();
+            $table->uuid('uuid')->unique();
+
+            $table->string('conversion_name');
+
+            $table->foreignId('media_id')->index();
+
+            $table->string('state')->nullable();
+            $table->dateTime('state_set_at')->nullable();
+
+            $table->longText('contents')->nullable();
+
+            $table->string('disk')->nullable();
+
+            $table->text('path')->nullable();
+            $table->string('name')->nullable();
+            $table->string('file_name')->nullable();
+            $table->string('extension')->nullable();
+            $table->string('mime_type')->nullable();
+            $table->string('type')->nullable();
+            $table->unsignedBigInteger('size')->nullable();
+            $table->unsignedBigInteger('width')->nullable();
+            $table->unsignedBigInteger('height')->nullable();
+            $table->decimal('aspect_ratio', 8, 2, true)->nullable();
+            $table->string('average_color')->nullable();
+            $table->decimal('duration', 19, 2, true)->nullable();
+
+            $table->json('metadata')->nullable();
+            
+            $table->unique(['conversion_name', 'media_id']);
+
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('media_conversations');
+    }
+};

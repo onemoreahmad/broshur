@@ -14,10 +14,13 @@ class UploadMedia
 {
     public function upload()
     {
+      
+
         $modelType = request()->modelType ?: request()->headers->get('modelType');
         $modelId = request()->modelId ?: request()->headers->get('modelId');
         $mediaCollection = request()->mediaCollection ?: request()->headers->get('mediaCollection');
-        $tenantId = request()->tenantId ?: request()->headers->get('tenantId');
+        // $tenantId = request()->tenantId ?: request()->headers->get('tenantId');
+        $tenantId = tenant('id');
  
         if (request()->file('file')) {
             $file = request()->file('file');
@@ -28,28 +31,11 @@ class UploadMedia
         if($modelType == 'tenant'){
             $model = Tenant::whereId($modelId)->firstOrFail();
         }
- 
-        if($modelType == 'page'){
-            // $model = Page::whereHashId(request()->modelId)->firstOrFail();
-            $model = Page::whereId($modelId)->firstOrFail();
-        }
-
-        if($modelType == 'user'){
-            $model = User::whereId($modelId)->firstOrFail();
-        }
-
+  
         if($modelType == 'block'){
             $model = Block::whereId($modelId)->firstOrFail();
         }
-
-        if($modelType == 'post'){
-            $model = Post::whereId($modelId)->firstOrFail();
-        }
-
-        // if($modelType == 'tenantApp'){
-        //     $model = TenantApp::whereId($modelId)->firstOrFail();
-        // }
-
+   
         $media = $model->addMedia(
             file: $file->getRealPath(),
             collectionName: $mediaCollection,
