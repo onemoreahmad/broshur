@@ -44,7 +44,7 @@
                                 <img :src="service.icon" :alt="service.name" class="w-8 h-8 object-contain" />
                             </template>
                             <template x-if="service.icon && !service.icon.startsWith('http://') && !service.icon.startsWith('https://')">
-                                <span class="text-2xl" x-text="service.icon"></span>
+                                <span class="size-7 text-{{ option('primaryColor', 'blue') }}-600" x-html="service.icon"></span>
                             </template>
                             <template x-if="!service.icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-{{ option('primaryColor', 'blue') }}-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

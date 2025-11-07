@@ -24,9 +24,10 @@
     "dependencies": {
         "@ckeditor/ckeditor5-core": "^43.0.0",
         "@ckeditor/ckeditor5-ui": "^43.0.0",
-        "ckeditor5": "^43.0.0",
         "@editorjs/editorjs": "^2.31.0",
         "@editorjs/list": "^2.0.8",
-        "@kyvg/vue3-notification": "^3.4.2"
+        "@kyvg/vue3-notification": "^3.4.2",
+        "ckeditor5": "^43.0.0",
+        "vue3-icon-picker": "^0.2.1"
     }
 }

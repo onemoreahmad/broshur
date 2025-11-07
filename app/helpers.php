@@ -280,7 +280,7 @@ if (!function_exists('currency')) {
 }
 
 if (!function_exists('renderBlock')) {
-    function renderBlock($component, $view = null, $parms = [], $isLazy = false)
+    function renderBlock($component, $view = null, $parms = [], $isLazy = true)
     {
         $parms['component'] = $component;
         $parms['view'] = $view;
@@ -299,7 +299,7 @@ if (!function_exists('renderBlock')) {
 }
 
 if (!function_exists('renderBlockComponent')) {
-    function renderBlockComponent($component, $parms = [], $isLazy = false)
+    function renderBlockComponent($component, $parms = [], $isLazy = true)
     {
         $parms['component'] = $component;
 

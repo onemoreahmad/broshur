@@ -22,8 +22,8 @@ class UpdateServices
             'services.*.subtitle' => ['nullable', 'string', 'max:255'],
             'services.*.detail' => ['nullable', 'string', 'max:2000'],
             'services.*.price' => ['nullable', 'numeric', 'min:0'],
-            'services.*.icon' => ['nullable', 'string', 'max:100'],
-            'services.*.image' => ['nullable', 'string', 'max:1024'],
+            'services.*.icon' => ['nullable', 'string'],
+            'services.*.image' => ['nullable', 'string', 'max:5024'],
             'services.*.active' => ['nullable', 'boolean'],
             'services.*.addons' => ['nullable', 'array'],
             'services.*.addons.*.id' => ['nullable', 'integer', 'exists:service_addons,id'],
@@ -44,14 +44,7 @@ class UpdateServices
         return (int) round((float) $price * 100);
     }
 
-    private function normalizeIcon($icon)
-    {
-        if ($icon === null || $icon === '') {
-            return null;
-        }
-        return trim($icon);
-    }
-
+ 
     public function handle(Request $request)
     {
         $tenantId = currentTenant()->id;
@@ -94,7 +87,7 @@ class UpdateServices
                             'subtitle' => data_get($serviceData, 'subtitle'),
                             'detail' => data_get($serviceData, 'detail'),
                             'price' => $this->convertPriceToCents(data_get($serviceData, 'price')), // Convert to cents
-                            'icon' => $this->normalizeIcon(data_get($serviceData, 'icon')),
+                            'icon' => data_get($serviceData, 'icon'),
                             'image' => data_get($serviceData, 'image'),
                             'active' => (bool) data_get($serviceData, 'active', true),
                             'sort' => $serviceIndex,
@@ -109,10 +102,10 @@ class UpdateServices
                         'subtitle' => data_get($serviceData, 'subtitle'),
                         'detail' => data_get($serviceData, 'detail'),
                         'price' => $this->convertPriceToCents(data_get($serviceData, 'price')), // Convert to cents
-                        'icon' => $this->normalizeIcon(data_get($serviceData, 'icon')),
+                        'icon' => data_get($serviceData, 'icon'),
                         'image' => data_get($serviceData, 'image'),
                         'active' => (bool) data_get($serviceData, 'active', true),
-                        'sort' => $serviceIndex,
+                        'sort' => $serviceIndex,    
                     ]);
                 }
 

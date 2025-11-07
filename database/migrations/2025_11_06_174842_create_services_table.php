@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('subtitle')->nullable();
             $table->text('detail')->nullable();
             $table->integer('price')->nullable();
-            $table->string('icon')->nullable();
+            $table->text('icon')->nullable();
             $table->string('image')->nullable();
             $table->boolean('active')->default(true);
             $table->integer('sort')->default(0);

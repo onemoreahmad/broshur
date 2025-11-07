@@ -17,7 +17,7 @@ class UpdateFeatures
             'title' => ['nullable', 'string', 'max:200'],
             'subtitle' => ['nullable', 'string', 'max:500'],
             'features' => ['nullable', 'array'],
-            'features.*.icon' => ['nullable', 'string', 'max:100'],
+            'features.*.icon' => ['nullable', 'string'],
             'features.*.title' => ['required', 'string', 'max:200'],
             'features.*.description' => ['nullable', 'string', 'max:1000'],
             'features.*.active' => ['nullable', 'boolean'],

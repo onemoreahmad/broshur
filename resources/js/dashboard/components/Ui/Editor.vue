@@ -44,9 +44,7 @@ import {
 import "ckeditor5/ckeditor5.css";
 
 import coreTranslations from "ckeditor5/translations/ar.js";
-
-
-
+ 
 const ckeditor = useTemplateRef('ckeditor')
 
 const editorConfig = computed(() => ({

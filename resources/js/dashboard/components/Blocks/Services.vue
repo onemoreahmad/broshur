@@ -68,7 +68,7 @@
                     <div v-if="service.active" :id="`service-panel-${index}`" class="mt-1 grid grid-cols-1 gap-1">
                         <UiInput :name="`services.${index}.name`" label="اسم الخدمة" v-model="service.name" placeholder="اسم الخدمة" />
                         <UiInput :name="`services.${index}.subtitle`" label="العنوان الفرعي" v-model="service.subtitle" placeholder="العنوان الفرعي للخدمة" />
-                        <UiInput :name="`services.${index}.icon`" label="الأيقونة" v-model="service.icon" placeholder="مثال: ⭐ أو 🚀 أو 📱" />
+                        <UiIcon :name="`services.${index}.icon`" label="الأيقونة" v-model="service.icon"  />
                         <UiUploadImage 
                             v-model="service.image"
                             :name="`services.${index}.image`"

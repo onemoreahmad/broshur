@@ -76,13 +76,13 @@
                                     </button>
                                 </div>
                             </div>
-
+ 
                             <UiToggle :name="`features.${index}.active`" label="تفعيل الميزة" v-model="feature.active" />
 
                             <div v-if="feature.active" :id="`feature-panel-${index}`" XXv-show="!collapsed[index]" class="space-y-1 mt-1 flex flex-col gap-1">
                                 <div class="grid grid-cols-1 gap-1">
                                  
-                                    <UiInput :name="`features.${index}.icon`" label="الأيقونة" v-model="feature.icon" placeholder="مثال: ⭐ أو 🚀 أو 📱" />
+                                    <UiIcon :name="`features.${index}.icon`" label="الأيقونة" v-model="feature.icon" placeholder="مثال: ⭐ أو 🚀 أو 📱" />
                                     <UiInput :name="`features.${index}.title`" label="العنوان" v-model="feature.title" placeholder="اكتب عنوان الميزة هنا..." />
                                     <UiInput :name="`features.${index}.description`" label="الوصف" v-model="feature.description" placeholder="اكتب وصف الميزة هنا..." />
     
