@@ -12,23 +12,24 @@
      }"
      @keydown.escape.window="closeContactModal(); closeSubscriptionModal()">
  
-        <div class="flex items-center gap-x-2"> 
+        <div class="flex flex-wrap gap-4"> 
         {% for link in links %}
             {% if link.type == 'cta'  %}
                 {% if data_get(link, 'slug') == 'whatsapp' and link.active %}
-                    <a href="https://wa.me/{{data_get(link, 'link')}}?text=السلام عليكم {{tenant('name')}}" target="_blank" class="w-full bg-white border-2 border-{{ option('primaryColor', 'blue') }}-700 text-{{ option('primaryColor', 'blue') }}-900 flex items-center gap-x-2 justify-center py-3 px-4 rounded-lg font-medium hover:bg-{{ option('primaryColor', 'blue') }}-700 hover:text-white transition-colors duration-200">
+                    <a href="https://wa.me/{{data_get(link, 'link')}}?text=السلام عليكم {{tenant('name')}}" target="_blank" class="flex-grow shrink bg-white border-2 border-{{ option('primaryColor', 'blue') }}-700 text-{{ option('primaryColor', 'blue') }}-900 flex items-center gap-x-2 justify-center py-3 px-4 rounded-lg font-medium hover:bg-{{ option('primaryColor', 'blue') }}-700 hover:text-white transition-colors duration-200">
                         {{icon('brand-whatsapp', 6)}}
                         ابدأ المحادثة    
+                        {{icon('arrow-up-left', 6)}}
                     </a>
                 {% endif %}
                 {% if data_get(link, 'slug') == 'contact' and link.active %}
-                    <button type="button" @click="openContactModal()" class="w-full bg-{{ option('primaryColor', 'blue') }}-700 hover:bg-{{ option('primaryColor', 'blue') }}-800 flex items-center justify-center gap-x-2 border-2 border-transparent text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200">
+                    <button type="button" @click="openContactModal()" class="shrink flex-grow  bg-{{ option('primaryColor', 'blue') }}-700 hover:bg-{{ option('primaryColor', 'blue') }}-800 flex items-center justify-center gap-x-2 border-2 border-transparent text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200">
                         {{icon('phone-call', 6)}}
                         اتصل بنا
                     </button>
                 {% endif %}
                 {% if data_get(link, 'slug') == 'subscription' and link.active %}
-                    <button type="button" @click="openSubscriptionModal()" class="w-full bg-white border-2 border-{{ option('primaryColor', 'blue') }}-700 text-{{ option('primaryColor', 'blue') }}-900 flex items-center gap-x-2 justify-center py-3 px-4 rounded-lg font-medium hover:bg-{{ option('primaryColor', 'blue') }}-700 hover:text-white transition-colors duration-200">
+                    <button type="button" @click="openSubscriptionModal()" class="shrink flex-grow  bg-{{ option('primaryColor', 'blue') }}-700 hover:bg-{{ option('primaryColor', 'blue') }}-800 flex items-center justify-center gap-x-2 border-2 border-transparent text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200">
                         {{icon('mail', 6)}}
                         اشترك الآن
                     </button>
@@ -37,18 +38,19 @@
         {% endfor %}
         </div>
   
-
-
-        <div class="flex items-center gap-x-2"> 
+ 
+        <div class="flex flex-wrap gap-4"> 
         {% for link in links %}             
             {% if data_get(link, 'slug') starts with 'custom-' and link.active %}
-                <a href="{{link.link}}" target="_blank" class="w-full bg-white border-2 border-{{ option('primaryColor', 'blue') }}-700 text-{{ option('primaryColor', 'blue') }}-900 flex items-center gap-x-2 justify-center py-3 px-4 rounded-lg font-medium hover:bg-{{ option('primaryColor', 'blue') }}-700 hover:text-white transition-colors duration-200">
+                <a href="{{link.link}}" target="_blank" class="shrink flex-grow  bg-white border-2 border-{{ option('primaryColor', 'blue') }}-700 text-{{ option('primaryColor', 'blue') }}-900 flex items-center gap-x-2 justify-center py-3 px-4 rounded-lg font-medium hover:bg-{{ option('primaryColor', 'blue') }}-700 hover:text-white transition-colors duration-200">
                     {{icon('link', 6)}}
                     {% if data_get(link, 'meta.label') %}
                         {{data_get(link, 'meta.label')}}
                     {% else %}
                         رابط
                     {% endif %}
+                    {{icon('arrow-up-left', 6)}}
+
                 </a>
             {% endif %}
         {% endfor %}
