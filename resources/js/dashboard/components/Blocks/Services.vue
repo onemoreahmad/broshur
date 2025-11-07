@@ -68,10 +68,7 @@
                     <div v-if="service.active" :id="`service-panel-${index}`" class="mt-1 grid grid-cols-1 gap-1">
                         <UiInput :name="`services.${index}.name`" label="اسم الخدمة" v-model="service.name" placeholder="اسم الخدمة" />
                         <UiInput :name="`services.${index}.subtitle`" label="العنوان الفرعي" v-model="service.subtitle" placeholder="العنوان الفرعي للخدمة" />
-                        <UiTextarea :name="`services.${index}.detail`" label="تفاصيل الخدمة" v-model="service.detail" placeholder="تفاصيل الخدمة" />
-                        <UiInput :name="`services.${index}.price`" label="السعر" v-model="service.price" type="number" step="0.01" min="0" placeholder="0.00" />
                         <UiInput :name="`services.${index}.icon`" label="الأيقونة" v-model="service.icon" placeholder="مثال: ⭐ أو 🚀 أو 📱" />
-                    
                         <UiUploadImage 
                             v-model="service.image"
                             :name="`services.${index}.image`"
@@ -82,7 +79,12 @@
                             @upload-end="imageUploadingCount--"
                         />
 
+                        <!--
+                        <UiTextarea :name="`services.${index}.detail`" label="تفاصيل الخدمة" v-model="service.detail" placeholder="تفاصيل الخدمة" />
+                        <UiInput :name="`services.${index}.price`" label="السعر" v-model="service.price" type="number" step="0.01" min="0" placeholder="0.00" />
+                        -->
                         <!-- Addons Section -->
+                        <!--
                         <div class="mt-3 border-t pt-3">
                             <div class="flex items-center justify-between mb-2">
                                 <label class="text-sm font-medium text-gray-700">الإضافات</label>
@@ -97,8 +99,9 @@
                                     إضافة
                                 </button>
                             </div>
-
+                            -->
                             <!-- Addons List -->
+                            <!--
                             <div v-if="service.addons && service.addons.length > 0" class="space-y-2 mt-2">
                                 <div 
                                     v-for="(addon, addonIndex) in service.addons" 
@@ -139,7 +142,7 @@
                                 لا توجد إضافات
                             </div>
                         </div>
-
+                        -->
                     </div>
                 </div>
             </div>
