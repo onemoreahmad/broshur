@@ -6,9 +6,8 @@ use Lorisleiva\Actions\Concerns\AsAction;
 use Lorisleiva\Actions\Concerns\WithAttributes;
 use App\Models\Tenant;
 use App\Events\TenantCreated;
-
-// use App\Models\Plan;
-
+use App\Models\Plan;
+    
 class CreateTenant
 {
     use AsAction, WithAttributes;
@@ -43,14 +42,14 @@ class CreateTenant
             ],
         ]);
 
-        // $plan = Plan::where('slug', 'basic')
-        //     ->where('is_system', true)
-        //     ->where('active', true)
-        //     ->first();
+        $plan = Plan::where('slug', 'basic')
+            ->where('is_system', true)
+            ->where('active', true)
+            ->first();
 
-        // if ($plan) {    
-        //     $tenant->subscribeTo($plan);
-        // }
+        if ($plan) {    
+            $tenant->subscribeTo($plan);
+        }
 
         event(new TenantCreated($tenant));
 

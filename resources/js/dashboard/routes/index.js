@@ -2,12 +2,15 @@
     import { useAuthStore } from '../stores/auth'
 
     import Home from '../views/Home.vue';
+    import Content from '../views/Content.vue';
     import Orders from '../views/Orders.vue';
     import OrderDetail from '../views/OrderDetail.vue';
     import Account from '../views/Account.vue';
     import Design from '../views/Design.vue';
     import Share from '../views/Share.vue';
     import Settings from '../views/Settings.vue';
+    import Subscription from '../views/Subscription.vue';
+
 
     // blocks
     import HeaderBlock from '../components/Blocks/Header.vue';
@@ -22,18 +25,19 @@
     import TeamBlock from '../components/Blocks/Team.vue';
     import ServicesBlock from '../components/Blocks/Services.vue';
     import AgreementBlock from '../components/Blocks/Agreement.vue';
-    
+      
     const router = createRouter({
         history: createWebHistory('/dashboard'),
      
         routes: [
+            { path: '/', component: Home, name: 'home' },
             {   
-                path: '/', 
-                component: Home,
+                path: '/content', 
+                component: Content,
                 children: [
                     {
                       path: '',
-                      name: 'home',
+                      name: 'content',
                       component: HeaderBlock,
                     },
                     {
@@ -100,6 +104,7 @@
             { path: '/design', component: Design, name: 'design' },
             { path: '/share', component: Share, name: 'share' },
             { path: '/settings', component: Settings, name: 'settings' },
+            { path: '/subscription', component: Subscription, name: 'subscription' },
         ],  
     });
 

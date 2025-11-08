@@ -48,6 +48,7 @@ class Plan extends SPlan
         // return cache()->rememberForever('plans.getAll', function () {
         return Plan::where('is_system', true)
             // ->where('periodicity_type', $periodicity)
+            // ->orWhere('price', 0)
             // ->where('active', true)->get()->keyBy('label')->flatten();
             ->where('active', true)->get();
         // });

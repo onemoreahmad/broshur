@@ -19,7 +19,7 @@ class SubscriptionSeeder extends Seeder
                 'slug'             => 'basic',
             ],
             [
-                'label'            => 'basic',
+                'label'            => 'الباقة المجانية',
                 'name'             => 'Basic',
                 'periodicity_type' => null,
                 'periodicity'      => null,

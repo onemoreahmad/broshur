@@ -29,6 +29,7 @@ class TenantResource extends JsonResource
             'city' => $this->city,
             'email' => $this->email,
             'phone' => $this->phone,
+            'plan' => $this->subscription?->plan,
         ];
     }
 }

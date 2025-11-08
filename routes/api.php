@@ -29,6 +29,14 @@ Route::post('/orders', \App\Api\Order\CreateOrder::class)->middleware('auth:sanc
 
 Route::get('/orders/{id}', \App\Api\Order\GetOrder::class)->middleware('auth:sanctum');
 
+Route::middleware(['auth:sanctum', 'admin'])
+    ->prefix('subscription')
+    ->as('subscription.')
+    ->group(function () {
+        Route::get('plans', \App\Api\Subscription\GetPlans::class);
+        Route::post('/', \App\Api\Subscription\SubscribeToPlan::class);
+    });
+
 
 // Manage Blocks
 Route::middleware(['auth:sanctum','admin'])
