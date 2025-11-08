@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Traits\Tenantable;
+use YMigVal\LaravelModelCache\HasCachedQueries;
 
 class Portfolio extends Model
 {
-    use Tenantable;
+    use Tenantable, HasCachedQueries;
 
+    protected $cacheMinutes = 1200; // 20 hours
+
+    protected $cachePrefix = 'portfolios_';
+    
     protected $fillable = [
         'name',
         'image',

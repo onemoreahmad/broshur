@@ -15,10 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('theme_id')->default(1); // 1 = default theme app
-            $table->unsignedBigInteger('linkinbio_theme_id')->default(1); // 1 = default theme app
-            $table->unsignedBigInteger('pages_theme_id')->default(1); // 1 = default theme app
-            $table->unsignedBigInteger('blog_theme_id')->default(1); // 1 = default theme app
-            $table->unsignedBigInteger('menu_theme_id')->default(1); // 1 = default theme app
             $table->string('handle')->unique()->index();
             $table->string('name');
             $table->string('domain')->unique()->index()->nullable();
@@ -50,6 +46,12 @@ return new class extends Migration
             $table->bigInteger('sales')->nullable()->default(0);
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index(['handle', 'active'], 'tenants_handle_active_idx');
+            $table->index(['user_id', 'active'], 'tenants_user_active_idx');
+            $table->index(['theme_id', 'active'], 'tenants_theme_active_idx');
+            $table->index(['domain', 'active'], 'tenants_domain_active_idx');
+            $table->index(['domain', 'domain_status', 'active'], 'tenants_domain_domain_status_active_idx');
         });
 
         Schema::create('tenantables', function (Blueprint $table) {

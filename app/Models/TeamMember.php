@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
 use App\Traits\Tenantable;
+use YMigVal\LaravelModelCache\HasCachedQueries;
 
 class TeamMember extends Model
 {
-    use HasFactory, Tenantable;
+    use HasFactory, Tenantable, HasCachedQueries;
 
+    protected $cacheMinutes = 1200; // 20 hours
+
+    protected $cachePrefix = 'team_members_';
+    
     protected $fillable = [
         'tenant_id',
         'block_id',

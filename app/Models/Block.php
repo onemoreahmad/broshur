@@ -9,11 +9,16 @@ use Elegantly\Media\Concerns\HasMedia;
 use Elegantly\Media\Contracts\InteractWithMedia;
 use Elegantly\Media\MediaCollection;
 use App\Traits\Tenantable;
+use YMigVal\LaravelModelCache\HasCachedQueries;
  
 class Block extends Model implements InteractWithMedia
 {
-    use HasShortflakePrimary, HasMedia, Tenantable;
- 
+    use HasShortflakePrimary, HasMedia, Tenantable, HasCachedQueries;
+
+    protected $cacheMinutes = 1200; // 20 hours
+
+    protected $cachePrefix = 'blocks_';
+    
     protected $casts = [
         'config' => SchemalessAttributes::class,
         'active' => 'boolean',

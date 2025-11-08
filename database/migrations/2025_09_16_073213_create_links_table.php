@@ -25,6 +25,12 @@ return new class extends Migration
             $table->unsignedSmallInteger('sort')->default(1000)->index();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->index(['active', 'type', 'tenant_id'], 'links_active_type_tenant_idx');
+            $table->index(['tenant_id', 'active', 'sort'], 'links_tenant_active_sort_idx');
+            $table->index(['block_id', 'active', 'sort'], 'links_block_active_sort_idx');
+            $table->index(['block_id', 'type', 'tenant_id', 'sort'], 'links_block_type_tenant_sort_idx');
+            $table->index(['type', 'slug', 'tenant_id'], 'links_type_slug_tenant_idx');
         });
     }
  

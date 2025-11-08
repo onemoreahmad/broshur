@@ -31,6 +31,8 @@ return new class extends Migration
             $table->unique(['slug','app']);
             $table->softDeletes();
             $table->timestamps();
+
+            $table->index(['active', 'is_system'], 'themes_active_is_system_idx');
         });
 
 
@@ -43,6 +45,8 @@ return new class extends Migration
             $table->json('config')->nullable();
             $table->unsignedTinyInteger('order')->default(100);
             $table->timestamps();
+
+            $table->index(['theme_id', 'tenant_id'], 'theme_options_theme_tenant_idx');
         });
     }
  

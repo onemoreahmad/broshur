@@ -23,7 +23,7 @@ return new class extends Migration
             $table->json('meta')->nullable();
             $table->timestamps();
             
-            $table->index(['tenant_id', 'active', 'sort']);
+            $table->index(['tenant_id', 'active', 'sort'], 'portfolios_tenant_active_sort_idx');
         });
     }
  

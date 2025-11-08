@@ -23,7 +23,8 @@
         "lucasdotvin/laravel-soulbscription": "^4.3",
         "rcrowe/twigbridge": "^0.14.6",
         "spatie/laravel-model-status": "^1.18",
-        "spatie/laravel-schemaless-attributes": "^2.5"
+        "spatie/laravel-schemaless-attributes": "^2.5",
+        "ymigval/laravel-model-cache": "^1.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16",

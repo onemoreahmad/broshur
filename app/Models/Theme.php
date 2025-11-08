@@ -4,9 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
+use YMigVal\LaravelModelCache\HasCachedQueries;
 
 class Theme extends Model
 {
+    use HasCachedQueries;
+
+    protected $cacheMinutes = 1200; // 20 hours
+
+    protected $cachePrefix = 'themes_';
+    
     protected $guarded = [];
 
     public $casts = [

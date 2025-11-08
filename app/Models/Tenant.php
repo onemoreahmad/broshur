@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
 use Illuminate\Support\Facades\Storage;
 use LucasDotVin\Soulbscription\Models\Concerns\HasSubscriptions;
+use YMigVal\LaravelModelCache\HasCachedQueries;
 
 class Tenant extends Model
 {
-    use HasSubscriptions;
+    use HasSubscriptions, HasCachedQueries;
+
+    protected $cacheMinutes = 1200; // 20 hours
+
+    protected $cachePrefix = 'tenants_';
     
     public $casts = [
         'meta' => SchemalessAttributes::class,
