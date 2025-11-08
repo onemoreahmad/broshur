@@ -231,7 +231,7 @@ const addService = () => {
         subtitle: '',
         detail: '',
         price: null,
-        icon: null,
+        icon: 'Versions',
         image: null,
         image_url: '',
         active: true,

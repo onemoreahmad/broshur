@@ -1,6 +1,6 @@
 <template>
     <UiField :name="name" :label="label"  class="w-full z-50"> 
-        <Vue3IconPicker v-model="model" :placeholder="placeholder" searchPlaceholder="home, user, magic ..etc" iconLibrary="tabler" />
+        <Vue3IconPicker valueType="name"  v-model="model" :placeholder="placeholder" searchPlaceholder="home, user, magic ..etc" iconLibrary="tabler" />
     </UiField>
 </template>
 

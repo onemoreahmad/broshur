@@ -1,3 +1,4 @@
+
 <!-- Services Section -->
 <div class="px-5" x-data="{ 
     services: {{services|json_encode}},
@@ -29,39 +30,33 @@
 
     <!-- Services Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <template x-for="service in services" :key="service.id">
-            <div 
-                @click="openModal(service)"
-                class="bg-{{ option('primaryColor', 'blue') }}-50/50 rounded-xl p-6 border-gray-100 hover:bg-{{ option('primaryColor', 'blue') }}-100/60 transition-colors cursor-pointer"
-            >
-          
-
-                <div class="flex items-start gap-4">
-                    <!-- Icon -->
-                    <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-{{ option('primaryColor', 'blue') }}-100 rounded-lg flex items-center justify-center">
-                            <template x-if="service.icon && (service.icon.startsWith('http://') || service.icon.startsWith('https://'))">
-                                <img :src="service.icon" :alt="service.name" class="w-8 h-8 object-contain" />
-                            </template>
-                            <template x-if="service.icon && !service.icon.startsWith('http://') && !service.icon.startsWith('https://')">
-                                <span class="size-7 text-{{ option('primaryColor', 'blue') }}-600" x-html="service.icon"></span>
-                            </template>
-                            <template x-if="!service.icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-{{ option('primaryColor', 'blue') }}-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </template>
-                        </div>
-                    </div>
-                    
-                    <!-- Content -->
-                    <div class="flex-1 min-w-0">
-                        <h4 class="text-lg font-bold text-gray-900 mb-2" x-text="service.name"></h4>
-                        <p class="text-gray-600 text-sm font-thin leading-relaxed" x-text="service.subtitle"></p>
+        {% for service in services %}
+        <div 
+            @click='openModal({{ service|json_encode|raw }})'
+            class="bg-{{ option('primaryColor', 'blue') }}-50/50 rounded-xl p-6 border-gray-100 hover:bg-{{ option('primaryColor', 'blue') }}-100/60 transition-colors cursor-pointer"
+        >
+            <div class="flex items-start gap-4">
+                <!-- Icon -->
+                <div class="flex-shrink-0">
+                    <div class="w-12 h-12 bg-{{ option('primaryColor', 'blue') }}-100 rounded-lg flex items-center justify-center">
+                        {% if service.icon %}
+                         
+                            {% autoescape false %}
+                            <span class="size-7 text-{{ option('primaryColor', 'blue') }}-600">{{ icon(service.icon, 7) }}</span>
+                            {% endautoescape %}
+                      
+                        {% endif %}
                     </div>
                 </div>
+                
+                <!-- Content -->
+                <div class="flex-1 min-w-0">
+                    <h4 class="text-lg font-bold text-gray-900 mb-2">{{ service.name }}</h4>
+                    <p class="text-gray-600 text-sm font-thin leading-relaxed">{{ service.subtitle }}</p>
+                </div>
             </div>
-        </template>
+        </div>
+        {% endfor %}
     </div>
 
     <!-- Service Details Modal -->
@@ -112,12 +107,12 @@
                             <!-- Icon -->
                             <div class="flex-shrink-0">
                                 <div class="w-16 h-16 bg-{{ option('primaryColor', 'blue') }}-100 rounded-xl flex items-center justify-center">
-                                    <template x-if="selectedService.icon && (selectedService.icon.startsWith('http://') || selectedService.icon.startsWith('https://'))">
-                                        <img :src="selectedService.icon" :alt="selectedService.name" class="w-10 h-10 object-contain" />
-                                    </template>
-                                    <template x-if="selectedService.icon && !selectedService.icon.startsWith('http://') && !selectedService.icon.startsWith('https://')">
+                                    {# <template x-if="selectedService.icon">
                                         <span class="size-8 text-{{ option('primaryColor', 'blue') }}-600" x-html="selectedService.icon"></span>
-                                    </template>
+                                    </template> #}
+                                    <span class="size-8 text-{{ option('primaryColor', 'blue') }}-600">{{icon('circle', 8)}}</span>
+
+
                                     <template x-if="!selectedService.icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-{{ option('primaryColor', 'blue') }}-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
