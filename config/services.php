@@ -35,4 +35,15 @@ return [
         ],
     ],
 
+    'moyasar' => [
+        'base_url' => 'https://api.moyasar.com/v1/',
+        'publishable_key' => env('MOYASAR_PUBLISHABLE_KEY'),
+        'secret_key' => env('MOYASAR_SECRET_KEY'),
+        'callback_url' => env('MOYASAR_CALLBACK_URL'),
+        'webhook_secret' => env('MOYASAR_WEBHOOK_SECRET'),
+        'currency' => 'SAR',
+        'webhook_url' => env('APP_URL') . '/webhooks/moyasar',
+    ],
+ 
+
 ];

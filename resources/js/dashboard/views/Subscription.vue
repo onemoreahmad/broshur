@@ -21,7 +21,7 @@
             </div>
 
             <div v-else>
-                <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
                     <article
                         v-for="plan in plans"
                         :key="plan.key"
@@ -31,7 +31,7 @@
                             <div class="flex items-center gap-3">
                                 <div
                                     :class="[
-                                        'size-12 rounded-2xl flex items-center justify-center text-white shadow-sm',
+                                        'size-12 rounded-2xl flex items-center justify-center text-white p-2',
                                         plan.info?.color || 'bg-primary-500'
                                     ]"
                                 >
@@ -54,7 +54,7 @@
 
                             <span
                                 v-if="isCurrentPlanGroup(plan)"
-                                class="rounded-full bg-primary-100 px-3 py-1 text-xs font-semibold text-primary-600"
+                                class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-primary-600"
                             >
                                 الباقة الحالية
                             </span>
@@ -213,11 +213,31 @@
                 </ul>
             </div>
 
+            <div v-if="requiresPayment" class="mt-6 space-y-4 w-full">
+                <!-- <div class="rounded-2xl border border-primary-100 bg-primary-50/70 p-4 text-sm text-primary-700">
+                    <p>سيتم إكمال الاشتراك بعد نجاح عملية الدفع.</p>
+                    <p class="mt-1 font-medium">
+                        المبلغ المستحق: {{ formatPrice(modalOption?.price) }}
+                        <span>
+                            / {{ periodicityLabel(modalOption?.periodicity_type) }}
+                        </span>
+                    </p>
+                </div> -->
+
+                <div
+                    :id="paymentFormId"
+                    :key="paymentFormKey"
+                    class="rounded-2xl border border-gray-200 bg-white p-4 !w-full"
+                     
+                ></div>
+
+                <p v-if="paymentError" class="text-sm text-red-500">{{ paymentError }}</p>
+            </div>
+
             <div class="mt-8 flex flex-col gap-3 md:flex-row md:justify-end">
-                <button class="btn btn-outline w-full md:w-auto" @click="closePlanModal()" :disabled="submitting">
-                    تراجع
-                </button>
+                 
                 <button
+                    v-if="!requiresPayment"
                     class="btn btn-primary w-full md:w-auto"
                     :disabled="submitting"
                     @click="confirmSubscription"
@@ -231,13 +251,13 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, reactive } from 'vue'
+import { ref, computed, onMounted, reactive, watch, nextTick, onUnmounted } from 'vue'
 import axios from 'axios'
 import { useNotification } from '@kyvg/vue3-notification'
 import { useAuthStore } from '@/stores/auth'
-  import { useHead } from '@unhead/vue'
+import { useHead } from '@unhead/vue'
 
-  const auth = useAuthStore()
+const auth = useAuthStore()
 const { notify } = useNotification()
 
 const plans = ref([])
@@ -249,14 +269,56 @@ const showConfirmModal = ref(false)
 const selectedPlan = ref(null)
 const modalOption = ref(null)
 const selectedOptions = reactive({})
-    
-  useHead({
+
+useHead({
     title: 'الاشتراك والباقات',
     meta: [
-      { name: 'description', content: 'الاشتراك والباقات' },
+        { name: 'description', content: 'الاشتراك والباقات' },
     ],
-  })
-    
+})
+
+const getMetaContent = (name) => {
+    if (typeof document === 'undefined') {
+        return ''
+    }
+
+    const meta = document.head?.querySelector(`meta[name="${name}"]`)
+
+    return meta?.content?.trim() || ''
+}
+
+const publishableKey =
+    getMetaContent('moyasar-publishable-key') ||
+    import.meta.env?.VITE_MOYASAR_PUBLISHABLE_KEY ||
+    (typeof window !== 'undefined' ? window.moyasarPublishableKey : '') ||
+    ''
+
+const callbackUrl =
+    getMetaContent('moyasar-callback-url') ||
+    import.meta.env?.VITE_MOYASAR_CALLBACK_URL ||
+    (typeof window !== 'undefined' ? window.moyasarCallbackUrl : '') ||
+    ''
+
+const MOYASAR_SCRIPT_SRC = 'https://cdn.moyasar.com/mpf/1.12.0/moyasar.js'
+const MOYASAR_STYLES_SRC = 'https://cdn.moyasar.com/mpf/1.12.0/moyasar.css'
+
+const paymentError = ref(null)
+const moyasarReady = ref(false)
+const paymentFormKey = ref(0)
+const paymentFormId = 'moyasar-payment-form'
+const moyasarInstance = ref(null)
+
+const requiresPayment = computed(() => Number(modalOption.value?.price ?? 0) > 0)
+const amountInHalala = computed(() => {
+    const price = Number(modalOption.value?.price ?? 0)
+
+    if (!Number.isFinite(price) || price <= 0) {
+        return 0
+    }
+
+    return Math.round(price * 100)
+})
+
 const fetchPlans = async () => {
     loading.value = true
     try {
@@ -287,17 +349,17 @@ const getSelectedOption = (plan) => {
 
 const optionClasses = (planKey, optionId) => (
     selectedOptions[planKey] === optionId
-        ? 'border-primary-500 bg-primary-50 text-primary-700 shadow-sm'
+        ? 'border-primary-500 bg-primary-50 text-primary-700 p-2'
         : 'border-gray-200 hover:border-primary-200 hover:bg-primary-50/40 text-gray-600'
 )
 
 const isCurrentPlanGroup = (plan) => plan?.options?.some(option => option.id === currentPlanId.value)
 
 const planCardClasses = (plan) => [
-    'border rounded-3xl bg-white p-6 shadow-sm flex flex-col gap-4 h-full transition-all duration-200',
+    'border rounded-3xl bg-white p-6 flex flex-col gap-4 h-full transition-all duration-200',
     isCurrentPlanGroup(plan)
         ? 'border-primary-500 ring-2 ring-primary-200'
-        : 'border-gray-200 hover:border-primary-400 hover:ring-1 hover:ring-primary-100',
+        : 'border-gray-200 hover:border-primary-400X XXhover:ring-1 hover:ring-primary-100',
 ]
 
 const initializeSelections = (force = false) => {
@@ -342,6 +404,18 @@ const formatPrice = (price) => {
     return `${Number(price).toLocaleString('ar-SA')} ر.س`
 }
 
+const paymentDescription = computed(() => {
+    if (!selectedPlan.value) {
+        return 'اشتراك بروشور'
+    }
+
+    const periodicityText = modalOption.value?.periodicity_type
+        ? periodicityLabel(modalOption.value.periodicity_type)
+        : 'مدى الحياة'
+
+    return `اشتراك ${selectedPlan.value.name} - ${periodicityText}`
+})
+
 const openPlanModal = (plan) => {
     if (isCurrentPlanGroup(plan)) {
         return
@@ -356,7 +430,245 @@ const openPlanModal = (plan) => {
     selectedPlan.value = plan
     modalOption.value = option
     pendingPlanId.value = null
+    paymentError.value = null
+    moyasarReady.value = false
     showConfirmModal.value = true
+}
+
+const cleanupPayment = (resetKey = true) => {
+    if (moyasarInstance.value && typeof moyasarInstance.value.destroy === 'function') {
+        try {
+            moyasarInstance.value.destroy()
+        } catch (error) {
+            console.warn('Failed to destroy Moyasar instance', error)
+        }
+    }
+
+    moyasarInstance.value = null
+    moyasarReady.value = false
+    paymentError.value = null
+    if (resetKey) {
+        paymentFormKey.value += 1
+    }
+}
+
+const handlePaymentError = (error, isInitialization = false) => {
+    submitting.value = false
+
+    let message = ''
+
+    if (error) {
+        if (typeof error === 'string') {
+            message = error
+        } else if (error?.message) {
+            message = error.message
+        } else if (error?.detail) {
+            message = error.detail
+        } else if (error?.response?.data?.message) {
+            message = error.response.data.message
+        }
+    }
+
+    if (!message) {
+        message = isInitialization
+            ? 'تعذر تحميل بوابة الدفع. حاول مرة أخرى.'
+            : 'تعذر إكمال عملية الدفع. يرجى التحقق من البيانات والمحاولة مجدداً.'
+    }
+
+    paymentError.value = message
+    console.error(error)
+}
+
+const loadMoyasarAssets = () => {
+    if (typeof window === 'undefined') {
+        return Promise.reject(new Error('Window is not available'))
+    }
+
+    if (window.Moyasar) {
+        return Promise.resolve(window.Moyasar)
+    }
+
+    if (!document.querySelector(`link[href="${MOYASAR_STYLES_SRC}"]`)) {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = MOYASAR_STYLES_SRC
+        document.head.appendChild(link)
+    }
+
+    if (window.__moyasarLoader) {
+        return window.__moyasarLoader
+    }
+
+    window.__moyasarLoader = new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = MOYASAR_SCRIPT_SRC
+        script.async = true
+        script.onload = () => resolve(window.Moyasar)
+        script.onerror = (event) => {
+            script.remove()
+            window.__moyasarLoader = null
+            reject(event)
+        }
+
+        document.head.appendChild(script)
+    })
+
+    return window.__moyasarLoader
+}
+
+const preparePaymentForm = async () => {
+    if (!showConfirmModal.value || !requiresPayment.value) {
+        return
+    }
+
+    const key = typeof publishableKey === 'string' ? publishableKey.trim() : ''
+
+    if (!key) {
+        paymentError.value = 'مفتاح بوابة الدفع غير مهيأ. يرجى التواصل مع الدعم.'
+        return
+    }
+
+    if (amountInHalala.value <= 0) {
+        paymentError.value = 'قيمة الاشتراك غير صالحة للدفع.'
+        return
+    }
+
+    cleanupPayment(false)
+
+    paymentError.value = null
+    moyasarReady.value = false
+    paymentFormKey.value += 1
+
+    await nextTick()
+
+    const formElement = document.getElementById(paymentFormId)
+
+    if (!formElement) {
+        paymentError.value = 'تعذر تهيئة نموذج الدفع. حاول مرة أخرى.'
+        return
+    }
+
+    try {
+        const Moyasar = await loadMoyasarAssets()
+
+        if (!Moyasar) {
+            paymentError.value = 'تعذر تحميل بوابة الدفع. حاول مرة أخرى.'
+            return
+        }
+
+        const options = {
+            element: formElement,
+            amount: amountInHalala.value,
+            currency: 'SAR',
+            description: paymentDescription.value,
+            publishable_api_key: key,
+            methods: ['creditcard', 'mada'],
+            metadata: {
+                plan_id: modalOption.value?.id,
+                plan_key: selectedPlan.value?.key,
+            },
+            on_completed: async (payment) => {
+                await finalizeSubscription(payment)
+            },
+            on_failure: (error) => {
+                handlePaymentError(error)
+            },
+            on_error: (error) => {
+                handlePaymentError(error)
+            },
+            on_cancel: () => {
+                submitting.value = false
+            },
+            on_canceled: () => {
+                submitting.value = false
+            },
+        }
+
+        if (callbackUrl) {
+            options.callback_url = callbackUrl
+        }
+
+        moyasarInstance.value = Moyasar.init(options)
+        moyasarReady.value = true
+    } catch (error) {
+        handlePaymentError(error, true)
+    }
+}
+
+const submitPaymentForm = () => {
+    const form = document.getElementById(paymentFormId)
+
+    if (!form) {
+        paymentError.value = 'تعذر العثور على نموذج الدفع.'
+        return
+    }
+
+    if (!moyasarReady.value) {
+        paymentError.value = 'بوابة الدفع قيد التهيئة. يرجى الانتظار لحظات.'
+        return
+    }
+
+    paymentError.value = null
+
+    if (typeof form.requestSubmit === 'function') {
+        form.requestSubmit()
+        return
+    }
+
+    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }))
+}
+
+const finalizeSubscription = async (payment = null) => {
+    if (!modalOption.value) {
+        return
+    }
+
+    submitting.value = true
+    pendingPlanId.value = modalOption.value.id
+
+    try {
+        const payload = {
+            plan_id: modalOption.value.id,
+        }
+
+        if (payment?.id) {
+            payload.payment_id = payment.id
+        }
+
+        const { data } = await axios.post('/api/subscription', payload)
+
+        subscription.value = data.subscription || null
+
+        await auth.setAuth()
+
+        notify({
+            type: 'success',
+            text: data.message || 'تم تحديث اشتراكك بنجاح.',
+        })
+
+        initializeSelections(true)
+        paymentError.value = null
+        closePlanModal(true)
+    } catch (error) {
+        const errors = error.response?.data?.errors
+        const message = error.response?.data?.message
+        const firstError = errors ? Object.values(errors)[0][0] : null
+        const text = firstError || message || 'حدث خطأ أثناء تفعيل الباقة. حاول لاحقاً.'
+
+        notify({
+            type: 'error',
+            text,
+        })
+
+        if (requiresPayment.value) {
+            paymentError.value = text
+        }
+
+        console.error(error)
+    } finally {
+        submitting.value = false
+        pendingPlanId.value = null
+    }
 }
 
 const closePlanModal = (force = false) => {
@@ -375,40 +687,42 @@ const confirmSubscription = async () => {
         return
     }
 
-    submitting.value = true
-    pendingPlanId.value = modalOption.value.id
-
-    try {
-        const { data } = await axios.post('/api/subscription', {
-            plan_id: modalOption.value.id,
-        })
-
-        subscription.value = data.subscription || null
-
-        await auth.setAuth()
-
-        notify({
-            type: 'success',
-            text: data.message || 'تم تحديث اشتراكك بنجاح.',
-        })
-
-        initializeSelections(true)
-        closePlanModal(true)
-    } catch (error) {
-        const errors = error.response?.data?.errors
-        const message = error.response?.data?.message
-
-        notify({
-            type: 'error',
-            text: errors ? Object.values(errors)[0][0] : message || 'حدث خطأ أثناء تفعيل الباقة. حاول لاحقاً.',
-        })
-
-        console.error(error)
-    } finally {
-        submitting.value = false
-        pendingPlanId.value = null
+    if (requiresPayment.value) {
+        submitPaymentForm()
+        return
     }
+
+    await finalizeSubscription()
 }
 
+watch(
+    () => showConfirmModal.value,
+    async (visible) => {
+        if (visible && requiresPayment.value) {
+            await preparePaymentForm()
+        }
+
+        if (!visible) {
+            cleanupPayment()
+        }
+    },
+)
+
+watch(
+    () => modalOption.value?.id,
+    async () => {
+        if (!showConfirmModal.value) {
+            return
+        }
+
+        if (requiresPayment.value) {
+            await preparePaymentForm()
+        } else {
+            cleanupPayment()
+        }
+    },
+)
+
 onMounted(fetchPlans)
+onUnmounted(cleanupPayment)
 </script>

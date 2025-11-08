@@ -30,6 +30,13 @@ Route::post('/orders', \App\Api\Order\CreateOrder::class)->middleware('auth:sanc
 Route::get('/orders/{id}', \App\Api\Order\GetOrder::class)->middleware('auth:sanctum');
 
 Route::middleware(['auth:sanctum', 'admin'])
+    ->prefix('dashboard')
+    ->as('dashboard.')
+    ->group(function () {
+        Route::get('summary', \App\Api\Dashboard\GetSummary::class);
+    });
+
+Route::middleware(['auth:sanctum', 'admin'])
     ->prefix('subscription')
     ->as('subscription.')
     ->group(function () {

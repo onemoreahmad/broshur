@@ -49,10 +49,9 @@ Route::as('admin.')
             Volt::route('/{slug}', 'admin.settings.detail')->name('detail');
         });
  
+
+   
+
 });
  
 
-// payment callback route
-Route::get('payment/callback', \App\Actions\PaymentCallback::class)
-    ->middleware('auth')
-    ->name('payment.callback');

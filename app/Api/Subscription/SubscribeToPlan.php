@@ -4,7 +4,9 @@ namespace App\Api\Subscription;
 
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Lorisleiva\Actions\Concerns\WithAttributes;
 
@@ -22,6 +24,7 @@ class SubscribeToPlan
                 Rule::exists('plans', 'id')->where(fn ($query) => $query->where('is_system', true)->where('active', true)),
             ],
             'immediate' => ['nullable', 'boolean'],
+            'payment_id' => ['nullable', 'string'],
         ];
     }
 
@@ -41,6 +44,13 @@ class SubscribeToPlan
             ->where('is_system', true)
             ->where('active', true)
             ->firstOrFail();
+
+        $requiresPayment = $plan->price > 0;
+        $paymentId = data_get($validated, 'payment_id');
+
+        if ($requiresPayment) {
+            $this->validatePayment($plan, $paymentId);
+        }
 
         // $immediately = (bool) data_get($validated, 'immediate', true);
 
@@ -82,6 +92,68 @@ class SubscribeToPlan
                 'suppressed_at' => optional($subscription?->suppressed_at)?->toDateTimeString(),
             ],
         ]);
+    }
+
+    protected function validatePayment(Plan $plan, ?string $paymentId): array
+    {
+        if (empty($paymentId)) {
+            throw ValidationException::withMessages([
+                'payment_id' => __('يرجى إكمال عملية الدفع.'),
+            ]);
+        }
+
+        $secretKey = config('services.moyasar.secret_key');
+
+        if (empty($secretKey)) {
+            abort(500, __('بوابة الدفع غير مهيأة. يرجى التواصل مع الدعم.'));
+        }
+
+        $endpoint = sprintf('https://api.moyasar.com/v1/payments/%s', $paymentId);
+
+        try {
+            $response = Http::withBasicAuth($secretKey, '')
+                ->acceptJson()
+                ->get($endpoint);
+        } catch (\Throwable $exception) {
+            report($exception);
+
+            throw ValidationException::withMessages([
+                'payment_id' => __('تعذر التحقق من عملية الدفع. حاول مرة أخرى لاحقاً.'),
+            ]);
+        }
+
+        if ($response->failed()) {
+            throw ValidationException::withMessages([
+                'payment_id' => __('تعذر التحقق من عملية الدفع. حاول مرة أخرى.'),
+            ]);
+        }
+
+        $payment = $response->json();
+
+        if (data_get($payment, 'status') !== 'paid') {
+            throw ValidationException::withMessages([
+                'payment_id' => __('لم يتم إكمال عملية الدفع.'),
+            ]);
+        }
+
+        $expectedAmount = (int) round($plan->price * 100);
+        $actualAmount = (int) data_get($payment, 'amount', 0);
+
+        if ($actualAmount !== $expectedAmount) {
+            throw ValidationException::withMessages([
+                'payment_id' => __('قيمة الدفع لا تطابق قيمة الاشتراك المحددة.'),
+            ]);
+        }
+
+        $currency = strtoupper((string) data_get($payment, 'currency', ''));
+
+        if ($currency !== 'SAR') {
+            throw ValidationException::withMessages([
+                'payment_id' => __('عملة الدفع غير مدعومة.'),
+            ]);
+        }
+
+        return $payment;
     }
 }
 

@@ -10,33 +10,37 @@
                                 <h1 class="text-3xl font-semibold text-gray-900 leading-snug">
                                     مرحبا بعودتك!
                                 </h1>
-                                <p class="text-sm text-gray-500 leading-relaxed max-w-md">
+                                 <!-- <p class="text-sm text-gray-500 leading-relaxed max-w-md">
                                     هذه الصفحة مخصصة لتقديم بعض المعلومات المهمة عن صفحتك. 
-                                </p>
-                                <div class="grid gap-4 sm:grid-cols-3">
+                                </p> -->
+                                <div class="grid gap-4 sm:grid-cols-2">
                                     <div
                                         v-for="metric in summaryMetrics"
                                         :key="metric.id"
-                                        class="bg-gray-100 rounded-2xl px-5 py-4 flex items-center gap-4"
+                                        :class="[
+                                            'bg-gray-100 rounded-2xl px-5 py-4 flex items-center gap-4 transition',
+                                            isLoadingMetrics ? 'animate-pulse' : ''
+                                        ]"
                                     >
                                         <div :class="['flex items-center justify-center rounded-xl size-12 shrink-0', metric.iconBackground]">
                                             <svg
-                                                v-if="metric.id === 'likes'"
+                                                v-if="metric.id === 'orders'"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 class="size-6 text-white"
                                                 fill="currentColor"
                                             >
-                                                <path d="M2.5 11.25A2.25 2.25 0 0 1 4.75 9h3.5a.75.75 0 0 0 .75-.75V8c0-1.623.875-3.152 2.3-3.964l.77-.44A2.25 2.25 0 0 1 15.5 5.63V11h2.873a2.25 2.25 0 0 1 2.213 2.725l-1.075 5.16A3.75 3.75 0 0 1 15.852 22H9.75A2.75 2.75 0 0 1 7 19.25v-8H4.75A2.25 2.25 0 0 1 2.5 8.75v2.5Z" />
+                                                <path d="M7 7V6a5 5 0 0 1 10 0v1h3a1 1 0 0 1 .99 1.141l-1.5 10A2 2 0 0 1 17.52 20H6.48a2 2 0 0 1-1.97-1.859l-1.5-10A1 1 0 0 1 4 7h3Zm2-1a3 3 0 0 1 6 0v1H9V6Z" />
                                             </svg>
                                             <svg
-                                                v-else-if="metric.id === 'love'"
+                                                v-else-if="metric.id === 'subscribers'"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 class="size-6 text-white"
                                                 fill="currentColor"
                                             >
-                                                <path d="M11.645 21.092a.75.75 0 0 0 .71 0c1.208-.663 5.895-3.35 7.897-6.692C21.73 12.779 22 11.86 22 10.875 22 8.053 19.868 6 17.25 6c-1.582 0-3.07.777-4.002 2.017C12.316 6.777 10.828 6 9.25 6 6.632 6 4.5 8.053 4.5 10.875c0 .985.27 1.904.748 3.525 2.002 3.342 6.69 6.029 7.897 6.692Z" />
+                                                <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+                                                <path d="M4 20a8 8 0 1 1 16 0z" />
                                             </svg>
                                             <svg
                                                 v-else
@@ -227,42 +231,72 @@
 </template>
 
 <script setup>
-    import { computed } from 'vue'
+    import { onMounted, ref } from 'vue'
+    import axios from 'axios'
     import { useAuthStore } from '@/stores/auth'
     import { useHead } from '@unhead/vue'
 
     const auth = useAuthStore()
-    
-useHead({
-  title: 'الرئيسية',
-  meta: [
-    { name: 'description', content: 'الرئيسية' },
-  ],
-})
-    
-    const summaryMetrics = computed(() => [
+
+    const summaryMetrics = ref([
         {
-            id: 'likes',
-            label: 'Likes',
-            value: '26,789',
+            id: 'orders',
+            label: 'عدد الطلبات',
+            value: '0',
             iconBackground: 'bg-blue-500',
-            trend: 'up',
+            trend: null,
         },
         {
-            id: 'love',
-            label: 'Love',
-            value: '6,754',
-            iconBackground: 'bg-red-500',
-            trend: 'steady',
-        },
-        {
-            id: 'smiles',
-            label: 'Smiles',
-            value: '52,789',
-            iconBackground: 'bg-yellow-400',
-            trend: 'down',
+            id: 'subscribers',
+            label: 'عدد المشتركين',
+            value: '0',
+            iconBackground: 'bg-indigo-500',
+            trend: null,
         },
     ])
+
+    const isLoadingMetrics = ref(false)
+
+    const fetchSummaryMetrics = async () => {
+        isLoadingMetrics.value = true
+        try {
+            const response = await axios.get('/api/dashboard/summary')
+            const { orders_count: ordersCount, subscribers_count: subscribersCount } = response.data.data || {}
+            const formatter = new Intl.NumberFormat()
+
+            summaryMetrics.value = [
+                {
+                    id: 'orders',
+                    label: 'عدد الطلبات',
+                    value: formatter.format(ordersCount ?? 0),
+                    iconBackground: 'bg-blue-500',
+                    trend: null,
+                },
+                {
+                    id: 'subscribers',
+                    label: 'عدد المشتركين',
+                    value: formatter.format(subscribersCount ?? 0),
+                    iconBackground: 'bg-indigo-500',
+                    trend: null,
+                },
+            ]
+        } catch (error) {
+            console.error('Failed to load dashboard summary', error)
+        } finally {
+            isLoadingMetrics.value = false
+        }
+    }
+
+    onMounted(() => {
+        fetchSummaryMetrics()
+    })
+
+    useHead({
+        title: 'الرئيسية',
+        meta: [
+            { name: 'description', content: 'الرئيسية' },
+        ],
+    })
 
     const targets = [
         {

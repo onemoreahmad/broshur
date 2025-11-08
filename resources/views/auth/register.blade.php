@@ -47,7 +47,7 @@ new class extends \Livewire\Volt\Component {
 
         Auth::login($data['user'], true);
  
-        $this->redirect(route('dashboard.home'));
+        $this->redirect(route('dashboard.home').'/content');
     }
 
     public function reseterrors()

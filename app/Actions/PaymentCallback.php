@@ -29,27 +29,31 @@ class PaymentCallback
             'Content-Type' => 'application/x-www-form-urlencoded',
         ])->get(config('services.moyasar.base_url') . 'payments/' . $validatedData['id'])->json();
     
-        $payment = Payment::where('payment_id', $validatedData['id'])->first();
+        // $payment = Payment::where('payment_id', $validatedData['id'])->first();
 
-        if($payment) {
-            $payment->setStatus(data_get($response, 'status'));
+        // if($payment) {
+        //     $payment->setStatus(data_get($response, 'status'));
  
-            $payment->description = data_get($response, 'description');
-            $payment->ip = data_get($response, 'ip');
-            $payment->meta = $response;
-            $payment->save();
+        //     $payment->description = data_get($response, 'description');
+        //     $payment->ip = data_get($response, 'ip');
+        //     $payment->meta = $response;
+        //     $payment->save();
 
-            if(data_get($response, 'status') == 'paid') {
-                return $this->subscriptTo(data_get($payment, 'purchased_id'));
-            }  
+        //     if(data_get($response, 'status') == 'paid') {
+        //         return $this->subscriptTo(data_get($payment, 'purchased_id'));
+        //     }  
 
-            // return redirect()->route('admin.subscription.index')->with('success', 'تم تفعيل الباقة بنجاح');
-        } 
+        //     // return redirect()->route('admin.subscription.index')->with('success', 'تم تفعيل الباقة بنجاح');
+        // } 
         
+        if(data_get($response, 'status') == 'paid') {
+            return $this->subscriptTo(data_get($response, 'metadata.plan_id'));
+        }  
+
         session()->flash('color', 'red');
         session()->flash('status', __('عملية الدفع فشلت، الرجاء المحاولة مرة أخرى'));
 
-        return redirect()->route('admin.subscription.index');
+        return redirect()->route('dashboard.home');
     }
 
 
@@ -67,7 +71,7 @@ class PaymentCallback
 
         session()->flash('status', __('Subscription plan updated successfully.') );
 
-        return redirect(route('admin.subscription.index'));
+        return redirect(route('dashboard.home').'/subscription');
     }
     
 }
