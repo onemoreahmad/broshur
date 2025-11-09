@@ -3,16 +3,16 @@
    <div class="max-w-7xl mx-auto flex items-center justify-between gap-x-2">
       <div class="flex items-center">
          <RouterLink :to="{ name: 'home' }" class="inline-flex items-center gap-2">
-            <img src="/assets/images/broshur-logo-shape.webp" alt="" class="size-6 !w-auto">
+            <img src="/assets/images/broshur-logo-shape.webp" alt="" class="size-6 w-auto hidden md:block">
 
 
  
             <!-- <img src="/assets/images/logo-white-0.webp" alt="" class="size-6 !w-auto hidden md:block"> -->
          </RouterLink>
-         <div class="mx-2 bg-white/20 h-8 rounded-full w-px">   </div> 
+         <div class="mx-2 bg-white/20 h-8 rounded-full w-px hidden md:block">   </div> 
             <div class="flex items-center gap-x-2">
                <RouterLink :to="{ name: 'home' }">
-                  <img :src="currentUser?.tenant?.logo" alt="" class="size-10 !w-auto rounded-md">
+                  <img :src="currentUser?.tenant?.logo" alt="" class="size-10 !w-auto rounded-md ">
                </RouterLink>
                <div class="text-sm flex flex-col truncate">
                   <RouterLink :to="{ name: 'home' }">{{ currentUser?.tenant?.name }} </RouterLink>

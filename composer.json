@@ -21,6 +21,7 @@
         "livewire/volt": "^1.7",
         "lorisleiva/laravel-actions": "^2.9",
         "lucasdotvin/laravel-soulbscription": "^4.3",
+        "me-shaon/laravel-request-analytics": "^1.8",
         "rcrowe/twigbridge": "^0.14.6",
         "spatie/laravel-model-status": "^1.18",
         "spatie/laravel-schemaless-attributes": "^2.5",

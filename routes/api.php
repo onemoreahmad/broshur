@@ -34,6 +34,7 @@ Route::middleware(['auth:sanctum', 'admin'])
     ->as('dashboard.')
     ->group(function () {
         Route::get('summary', \App\Api\Dashboard\GetSummary::class);
+        Route::get('analytics/overview', [\App\Api\Dashboard\GetAnalytics::class, 'overview']);
     });
 
 Route::middleware(['auth:sanctum', 'admin'])

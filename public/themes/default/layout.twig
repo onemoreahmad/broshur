@@ -23,7 +23,7 @@
  
     <title>
             {% if title %} {{ title }} | {% endif %} {{ site('name') }} 
-         {{ site('slogan') ? ' : ' ~ site('slogan') : '' }}
+         {{ site('slogan') ? ' | ' ~ site('slogan') : '' }}
     </title>
     <script>
         let config = {

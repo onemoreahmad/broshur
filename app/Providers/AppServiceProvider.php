@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use MeShaon\RequestAnalytics\Models\RequestAnalytics;
+use App\Observers\RequestAnalyticsObserver;
  
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
             \App\Http\Middleware\CurrentBroshur::class,
         ]);
   
+        RequestAnalytics::observe(RequestAnalyticsObserver::class);
     }
 }

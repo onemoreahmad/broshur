@@ -4,36 +4,38 @@
             <div class="grid gap-6 xl:grid-cols-[2.2fr,1fr]">
                 <div class="space-y-6">
                     <div class="grid gap-6 lg:grid-cols-[1.4fr,1fr] items-stretch">
-                        <div class="bg-white rounded-3xl shadow-sm p-8 flex flex-col lg:flex-row items-start lg:items-center gap-8">
+                        <div class="bg-white rounded-3xl shadow-sm p-8">
                             <div class="space-y-4 flex-1">
-                                <p class="text-sm text-gray-400">مرحبا {{ auth.user?.name }},</p>
-                                <h1 class="text-3xl font-semibold text-gray-900 leading-snug">
-                                    مرحبا بعودتك!
+                                <h1 class="text-xl font-semibold text-gray-900 leading-snug">
+                                    مرحبا بعودتك, {{ auth.user?.name }} 
+                                    <span class="text-3xl ms-2">
+                                        👋
+                                    </span>
                                 </h1>
-                                 <!-- <p class="text-sm text-gray-500 leading-relaxed max-w-md">
-                                    هذه الصفحة مخصصة لتقديم بعض المعلومات المهمة عن صفحتك. 
-                                </p> -->
-                                <div class="grid gap-4 sm:grid-cols-2">
+                                 <p class="text-sm text-gray-500/50 leading-relaxed max-w-md">
+                                    إحصائيات صفحتك خلال الشهر ({{ dateRange.days }} يوم) الفترة من {{ dateRange.from }} إلى {{ dateRange.to }}
+                                </p> 
+                                <div class="grid gap-4 grid-cols-2 md:grid-cols-3 w-full mt-6">
                                     <div
                                         v-for="metric in summaryMetrics"
                                         :key="metric.id"
                                         :class="[
-                                            'bg-gray-100 rounded-2xl px-5 py-4 flex items-center gap-4 transition',
+                                            'bg-gray-100 rounded-2xl px-5 py-4 flex items-center gap-4 transition w-full',
                                             isLoadingMetrics ? 'animate-pulse' : ''
                                         ]"
                                     >
                                         <div :class="['flex items-center justify-center rounded-xl size-12 shrink-0', metric.iconBackground]">
                                             <svg
-                                                v-if="metric.id === 'orders'"
+                                                v-if="metric.id === 'views'"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 class="size-6 text-white"
                                                 fill="currentColor"
                                             >
-                                                <path d="M7 7V6a5 5 0 0 1 10 0v1h3a1 1 0 0 1 .99 1.141l-1.5 10A2 2 0 0 1 17.52 20H6.48a2 2 0 0 1-1.97-1.859l-1.5-10A1 1 0 0 1 4 7h3Zm2-1a3 3 0 0 1 6 0v1H9V6Z" />
+                                                <path d="M4 13a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6H5a1 1 0 0 1-1-1v-5Zm6-4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v10h-5V9Zm6-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1h-4V4Z" />
                                             </svg>
                                             <svg
-                                                v-else-if="metric.id === 'subscribers'"
+                                                v-else-if="metric.id === 'visitors'"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 class="size-6 text-white"
@@ -43,6 +45,24 @@
                                                 <path d="M4 20a8 8 0 1 1 16 0z" />
                                             </svg>
                                             <svg
+                                                v-else-if="metric.id === 'average_visit_time'"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                class="size-6 text-white"
+                                                fill="currentColor"
+                                            >
+                                                <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8Zm.5-13h-1a1 1 0 0 0-1 1v4.382a1 1 0 0 0 .293.707l2.536 2.535a1 1 0 0 0 1.414-1.414L12.5 11.586Z" />
+                                            </svg>
+                                            <svg
+                                                v-else-if="metric.id === 'order_count'"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                class="size-6 text-white"
+                                                fill="currentColor"
+                                            >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-list-details"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13 5h8" /><path d="M13 9h5" /><path d="M13 15h8" /><path d="M13 19h5" /><path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /></svg>
+                                        </svg>
+                                            <svg
                                                 v-else
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
@@ -51,7 +71,7 @@
                                             >
                                                 <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-3.25 8.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm8.5 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm-5.25 6.75a4.75 4.75 0 0 1-4.33-2.75.75.75 0 1 1 1.36-.6 3.25 3.25 0 0 0 5.94 0 .75.75 0 1 1 1.36.6A4.75 4.75 0 0 1 12 17Z" />
                                             </svg>
-                                        </div>
+                                        </div> 
                                         <div>
                                             <p class="text-xl font-semibold text-gray-900">{{ metric.value }}</p>
                                             <p class="text-sm text-gray-500">{{ metric.label }}</p>
@@ -72,16 +92,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="relative sm:w-48 sm:h-48 w-full aspect-square">
-                                <div class="absolute inset-0 bg-indigo-100 rounded-3xl"></div>
-                                <div class="absolute inset-6 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-3xl flex items-center justify-center">
-                                    <svg class="w-24 h-24 text-white" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect x="12" y="24" width="10" height="28" rx="3" fill="currentColor" opacity="0.7" />
-                                        <rect x="28" y="16" width="10" height="36" rx="3" fill="currentColor" opacity="0.85" />
-                                        <rect x="44" y="8" width="10" height="44" rx="3" fill="currentColor" />
-                                    </svg>
-                                </div>
-                            </div>
+                            
                         </div>
 
                         <div hidden class="rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white p-8 flex flex-col justify-between gap-6">
@@ -240,43 +251,86 @@
 
     const summaryMetrics = ref([
         {
-            id: 'orders',
-            label: 'عدد الطلبات',
+            id: 'views',
+            label: 'عدد الزايارات (المشاهدات)',
             value: '0',
             iconBackground: 'bg-blue-500',
             trend: null,
         },
         {
-            id: 'subscribers',
-            label: 'عدد المشتركين',
+            id: 'visitors',
+            label: 'عدد الزوار',
             value: '0',
             iconBackground: 'bg-indigo-500',
+            trend: null,
+        },
+        {
+            id: 'average_visit_time',
+            label: 'متوسط زمن الزيارة',
+            value: '0s',
+            iconBackground: 'bg-teal-500',
+            trend: null,
+        },
+        {
+            id: 'order_count',
+            label: 'عدد الطلبات',
+            value: '0',
+            iconBackground: 'bg-green-500',
+            trend: null,
+        },
+        {
+            id: 'subscribers_count',
+            label: 'عدد المشتركين',
+            value: '0',
+            iconBackground: 'bg-purple-500',
             trend: null,
         },
     ])
 
     const isLoadingMetrics = ref(false)
-
+    const dateRange = ref({})
     const fetchSummaryMetrics = async () => {
         isLoadingMetrics.value = true
         try {
-            const response = await axios.get('/api/dashboard/summary')
-            const { orders_count: ordersCount, subscribers_count: subscribersCount } = response.data.data || {}
+            const response = await axios.get('/api/dashboard/analytics/overview')
+            const summary = response?.data?.data?.summary ?? {}
+            dateRange.value = response?.data?.date_range ?? {}
             const formatter = new Intl.NumberFormat()
 
             summaryMetrics.value = [
                 {
-                    id: 'orders',
-                    label: 'عدد الطلبات',
-                    value: formatter.format(ordersCount ?? 0),
+                    id: 'views',
+                    label: 'عدد الزايارات (المشاهدات)',
+                    value: formatter.format(summary.views ?? 0),
                     iconBackground: 'bg-blue-500',
                     trend: null,
                 },
                 {
-                    id: 'subscribers',
-                    label: 'عدد المشتركين',
-                    value: formatter.format(subscribersCount ?? 0),
+                    id: 'visitors',
+                    label: 'عدد الزوار',
+                    value: formatter.format(summary.visitors ?? 0),
                     iconBackground: 'bg-indigo-500',
+                    trend: null,
+                },
+                {
+                    id: 'average_visit_time',
+                    label: 'متوسط زمن الزيارة',
+                    value: summary.average_visit_time ?? '0s',
+                    iconBackground: 'bg-purple-500',
+                    trend: null,
+                },
+                {
+                    id: 'order_count',
+                    label: 'عدد الطلبات',
+                    value: formatter.format(response?.data?.order_count ?? 0),
+                    iconBackground: 'bg-teal-500',
+                    trend: null,
+                },
+                {
+                    id: 'subscribers_count',
+                    label: 'عدد المشتركين',
+                    value: formatter.format(response?.data?.subscribers_count ?? 0),
+                    iconBackground: 'bg-cyan-500',
                     trend: null,
                 },
             ]

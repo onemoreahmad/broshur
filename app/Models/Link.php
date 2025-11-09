@@ -7,10 +7,11 @@ use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
 use App\Traits\Tenantable;
 use Bkwld\Cloner\Cloneable;
 use YMigVal\LaravelModelCache\HasCachedQueries;
+use Kra8\Snowflake\HasShortflakePrimary;
 
 class Link extends Model
 {
-    use Tenantable, Cloneable, HasCachedQueries;
+    use Tenantable, Cloneable, HasCachedQueries, HasShortflakePrimary;
 
     protected $cacheMinutes = 1200; // 20 hours
 

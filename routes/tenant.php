@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use Livewire\Livewire;
   
+Route::get('link/{id}', \App\Actions\VisitLink::class)
+    ->name('storefront.link');
+    
 Livewire::setUpdateRoute(function ($handle) {
-    return Route::post('{tenant}/livewire/update', $handle)
+    return Route::post('{tenant}/ajax', $handle)
         ->middleware(['currentBroshur']);
 });
 

@@ -3,16 +3,16 @@
         <div class="space-y-6">
             <div
                 v-if="subscription"
-                class="rounded-3xl border border-primary-200 bg-primary-50 px-6 py-4 text-sm text-primary-800 flex flex-col gap-1 md:flex-row md:items-center md:justify-between"
+                class="rounded-xl border border-gray-200 bg-gray-50 px-6 py-4 text-sm text-primary-800 flex flex-col gap-1 md:flex-row md:items-center"
             >
                 <div>
                     <span class="font-semibold">الباقة الحالية:</span>
                     <span>{{ subscription.plan_name || '—' }} {{ subscription.periodicity_type }}</span>
                 </div>
-                <div class="flex flex-wrap gap-4 text-xs text-primary-700/80 mt-2 md:mt-0">
-                    <span v-if="subscription.started_at">تاريخ البداية: {{ subscription.started_at }}</span>
-                    <span v-if="subscription.expired_at">تاريخ التجديد القادم: {{ subscription.expired_at }}</span>
-                    <span v-if="subscription.grace_days_ended_at">نهاية فترة السماح: {{ subscription.grace_days_ended_at }}</span>
+                <div class="flex flex-wrap items-center gap-8 text-xs text-primary-700/80 mt-2 md:mt-0">
+                    <span v-if="subscription.started_at" class="text-gray-500">تاريخ البداية: <b class="text-gray-900 inline-block me-2">{{ subscription.started_at }}</b>   </span>
+                    <span v-if="subscription.expired_at" class="text-gray-500">تاريخ التجديد القادم: <b class="text-gray-900 inline-block me-2">{{ subscription.expired_at }}</b>   </span>
+                    <span v-if="subscription.grace_days_ended_at" class="text-gray-500">نهاية فترة السماح: <b class="text-gray-900 inline-block me-2">{{ subscription.grace_days_ended_at }}</b>   </span>
                 </div>
             </div>
 
