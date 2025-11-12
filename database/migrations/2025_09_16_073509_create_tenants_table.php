@@ -35,6 +35,7 @@ return new class extends Migration
             $table->boolean('convert_currency')->nullable()->default(false);
             $table->string('sr_number', 60)->nullable();
             $table->string('tax_number', 120)->nullable();
+            $table->string('city', 150)->nullable();
             $table->json('address')->nullable();
             $table->string('phone', 20)->nullable();
             $table->string('email', 255)->nullable();

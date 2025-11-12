@@ -37,12 +37,5 @@ return new class extends Migration
             });
         }
     }
-
-    public function down()
-    {
-        $tableName = config('request-analytics.database.table', 'request_analytics');
-        $connection = config('request-analytics.database.connection');
-
-        Schema::connection($connection)->dropIfExists($tableName);
-    }
+ 
 };

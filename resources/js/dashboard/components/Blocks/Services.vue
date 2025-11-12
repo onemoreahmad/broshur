@@ -16,6 +16,10 @@
                 </div>
             
 
+            <UiAlert>
+                قائمة الخدمات الرئيسية، يمكنك إضافة أكثر من خدمة لعرضها لعملائك المحتملين.
+            </UiAlert>
+
             <UiToggle name="active" label="تفعيل القسم" v-model="form.active"   />
 
             <section v-if="form.active" class="flex flex-col gap-1">

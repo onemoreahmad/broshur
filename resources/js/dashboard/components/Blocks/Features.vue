@@ -12,6 +12,9 @@
                     </h2>
                 </div>
 
+                <UiAlert>
+                    قائمة المميزات الرئيسية، يمكنك إضافة أكثر من ميزة لعرضها لعملائك المحتملين.
+                </UiAlert>
                 <UiToggle name="active" label="تفعيل القسم" v-model="form.active" />
 
                 <section v-if="form.active" class="flex flex-col gap-1">

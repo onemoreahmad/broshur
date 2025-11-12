@@ -13,6 +13,10 @@
                     
                 </div>
 
+                <UiAlert>
+                    قائمة المشاريع والأعمال، يمكنك إضافة أكثر من مشروع أو عمل لتعزيز المصداقية والثقة لعملائك المحتملين.
+                </UiAlert>
+
                 <UiToggle name="active" label="تفعيل القسم" v-model="form.active"   />
 
                 <section v-if="form.active" class="flex flex-col gap-1">

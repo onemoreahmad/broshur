@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('email');
             $table->json('meta')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['tenant_id', 'email']);
         });

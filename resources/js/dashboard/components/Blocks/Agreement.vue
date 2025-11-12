@@ -14,6 +14,10 @@
                     
                 </div> 
                 
+                <UiAlert>
+                    الاتفاقية وسياسة الخصوصية، يمكنك تحرير البنود لتوضيح آليات العمل وسياسة الخدمة والإستبدال لعملائك.
+                </UiAlert>
+
                 <UiToggle name="active" label="تفعيل القسم" v-model="form.active"   />
 
                 <section v-if="form.active" class="flex flex-col gap-1"> 

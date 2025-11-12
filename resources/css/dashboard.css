@@ -65,7 +65,7 @@
 
 
 @plugin "daisyui" {
-  themes: emerald, cmyk --default,  cupcake;
+  themes:  cmyk, nord, emerald --default,  cupcake;
 }
  
 .input, .textarea, .select {

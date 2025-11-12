@@ -15,6 +15,9 @@
                         </h2>
                 </div>
             
+            <UiAlert>
+                قائمة فريق العمل، يمكنك إضافة أكثر من عضو لعرضهم في الصفحة وإعادة ترتيبهم بالسحب والإفلات.
+            </UiAlert>
 
             <UiToggle name="active" label="تفعيل القسم" v-model="form.active"   />
 

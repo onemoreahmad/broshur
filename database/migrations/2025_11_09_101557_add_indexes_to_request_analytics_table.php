@@ -32,29 +32,5 @@ return new class extends Migration
             $table->index(['tenant_id','country', 'visited_at']);
         });
     }
-
-    public function down()
-    {
-        $tableName = config('request-analytics.database.table', 'request_analytics');
-        $connection = config('request-analytics.database.connection');
-        
-        Schema::connection($connection)->table($tableName, function (Blueprint $table) {
-            $table->dropIndex(['visited_at']);
-            $table->dropIndex(['session_id']);
-            $table->dropIndex(['path']);
-            $table->dropIndex(['user_id']);
-            $table->dropIndex(['tenant_id']);
-            $table->dropIndex(['request_category']);
-            $table->dropIndex(['visited_at', 'session_id']);
-            $table->dropIndex(['path', 'visited_at']);
-            $table->dropIndex(['browser', 'visited_at']);
-            $table->dropIndex(['operating_system', 'visited_at']);
-            $table->dropIndex(['country', 'visited_at']);
-            $table->dropIndex(['tenant_id', 'visited_at', 'session_id']);
-            $table->dropIndex(['tenant_id','path', 'visited_at']);
-            $table->dropIndex(['tenant_id','browser', 'visited_at']);
-            $table->dropIndex(['tenant_id','operating_system', 'visited_at']);
-            $table->dropIndex(['tenant_id','country', 'visited_at']);
-        });
-    }
+ 
 };

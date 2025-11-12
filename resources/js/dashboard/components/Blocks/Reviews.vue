@@ -16,6 +16,10 @@
                 </div>
             
 
+            <UiAlert>
+                قائمة التقييمات الخاصة بالعملاء، يمكنك إضافة التقييمات الخاصة بالعملاء لعرضها بالصفحة.
+            </UiAlert>
+
             <UiToggle name="active" label="تفعيل القسم" v-model="form.active"   />
 
             <section v-if="form.active" class="flex flex-col gap-1">

@@ -71,12 +71,15 @@ class TenantCreated
         $subscriptionLink = new Link();
         $subscriptionLink->tenant_id = $this->tenant->id;
         $subscriptionLink->block_id = $block->id;
-        $subscriptionLink->active = false;
+        $subscriptionLink->active = true;
         $subscriptionLink->name = 'subscription';
         $subscriptionLink->slug = 'subscription';
         $subscriptionLink->link = '';
         $subscriptionLink->type = 'cta';
         $subscriptionLink->sort = 3;
+        $subscriptionLink->meta = [
+            'message' => 'اشترك في قائمتنا البريدية لتصلك آخر الأخبار والعروض.',
+        ];
         $subscriptionLink->save();
  
     }

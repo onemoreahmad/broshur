@@ -13,6 +13,10 @@
                      
                 </div>
 
+                <UiAlert>
+                    قائمة الأسئلة الشائعة، يمكنك إضافة أسئلة وإجابات لعرضها لعملائك المحتملين لتقليل التواصل وتكرار الأسئلة.
+                </UiAlert>
+
                 <UiToggle name="active" label="تفعيل القسم" v-model="form.active"   />
 
                 <section v-if="form.active" class="flex flex-col gap-1"> 

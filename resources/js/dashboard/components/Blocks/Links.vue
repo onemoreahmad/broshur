@@ -13,6 +13,10 @@
                      
                 </div>
 
+                <UiAlert>
+                    روابط حساباتك الإجتماعية، 
+                    كما يمكنك إضافة روابط مخصصة أخرى.
+                </UiAlert>
                 <UiToggle name="active" label="تفعيل القسم" v-model="form.active"   />
 
                 <section v-if="form.active" class="flex flex-col gap-1">

@@ -12,7 +12,11 @@
                     </h2>
                     
                 </div> 
-                 
+
+                <UiAlert>   
+                    القسم الرئيسي للصفحة، يعمل على لفت انتباه الزائر بعنوان تسويقي جذاب لدفعه لإتخاذ إجراء وكسب انطباع ايجابي.
+                </UiAlert>
+
                 <UiToggle name="active" label="تفعيل القسم" v-model="form.active"   />
 
                 <section v-if="form.active" class="flex flex-col gap-1"> 

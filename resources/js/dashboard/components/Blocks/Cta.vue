@@ -13,6 +13,13 @@
                     
                 </div>
 
+                <UiAlert>
+                    أزرار الإجراءات 
+                    هي الطريقة التي يتفاعل بها عميلك مع صفحتك،
+                    يمكنك تفعيل زر التواصل على الواتس اب أو  اتصل بنا، 
+                    أو زر الاشتراك في قائمتنا البريدية أو حجز وشراء خدمة.
+                </UiAlert>
+
                 <UiToggle name="active" label="تفعيل القسم" v-model="form.active"   />
 
                 <section v-if="form.active" class="flex flex-col gap-1">

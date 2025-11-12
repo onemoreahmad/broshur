@@ -4,6 +4,8 @@
             <span class="loading loading-spinner loading-lg opacity-75"></span>
         </div>
         <div v-else>
+
+            
         <div class="flex flex-col gap-1">
             <div class="flex items-center justify-between border-b-2 border-gray-200 pb-3 border-dotted">
                 <h2 class="text-sm font-semibold text-gray-800 flex items-center gap-x-2">
@@ -12,11 +14,13 @@
                 </h2>
             </div>
 
+            <UiAlert>
+                المعلومات الأساسية لصفحتك، اسم الصفحة، الشعار والشعار النصي.
+            </UiAlert>
+ 
             <UiInput name="name" label="اسم البروشور" v-model="form.name" placeholder="اسم البروشور" />
             <UiInput name="slogan" label="الشعار النصي" v-model="form.slogan" placeholder="الشعار النصي" />
             <UiUploadAvatar v-model="form.newLogo" :preview="form.logo" name="newLogo" label="الشعار" />
-
-
   
             <!-- <UiUploadImage 
                 v-model="form.newCover"
