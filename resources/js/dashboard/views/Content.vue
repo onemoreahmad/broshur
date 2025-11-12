@@ -1,11 +1,11 @@
 <template>
     <div>
  
-        <div v-if="auth?.tenant" class="max-w-7xl mx-auto py-4 flex items-center gap-4 px-1 xl:px-0 mt-4">
-            <img :src="auth?.tenant?.logo" alt="avatar" class="size-16 rounded-2xl">
+        <div v-if="auth?.tenant" class="max-w-7xl mx-auto py-4 flex items-center lg:gap-4 gap-2 px-1 xl:px-0 mt-4">
+            <img :src="auth?.tenant?.logo" alt="avatar" class="lg:size-12 size-10 md:rounded-2xl rounded-lg">
             <div class="">
-                <h1 class="text-2xl font-bold"> {{ auth?.tenant?.name  }} </h1> 
-                <p class="text-sm text-gray-500"> {{ auth?.tenant?.handle  }} </p>
+                <h1 class="lg:text-base text-base font-bold"> {{ auth?.tenant?.name  }} </h1> 
+                <p class="lg:text-sm text-xs text-gray-500"> {{ auth?.tenant?.handle  }} </p>
             </div>
         </div>
 

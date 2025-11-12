@@ -1,10 +1,10 @@
 <template>
-    <div class="max-w-7xl mx-auto p-6">
+    <Container>
          
         <!-- Handle URL Settings -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+        <div class="bg-white rounded-xl border border-gray-200 lg:p-6 p-3 mb-6">
             <h2 class="text-base-content font-semibold mb-2">رابط الموقع</h2>
-            <p class="text-gray-400 font-light mb-6 text-sm">قم بتخصيص رابط موقعك الشخصي</p>
+            <p class="text-gray-400 font-light mb-6 text-xs lg:text-sm">قم بتخصيص رابط البروشور الخاص بك</p>
             
             <form @submit.prevent="updateHandle" class="space-y-4">
                 <div class="flex items-end gap-4">
@@ -17,7 +17,7 @@
                             </label>
                         </UiField>
                          
-                        <p class="text-gray-500 text-xs mt-1">
+                        <p class="text-gray-500 text-xs lg:text-sm mt-1">
                             رابط موقعك: <span class="font-mono text-blue-600">{{ previewUrl }}</span>
                         </p>
                     </div>
@@ -40,9 +40,9 @@
         </div>
 
         <!-- Contact Information Settings -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+        <div class="bg-white rounded-xl border border-gray-200 lg:p-6 p-3 mb-6">
             <h2 class="text-base-content font-semibold mb-2">معلومات الاتصال</h2>
-            <p class="text-gray-400 font-light mb-6 text-sm">قم بتحديث معلومات الاتصال الخاصة بك</p>
+            <p class="text-gray-400 font-light mb-6 text-xs lg:text-sm">قم بتحديث معلومات الاتصال الخاصة بك</p>
                 
             <form @submit.prevent="updateContact" class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -94,9 +94,9 @@
         </div>
 
         <!-- Location Settings -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+        <div class="bg-white rounded-xl border border-gray-200 lg:p-6 p-3 mb-6">
             <h2 class="text-base-content font-semibold mb-2">الموقع الجغرافي</h2>
-            <p class="text-gray-400 font-light mb-6 text-sm">قم بتحديد موقعك الجغرافي</p>
+            <p class="text-gray-400 font-light mb-6 text-xs lg:text-sm">قم بتحديد موقعك الجغرافي</p>
             
             <form @submit.prevent="updateLocation" class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -148,7 +148,7 @@
         </div>
 
         <!-- Current Settings Info -->
-        <div class="bg-gray-400/10 rounded-xl p-6">
+        <div class="bg-gray-400/10 rounded-xl lg:p-6 p-3">
             <h3 class="text-base-content font-semibold mb-4">معلومات الحساب الحالي</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -192,7 +192,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </Container>
 </template>
 
 <script setup>

@@ -1,6 +1,6 @@
 <template>
-<div class="max-w-7xl mx-auto py-6 flex flex-col gap-y-4">
-	<div class="rounded-lg bg-blue-50 p-2 [*+&amp;]:mt-4 border border-gray-200 border-blue-300">
+<div class="max-w-7xl mx-auto py-6 flex flex-col gap-y-4 px-2 md:px-0">
+	<div class="rounded-lg bg-blue-50 p-2 border border-gray-200  ">
 		<div class="flex items-center">
 			<div class="flex-shrink-0 ms-2">
 				<span>
@@ -101,72 +101,37 @@
 					xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 me-2" data-sentry-element="svg" data-sentry-source-file="share-cv.tsx">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" data-sentry-element="path" data-sentry-source-file="share-cv.tsx"></path>
 				</svg>
-                  مشاركة البروشور
-               
+                  مشاركة البروشور        
 			</div>
 			<div class="flex flex-col md:flex-row items-center gap-2 p-2 mt-4">
 				<a :href="`https://api.whatsapp.com/send?text=${auth?.tenant?.site_url}`" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex w-full border-black/10 bg-white px-4 py-2 text-sm transition-all transition-colors border duration-300 items-center justify-center whitespace-nowrap rounded-md hover:bg-black/5 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:w-auto" target="_blank">
-					<img src="https://broshur.test/assets/icons/social/brand-whatsapp.svg" alt="whatsapp" class="size-5 !text-white">
-                 
-                        واتساب
-
-
-
-
-
-					</a>
-					<a :href="`https://t.me/share/url?text=${auth?.tenant?.site_url}&amp;url=${auth?.tenant?.site_url}`" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex w-full border-black/10 bg-white px-4 py-2 text-sm transition-all transition-colors border duration-300 items-center justify-center whitespace-nowrap rounded-md hover:bg-black/5 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:w-auto" target="_blank">
-						<img src="https://broshur.test/assets/icons/social/brand-telegram.svg" alt="telegram" class="size-5">
-                     
-                        تليجرام
-
-
-
-
-
-						</a>
-						<a :href="`https://x.com/intent/tweet?url=${auth?.tenant?.site_url}&amp;text=${auth?.tenant?.name}`" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex w-full border-black/10 bg-white px-4 py-2 text-sm transition-all transition-colors border duration-300 items-center justify-center whitespace-nowrap rounded-md hover:bg-black/5 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:w-auto" target="_blank">
-							<img src="https://broshur.test/assets/icons/social/brand-x.svg" alt="x" class="size-5">
-                     
-                        تويتر
-
-
-
-
-
-							</a>
-							<a :href="`https://www.facebook.com/sharer/sharer.php?u=${auth?.tenant?.site_url}`" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex w-full border-black/10 bg-white px-4 py-2 text-sm transition-all transition-colors border duration-300 items-center justify-center whitespace-nowrap rounded-md hover:bg-black/5 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:w-auto" target="_blank">
-								<img src="https://broshur.test/assets/icons/social/brand-facebook.svg" alt="facebook" class="size-5">
-               
-                        فيسبوك
-
-
-
-
-
-								</a>
-								<a :href="`https://www.linkedin.com/shareArticle?mini=true&amp;url=${auth?.tenant?.site_url}`" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex w-full border-black/10 bg-white px-4 py-2 text-sm transition-all transition-colors border duration-300 items-center justify-center whitespace-nowrap rounded-md hover:bg-black/5 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:w-auto" target="_blank">
-									<img src="https://broshur.test/assets/icons/social/brand-linkedin.svg" alt="linkedin" class="size-5">
-                     
-                        لينكد ان
-
-
-
-
-
-									</a>
-									<a :href="`mailto:${auth?.tenant?.email}?&amp;subject=&amp;cc=&amp;bcc=&amp;body=${auth?.tenant?.site_url}`" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex w-full border-black/10 bg-white px-4 py-2 text-sm transition-all transition-colors border duration-300 items-center justify-center whitespace-nowrap rounded-md hover:bg-black/5 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:w-auto" target="_blank">
-										<img src="https://broshur.test/assets/icons/social/brand-email.svg" alt="email" class="size-5">
-                     
-                        البريد الالكتروني
-
- 
-
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.25" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></svg>
+					واتساب
+				</a>
+				<a :href="`https://t.me/share/url?text=${auth?.tenant?.site_url}&amp;url=${auth?.tenant?.site_url}`" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex w-full border-black/10 bg-white px-4 py-2 text-sm transition-all transition-colors border duration-300 items-center justify-center whitespace-nowrap rounded-md hover:bg-black/5 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:w-auto" target="_blank">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>
+					 تليجرام
+ 				</a>
+				<a :href="`https://x.com/intent/tweet?url=${auth?.tenant?.site_url}&amp;text=${auth?.tenant?.name}`" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex w-full border-black/10 bg-white px-4 py-2 text-sm transition-all transition-colors border duration-300 items-center justify-center whitespace-nowrap rounded-md hover:bg-black/5 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:w-auto" target="_blank">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg>
+					X (تويتر)
+				</a>
+				<a :href="`https://www.facebook.com/sharer/sharer.php?u=${auth?.tenant?.site_url}`" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex w-full border-black/10 bg-white px-4 py-2 text-sm transition-all transition-colors border duration-300 items-center justify-center whitespace-nowrap rounded-md hover:bg-black/5 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:w-auto" target="_blank">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-facebook"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg>
+					 فيسبوك
+				</a>
+				<a :href="`https://www.linkedin.com/shareArticle?mini=true&amp;url=${auth?.tenant?.site_url}`" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex w-full border-black/10 bg-white px-4 py-2 text-sm transition-all transition-colors border duration-300 items-center justify-center whitespace-nowrap rounded-md hover:bg-black/5 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:w-auto" target="_blank">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-linkedin"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" /></svg>
+					 لينكد ان
+				</a>
+				<a :href="`mailto:${auth?.tenant?.email}?&amp;subject=&amp;cc=&amp;bcc=&amp;body=${auth?.tenant?.site_url}`" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex w-full border-black/10 bg-white px-4 py-2 text-sm transition-all transition-colors border duration-300 items-center justify-center whitespace-nowrap rounded-md hover:bg-black/5 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none lg:w-auto" target="_blank">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail-forward"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 18h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v7.5" /><path d="M3 6l9 6l9 -6" /><path d="M15 18h6" /><path d="M18 15l3 3l-3 3" /></svg>
+					البريد الإلكتروني
+				</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script setup>

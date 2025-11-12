@@ -32,7 +32,7 @@
                                 <div
                                     :class="[
                                         'size-12 rounded-2xl flex items-center justify-center text-white p-2',
-                                        plan.info?.color || 'bg-primary-500'
+                                         
                                     ]"
                                 >
                                     <span v-if="plan.info?.image" v-html="plan.info.image"></span>
@@ -47,8 +47,8 @@
                                     </span>
                                 </div>
                                 <div>
-                                    <p class="text-xs text-gray-400">{{ plan.label }}</p>
-                                    <h3 class="text-lg font-semibold text-gray-900">{{ plan.name }}</h3>
+                                    <h3 class="text-lg font-semibold text-gray-900">{{ plan.label }}</h3>
+                                    <p class="text-xs text-gray-400">{{ plan.info?.description }}</p>
                                 </div>
                             </div>
 
@@ -83,7 +83,7 @@
                             </label>
                         </div>
 
-                        <div class="mt-6 flex items-baseline gap-2">
+                        <div class="mt-6 lg:flex items-baseline gap-2 hidden">
                             <p class="text-3xl font-semibold text-gray-900">
                                 {{ formatPrice(getSelectedOption(plan)?.price) }}
                             </p>
@@ -91,13 +91,9 @@
                                 / {{ periodicityLabel(getSelectedOption(plan)?.periodicity_type) }}
                             </span>
                         </div>
-
-                        <p v-if="plan.info?.summary" class="mt-4 text-sm leading-relaxed text-gray-600">
-                            {{ plan.info.summary }}
-                        </p>
-
+ 
                         <p v-if="plan.info?.description" class="mt-3 text-xs leading-6 text-gray-500">
-                            {{ plan.info.description }}
+                            {{ plan.info.summary }}
                         </p>
 
                         <ul v-if="plan.meta?.features?.length" class="mt-5 space-y-3 text-sm text-gray-600">
@@ -143,15 +139,16 @@
 
     <div
         v-if="showConfirmModal && selectedPlan && modalOption"
-        class="fixed inset-0 z-50 flex items-center justify-center px-4"
+        class="fixed inset-0 z-50 flex items-center justify-center px-4 py-4 overflow-y-auto"
     >
-        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" @click="closePlanModal()"></div>
+        <div class="fixed inset-0 bg-black/40 backdrop-blur-sm" @click="closePlanModal()"></div>
 
-        <div class="relative z-10 w-full max-w-2xl rounded-3xl bg-white p-6 shadow-2xl">
-            <div class="flex items-start justify-between gap-4">
+        <div class="relative z-10 w-full max-w-5xl max-h-[calc(100vh-2rem)] my-auto rounded-3xl bg-white shadow-2xl overflow-hidden flex flex-col">
+            <!-- Header -->
+            <div class="flex items-start justify-between gap-4 p-6 border-b border-gray-200">
                 <div>
                     <p class="text-sm text-gray-400">تأكيد الاشتراك</p>
-                    <h2 class="mt-1 text-2xl font-semibold text-gray-900">{{ selectedPlan.name }}</h2>
+                    <h2 class="mt-1 text-2xl font-semibold text-gray-900">{{ selectedPlan.label }}</h2>
                 </div>
                 <button class="text-gray-400 hover:text-gray-600 transition" @click="closePlanModal()" :disabled="submitting">
                     <span class="sr-only">إغلاق</span>
@@ -159,92 +156,106 @@
                 </button>
             </div>
 
-            <div class="mt-6 grid gap-4 md:grid-cols-2">
-                <div class="space-y-2">
-                    <p class="text-sm text-gray-500">سعر الباقة</p>
-                    <p class="text-xl font-semibold text-gray-900">
-                        {{ formatPrice(modalOption?.price) }}
-                        <span v-if="modalOption?.periodicity_type" class="text-sm text-gray-500">
-                            / {{ periodicityLabel(modalOption?.periodicity_type) }}
-                        </span>
-                    </p>
+            <!-- Main Content: Payment Form (Left) and Plan Details (Right) -->
+            <div class="flex-1 overflow-y-auto">
+                <div class="grid lg:grid-cols-2 gap-0 lg:min-h-full">
+                    <!-- Plan Details Section (Right) -->
+                    <div class="p-6 space-y-6">
+                        <div>
+                         
+                            <!-- Price -->
+                            <div class="mb-6">
+                                <p class="text-sm hidden lg:block text-gray-500 mb-2">سعر الباقة</p>
+                                <p class="text-xl font-bold text-gray-900">
+                                    {{ formatPrice(modalOption?.price) }}
+                                    <span v-if="modalOption?.periodicity_type" class="text-lg font-normal text-gray-500">
+                                        / {{ periodicityLabel(modalOption?.periodicity_type) }}
+                                    </span>
+                                </p>
+                            </div>
 
-                    <div v-if="selectedPlan.info?.summary" class="rounded-2xl bg-gray-50 p-4 text-sm text-gray-600 leading-relaxed">
-                        {{ selectedPlan.info.summary }}
+                            <!-- Summary -->
+                            <div v-if="selectedPlan.info?.summary" class="mb-6 rounded-2xl bg-gray-50 p-4 text-sm text-gray-600 leading-relaxed">
+                                {{ selectedPlan.info.summary }}
+                            </div>
+
+                            <!-- Additional Details -->
+                            <div hidden class="mb-6 space-y-3">
+                                 <p class="text-sm font-semibold text-gray-700 mb-3">معلومات إضافية</p> 
+                                <ul class="space-y-3 text-sm text-gray-600">
+                                
+                                    <li v-if="modalOption?.periodicity" class="flex items-start justify-between gap-4 py-2 border-b border-gray-100 last:border-0">
+                                        <span class="font-medium text-gray-700">الفترة:</span>
+                                        <span>{{ modalOption?.periodicity }} {{ periodicityLabel(modalOption?.periodicity_type) }}</span>
+                                    </li>
+                                    <li class="flex items-start justify-between gap-4 py-2 border-b border-gray-100 last:border-0">
+                                        <span class="font-medium text-gray-700">أيام السماح:</span>
+                                        <span>{{ modalOption?.grace_days ?? 0 }} يوم</span>
+                                    </li> 
+                                </ul>
+                            </div>
+
+                            <!-- Features -->
+                            <div v-if="selectedPlan.meta?.features?.length">
+                                <p class="text-sm font-semibold text-gray-600 mb-3">تشمل الباقة:</p>
+                                <ul class="space-y-2.5 text-sm text-gray-600">
+                                    <li
+                                        v-for="feature in selectedPlan.meta.features"
+                                        :key="feature"
+                                        class="flex items-start gap-2.5"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 text-primary-500 mt-0.5 flex-shrink-0">
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                        <span class="leading-relaxed">{{ feature }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Payment Form Section (Left) -->
+                    <div class="p-6 border-e border-gray-200 bg-gray-50/50">
+                        <div class="sticky top-0 space-y-6">
+                            <div>
+                               
+                                <div v-if="requiresPayment" class="space-y-4">
+                                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                                        <div
+                                            :id="paymentFormId"
+                                            :key="paymentFormKey"
+                                            class="w-full"
+                                        ></div>
+                                    </div>
+
+                                    <p v-if="paymentError" class="text-sm text-red-500">{{ paymentError }}</p>
+                                </div>
+
+                                <div v-else class="rounded-2xl border border-primary-100 bg-primary-50/70 p-4 text-sm text-primary-700">
+                                    <p class="font-medium mb-2">الباقة مجانية</p>
+                                    <p class="text-primary-600">سيتم تفعيل الاشتراك مباشرة بعد التأكيد.</p>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 border-t border-gray-200">
+                                <button
+                                    class="btn btn-primary w-full"
+                                    :disabled="submitting"
+                                    @click="confirmSubscription"
+                                >
+                                    <span v-if="submitting" class="loading loading-spinner loading-sm"></span>
+                                    <span v-else>تأكيد الاشتراك</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    
                 </div>
-
-                <div class="space-y-2">
-                    <p class="text-sm text-gray-500">تفاصيل إضافية</p>
-                    <ul class="space-y-2 text-sm text-gray-600 leading-6">
-                        <li>
-                            <span class="font-medium text-gray-700">أيام السماح:</span>
-                            <span>{{ modalOption?.grace_days ?? 0 }} يوم</span>
-                        </li>
-                        <li v-if="modalOption?.periodicity">
-                            <span class="font-medium text-gray-700">الفترة:</span>
-                            <span>{{ modalOption?.periodicity }} {{ periodicityLabel(modalOption?.periodicity_type) }}</span>
-                        </li>
-                        <li v-if="selectedPlan.info?.description">
-                            <span class="font-medium text-gray-700 block">عن الباقة:</span>
-                            <span>{{ selectedPlan.info.description }}</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div v-if="selectedPlan.meta?.features?.length" class="mt-6">
-                <p class="text-sm font-semibold text-gray-700">تشمل الباقة:</p>
-                <ul class="mt-3 grid gap-2 sm:grid-cols-2 text-sm text-gray-600">
-                    <li
-                        v-for="feature in selectedPlan.meta.features"
-                        :key="feature"
-                        class="flex items-start gap-2"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-4 text-primary-500 mt-0.5">
-                            <path
-                                fill-rule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clip-rule="evenodd"
-                            />
-                        </svg>
-                        <span>{{ feature }}</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div v-if="requiresPayment" class="mt-6 space-y-4 w-full">
-                <!-- <div class="rounded-2xl border border-primary-100 bg-primary-50/70 p-4 text-sm text-primary-700">
-                    <p>سيتم إكمال الاشتراك بعد نجاح عملية الدفع.</p>
-                    <p class="mt-1 font-medium">
-                        المبلغ المستحق: {{ formatPrice(modalOption?.price) }}
-                        <span>
-                            / {{ periodicityLabel(modalOption?.periodicity_type) }}
-                        </span>
-                    </p>
-                </div> -->
-
-                <div
-                    :id="paymentFormId"
-                    :key="paymentFormKey"
-                    class="rounded-2xl border border-gray-200 bg-white p-4 !w-full"
-                     
-                ></div>
-
-                <p v-if="paymentError" class="text-sm text-red-500">{{ paymentError }}</p>
-            </div>
-
-            <div class="mt-8 flex flex-col gap-3 md:flex-row md:justify-end">
-                 
-                <button
-                    v-if="!requiresPayment"
-                    class="btn btn-primary w-full md:w-auto"
-                    :disabled="submitting"
-                    @click="confirmSubscription"
-                >
-                    <span v-if="submitting" class="loading loading-spinner loading-sm"></span>
-                    <span v-else>تأكيد الاشتراك</span>
-                </button>
             </div>
         </div>
     </div>

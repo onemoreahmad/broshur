@@ -25,7 +25,7 @@ class GetPlans
                 return [
                     'key' => $subscriptionKey,
                     'name' => $basePlan->name,
-                    'label' => $basePlan->label,
+                    'label' => data_get($config, 'label', $basePlan->label),
                     'meta' => $basePlan->meta,
                     'image' => $basePlan->image,
                     'info' => [

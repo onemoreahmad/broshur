@@ -1,35 +1,35 @@
 <template>
     <Container>
         <div class="">
-            <div class="grid gap-6 xl:grid-cols-[2.2fr,1fr]">
-                <div class="space-y-6">
-                    <div class="grid gap-6 lg:grid-cols-[1.4fr,1fr] items-stretch">
-                        <div class="bg-white rounded-3xl shadow-sm p-8">
-                            <div class="space-y-4 flex-1">
-                                <h1 class="text-xl font-semibold text-gray-900 leading-snug">
+            <div class="grid gap-4 md:gap-6 xl:grid-cols-[2.2fr,1fr]">
+                <div class="space-y-4 md:space-y-6">
+                    <div class="grid gap-4 md:gap-6 lg:grid-cols-[1.4fr,1fr] items-stretch">
+                        <div class="bg-white rounded-2xl md:rounded-3xl shadow-sm p-4 md:p-6 lg:p-8">
+                            <div class="space-y-3 md:space-y-4 flex-1">
+                                <h1 class="text-lg md:text-xl font-semibold text-gray-900 leading-snug">
                                     مرحبا بعودتك, {{ auth.user?.name }} 
-                                    <span class="text-3xl ms-2">
+                                    <span class="text-2xl md:text-3xl ms-2">
                                         👋
                                     </span>
                                 </h1>
-                                 <p class="text-sm text-gray-500/50 leading-relaxed max-w-md">
+                                 <p class="text-xs md:text-sm text-gray-500/50 leading-relaxed max-w-md">
                                     إحصائيات صفحتك خلال الشهر ({{ dateRange.days }} يوم) الفترة من {{ dateRange.from }} إلى {{ dateRange.to }}
                                 </p> 
-                                <div class="grid gap-4 grid-cols-2 md:grid-cols-3 w-full mt-6">
+                                <div class="grid gap-3 md:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full mt-4 md:mt-6">
                                     <div
                                         v-for="metric in summaryMetrics"
                                         :key="metric.id"
                                         :class="[
-                                            'bg-gray-100 rounded-2xl px-5 py-4 flex items-center gap-4 transition w-full',
+                                            'bg-gray-100 rounded-xl md:rounded-2xl px-3 py-3 md:px-5 md:py-4 flex items-center gap-2 md:gap-4 transition w-full',
                                             isLoadingMetrics ? 'animate-pulse' : ''
                                         ]"
                                     >
-                                        <div :class="['flex items-center justify-center rounded-xl size-12 shrink-0', metric.iconBackground]">
+                                        <div :class="['flex items-center justify-center rounded-lg md:rounded-xl size-10 md:size-12 shrink-0', metric.iconBackground]">
                                             <svg
                                                 v-if="metric.id === 'views'"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
-                                                class="size-6 text-white"
+                                                class="size-5 md:size-6 text-white"
                                                 fill="currentColor"
                                             >
                                                 <path d="M4 13a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6H5a1 1 0 0 1-1-1v-5Zm6-4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v10h-5V9Zm6-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1h-4V4Z" />
@@ -38,7 +38,7 @@
                                                 v-else-if="metric.id === 'visitors'"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
-                                                class="size-6 text-white"
+                                                class="size-5 md:size-6 text-white"
                                                 fill="currentColor"
                                             >
                                                 <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
@@ -48,7 +48,7 @@
                                                 v-else-if="metric.id === 'average_visit_time'"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
-                                                class="size-6 text-white"
+                                                class="size-5 md:size-6 text-white"
                                                 fill="currentColor"
                                             >
                                                 <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8Zm.5-13h-1a1 1 0 0 0-1 1v4.382a1 1 0 0 0 .293.707l2.536 2.535a1 1 0 0 0 1.414-1.414L12.5 11.586Z" />
@@ -57,24 +57,34 @@
                                                 v-else-if="metric.id === 'order_count'"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
-                                                class="size-6 text-white"
-                                                fill="currentColor"
+                                                class="size-5 md:size-6 text-white"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="1.5"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
                                             >
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-list-details"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M13 5h8" /><path d="M13 9h5" /><path d="M13 15h8" /><path d="M13 19h5" /><path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /><path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /></svg>
-                                        </svg>
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                <path d="M13 5h8" />
+                                                <path d="M13 9h5" />
+                                                <path d="M13 15h8" />
+                                                <path d="M13 19h5" />
+                                                <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                                <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                            </svg>
                                             <svg
                                                 v-else
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
-                                                class="size-6 text-white"
+                                                class="size-5 md:size-6 text-white"
                                                 fill="currentColor"
                                             >
                                                 <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-3.25 8.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm8.5 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm-5.25 6.75a4.75 4.75 0 0 1-4.33-2.75.75.75 0 1 1 1.36-.6 3.25 3.25 0 0 0 5.94 0 .75.75 0 1 1 1.36.6A4.75 4.75 0 0 1 12 17Z" />
                                             </svg>
                                         </div> 
-                                        <div>
-                                            <p class="text-xl font-semibold text-gray-900">{{ metric.value }}</p>
-                                            <p class="text-sm text-gray-500">{{ metric.label }}</p>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-lg md:text-xl font-semibold text-gray-900 truncate">{{ metric.value }}</p>
+                                            <p class="text-xs md:text-sm text-gray-500 line-clamp-2">{{ metric.label }}</p>
                                         </div>
                                         <span
                                             v-if="metric.trend"

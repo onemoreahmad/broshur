@@ -6,6 +6,9 @@
             <p v-if="subtitle" class="text-gray-400 font-light  text-sm">{{ subtitle }}</p>
         </div>
 
+        <div class="px-2 md:px-0 mb-6"> 
+            <slot />
+        </div>
         <slot />
     </div>
 </template>

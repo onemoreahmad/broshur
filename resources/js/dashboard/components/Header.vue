@@ -1,23 +1,21 @@
 <template>
-<div class="bg-white py-2 px-2 xl:px-0 !bg-purple-700 bg-gradient-to-l from-gray-900 via-indigo-800 to-blue-900 !p-3 text-white" wire:ignore="">
+<div class="lg:py-2 py-1.5 px-1.5 xl:px-0 !bg-purple-700 bg-gradient-to-l from-gray-900 via-indigo-800 to-blue-900 text-white" wire:ignore="">
    <div class="max-w-7xl mx-auto flex items-center justify-between gap-x-2">
       <div class="flex items-center">
          <RouterLink :to="{ name: 'home' }" class="inline-flex items-center gap-2">
             <img src="/assets/images/broshur-logo-shape.webp" alt="" class="size-6 w-auto hidden md:block">
 
-
- 
             <!-- <img src="/assets/images/logo-white-0.webp" alt="" class="size-6 !w-auto hidden md:block"> -->
          </RouterLink>
          <div class="mx-2 bg-white/20 h-8 rounded-full w-px hidden md:block">   </div> 
-            <div class="flex items-center gap-x-2">
+            <div class="flex items-center lg:gap-x-2 gap-x-1">
                <RouterLink :to="{ name: 'home' }">
                   <img :src="currentUser?.tenant?.logo" alt="" class="size-10 !w-auto rounded-md ">
                </RouterLink>
-               <div class="text-sm flex flex-col truncate">
-                  <RouterLink :to="{ name: 'home' }">{{ currentUser?.tenant?.name }} </RouterLink>
-                  <span class="text-xs text-yellow-400 font-thin mt-1">
-                     <RouterLink :to="{ name: 'subscription' }" class="text-xs inline-flex items-center gap-x-2 bg-blue-600 hover:bg-blue-700 text-white px-2 py-0.5 rounded-md font-thin">
+               <div class="lg:text-sm text-xs flex flex-col truncate">
+                  <RouterLink :to="{ name: 'home' }" >{{ currentUser?.tenant?.name }} </RouterLink>
+                  <span class="lg:text-xs text-xs text-yellow-400 font-thin mt-0.5">
+                     <RouterLink :to="{ name: 'subscription' }" class="!text-xs inline-flex items-center gap-x-2 bg-blue-600 hover:bg-blue-700 text-white lg:px-2 px-1.5 lg:py-0.5 py-1 rounded-md font-thin">
                         <svg viewBox="0 0 24 24" class="size-4" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M21.609 13.5616L21.8382 11.1263C22.0182 9.2137 22.1082 8.25739 21.781 7.86207C21.604 7.64823 21.3633 7.5172 21.106 7.4946C20.6303 7.45282 20.0329 8.1329 18.8381 9.49307C18.2202 10.1965 17.9113 10.5482 17.5666 10.6027C17.3757 10.6328 17.1811 10.6018 17.0047 10.5131C16.6865 10.3529 16.4743 9.91812 16.0499 9.04851L13.8131 4.46485C13.0112 2.82162 12.6102 2 12 2C11.3898 2 10.9888 2.82162 10.1869 4.46486L7.95007 9.04852C7.5257 9.91812 7.31351 10.3529 6.99526 10.5131C6.81892 10.6018 6.62434 10.6328 6.43337 10.6027C6.08872 10.5482 5.77977 10.1965 5.16187 9.49307C3.96708 8.1329 3.36968 7.45282 2.89399 7.4946C2.63666 7.5172 2.39598 7.64823 2.21899 7.86207C1.8918 8.25739 1.9818 9.2137 2.16181 11.1263L2.391 13.5616C2.76865 17.5742 2.95748 19.5805 4.14009 20.7902C5.32271 22 7.09517 22 10.6401 22H13.3599C16.9048 22 18.6773 22 19.8599 20.7902C21.0425 19.5805 21.2313 17.5742 21.609 13.5616Z" stroke="currentColor" stroke-width="1.5"></path> <path opacity="0.5" d="M9 18H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
 
                         {{ currentUser?.tenant?.plan?.label }} 
