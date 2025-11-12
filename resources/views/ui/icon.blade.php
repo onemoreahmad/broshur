@@ -3,7 +3,7 @@
     'class' => '',
     'iconclass' => '',
     'path' => 'assets/icons',
-    'dir' => 'tabler-full',
+    'dir' => 'tabler',
     'type' => 'tabler',
     'size' => '5',
 ])
