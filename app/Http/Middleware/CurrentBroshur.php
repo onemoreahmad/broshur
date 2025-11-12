@@ -46,8 +46,8 @@ class CurrentBroshur
     private function setThemeOptions($tenant)
     {   
         if(is_null(config('themeOptions'))){
-            $theme = Theme::where('id', $tenant->theme_id)->first();
-            $themeOptions = ThemeOption::where('theme_id', $tenant->theme_id)->first();
+            $theme = Theme::where('id', data_get($tenant, 'theme_id'))->first();
+            $themeOptions = ThemeOption::where('theme_id', data_get($tenant, 'theme_id'))->first();
             config()->set('themeOptions', data_get($themeOptions, 'config', []));
             view()->addNamespace(
                 'theme',
