@@ -158,7 +158,7 @@
 
             <!-- Main Content: Payment Form (Left) and Plan Details (Right) -->
             <div class="flex-1 overflow-y-auto">
-                <div class="grid lg:grid-cols-2 gap-0 lg:min-h-full">
+                <div class="grid lg:grid-cols-2 gap-0  ">
                     <!-- Plan Details Section (Right) -->
                     <div class="p-6 space-y-6">
                         <div>

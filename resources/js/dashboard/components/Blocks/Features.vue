@@ -129,8 +129,10 @@
 import axios from 'axios'
 import { ref, onMounted, watch } from 'vue'
 import { useErrorsStore } from '@/stores/errors'
+import { useNotification } from '@kyvg/vue3-notification'
 
 const errorsStore = useErrorsStore()
+const { notify } = useNotification()
 
 const form = ref({
     id: null,
@@ -238,6 +240,8 @@ const save = () => {
         // Update form with response data to get proper IDs
         form.value = response.data.data
         
+        notify({ type: "success", text: "تم حفظ المميزات بنجاح" })
+        
         // Reload preview iframe
         const previewIframe = document.getElementById('preview-iframe')
         if (previewIframe) {
@@ -246,10 +250,13 @@ const save = () => {
         
     })
     .catch(error => {
-        console.error(error.response.data.errors)
+        console.error(error.response?.data?.errors || error.message)
         formLoading.value = false;
         if (error.response) {
             errorsStore.setErrors(error.response.data.errors);
+            notify({ type: "error", text: "فشل حفظ المميزات" })
+        } else {
+            notify({ type: "error", text: "حدث خطأ ما، الرجاء المحاولة مرة أخرى" })
         }
     })
 }

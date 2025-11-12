@@ -152,8 +152,10 @@
 import axios from 'axios'
 import { ref, onMounted, computed } from 'vue'
 import { useErrorsStore } from '@/stores/errors'
+import { useNotification } from '@kyvg/vue3-notification'
 
 const errorsStore = useErrorsStore()
+const { notify } = useNotification()
 
 const form = ref({
     active: true,
@@ -394,6 +396,8 @@ const save = () => {
             form.value.custom_links = []
         }
         
+        notify({ type: "success", text: "تم حفظ أزرار الإجراءات بنجاح" })
+        
         // Reload preview iframe
         const previewIframe = document.getElementById('preview-iframe')
         if (previewIframe) {
@@ -406,6 +410,9 @@ const save = () => {
         formLoading.value = false;
         if (error.response) {
             errorsStore.setErrors(error.response.data.errors);
+            notify({ type: "error", text: "فشل حفظ أزرار الإجراءات" })
+        } else {
+            notify({ type: "error", text: "حدث خطأ ما، الرجاء المحاولة مرة أخرى" })
         }
     })
 }

@@ -31,9 +31,12 @@ import { useAuthStore } from '../stores/auth'
 import { storeToRefs } from 'pinia'
 import UiUploadAvatar from '../components/Ui/UploadAvatar.vue'
 import { useErrorsStore } from '../stores/errors'
+import { useNotification } from '@kyvg/vue3-notification'
+
 const store = useAuthStore()
 const formLoading = ref(false)
 const errorsStore = useErrorsStore()
+const { notify } = useNotification()
 const { user } = storeToRefs(useAuthStore())
  
 const form = ref({
@@ -67,15 +70,18 @@ const save = () => {
         store.updateUser(response.data.user)
         // Reset the image file input after successful upload
         form.value.newImage = null
+        
+        notify({ type: "success", text: "تم حفظ بيانات الحساب بنجاح" })
     }).catch(error => {
+        formLoading.value = false
+        
         if (error.response?.data?.errors) {
             errorsStore.setErrors(error.response.data.errors);
+            notify({ type: "error", text: "فشل حفظ بيانات الحساب" })
         } else {
             console.error(error)
+            notify({ type: "error", text: "حدث خطأ ما، الرجاء المحاولة مرة أخرى" })
         }
-
-        formLoading.value = false
-        console.error(error)
     })
 }
 </script>

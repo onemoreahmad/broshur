@@ -154,8 +154,10 @@
 import axios from 'axios'
 import { ref, onMounted, watch, useId } from 'vue'
 import { useErrorsStore } from '@/stores/errors'
+import { useNotification } from '@kyvg/vue3-notification'
 
 const errorsStore = useErrorsStore()
+const { notify } = useNotification()
 
 const form = ref({
     id: null,
@@ -246,6 +248,8 @@ const save = () => {
         // Update form with response data to get proper IDs
         form.value = response.data.data
         
+        notify({ type: "success", text: "تم حفظ الروابط الاجتماعية بنجاح" })
+        
         // Reload preview iframe
         const previewIframe = document.getElementById('preview-iframe')
         if (previewIframe) {
@@ -258,6 +262,9 @@ const save = () => {
         formLoading.value = false;
         if (error.response) {
             errorsStore.setErrors(error.response.data.errors);
+            notify({ type: "error", text: "فشل حفظ الروابط الاجتماعية" })
+        } else {
+            notify({ type: "error", text: "حدث خطأ ما، الرجاء المحاولة مرة أخرى" })
         }
     })
 }

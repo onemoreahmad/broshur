@@ -124,6 +124,20 @@
 
     const summaryMetrics = ref([
         {
+            id: 'order_count',
+            label: 'عدد الطلبات',
+            value: '0',
+            iconBackground: 'bg-green-500',
+            trend: null,
+        },
+        {
+            id: 'subscribers_count',
+            label: 'عدد المشتركين',
+            value: '0',
+            iconBackground: 'bg-purple-500',
+            trend: null,
+        },
+        {
             id: 'views',
             label: 'عدد الزايارات (المشاهدات)',
             value: '0',
@@ -144,20 +158,7 @@
             iconBackground: 'bg-teal-500',
             trend: null,
         },
-        {
-            id: 'order_count',
-            label: 'عدد الطلبات',
-            value: '0',
-            iconBackground: 'bg-green-500',
-            trend: null,
-        },
-        {
-            id: 'subscribers_count',
-            label: 'عدد المشتركين',
-            value: '0',
-            iconBackground: 'bg-purple-500',
-            trend: null,
-        },
+
     ])
 
     const isLoadingMetrics = ref(false)
@@ -171,6 +172,22 @@
             const formatter = new Intl.NumberFormat()
 
             summaryMetrics.value = [
+
+            
+                {
+                    id: 'order_count',
+                    label: 'عدد الطلبات',
+                    value: formatter.format(response?.data?.order_count ?? 0),
+                    iconBackground: 'bg-teal-500',
+                    trend: null,
+                },
+                {
+                    id: 'subscribers_count',
+                    label: 'عدد المشتركين',
+                    value: formatter.format(response?.data?.subscribers_count ?? 0),
+                    iconBackground: 'bg-cyan-500',
+                    trend: null,
+                },
                 {
                     id: 'views',
                     label: 'عدد الزايارات (المشاهدات)',
@@ -190,20 +207,6 @@
                     label: 'متوسط زمن الزيارة',
                     value: summary.average_visit_time ?? '0s',
                     iconBackground: 'bg-purple-500',
-                    trend: null,
-                },
-                {
-                    id: 'order_count',
-                    label: 'عدد الطلبات',
-                    value: formatter.format(response?.data?.order_count ?? 0),
-                    iconBackground: 'bg-teal-500',
-                    trend: null,
-                },
-                {
-                    id: 'subscribers_count',
-                    label: 'عدد المشتركين',
-                    value: formatter.format(response?.data?.subscribers_count ?? 0),
-                    iconBackground: 'bg-cyan-500',
                     trend: null,
                 },
             ]

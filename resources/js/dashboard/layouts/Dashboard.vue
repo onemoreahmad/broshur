@@ -1,9 +1,17 @@
 <template>
-    <div class="bg-base-200 min-h-screen relative pb-20">
+    <div class="bg-base-200 min-h-screen relative ">
         <Header />
         <Navbar />
       
-        <RouterView /> 
+        <div class="min-h-[calc(100vh-177px)]">
+          <RouterView /> 
+        </div>
+        <footer class="bg-black/10 p-2 text-center text-xs text-gray-400 mt-10">
+          بروشور  © 2025 
+          <a href="https://broshur.com" class="text-blue-800 hover:text-blue-900 ms-2 inline-flex items-center gap-x-1">بروشور 
+            <img src="/assets/images/broshur-logo-shape.webp" alt="بروشور" class="h-4" /> 
+          </a>
+        </footer>
         <notifications position="top right" :duration="1000"   />
 
 
