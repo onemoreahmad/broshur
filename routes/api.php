@@ -23,11 +23,17 @@ Route::get('/themes', \App\Api\Theme\GetThemes::class)->middleware('auth:sanctum
 // Save theme options
 Route::post('/theme-options', \App\Api\Theme\UpdateThemeOptions::class)->middleware('auth:sanctum', 'admin');
 
-Route::get('/orders', \App\Api\Order\GetOrders::class)->middleware('auth:sanctum');
+Route::get('/orders', \App\Api\Order\GetOrders::class)->middleware('auth:sanctum','admin');
 
-Route::post('/orders', \App\Api\Order\CreateOrder::class)->middleware('auth:sanctum');
+Route::post('/orders', \App\Api\Order\CreateOrder::class)->middleware('auth:sanctum','admin');
 
-Route::get('/orders/{id}', \App\Api\Order\GetOrder::class)->middleware('auth:sanctum');
+Route::get('/orders/{id}', \App\Api\Order\GetOrder::class)->middleware('auth:sanctum','admin');
+
+Route::get('/subscribers', \App\Api\Subscriber\GetSubscribers::class)->middleware('auth:sanctum','admin');
+
+Route::post('/subscribers', \App\Api\Subscriber\CreateSubscriber::class)->middleware('auth:sanctum','admin');
+
+Route::delete('/subscribers/{id}', \App\Api\Subscriber\DeleteSubscriber::class)->middleware('auth:sanctum','admin');
 
 Route::middleware(['auth:sanctum', 'admin'])
     ->prefix('dashboard')

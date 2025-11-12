@@ -16,90 +16,277 @@
                                     إحصائيات صفحتك خلال الشهر ({{ dateRange.days }} يوم) الفترة من {{ dateRange.from }} إلى {{ dateRange.to }}
                                 </p> 
                                 <div class="grid gap-3 md:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full mt-4 md:mt-6">
-                                    <div
-                                        v-for="metric in summaryMetrics"
-                                        :key="metric.id"
-                                        :class="[
-                                            'bg-gray-100 rounded-xl md:rounded-2xl px-3 py-3 md:px-5 md:py-4 flex items-center gap-2 md:gap-4 transition w-full',
-                                            isLoadingMetrics ? 'animate-pulse' : ''
-                                        ]"
-                                    >
-                                        <div :class="['flex items-center justify-center rounded-lg md:rounded-xl size-10 md:size-12 shrink-0', metric.iconBackground]">
-                                            <svg
-                                                v-if="metric.id === 'views'"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24"
-                                                class="size-5 md:size-6 text-white"
-                                                fill="currentColor"
+                                    <template v-for="metric in summaryMetrics" :key="metric.id">
+                                        <RouterLink
+                                            v-if="metric.id === 'order_count'"
+                                            :to="{ name: 'orders' }"
+                                            class="block"
+                                        >
+                                            <div
+                                                :class="[
+                                                    'bg-gray-100 rounded-xl md:rounded-2xl px-3 py-3 md:px-5 md:py-4 flex items-center gap-2 md:gap-4 transition w-full cursor-pointer hover:bg-gray-200',
+                                                    isLoadingMetrics ? 'animate-pulse' : ''
+                                                ]"
                                             >
-                                                <path d="M4 13a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6H5a1 1 0 0 1-1-1v-5Zm6-4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v10h-5V9Zm6-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1h-4V4Z" />
-                                            </svg>
-                                            <svg
-                                                v-else-if="metric.id === 'visitors'"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24"
-                                                class="size-5 md:size-6 text-white"
-                                                fill="currentColor"
+                                                <div :class="['flex items-center justify-center rounded-lg md:rounded-xl size-10 md:size-12 shrink-0', metric.iconBackground]">
+                                                    <svg
+                                                        v-if="metric.id === 'views'"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        class="size-5 md:size-6 text-white"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path d="M4 13a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6H5a1 1 0 0 1-1-1v-5Zm6-4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v10h-5V9Zm6-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1h-4V4Z" />
+                                                    </svg>
+                                                    <svg
+                                                        v-else-if="metric.id === 'visitors'"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        class="size-5 md:size-6 text-white"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+                                                        <path d="M4 20a8 8 0 1 1 16 0z" />
+                                                    </svg>
+                                                    <svg
+                                                        v-else-if="metric.id === 'average_visit_time'"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        class="size-5 md:size-6 text-white"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8Zm.5-13h-1a1 1 0 0 0-1 1v4.382a1 1 0 0 0 .293.707l2.536 2.535a1 1 0 0 0 1.414-1.414L12.5 11.586Z" />
+                                                    </svg>
+                                                    <svg
+                                                        v-else-if="metric.id === 'order_count'"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        class="size-5 md:size-6 text-white"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="1.5"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                    >
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                        <path d="M13 5h8" />
+                                                        <path d="M13 9h5" />
+                                                        <path d="M13 15h8" />
+                                                        <path d="M13 19h5" />
+                                                        <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                                        <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                                    </svg>
+                                                    <svg
+                                                        v-else
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        class="size-5 md:size-6 text-white"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-3.25 8.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm8.5 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm-5.25 6.75a4.75 4.75 0 0 1-4.33-2.75.75.75 0 1 1 1.36-.6 3.25 3.25 0 0 0 5.94 0 .75.75 0 1 1 1.36.6A4.75 4.75 0 0 1 12 17Z" />
+                                                    </svg>
+                                                </div> 
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-lg md:text-xl font-semibold text-gray-900 truncate">{{ metric.value }}</p>
+                                                    <p class="text-xs md:text-sm text-gray-500 line-clamp-2">{{ metric.label }}</p>
+                                                </div>
+                                                <span
+                                                    v-if="metric.trend"
+                                                    :class="[
+                                                        'ml-auto text-xs font-medium px-2 py-1 rounded-full hidden sm:inline-flex',
+                                                        metric.trend === 'up'
+                                                            ? 'bg-green-100 text-green-600'
+                                                            : metric.trend === 'down'
+                                                                ? 'bg-red-100 text-red-600'
+                                                                : 'bg-gray-100 text-gray-500'
+                                                    ]"
+                                                >
+                                                    {{ metric.trend === 'up' ? '▲' : metric.trend === 'down' ? '▼' : '•' }}
+                                                </span>
+                                            </div>
+                                        </RouterLink>
+                                        <RouterLink
+                                            v-else-if="metric.id === 'subscribers_count'"
+                                            :to="{ name: 'subscribers' }"
+                                            class="block"
+                                        >
+                                            <div
+                                                :class="[
+                                                    'bg-gray-100 rounded-xl md:rounded-2xl px-3 py-3 md:px-5 md:py-4 flex items-center gap-2 md:gap-4 transition w-full cursor-pointer hover:bg-gray-200',
+                                                    isLoadingMetrics ? 'animate-pulse' : ''
+                                                ]"
                                             >
-                                                <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
-                                                <path d="M4 20a8 8 0 1 1 16 0z" />
-                                            </svg>
-                                            <svg
-                                                v-else-if="metric.id === 'average_visit_time'"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24"
-                                                class="size-5 md:size-6 text-white"
-                                                fill="currentColor"
-                                            >
-                                                <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8Zm.5-13h-1a1 1 0 0 0-1 1v4.382a1 1 0 0 0 .293.707l2.536 2.535a1 1 0 0 0 1.414-1.414L12.5 11.586Z" />
-                                            </svg>
-                                            <svg
-                                                v-else-if="metric.id === 'order_count'"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24"
-                                                class="size-5 md:size-6 text-white"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="1.5"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                            >
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                <path d="M13 5h8" />
-                                                <path d="M13 9h5" />
-                                                <path d="M13 15h8" />
-                                                <path d="M13 19h5" />
-                                                <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
-                                                <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
-                                            </svg>
-                                            <svg
-                                                v-else
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24"
-                                                class="size-5 md:size-6 text-white"
-                                                fill="currentColor"
-                                            >
-                                                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-3.25 8.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm8.5 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm-5.25 6.75a4.75 4.75 0 0 1-4.33-2.75.75.75 0 1 1 1.36-.6 3.25 3.25 0 0 0 5.94 0 .75.75 0 1 1 1.36.6A4.75 4.75 0 0 1 12 17Z" />
-                                            </svg>
-                                        </div> 
-                                        <div class="flex-1 min-w-0">
-                                            <p class="text-lg md:text-xl font-semibold text-gray-900 truncate">{{ metric.value }}</p>
-                                            <p class="text-xs md:text-sm text-gray-500 line-clamp-2">{{ metric.label }}</p>
-                                        </div>
-                                        <span
-                                            v-if="metric.trend"
+                                                <div :class="['flex items-center justify-center rounded-lg md:rounded-xl size-10 md:size-12 shrink-0', metric.iconBackground]">
+                                                    <svg
+                                                        v-if="metric.id === 'views'"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        class="size-5 md:size-6 text-white"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path d="M4 13a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6H5a1 1 0 0 1-1-1v-5Zm6-4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v10h-5V9Zm6-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1h-4V4Z" />
+                                                    </svg>
+                                                    <svg
+                                                        v-else-if="metric.id === 'visitors'"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        class="size-5 md:size-6 text-white"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+                                                        <path d="M4 20a8 8 0 1 1 16 0z" />
+                                                    </svg>
+                                                    <svg
+                                                        v-else-if="metric.id === 'average_visit_time'"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        class="size-5 md:size-6 text-white"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8Zm.5-13h-1a1 1 0 0 0-1 1v4.382a1 1 0 0 0 .293.707l2.536 2.535a1 1 0 0 0 1.414-1.414L12.5 11.586Z" />
+                                                    </svg>
+                                                    <svg
+                                                        v-else-if="metric.id === 'order_count'"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        class="size-5 md:size-6 text-white"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="1.5"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                    >
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                        <path d="M13 5h8" />
+                                                        <path d="M13 9h5" />
+                                                        <path d="M13 15h8" />
+                                                        <path d="M13 19h5" />
+                                                        <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                                        <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                                    </svg>
+                                                    <svg
+                                                        v-else
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        class="size-5 md:size-6 text-white"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-3.25 8.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm8.5 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm-5.25 6.75a4.75 4.75 0 0 1-4.33-2.75.75.75 0 1 1 1.36-.6 3.25 3.25 0 0 0 5.94 0 .75.75 0 1 1 1.36.6A4.75 4.75 0 0 1 12 17Z" />
+                                                    </svg>
+                                                </div> 
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-lg md:text-xl font-semibold text-gray-900 truncate">{{ metric.value }}</p>
+                                                    <p class="text-xs md:text-sm text-gray-500 line-clamp-2">{{ metric.label }}</p>
+                                                </div>
+                                                <span
+                                                    v-if="metric.trend"
+                                                    :class="[
+                                                        'ml-auto text-xs font-medium px-2 py-1 rounded-full hidden sm:inline-flex',
+                                                        metric.trend === 'up'
+                                                            ? 'bg-green-100 text-green-600'
+                                                            : metric.trend === 'down'
+                                                                ? 'bg-red-100 text-red-600'
+                                                                : 'bg-gray-100 text-gray-500'
+                                                    ]"
+                                                >
+                                                    {{ metric.trend === 'up' ? '▲' : metric.trend === 'down' ? '▼' : '•' }}
+                                                </span>
+                                            </div>
+                                        </RouterLink>
+                                        <div
+                                            v-else
                                             :class="[
-                                                'ml-auto text-xs font-medium px-2 py-1 rounded-full hidden sm:inline-flex',
-                                                metric.trend === 'up'
-                                                    ? 'bg-green-100 text-green-600'
-                                                    : metric.trend === 'down'
-                                                        ? 'bg-red-100 text-red-600'
-                                                        : 'bg-gray-100 text-gray-500'
+                                                'bg-gray-100 rounded-xl md:rounded-2xl px-3 py-3 md:px-5 md:py-4 flex items-center gap-2 md:gap-4 transition w-full',
+                                                isLoadingMetrics ? 'animate-pulse' : ''
                                             ]"
                                         >
-                                            {{ metric.trend === 'up' ? '▲' : metric.trend === 'down' ? '▼' : '•' }}
-                                        </span>
-                                    </div>
+                                            <div :class="['flex items-center justify-center rounded-lg md:rounded-xl size-10 md:size-12 shrink-0', metric.iconBackground]">
+                                                <svg
+                                                    v-if="metric.id === 'views'"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24"
+                                                    class="size-5 md:size-6 text-white"
+                                                    fill="currentColor"
+                                                >
+                                                    <path d="M4 13a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6H5a1 1 0 0 1-1-1v-5Zm6-4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v10h-5V9Zm6-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1h-4V4Z" />
+                                                </svg>
+                                                <svg
+                                                    v-else-if="metric.id === 'visitors'"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24"
+                                                    class="size-5 md:size-6 text-white"
+                                                    fill="currentColor"
+                                                >
+                                                    <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+                                                    <path d="M4 20a8 8 0 1 1 16 0z" />
+                                                </svg>
+                                                <svg
+                                                    v-else-if="metric.id === 'average_visit_time'"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24"
+                                                    class="size-5 md:size-6 text-white"
+                                                    fill="currentColor"
+                                                >
+                                                    <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8Zm.5-13h-1a1 1 0 0 0-1 1v4.382a1 1 0 0 0 .293.707l2.536 2.535a1 1 0 0 0 1.414-1.414L12.5 11.586Z" />
+                                                </svg>
+                                                <svg
+                                                    v-else-if="metric.id === 'order_count'"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24"
+                                                    class="size-5 md:size-6 text-white"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="1.5"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                >
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <path d="M13 5h8" />
+                                                    <path d="M13 9h5" />
+                                                    <path d="M13 15h8" />
+                                                    <path d="M13 19h5" />
+                                                    <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                                    <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+                                                </svg>
+                                                <svg
+                                                    v-else-if="metric.id === 'subscribers_count'"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24"
+                                                    class="size-5 md:size-6 text-white"
+                                                    fill="currentColor"
+                                                >
+                                                    <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+                                                    <path d="M4 20a8 8 0 1 1 16 0z" />
+                                                </svg>
+                                                <svg
+                                                    v-else
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24"
+                                                    class="size-5 md:size-6 text-white"
+                                                    fill="currentColor"
+                                                >
+                                                    <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-3.25 8.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm8.5 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm-5.25 6.75a4.75 4.75 0 0 1-4.33-2.75.75.75 0 1 1 1.36-.6 3.25 3.25 0 0 0 5.94 0 .75.75 0 1 1 1.36.6A4.75 4.75 0 0 1 12 17Z" />
+                                                </svg>
+                                            </div> 
+                                            <div class="flex-1 min-w-0">
+                                                <p class="text-lg md:text-xl font-semibold text-gray-900 truncate">{{ metric.value }}</p>
+                                                <p class="text-xs md:text-sm text-gray-500 line-clamp-2">{{ metric.label }}</p>
+                                            </div>
+                                            <span
+                                                v-if="metric.trend"
+                                                :class="[
+                                                    'ml-auto text-xs font-medium px-2 py-1 rounded-full hidden sm:inline-flex',
+                                                    metric.trend === 'up'
+                                                        ? 'bg-green-100 text-green-600'
+                                                        : metric.trend === 'down'
+                                                            ? 'bg-red-100 text-red-600'
+                                                            : 'bg-gray-100 text-gray-500'
+                                                ]"
+                                            >
+                                                {{ metric.trend === 'up' ? '▲' : metric.trend === 'down' ? '▼' : '•' }}
+                                            </span>
+                                        </div>
+                                    </template>
                                 </div>
                             </div>
                              
@@ -116,6 +303,7 @@
 
 <script setup>
     import { onMounted, ref } from 'vue'
+    import { RouterLink } from 'vue-router'
     import axios from 'axios'
     import { useAuthStore } from '@/stores/auth'
     import { useHead } from '@unhead/vue'

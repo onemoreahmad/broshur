@@ -30,7 +30,7 @@ class Order extends Model
     {
         static::creating(function ($model) {
             $model->user_id = auth()->check() ? auth()->id() : null;
-            $model->number =  self::count()  + 1000;
+            $model->number =  self::where('tenant_id', $model->tenant_id)->count()  + 1000;
         });
     }
 

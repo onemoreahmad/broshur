@@ -1,19 +1,20 @@
 <template>
-    <div class="max-w-7xl mx-auto p-6">
-        <div class="flex items-center justify-between mb-6">
-            <h1 class="text-3xl font-bold text-gray-800">الطلبات</h1>
-            <div class="flex items-center gap-4">
-                <div class="text-sm text-gray-500">
+    <div class="max-w-7xl mx-auto p-3 sm:p-4 md:p-6">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">الطلبات</h1>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
+                <div class="text-sm text-gray-500 order-2 sm:order-1">
                     إجمالي الطلبات: {{ pagination.total }}
                 </div>
                 <button 
                     @click="showAddOrderModal = true"
-                    class="btn btn-primary"
+                    class="btn btn-primary w-full sm:w-auto order-1 sm:order-2"
                 >
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
-                    إضافة طلب جديد
+                    <span class="hidden sm:inline">إضافة طلب جديد</span>
+                    <span class="sm:hidden">إضافة</span>
                 </button>
             </div>
         </div>
@@ -23,9 +24,10 @@
             <span class="loading loading-spinner loading-lg"></span>
         </div>
 
-        <!-- Orders Table -->
+        <!-- Orders Table - Desktop -->
         <div v-else-if="orders.length > 0" class="bg-white rounded-xl border border-gray-200 overflow-hidden">
-            <div class="overflow-x-auto">
+            <!-- Desktop Table View -->
+            <div class="hidden md:block overflow-x-auto">
                 <table class="table w-full">
                     <thead>
                         <tr class="bg-gray-50">
@@ -40,16 +42,20 @@
                     <tbody>
                         <tr v-for="order in orders" :key="order.id" class="hover:bg-gray-50">
                             <td>
-                                <div class="font-medium text-gray-900">
+                                <router-link :to="`/orders/${order.id}`"     class="font-medium text-gray-900">
                                     #{{ order.number }}
-                                </div>
+                                </router-link>
                                 <div class="text-sm text-gray-500">
                                     {{ order.hashed_number }}
                                 </div>
                             </td>
                             <td>
-                                <div v-if="order.client" class="font-medium text-gray-900">
-                                    {{ order.client.name }}
+                                <div v-if="order.meta?.client_name" class="font-medium text-gray-900">
+                                    {{ order.meta?.client_name }} <br>
+                                    <div class="text-xs text-gray-500">
+                                        {{ order.meta?.client_phone }} <br>
+                                        {{ order.meta?.client_email }}
+                                    </div>
                                 </div>
                                 <div v-else class="text-gray-500 text-sm">
                                     عميل غير محدد
@@ -66,9 +72,9 @@
                             <td>
                                 <span :class="[
                                     'inline-flex px-2 py-1 text-xs font-medium rounded-full',
-                                    getStatusColor(order.status)
+                                    getStatusColor(order.meta?.status)
                                 ]">
-                                    {{ getStatusLabel(order.status) }}
+                                    {{ getStatusLabel(order.meta?.status) }}
                                 </span>
                             </td>
                             <td>
@@ -87,13 +93,7 @@
                                     >
                                         عرض
                                     </button>
-                                    <button 
-                                        v-if="order.status === 'pending'"
-                                        @click="updateOrderStatus(order, 'processing')"
-                                        class="btn btn-sm btn-primary"
-                                    >
-                                        معالجة
-                                    </button>
+                                   
                                 </div>
                             </td>
                         </tr>
@@ -101,25 +101,96 @@
                 </table>
             </div>
 
+            <!-- Mobile Card View -->
+            <div class="md:hidden divide-y divide-gray-200">
+                <div 
+                    v-for="order in orders" 
+                    :key="order.id" 
+                    class="p-4 hover:bg-gray-50 transition-colors"
+                >
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-semibold text-gray-900">
+                                    #{{ order.number }}
+                                </h3>
+                                <span :class="[
+                                    'inline-flex px-2 py-1 text-xs font-medium rounded-full',
+                                    getStatusColor(order.meta?.status)
+                                ]">
+                                    {{ getStatusLabel(order.meta?.status) }}
+                                </span>
+                            </div>
+                            <p class="text-xs text-gray-500">{{ order.hashed_number }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-3">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-500">الحالة:</span>
+                            <span :class="[
+                                'inline-flex px-2 py-1 text-xs font-medium rounded-full',
+                                getStatusColor(order.meta?.status)
+                            ]">
+                                {{ getStatusLabel(order.meta?.status) }}
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-500">العميل:</span>
+                            <span class="font-medium text-gray-900">
+                                {{ order.client?.name || 'عميل غير محدد' }}
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-500">المبلغ:</span>
+                            <span class="font-semibold text-gray-900">
+                                ${{ order.total || '0.00' }}
+                            </span>
+                        </div>
+                        <div v-if="order.items && order.items.length > 0" class="flex items-center justify-between text-sm">
+                            <span class="text-gray-500">العناصر:</span>
+                            <span class="text-gray-700">{{ order.items.length }} عنصر</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-gray-500">التاريخ:</span>
+                            <div class="text-left">
+                                <div class="text-gray-900">{{ formatDate(order.created_at) }}</div>
+                                <div class="text-xs text-gray-500">{{ formatTime(order.created_at) }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2 pt-2">
+                        <button 
+                            @click="viewOrder(order)"
+                            class="btn btn-sm btn-outline flex-1"
+                        >
+                            عرض
+                        </button>
+                      
+                    </div>
+                </div>
+            </div>
+
             <!-- Pagination -->
-            <div v-if="pagination.last_page > 1" class="flex items-center justify-between px-6 py-4 border-t border-gray-200">
-                <div class="text-sm text-gray-700">
+            <div v-if="pagination.last_page > 1" class="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 sm:px-6 py-4 border-t border-gray-200">
+                <div class="text-xs sm:text-sm text-gray-700 text-center sm:text-right order-2 sm:order-1">
                     عرض {{ (pagination.current_page - 1) * pagination.per_page + 1 }} إلى 
                     {{ Math.min(pagination.current_page * pagination.per_page, pagination.total) }} 
                     من {{ pagination.total }} طلب
                 </div>
-                <div class="flex gap-2">
+                <div class="flex gap-2 w-full sm:w-auto order-1 sm:order-2">
                     <button 
                         @click="loadOrders(pagination.current_page - 1)"
                         :disabled="pagination.current_page <= 1"
-                        class="btn btn-sm btn-outline"
+                        class="btn btn-sm btn-outline flex-1 sm:flex-none"
                     >
                         السابق
                     </button>
                     <button 
                         @click="loadOrders(pagination.current_page + 1)"
                         :disabled="!pagination.has_more"
-                        class="btn btn-sm btn-outline"
+                        class="btn btn-sm btn-outline flex-1 sm:flex-none"
                     >
                         التالي
                     </button>
@@ -128,30 +199,30 @@
         </div>
 
         <!-- Empty State -->
-        <div v-else class="text-center py-12">
-            <div class="text-gray-400 text-6xl mb-4">📦</div>
-            <h3 class="text-lg font-medium text-gray-900 mb-2">لا توجد طلبات</h3>
-            <p class="text-gray-500">لم يتم إنشاء أي طلبات بعد</p>
+        <div v-else class="text-center py-8 sm:py-12">
+            <div class="text-gray-400 text-5xl sm:text-6xl mb-3 sm:mb-4">📦</div>
+            <h3 class="text-base sm:text-lg font-medium text-gray-900 mb-2">لا توجد طلبات</h3>
+            <p class="text-sm sm:text-base text-gray-500">لم يتم إنشاء أي طلبات بعد</p>
         </div>
 
         <!-- Add Order Modal -->
-        <div v-if="showAddOrderModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div class="bg-white rounded-xl p-6 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-bold text-gray-800">إضافة طلب جديد</h2>
+        <div v-if="showAddOrderModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-3 sm:p-4">
+            <div class="bg-white rounded-xl p-4 sm:p-6 w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+                <div class="flex items-center justify-between mb-4 sm:mb-6">
+                    <h2 class="text-xl sm:text-2xl font-bold text-gray-800">إضافة طلب جديد</h2>
                     <button 
                         @click="closeAddOrderModal"
-                        class="text-gray-400 hover:text-gray-600"
+                        class="text-gray-400 hover:text-gray-600 p-1 -mr-1"
                     >
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
 
-                <form @submit.prevent="createOrder" class="space-y-4">
+                <form @submit.prevent="createOrder" class="space-y-3 sm:space-y-4">
                     <!-- Client Information -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
                                 اسم العميل
@@ -172,7 +243,7 @@
                                 v-model="newOrder.client_phone"
                                 type="tel" 
                                 class="input w-full"
-                                placeholder="رقم الهاتف"
+                                placeholder="9665412345678"
                             />
                         </div>
                     </div>
@@ -184,68 +255,89 @@
                         <input 
                             v-model="newOrder.client_email"
                             type="email" 
+                            dir="ltr"
                             class="input w-full"
-                            placeholder="البريد الإلكتروني"
+                            placeholder="client@email.com"
                         />
                     </div>
 
                     <!-- Order Items -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-4 border-b border-gray-200 pb-2 border-dashed">
                             عناصر الطلب
                         </label>
-                        <div class="space-y-3">
-                            <div v-for="(item, index) in newOrder.items" :key="index" class="flex gap-3 items-end">
-                                <div class="flex-1">
+                        <div class="space-y-3 w-full">
+                            <div v-for="(item, index) in newOrder.items" :key="index" class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                                <div class="  flex-grow w-full">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2 hidden sm:block"> 
+                                        اسم الخدمة أو المنتج
+                                        </label>
                                     <input 
                                         v-model="item.name"
                                         type="text" 
-                                        class="input w-full"
-                                        placeholder="اسم العنصر"
+                                        class="input w-full text-sm sm:text-base w-full"
+                                        placeholder="اسم الخدمة أو المنتج، مثال: تصميم شعار"
                                         required
                                     />
                                 </div>
-                                <div class="w-24">
-                                    <input 
-                                        v-model.number="item.quantity"
-                                        type="number" 
-                                        class="input w-full"
-                                        placeholder="الكمية"
-                                        min="1"
-                                        required
-                                    />
+                                <div class="flex gap-2 sm:gap-3 items-center w-full">
+                                    <div class="">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2"> 
+                                            الكمية
+                                        </label>
+                                        <input 
+                                            v-model.number="item.quantity"
+                                            type="number" 
+                                            class="input w-full text-sm sm:text-base"
+                                            placeholder="1"
+                                            min="1"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="flex-grow">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2"> 
+                                            السعر
+                                        </label>
+                                        <input 
+                                            v-model.number="item.price"
+                                            type="number" 
+                                            step="0.01"
+                                            class="input w-full text-sm sm:text-base"
+                                            placeholder="0.00"
+                                            min="0"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="flex-1 sm:w-32" v-if="index > 0">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2"> 
+                                             <br />
+                                        </label>
+                                      
+                                    <button 
+                                        type="button"
+                                        @click="removeOrderItem(index)"
+                                        class="btn btn-md btn-outline text-red-600 hover:bg-red-50 px-3 sm:px-4"
+                                    >
+                                        <span class="hidden sm:inline">حذف</span>
+                                        <svg class="w-4 h-4 sm:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                        </svg>
+                                    </button>
+                                    </div>
                                 </div>
-                                <div class="w-32">
-                                    <input 
-                                        v-model.number="item.price"
-                                        type="number" 
-                                        step="0.01"
-                                        class="input w-full"
-                                        placeholder="السعر"
-                                        min="0"
-                                        required
-                                    />
-                                </div>
-                                <button 
-                                    type="button"
-                                    @click="removeOrderItem(index)"
-                                    class="btn btn-sm btn-outline text-red-600 hover:bg-red-50"
-                                >
-                                    حذف
-                                </button>
                             </div>
                         </div>
                         <button 
                             type="button"
                             @click="addOrderItem"
-                            class="btn btn-sm btn-outline mt-3"
+                            class="btn btn-sm btn-outline mt-3 w-full sm:w-auto"
                         >
                             إضافة عنصر
                         </button>
                     </div>
 
                     <!-- Order Details -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">
                                 المبلغ الإجمالي
@@ -285,26 +377,19 @@
                     </div>
 
                     <!-- Form Actions -->
-                    <div class="flex gap-3 pt-4">
+                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-3 sm:pt-4">
                         <button 
                             type="submit" 
                             :disabled="isCreatingOrder"
-                            class="btn btn-primary flex-1"
+                            class="btn btn-primary p-3 flex-1 order-2 sm:order-1"
                         >
                             <span v-if="!isCreatingOrder">إنشاء الطلب</span>
-                            <span v-if="isCreatingOrder" class="flex items-center gap-2">
+                            <span v-if="isCreatingOrder" class="flex items-center justify-center gap-2">
                                 <span class="loading loading-spinner loading-xs"></span>
                                 جاري الإنشاء...
                             </span>
                         </button>
-                        <button 
-                            type="button" 
-                            @click="closeAddOrderModal"
-                            :disabled="isCreatingOrder"
-                            class="btn btn-outline"
-                        >
-                            إلغاء
-                        </button>
+                        
                     </div>
                 </form>
             </div>
@@ -490,12 +575,14 @@ const getStatusLabel = (status) => {
 
 const formatDate = (dateString) => {
     if (!dateString) return 'غير محدد'
-    return new Date(dateString).toLocaleDateString('ar-SA')
+    // return new Date(dateString).toLocaleDateString('ar-SA')
+    return new Date(dateString).toLocaleDateString('en-US')
 }
 
 const formatTime = (dateString) => {
     if (!dateString) return ''
-    return new Date(dateString).toLocaleTimeString('ar-SA', { 
+    // return new Date(dateString).toLocaleTimeString('ar-SA', { 
+    return new Date(dateString).toLocaleTimeString('en-US', { 
         hour: '2-digit', 
         minute: '2-digit' 
     })

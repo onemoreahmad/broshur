@@ -4,13 +4,14 @@ namespace App\Models;
 
 use App\Traits\Tenantable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Subscriber extends Model
 {
-    use Tenantable;
+    use Tenantable, SoftDeletes;
 
     protected $fillable = [
-        'tenant_id',
+      
         'name',
         'email',
         'meta',

@@ -42,11 +42,11 @@
                     </div>
                     <div>
                         <div class="text-gray-500">الهاتف</div>
-                        <div class="font-medium" dir="ltr">{{ order.meta?.client_phone || '-' }}</div>
+                        <div class="font-medium">{{ order.meta?.client_phone || '-' }}</div>
                     </div>
                     <div>
                         <div class="text-gray-500">البريد الإلكتروني</div>
-                        <div class="font-medium" dir="ltr">{{ order.meta?.client_email || '-' }}</div>
+                        <div class="font-medium">{{ order.meta?.client_email || '-' }}</div>
                     </div>
                 </div>
             </div>
@@ -140,12 +140,14 @@ const statusColor = computed(() => {
 
 const formatDate = (dateString) => {
     if (!dateString) return 'غير محدد'
-    return new Date(dateString).toLocaleDateString('ar-SA')
+    // return new Date(dateString).toLocaleDateString('ar-SA')
+    return new Date(dateString).toLocaleDateString('en-US')
 }
 
 const formatTime = (dateString) => {
     if (!dateString) return ''
-    return new Date(dateString).toLocaleTimeString('ar-SA', { 
+    // return new Date(dateString).toLocaleTimeString('ar-SA', { 
+    return new Date(dateString).toLocaleTimeString('en-US', { 
         hour: '2-digit', 
         minute: '2-digit' 
     })
