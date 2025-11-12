@@ -3,7 +3,7 @@
    <div class="max-w-7xl mx-auto flex items-center justify-between gap-x-2">
       <div class="flex items-center">
          <RouterLink :to="{ name: 'home' }" class="inline-flex items-center gap-2">
-            <img src="/assets/images/broshur-logo-shape.webp" alt="" class="size-6 w-auto hidden md:block">
+            <img src="/assets/images/broshur-logo-shape.webp" alt="" class="size-6 lg:w-auto w-6 hidden md:block">
 
             <!-- <img src="/assets/images/logo-white-0.webp" alt="" class="size-6 !w-auto hidden md:block"> -->
          </RouterLink>

@@ -15,7 +15,7 @@
                     :key="theme.id"
                     @click="selectTheme(theme)"
                     :class="[
-                        'flex-none w-36 sm:w-40 md:w-48 bg-white border-2 rounded-lg md:rounded-xl p-1 cursor-pointer transition-all duration-300 hover:border-primary-500 xhover:-translate-y-1 relative',
+                        'flex-none w-36 sm:w-40 md:w-42 bg-white border-2 rounded-lg md:rounded-xl p-1 cursor-pointer transition-all duration-300 hover:border-primary-500 xhover:-translate-y-1 relative',
                         selectedTheme?.id === theme.id 
                             ? 'border-primary-500 bg-primary-50' 
                             : 'border-gray-200'
@@ -111,9 +111,9 @@
                     </div>
 
                     <!-- Mobile Preview Section -->
-                    <div class="hidden lg:block lg:px-5 shrink-0">
-                        <div class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[10px] rounded-[2.5rem] h-[700px] w-[420px] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]" dir="ltr">
-                            <div class="h-[672px] overflow-hidden w-[398px] bg-white overflow-y-scroll rounded-[2rem] dark:bg-gray-800">
+                    <div class="lg:px-5 shrink-0">
+                        <div class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[10px] rounded-[2.5rem] h-[700px] w-[300px] lg:w-[420px] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]" dir="ltr">
+                            <div class="h-[672px] mx-auto overflow-hidden w-[280px] lg:w-[398px] bg-white overflow-y-scroll rounded-[2rem] dark:bg-gray-800">
                                 <iframe id="preview-iframe" :src="authStore.tenant?.preview_url" class="w-full min-h-screen"></iframe> 
                             </div>
                         </div>   
@@ -131,11 +131,13 @@ import { useHead } from '@unhead/vue'
 import axios from 'axios'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
+import { useNotification } from '@kyvg/vue3-notification'
 
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
 const { tenant } = storeToRefs(authStore)
+const { notify } = useNotification()
 
 useHead({
   title: 'تخصيص التصميم',
@@ -196,14 +198,15 @@ const setCurrentTheme = async () => {
         // Update current theme ID
         currentThemeId.value = selectedTheme.value.id
         
-        // Show success message (you can add a toast notification here)
+        notify({ type: "success", text: "تم تعيين القالب بنجاح" })
+        
         console.log('Theme updated successfully:', response.data)
         document.getElementById('preview-iframe').contentWindow.location.reload();
 
         
     } catch (error) {
         console.error('Error updating theme:', error)
-        // Handle error (you can add error handling here)
+        notify({ type: "error", text: "فشل تعيين القالب" })
     } finally {
         isLoading.value = false
     }

@@ -15,9 +15,7 @@
             <div class="flex justify-center max-w-xl mx-auto">
                 <div class="rounded-full flex items-center w-full mx-auto justify-between -mt-7 bg-black text-white px-2 py-2 text-xs sm:text-sm font-medium">
                       <a href="{{ route('site.home') }}" wire:navigate title="" class="flex items-center gap-x-3 ms-3">
-                        {{-- <img class="w-auto h-7" src="{{ asset('assets/images/logo-shape-white.svg') }}" alt="" /> --}}
                         <img class="w-auto h-7" src="{{ asset('assets/images/broshur-logo-shape.webp') }}" alt="" />
-                        {{-- <img class="w-auto h-10" src="{{ asset('assets/images/logo-white.webp') }}" alt="" /> --}}
                         <img class="w-auto h-7" src="{{ asset('assets/images/logo-white-0.webp') }}" alt="" />
                         {{-- <span class="text-xl lg:text-3xl font-camel font-extrabold">
                             {{ config('app.name') }} 

@@ -9,7 +9,7 @@
         <div class="px-2 md:px-0 mb-6"> 
             <slot />
         </div>
-        <slot />
+   
     </div>
 </template>
 

@@ -7,7 +7,7 @@
     {{-- <ui:navbar wire:ignore class="bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-[#202040] via-[#543864] to-[#ff6363] !p-2 text-white"> --}}
         {{-- <ui:brand href="{{ route('admin.home') }}" wire:navigate logo="{{data_get(currentTenant(), 'logo')}}" name="{{data_get(currentTenant(), 'name')}}" Xsubtitle="{{ config('app.domain') }}" size="7"  /> --}}
         <ui:brand href="{{ route('admin.home') }}" wire:navigate logo="{{ asset('assets/images/logo-shape-white.svg') }}"  size="6" iconClass="!w-auto" />
-        <ui:brand href="{{ route('admin.home') }}" wire:navigate logo="{{ asset('assets/images/logo-white.webp') }}"  size="6" iconClass="!w-auto" />
+        <ui:brand href="{{ route('admin.home') }}" wire:navigate logo="{{ asset('assets/images/broshur-logo-shape.webp') }}"  size="6" iconClass="!w-auto" />
  
         <a href="{{ route('admin.orders.index') }}" wire:navigate title="" class="shrink-0 ms-12 justify-center flex items-center gap-x-2 text-white p-1 px-2 rounded-lg " wire:current="bg-black/40">
             {{-- <ui:icon name="message-2" size="6" /> --}}

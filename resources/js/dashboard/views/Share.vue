@@ -136,12 +136,18 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/auth';
-const auth = useAuthStore()
+import { useNotification } from '@kyvg/vue3-notification';
 
- 
-		const copyToClipboard = (text) => {
-			navigator.clipboard.writeText(text)
-			// emit('notify', {text: 'تم نسخ رابط البروشور', type: 'success'})
-        }
- 
+const auth = useAuthStore()
+const { notify } = useNotification()
+
+const copyToClipboard = async (text) => {
+	try {
+		await navigator.clipboard.writeText(text)
+		notify({ type: "success", text: "تم نسخ رابط البروشور" })
+	} catch (error) {
+		console.error('Failed to copy:', error)
+		notify({ type: "error", text: "فشل نسخ الرابط" })
+	}
+}
 </script>

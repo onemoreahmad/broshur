@@ -1,7 +1,7 @@
 <template>
     <div>
  
-        <div v-if="auth?.tenant" class="max-w-7xl mx-auto py-4 flex items-center lg:gap-4 gap-2 px-1 xl:px-0 mt-4">
+        <div v-if="auth?.tenant" class="max-w-7xl mx-auto lg:py-4 py-2 flex items-center lg:gap-4 gap-2 px-1 xl:px-0 mt-4">
             <img :src="auth?.tenant?.logo" alt="avatar" class="lg:size-12 size-10 md:rounded-2xl rounded-lg">
             <div class="">
                 <h1 class="lg:text-base text-base font-bold"> {{ auth?.tenant?.name  }} </h1> 
@@ -9,7 +9,7 @@
             </div>
         </div>
 
-        <div class="lg:flex max-w-7xl mx-auto items-start px-1 xl:px-0 mt-3">
+        <div class="lg:flex max-w-7xl mx-auto items-start px-1 xl:px-0 lg:mt-3 mt-1">
             <nav class="flex lg:flex-col lg:w-80 min-w-48 gap-px overflow-hidden mx-auto justify-between max-w-7xl overflow-x-auto text-start">
                 <RouterLink :to="{ name: 'content' }" exactActiveClass="bg-white hover:bg-white" class="cursor-pointer lg:w-full w-fit shrink-0 hover:bg-base-100 flex flex-grow items-center gap-x-2 text-xs lg:rounded-s p-2.5 px-3 bg-base-100/50">
                     <span class="text-lg inline-block -mt-1"> 
@@ -92,21 +92,19 @@
  
             </nav>
  
-            <div class="bg-white truncate lg:rounded-lg rounded-b-lg lg:-mr-1.5 p-6 min-h-[60vh] w-full relative">
+            <div class="bg-white truncate lg:rounded-lg rounded-b-lg lg:-mr-1.5 p-6 lg:min-h-[60vh] w-full relative">
                 <RouterView :key="$route.name" />
             </div>
- 
-            <div class="hidden lg:block lg:px-5">
-                <div class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[10px] rounded-[2.5rem] h-[700px] w-[420px] [&amp;::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]" dir="ltr">
-                    <!--<div class="h-[32px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -start-[27px] top-[72px] rounded-s-lg"></div>
-                    <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -start-[17px] top-[124px] rounded-s-lg"></div>
-                    <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -start-[17px] top-[178px] rounded-s-lg"></div>
-                    <div class="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -end-[17px] top-[142px] rounded-e-lg"></div>-->
-                    <div class="h-[672px] overflow-hidden w-[398px] bg-white overflow-y-scroll rounded-[2rem] dark:bg-gray-800">
+  
+
+            <div class="lg:px-5 mt-5 lg:mt-0">
+                <div class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[10px] rounded-[2.5rem] h-[700px] w-[300px] lg:w-[420px] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]" dir="ltr">
+                    <div class="h-[672px] mx-auto overflow-hidden w-[280px] lg:w-[398px] bg-white overflow-y-scroll rounded-[2rem] dark:bg-gray-800">
                         <iframe id="preview-iframe" :src="auth?.tenant?.preview_url" class="w-full min-h-screen"></iframe> 
                     </div>
-                </div>   
+                </div>  
             </div>
+            
         </div>
   
     </div>

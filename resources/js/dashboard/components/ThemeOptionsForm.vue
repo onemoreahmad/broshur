@@ -44,7 +44,7 @@
 
         <div class="flex justify-end mt-10">
             <button @click="save" class="btn btn-primary w-full" :disabled="formLoading" > 
-                <span v-if="!formLoading"> حفظ </span>
+                <span v-if="!formLoading"> حفظ خيارات القالب </span>
                 <span v-if="formLoading" class="loading loading-spinner loading-xs"></span>
             </button>
         </div>
@@ -55,8 +55,10 @@
 
 import { ref, computed } from 'vue'
 import axios from 'axios'
- 
+import { useNotification } from '@kyvg/vue3-notification'
+
 const formLoading = ref(false)
+const { notify } = useNotification()
 
 const props = defineProps(['modelValue', 'options', 'themeOptions', 'themeId'])
 import { useAuthStore } from '@/stores/auth'
@@ -72,11 +74,14 @@ const save = () => {
         formLoading.value = false
         console.log(response.data)
 
+        notify({ type: "success", text: "تم حفظ خيارات القالب بنجاح" })
+        
         document.getElementById('preview-iframe').contentWindow.location.reload();
 
     }).catch(error => {
         formLoading.value = false
         console.error(error)
+        notify({ type: "error", text: "فشل حفظ خيارات القالب" })
     })
 }
 </script>

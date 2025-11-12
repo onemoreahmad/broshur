@@ -202,9 +202,11 @@ import axios from 'axios'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 import { useErrorsStore } from '@/stores/errors'
+import { useNotification } from '@kyvg/vue3-notification'
 
 const { tenant } = storeToRefs(useAuthStore())
 const errorsStore = useErrorsStore()
+const { notify } = useNotification()
  
 useHead({
   title: 'الإعدادات',
@@ -265,6 +267,7 @@ const updateHandle = async () => {
         // originalHandle.value = form.value.handle
         authStore.updateTenant(response.data.tenant)
 
+        notify({ type: "success", text: "تم حفظ رابط الموقع بنجاح" })
         
         // Show success message
         console.log('Handle updated successfully:', response.data)
@@ -298,6 +301,8 @@ const updateLocation = async () => {
         
         authStore.updateTenant(response.data.tenant)
         
+        notify({ type: "success", text: "تم حفظ الموقع الجغرافي بنجاح" })
+        
         console.log('Location updated successfully:', response.data)
         
     } catch (error) {
@@ -321,6 +326,8 @@ const updateContact = async () => {
         })
         
         authStore.updateTenant(response.data.tenant)
+        
+        notify({ type: "success", text: "تم حفظ معلومات الاتصال بنجاح" })
         
         console.log('Contact information updated successfully:', response.data)
         
