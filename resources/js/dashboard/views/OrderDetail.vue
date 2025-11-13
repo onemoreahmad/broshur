@@ -24,7 +24,7 @@
                 </div>
                 <div class="bg-white rounded-xl border border-gray-200 p-4">
                     <div class="text-sm text-gray-500 mb-1">المبلغ الإجمالي</div>
-                    <div class="text-lg font-semibold">${{ order.total || '0.00' }}</div>
+                    <div class="text-lg font-semibold">{{ order.total || '0.00' }} ر.س</div>
                 </div>
                 <div class="bg-white rounded-xl border border-gray-200 p-4">
                     <div class="text-sm text-gray-500 mb-1">تاريخ الإنشاء</div>
@@ -67,8 +67,8 @@
                             <tr v-for="item in order.items" :key="item.id">
                                 <td class="font-medium text-gray-800">{{ item.data?.name || '-' }}</td>
                                 <td>{{ item.quantity }}</td>
-                                <td>${{ item.amount?.toFixed ? item.amount.toFixed(2) : item.amount }}</td>
-                                <td>${{ item.total_pre_tax?.toFixed ? item.total_pre_tax.toFixed(2) : item.total_pre_tax }}</td>
+                                <td>{{ item.amount?.toFixed ? item.amount.toFixed(2) : item.amount }} ر.س</td>
+                                <td>{{ item.total_pre_tax?.toFixed ? item.total_pre_tax.toFixed(2) : item.total_pre_tax }} ر.س</td>
                             </tr>
                         </tbody>
                     </table>

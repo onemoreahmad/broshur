@@ -1,14 +1,13 @@
 <template>
-    <div class="max-w-7xl mx-auto p-3 sm:p-4 md:p-6">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
-            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">التذاكر والدعم</h1>
-            <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
-                <div class="text-sm text-gray-500 order-2 sm:order-1">
+    <Container title="التذاكر والدعم">
+        <template #actions>
+            <div class="flex items-center gap-3 sm:gap-4  ">
+                <div class="text-sm text-gray-500 ">
                     إجمالي التذاكر: {{ pagination.total }}
                 </div>
                 <button 
                     @click="showCreateTicketModal = true"
-                    class="btn btn-primary w-full sm:w-auto order-1 sm:order-2"
+                    class="btn btn-primary   "
                 >
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -16,7 +15,7 @@
                     <span class="">فتح تذكرة جديدة</span>
                 </button>
             </div>
-        </div>
+        </template>
 
         <!-- Loading State -->
         <div v-if="loading" class="flex justify-center items-center py-12">
@@ -274,7 +273,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </Container>
 </template>
 
 <script setup>

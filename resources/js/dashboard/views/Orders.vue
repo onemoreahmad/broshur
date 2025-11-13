@@ -62,7 +62,7 @@
                             </td>
                             <td>
                                 <div class="font-medium text-gray-900">
-                                    ${{ order.total  || '0.00' }}
+                                    {{ order.total  || '0.00' }} ر.س
                                 </div>
                                 <div v-if="order.items && order.items.length > 0" class="text-sm text-gray-500">
                                     {{ order.items.length }} عنصر
@@ -143,7 +143,7 @@
                         <div class="flex items-center justify-between text-sm">
                             <span class="text-gray-500">المبلغ:</span>
                             <span class="font-semibold text-gray-900">
-                                ${{ order.total || '0.00' }}
+                                {{ order.total || '0.00' }} ر.س
                             </span>
                         </div>
                         <div v-if="order.items && order.items.length > 0" class="flex items-center justify-between text-sm">
