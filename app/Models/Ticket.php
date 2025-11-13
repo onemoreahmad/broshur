@@ -57,5 +57,10 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
 }
  

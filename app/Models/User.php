@@ -64,5 +64,16 @@ class User extends Authenticatable
         return 'https://ui-avatars.com/api/?background=219EBD&color=fff&name=' . data_get($this, 'email');
     }
   
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
+    
 
 }
