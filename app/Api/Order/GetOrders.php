@@ -12,7 +12,7 @@ class GetOrders
     public function handle(Request $request)
     {
         $orders = \App\Models\Order::where('tenant_id', $request->user()->tenant->id)
-            ->with(['items'])
+            ->with(['items', 'client'])
             ->orderBy('created_at', 'desc')
             ->paginate(15);
 

@@ -35,19 +35,22 @@
             <!-- Client Info -->
             <div class="bg-white rounded-xl border border-gray-200 p-6">
                 <h2 class="text-lg font-semibold text-gray-800 mb-4">بيانات العميل</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div v-if="order.client" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                     <div>
                         <div class="text-gray-500">الاسم</div>
-                        <div class="font-medium">{{ order.meta?.client_name || '-' }}</div>
+                        <div class="font-medium">{{ order.client.name || '-' }}</div>
                     </div>
                     <div>
                         <div class="text-gray-500">الهاتف</div>
-                        <div class="font-medium">{{ order.meta?.client_phone || '-' }}</div>
+                        <div class="font-medium">{{ order.client.phone || '-' }}</div>
                     </div>
                     <div>
                         <div class="text-gray-500">البريد الإلكتروني</div>
-                        <div class="font-medium">{{ order.meta?.client_email || '-' }}</div>
+                        <div class="font-medium">{{ order.client.email || '-' }}</div>
                     </div>
+                </div>
+                <div v-else class="text-gray-500 text-sm">
+                    لا توجد بيانات عميل متاحة
                 </div>
             </div>
 

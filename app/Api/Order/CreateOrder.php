@@ -29,17 +29,50 @@ class CreateOrder
     {
         $tenant = $request->user()->tenant;
         
+        // Find or create client
+        // Priority: email > phone > create new
+        $client = null;
+        
+        if ($request->client_email) {
+            // Try to find by email first
+            $client = \App\Models\Client::where('tenant_id', $tenant->id)
+                ->where('email', $request->client_email)
+                ->first();
+        }
+        
+        if (!$client && $request->client_phone) {
+            // If not found by email, try by phone
+            $client = \App\Models\Client::where('tenant_id', $tenant->id)
+                ->where('phone', $request->client_phone)
+                ->first();
+        }
+        
+        if (!$client) {
+            // Create new client if not found
+            $client = \App\Models\Client::create([
+                'tenant_id' => $tenant->id,
+                'name' => $request->client_name,
+                'phone' => $request->client_phone,
+                'email' => $request->client_email,
+            ]);
+        } else {
+            // Update existing client info
+            $client->update([
+                'name' => $request->client_name,
+                'phone' => $request->client_phone ?: $client->phone,
+                'email' => $request->client_email ?: $client->email,
+            ]);
+        }
+        
         // Create the order
         $order = \App\Models\Order::create([
             'tenant_id' => $tenant->id,
             'user_id' => $request->user()->id,
+            'client_id' => $client->id,
             'total' => $request->total,
             'meta' => [
                 'notes' => $request->notes,
                 'status' => $request->status,
-                'client_name' => $request->client_name,
-                'client_phone' => $request->client_phone,
-                'client_email' => $request->client_email,
             ]
         ]);
 
@@ -52,11 +85,6 @@ class CreateOrder
                 'total_pre_tax' => $item['quantity'] * $item['price'],
                 'data' => [
                     'name' => $item['name'],
-                    'notes' => $request->notes,
-                    'status' => $request->status,
-                    'client_name' => $request->client_name,
-                    'client_phone' => $request->client_phone,
-                    'client_email' => $request->client_email,
                 ]
             ]);
         }
@@ -66,7 +94,7 @@ class CreateOrder
 
         return response()->json([
             'message' => 'Order created successfully',
-            'order' => $order->load(['items'])
+            'order' => $order->load(['items', 'client'])
         ]);
     }
 }

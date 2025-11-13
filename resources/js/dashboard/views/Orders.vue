@@ -49,11 +49,11 @@
                                 </div>
                             </td>
                             <td>
-                                <div v-if="order.meta?.client_name" class="font-medium text-gray-900">
-                                    {{ order.meta?.client_name }} <br>
+                                <div v-if="order.client" class="font-medium text-gray-900">
+                                    {{ order.client.name }} <br>
                                     <div class="text-xs text-gray-500">
-                                        {{ order.meta?.client_phone }} <br>
-                                        {{ order.meta?.client_email }}
+                                        <span v-if="order.client.phone">{{ order.client.phone }} <br></span>
+                                        <span v-if="order.client.email">{{ order.client.email }}</span>
                                     </div>
                                 </div>
                                 <div v-else class="text-gray-500 text-sm">

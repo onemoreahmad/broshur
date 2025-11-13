@@ -19,6 +19,7 @@ class Order extends Model
     protected $fillable = [
         'tenant_id',
         'user_id',
+        'client_id',
         'number',
         'status',
         'total',
@@ -39,10 +40,10 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    // public function client()
-    // {
-    //     return $this->belongsTo(Client::class);
-    // }
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 
     public function getSNumberAttribute()
     {

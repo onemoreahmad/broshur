@@ -12,7 +12,7 @@ class GetOrder
     public function handle(Request $request, $id)
     {
         $order = \App\Models\Order::where('tenant_id', $request->user()->tenant->id)
-            ->with(['items'])
+            ->with(['items', 'client'])
             ->findOrFail($id);
 
         return response()->json([
