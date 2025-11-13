@@ -1,10 +1,9 @@
 <template>
-    <div class="max-w-7xl mx-auto p-3 sm:p-4 md:p-6">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
-            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">المشتركين</h1>
-            <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
+    <Container title="المشتركين">
+        <template #actions>
+            <div class="flex items-center gap-3 sm:gap-4  ">
                 <div class="text-sm text-gray-500 order-2 sm:order-1">
-                    إجمالي المشتركين: {{ pagination.total }}
+                     المشتركين: {{ pagination.total }}
                 </div>
                 <button 
                     @click="showAddSubscriberModal = true"
@@ -17,7 +16,8 @@
                     <span class="sm:hidden">إضافة</span>
                 </button>
             </div>
-        </div>
+        </template>
+       
 
         <!-- Loading State -->
         <div v-if="loading" class="flex justify-center items-center py-12">
@@ -143,7 +143,10 @@
 
         <!-- Empty State -->
         <div v-else class="text-center py-8 sm:py-12">
-            <div class="text-gray-400 text-5xl sm:text-6xl mb-3 sm:mb-4">👥</div>
+            <div class="text-gray-400 text-5xl sm:text-6xl mb-3 sm:mb-4">
+                <svg viewBox="0 0 24 24" class="size-16 mx-auto" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 2.00522C13.3848 2 12.7199 2 12 2C7.28595 2 4.92893 2 3.46447 3.46447C2 4.92893 2 7.28595 2 12C2 16.714 2 19.0711 3.46447 20.5355C4.92893 22 7.28595 22 12 22C16.714 22 19.0711 22 20.5355 20.5355C22 19.0711 22 16.714 22 12C22 11.2801 22 10.6152 21.9948 10" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <circle cx="19" cy="5" r="3" stroke="#1C274C" stroke-width="1.5"></circle> <path opacity="0.5" d="M2 13H5.16026C6.06543 13 6.51802 13 6.91584 13.183C7.31367 13.3659 7.60821 13.7096 8.19729 14.3968L8.80271 15.1032C9.39179 15.7904 9.68633 16.1341 10.0842 16.317C10.482 16.5 10.9346 16.5 11.8397 16.5H12.1603C13.0654 16.5 13.518 16.5 13.9158 16.317C14.3137 16.1341 14.6082 15.7904 15.1973 15.1032L15.8027 14.3968C16.3918 13.7096 16.6863 13.3659 17.0842 13.183C17.482 13 17.9346 13 18.8397 13H22" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+
+            </div>
             <h3 class="text-base sm:text-lg font-medium text-gray-900 mb-2">لا يوجد مشتركين</h3>
             <p class="text-sm sm:text-base text-gray-500">لم يتم إضافة أي مشتركين بعد</p>
         </div>
@@ -296,7 +299,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </Container>
 </template>
 
 <script setup>

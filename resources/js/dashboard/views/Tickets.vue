@@ -166,7 +166,10 @@
 
         <!-- Empty State -->
         <div v-else class="text-center py-8 sm:py-12">
-            <div class="text-gray-400 text-5xl sm:text-6xl mb-3 sm:mb-4">🎫</div>
+            <div class="text-gray-400 text-5xl sm:text-6xl mb-3 sm:mb-4">
+                <svg viewBox="0 0 24 24" class="size-16 mx-auto" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="12" r="10" stroke="#1C274C" stroke-width="1.5"></circle> <circle cx="12" cy="12" r="4" stroke="#1C274C" stroke-width="1.5"></circle> <path opacity="0.5" d="M15 9L19 5" stroke="#1C274C" stroke-width="1.5"></path> <path opacity="0.5" d="M5 19L9 15" stroke="#1C274C" stroke-width="1.5"></path> <path opacity="0.5" d="M9 9L5 5" stroke="#1C274C" stroke-width="1.5"></path> <path opacity="0.5" d="M19 19L15 15" stroke="#1C274C" stroke-width="1.5"></path> </g></svg>
+
+            </div>
             <h3 class="text-base sm:text-lg font-medium text-gray-900 mb-2">لا توجد تذاكر</h3>
             <p class="text-sm sm:text-base text-gray-500 mb-4">لم يتم إنشاء أي تذاكر دعم بعد</p>
             <button 

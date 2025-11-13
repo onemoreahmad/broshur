@@ -1,14 +1,13 @@
 <template>
-    <div class="max-w-7xl mx-auto p-3 sm:p-4 md:p-6">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
-            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">الطلبات</h1>
-            <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
-                <div class="text-sm text-gray-500 order-2 sm:order-1">
-                    إجمالي الطلبات: {{ pagination.total }}
+    <Container title="الطلبات">
+        <template #actions>
+            <div class="flex items-center gap-3 sm:gap-4  ">
+                <div class="text-sm text-gray-500 ">
+                    إجمالي الطلبات:  {{ pagination.total }}
                 </div>
                 <button 
                     @click="showAddOrderModal = true"
-                    class="btn btn-primary w-full sm:w-auto order-1 sm:order-2"
+                    class="btn btn-primary   "
                 >
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -17,7 +16,7 @@
                     <span class="sm:hidden">إضافة</span>
                 </button>
             </div>
-        </div>
+        </template>
 
         <!-- Loading State -->
         <div v-if="loading" class="flex justify-center items-center py-12">
@@ -200,7 +199,10 @@
 
         <!-- Empty State -->
         <div v-else class="text-center py-8 sm:py-12">
-            <div class="text-gray-400 text-5xl sm:text-6xl mb-3 sm:mb-4">📦</div>
+            <div class="text-gray-400 text-5xl sm:text-6xl mb-3 sm:mb-4">
+                <svg viewBox="0 0 24 24" class="size-16 mx-auto" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 8C5 5.17157 5 3.75736 5.87868 2.87868C6.75736 2 8.17157 2 11 2H13C15.8284 2 17.2426 2 18.1213 2.87868C19 3.75736 19 5.17157 19 8V16C19 18.8284 19 20.2426 18.1213 21.1213C17.2426 22 15.8284 22 13 22H11C8.17157 22 6.75736 22 5.87868 21.1213C5 20.2426 5 18.8284 5 16V8Z" stroke="#1C274C" stroke-width="1.5"></path> <path opacity="0.7" d="M9 13H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M9 9H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.4" d="M9 17H12" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M2 19V5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M22 19V5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+
+            </div>
             <h3 class="text-base sm:text-lg font-medium text-gray-900 mb-2">لا توجد طلبات</h3>
             <p class="text-sm sm:text-base text-gray-500">لم يتم إنشاء أي طلبات بعد</p>
         </div>
@@ -394,7 +396,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </Container>
 </template>
 
 <script setup>

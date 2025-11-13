@@ -129,7 +129,7 @@
             <div class="cursor-pointer flex items-center gap-x-2" @click="toggleDropdown" icon:trailing="chevron-down">
                <img :src="currentUser?.user?.image" alt="" class="object-cover rounded-full size-8 border-2 border-black/10 hover:border-black/20">
                <span>
-                  <svg class="h-4 inline-block size-5 w-4 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <svg class="h-4 inline-block size-5 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                      <path d="M6 9l6 6l6 -6"></path>
                   </svg>

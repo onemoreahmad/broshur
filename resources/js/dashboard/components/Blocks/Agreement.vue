@@ -22,7 +22,36 @@
 
                 <section v-if="form.active" class="flex flex-col gap-1"> 
                     <UiInput name="agreement_title" label="عنوان الاتفاقية" v-model="form.agreement_title" placeholder="مثال: اتفاقية الاستخدام" />
-                    <UiTextarea name="agreement_content" label="محتوى الاتفاقية" v-model="form.agreement_content" placeholder="اكتب محتوى اتفاقية الاستخدام هنا..." />
+                    
+                    <UiEditor name="text" 
+                       
+                        v-model="form.agreement_content" 
+                        placeholder="اكتب محتوى اتفاقية الاستخدام هنا..." 
+                        media-collection="block-editor-images" 
+                        model-type="block" 
+                        :model-id="form.id" 
+                        :toolbar="
+                        [
+                            'heading', '|', 'bold', 'italic', 'underline', '|',
+                            'fontColor', 'fontBackgroundColor', 'alignment',
+                            'link',
+                            '|',
+                            'mediaEmbed',
+                            'insertImage',
+                            '|',
+                           
+                            'bulletedList',
+                            'numberedList',
+
+                            'blockQuote',
+                          
+                            '|',
+                            'codeBlock',
+                            '|',
+                            'horizontalLine',
+                        ]"
+                    />
+                
                 </section>
           
                 

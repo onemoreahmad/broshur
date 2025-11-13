@@ -6,8 +6,8 @@
     </h3>
     {% endif %}
     
-    <p class="text-gray-600 text-base leading-relaxed {{editorStyle()}} p-6 ">
-        {{agreement_content}}
-    </p>
+    <div class="{{editorStyle()}} p-6">
+        {{agreement_content | raw}}
+    </div>
 </div>
  
