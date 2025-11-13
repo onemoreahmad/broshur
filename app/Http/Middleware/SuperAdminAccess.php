@@ -22,7 +22,7 @@ class SuperAdminAccess
         }
 
         // Set Arabic locale for superadmin panel
-        app()->setLocale('ar');
+        // app()->setLocale('ar');
 
         return $next($request);
     }
