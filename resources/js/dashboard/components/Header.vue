@@ -165,6 +165,17 @@
                         باقة الاشتراك
                         </span>
                      </RouterLink>
+                     <RouterLink :to="{ name: 'tickets' }" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex bg-black/10 bg-gray-100 px-4 py-2 text-sm transition-all transition-colors duration-300 items-center justify-center justify-start whitespace-nowrap rounded-md hover:bg-black/20 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none" wire:navigate="">
+                        <span>
+                           <svg class="inline-block size-5 ltr:-ml-1 rtl:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                           </svg>
+                        </span>
+                        <span>
+                        التذاكر والدعم
+                        </span>
+                     </RouterLink>
                      <a href="/" class="focus-visible:ring-ring shadow-none focus-visible:ring-1 text-black/70 cursor-pointer gap-2 h-9 inline-flex bg-black/10 bg-gray-100 px-4 py-2 text-sm transition-all transition-colors duration-300 items-center justify-center justify-start whitespace-nowrap rounded-md hover:bg-black/20 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none">
                         <span>
                            <svg class="inline-block size-5 ltr:-ml-1 rtl:-mr-1 dark:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

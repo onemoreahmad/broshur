@@ -35,6 +35,12 @@ Route::post('/subscribers', \App\Api\Subscriber\CreateSubscriber::class)->middle
 
 Route::delete('/subscribers/{id}', \App\Api\Subscriber\DeleteSubscriber::class)->middleware('auth:sanctum','admin');
 
+// Tickets
+Route::get('/tickets', \App\Api\Ticket\GetTickets::class)->middleware('auth:sanctum');
+Route::post('/tickets', \App\Api\Ticket\CreateTicket::class)->middleware('auth:sanctum');
+Route::get('/tickets/{id}', \App\Api\Ticket\GetTicket::class)->middleware('auth:sanctum');
+Route::post('/tickets/{id}/reply', \App\Api\Ticket\ReplyTicket::class)->middleware('auth:sanctum');
+
 Route::middleware(['auth:sanctum', 'admin'])
     ->prefix('dashboard')
     ->as('dashboard.')

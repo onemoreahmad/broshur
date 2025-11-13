@@ -291,6 +291,36 @@
                             </div>
                              
                         </div>
+
+                        <!-- Support Card -->
+                        <div class="bg-white rounded-2xl md:rounded-3xl shadow-sm p-4 md:p-6 lg:p-8">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3 md:gap-4">
+                                    <div class="flex items-center justify-center rounded-xl bg-blue-100 size-12 md:size-14 shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-6 md:size-7 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <RouterLink 
+                                        :to="{ name: 'tickets' }"
+                                        class="block"
+                                    >
+                                        <h3 class="text-base md:text-lg font-semibold text-gray-900">الدعم الفني</h3>
+                                        <p class="text-xs md:text-sm text-gray-500">هل تحتاج مساعدة؟ تواصل معنا</p>
+                                    </RouterLink>
+                                </div>
+                                <RouterLink 
+                                    :to="{ name: 'tickets' }"
+                                    class="btn btn-primary btn-sm md:btn-md"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-4 md:size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                    </svg>
+                                    <span class="hidden sm:inline">فتح تذكرة</span>
+                                    <span class="sm:hidden">تذكرة</span>
+                                </RouterLink>
+                            </div>
+                        </div>
  
                     </div>
  

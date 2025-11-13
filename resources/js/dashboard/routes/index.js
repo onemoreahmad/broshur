@@ -5,6 +5,8 @@
     import Content from '../views/Content.vue';
     import Orders from '../views/Orders.vue';
     import OrderDetail from '../views/OrderDetail.vue';
+    import Tickets from '../views/Tickets.vue';
+    import TicketDetail from '../views/TicketDetail.vue';
     import Subscribers from '../views/Subscribers.vue';
     import Account from '../views/Account.vue';
     import Design from '../views/Design.vue';
@@ -101,6 +103,8 @@
              },
             { path: '/orders', component: Orders, name: 'orders' },
             { path: '/orders/:id', component: OrderDetail, name: 'orders.detail' },
+            { path: '/tickets', component: Tickets, name: 'tickets' },
+            { path: '/tickets/:id', component: TicketDetail, name: 'tickets.detail' },
             { path: '/subscribers', component: Subscribers, name: 'subscribers' },
             { path: '/account', component: Account, name: 'account' },
             { path: '/design', component: Design, name: 'design' },
