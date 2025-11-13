@@ -28,7 +28,7 @@ class UpdateHeader
 
         // update tenant
         tenant()->name = $request->name;
-        tenant()->meta->set('slogan.'.app()->getLocale(), $request->slogan);
+        tenant()->slogan = $request->slogan;
         if ($request->hasFile('newLogo')) {
             tenant()->logo = $request->newLogo->store('logo');
         }
@@ -47,7 +47,7 @@ class UpdateHeader
             'message' => 'Block updated successfully',
             'data' => [
                 'name' => currentTenant()->name,
-                'slogan' => data_get(currentTenant(), 'meta.slogan.'.app()->getLocale()),
+                'slogan' => currentTenant()->slogan,
                 'logo' => data_get(currentTenant(), 'logo'),
                 // 'cover' => data_get(currentTenant(), 'meta.cover'),
             ],

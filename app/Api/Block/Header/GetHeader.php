@@ -13,7 +13,7 @@ class GetHeader
         return response()->json([
             'data' => [
                 'name' => currentTenant()->name,
-                'slogan' => data_get(currentTenant(), 'meta.slogan.'.app()->getLocale()),
+                'slogan' => currentTenant()->slogan,
                 'logo' => data_get(currentTenant(), 'logo'),
                 // 'cover' => data_get(currentTenant(), 'cover'),
             ],

@@ -37,9 +37,7 @@ class CreateTenant
             'user_id' => $validatedData['user_id'],
             'theme_id' => 1,
             'traffic_website_id' => $websiteId,
-            'meta' => [
-                'slogan' =>  ['ar' => 'صفحة بروشور جديدة', 'en' => 'New Brochure Page'],
-            ],
+            'slogan' => 'صفحة بروشور جديدة',
         ]);
 
         $plan = Plan::where('slug', 'basic')

@@ -25,12 +25,12 @@ class Tenant extends Model
     protected $appends = [
         'storefront_url',
         'preview_url',
-        'slogan',
         'social_links',
     ];  
 
     protected $fillable = [
         'name',
+        'slogan',
         'handle',
         'user_id',
         'theme_id',
@@ -104,12 +104,6 @@ class Tenant extends Model
     public function getPreviewUrlAttribute()
     {
         return route('storefront.home.preview', $this->handle);
-    }
- 
- 
-    public function getSloganAttribute()
-    {
-        return data_get($this, 'meta.slogan') ? data_get($this, 'meta.slogan.'.app()->getLocale()) : null;
     }
 
     public function getSocialLinksAttribute()

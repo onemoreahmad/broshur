@@ -27,6 +27,7 @@
     import PortfolioBlock from '../components/Blocks/Portfolio.vue';
     import TeamBlock from '../components/Blocks/Team.vue';
     import ServicesBlock from '../components/Blocks/Services.vue';
+    import PlaylistsBlock from '../components/Blocks/Playlists.vue';
     import AgreementBlock from '../components/Blocks/Agreement.vue';
     import NumbersBlock from '../components/Blocks/Numbers.vue';
       
@@ -94,6 +95,11 @@
                       path: 'services',
                       name: 'blocks.services',
                       component: ServicesBlock,
+                    },
+                    {
+                      path: 'playlists',
+                      name: 'blocks.playlists',
+                      component: PlaylistsBlock,
                     },
                     {
                       path: 'agreement',

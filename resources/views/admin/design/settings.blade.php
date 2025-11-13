@@ -38,7 +38,7 @@ new class extends \Livewire\Volt\Component {
         ]);
  
         $this->name =  data_get($this->setting, 'config.name') ?? data_get(currentTenant(), 'name');
-        $this->slogan =  data_get($this->setting, 'config.slogan.' . app()->getLocale()) ?? data_get(currentTenant(), 'meta.slogan.' . app()->getLocale());
+        $this->slogan =  data_get($this->setting, 'config.slogan.' . app()->getLocale()) ?? currentTenant()->slogan;
         $this->handle = data_get($this->setting, 'config.handle') ?? data_get(currentTenant(), 'handle');
         $this->logo = data_get($this->setting, 'config.logo') ?? data_get(currentTenant(), 'meta.logo');
 

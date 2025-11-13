@@ -84,6 +84,8 @@ Route::middleware(['auth:sanctum','admin'])
         Route::post('team', Team\UpdateTeam::class);
         Route::get('services', Services\GetServices::class);
         Route::post('services', Services\UpdateServices::class);
+        Route::get('playlists', Playlists\GetPlaylists::class);
+        Route::post('playlists', Playlists\UpdatePlaylists::class);
         Route::get('agreement', Agreement\GetAgreement::class);
         Route::post('agreement', Agreement\UpdateAgreement::class);
         Route::get('numbers', Numbers\GetNumbers::class);

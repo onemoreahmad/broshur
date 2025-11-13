@@ -1,0 +1,215 @@
+
+<!-- Playlists Section -->
+<div class="px-5" x-data="{ 
+    playlists: {{playlists|json_encode}},
+    selectedPlaylist: null,
+    modalOpen: false,
+    openModal(playlist) {
+        this.selectedPlaylist = playlist;
+        this.modalOpen = true;
+        document.body.style.overflow = 'hidden';
+    },
+    closeModal() {
+        this.modalOpen = false;
+        this.selectedPlaylist = null;
+        document.body.style.overflow = '';
+    }
+}" @keydown.escape.window="closeModal()">
+
+    <div class="flex items-center justify-between mb-6">
+        {% if title %}
+        <h3 class="text-base font-bold text-gray-900 -mx-5 rtl:border-r-4 rtl:border-{{ option('primaryColor', 'blue') }}-800 ltr:border-l-[6px] ltr:border-{{ option('primaryColor', 'blue') }}-800 ps-4 py-3 bg-gray-50 w-full">
+            {{title}}
+        </h3>
+        {% endif %}
+    </div>
+
+    {% if subtitle %}
+    <p class="text-gray-600 text-sm mb-6">{{subtitle}}</p>
+    {% endif %}
+
+    <!-- Playlists Grid - Two Columns -->
+    <div class="grid grid-cols-2 gap-4">
+        {% for playlist in playlists %}
+        <div 
+            @click='openModal({{ playlist|json_encode|raw }})'
+            class="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-{{ option('primaryColor', 'blue') }}-300 transition-all cursor-pointer shadow-sm hover:shadow-md"
+        >
+            <!-- Cover Image -->
+            <div class="relative h-32 bg-gradient-to-br from-{{ option('primaryColor', 'blue') }}-100 to-{{ option('primaryColor', 'blue') }}-200">
+                {% if playlist.cover_url %}
+                    <img src="{{ playlist.cover_url }}" alt="{{ playlist.name }}" class="w-full h-full object-cover" />
+                {% else %}
+                    <div class="w-full h-full flex items-center justify-center">
+                        <svg class="w-12 h-12 text-{{ option('primaryColor', 'blue') }}-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                        </svg>
+                    </div>
+                {% endif %}
+                
+                <!-- Logo Overlay -->
+                {% if playlist.logo_url %}
+                <div class="absolute bottom-2 right-2">
+                    <img src="{{ playlist.logo_url }}" alt="{{ playlist.name }}" class="w-12 h-12 rounded-lg border-2 border-white shadow-md object-cover" />
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Playlist Info -->
+            <div class="p-3">
+                <h4 class="text-sm font-bold text-gray-900 mb-1 line-clamp-1">{{ playlist.name }}</h4>
+                {% if playlist.description %}
+                <p class="text-xs text-gray-600 line-clamp-2">{{ playlist.description }}</p>
+                {% endif %}
+                {% if playlist.items and playlist.items|length > 0 %}
+                <p class="text-xs text-gray-500 mt-1">{{ playlist.items|length }} عنصر</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Playlist Details Modal -->
+    <div 
+        x-show="modalOpen" 
+        x-cloak
+        @click="closeModal()"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900 bg-opacity-75 backdrop-blur-sm"
+        style="display: none;"
+    >
+        <!-- Modal Content -->
+        <div 
+            @click.stop
+            x-show="modalOpen"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+            x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+            x-transition:leave-end="opacity-0 scale-95 translate-y-4"
+            class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden"
+            style="display: none;"
+        >
+            <!-- Close Button -->
+            <button 
+                @click="closeModal()"
+                type="button"
+                class="absolute top-4 left-4 z-10 rounded-full bg-gray-100 p-2 text-gray-500 hover:bg-gray-200 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-{{ option('primaryColor', 'blue') }}-500 focus:ring-offset-2 transition-colors duration-200"
+                aria-label="إغلاق"
+            >
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            
+            <!-- Modal Body -->
+            <div class="overflow-y-auto max-h-[90vh]" x-show="selectedPlaylist">
+                <template x-if="selectedPlaylist">
+                    <div>
+                        <!-- Playlist Header -->
+                        <div class="relative">
+                            <!-- Cover Image -->
+                            <div class="h-48 bg-gradient-to-br from-{{ option('primaryColor', 'blue') }}-100 to-{{ option('primaryColor', 'blue') }}-200">
+                                <template x-if="selectedPlaylist.cover_url">
+                                    <img :src="selectedPlaylist.cover_url" :alt="selectedPlaylist.name" class="w-full h-full object-cover" />
+                                </template>
+                                <template x-if="!selectedPlaylist.cover_url">
+                                    <div class="w-full h-full flex items-center justify-center">
+                                        <svg class="w-16 h-16 text-{{ option('primaryColor', 'blue') }}-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                                        </svg>
+                                    </div>
+                                </template>
+                            </div>
+                            
+                            <!-- Logo Overlay -->
+                            <template x-if="selectedPlaylist.logo_url">
+                                <div class="absolute bottom-0 right-4 transform translate-y-1/2">
+                                    <img :src="selectedPlaylist.logo_url" :alt="selectedPlaylist.name" class="w-20 h-20 rounded-xl border-4 border-white shadow-lg object-cover" />
+                                </div>
+                            </template>
+                        </div>
+                        
+                        <!-- Playlist Info -->
+                        <div class="p-6 pt-8">
+                            <h2 class="text-xl font-bold text-gray-900 mb-2" x-text="selectedPlaylist.name"></h2>
+                            <template x-if="selectedPlaylist.description">
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed" x-text="selectedPlaylist.description"></p>
+                            </template>
+                            
+                            <!-- Playlist Items -->
+                            <template x-if="selectedPlaylist.items && selectedPlaylist.items.length > 0">
+                                <div class="mt-6">
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-4">عناصر القائمة</h3>
+                                    <div class="space-y-3">
+                                        <template x-for="(item, index) in selectedPlaylist.items" :key="item.id || index">
+                                            <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                                                <!-- Item Cover -->
+                                                <div class="flex-shrink-0">
+                                                    <template x-if="item.cover_url">
+                                                        <img :src="item.cover_url" :alt="item.name" class="w-12 h-12 rounded-lg object-cover" />
+                                                    </template>
+                                                    <template x-if="!item.cover_url">
+                                                        <div class="w-12 h-12 rounded-lg bg-{{ option('primaryColor', 'blue') }}-100 flex items-center justify-center">
+                                                            <svg class="w-6 h-6 text-{{ option('primaryColor', 'blue') }}-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                                
+                                                <!-- Item Info -->
+                                                <div class="flex-1 min-w-0">
+                                                    <h4 class="text-sm font-semibold text-gray-900 mb-1" x-text="item.name"></h4>
+                                                    <template x-if="item.type">
+                                                        <span class="text-xs text-gray-500" x-text="item.type"></span>
+                                                    </template>
+                                                </div>
+                                                
+                                                <!-- Item Actions -->
+                                                <div class="flex-shrink-0">
+                                                    <template x-if="item.link">
+                                                        <a :href="item.link" target="_blank" class="text-{{ option('primaryColor', 'blue') }}-600 hover:text-{{ option('primaryColor', 'blue') }}-700">
+                                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                                            </svg>
+                                                        </a>
+                                                    </template>
+                                                    <template x-if="!item.link && item.file">
+                                                        <a :href="item.file" target="_blank" class="text-{{ option('primaryColor', 'blue') }}-600 hover:text-{{ option('primaryColor', 'blue') }}-700">
+                                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                                            </svg>
+                                                        </a>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                            
+                            <!-- Empty State -->
+                            <template x-if="!selectedPlaylist.items || selectedPlaylist.items.length === 0">
+                                <div class="text-center py-8 text-gray-500">
+                                    <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                                    </svg>
+                                    <p class="text-sm">لا توجد عناصر في هذه القائمة</p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+</div>
+
