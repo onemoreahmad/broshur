@@ -97,7 +97,7 @@
             </div>
   
 
-            <div class="lg:px-5 mt-5 lg:mt-0">
+            <div class="lg:px-5 mt-5 lg:mt-0 hidden md:block">
                 <div class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[10px] rounded-[2.5rem] h-[700px] w-[300px] lg:w-[420px] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]" dir="ltr">
                     <div class="h-[672px] mx-auto overflow-hidden w-[280px] lg:w-[398px] bg-white overflow-y-scroll rounded-[2rem] dark:bg-gray-800">
                         <iframe id="preview-iframe" :src="auth?.tenant?.preview_url" class="w-full min-h-screen"></iframe> 
