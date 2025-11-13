@@ -31,7 +31,7 @@
                 {% if data_get(link, 'slug') == 'subscription' and link.active %}
                     <button type="button" @click="openSubscriptionModal()" class="shrink flex-grow  bg-{{ option('primaryColor', 'blue') }}-700 hover:bg-{{ option('primaryColor', 'blue') }}-800 flex items-center justify-center gap-x-2 border-2 border-transparent text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200">
                         {{icon('mail', 6)}}
-                        اشترك الآن
+                        اشترك بالقائمة
                     </button>
                 {% endif %}
             {% endif %}

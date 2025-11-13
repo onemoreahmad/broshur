@@ -28,6 +28,7 @@
     import TeamBlock from '../components/Blocks/Team.vue';
     import ServicesBlock from '../components/Blocks/Services.vue';
     import AgreementBlock from '../components/Blocks/Agreement.vue';
+    import NumbersBlock from '../components/Blocks/Numbers.vue';
       
     const router = createRouter({
         history: createWebHistory('/dashboard'),
@@ -98,6 +99,11 @@
                       path: 'agreement',
                       name: 'blocks.agreement',
                       component: AgreementBlock,
+                    },
+                    {
+                      path: 'numbers',
+                      name: 'blocks.numbers',
+                      component: NumbersBlock,
                     },
                   ],
              },

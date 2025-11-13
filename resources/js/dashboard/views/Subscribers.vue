@@ -1,10 +1,8 @@
 <template>
-    <Container title="المشتركين">
+    <Container title="المشتركين" :subtitle="'المشتركين: ' + pagination.total">
         <template #actions>
             <div class="flex items-center gap-3 sm:gap-4  ">
-                <div class="text-sm text-gray-500 order-2 sm:order-1">
-                     المشتركين: {{ pagination.total }}
-                </div>
+                
                 <button 
                     @click="showAddSubscriberModal = true"
                     class="btn btn-primary w-full sm:w-auto order-1 sm:order-2"

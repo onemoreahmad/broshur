@@ -1,10 +1,8 @@
 <template>
-    <Container title="الطلبات">
+    <Container title="الطلبات" :subtitle="'إجمالي الطلبات: ' + pagination.total">
         <template #actions>
             <div class="flex items-center gap-3 sm:gap-4  ">
-                <div class="text-sm text-gray-500 ">
-                    إجمالي الطلبات:  {{ pagination.total }}
-                </div>
+                 
                 <button 
                     @click="showAddOrderModal = true"
                     class="btn btn-primary   "

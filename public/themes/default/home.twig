@@ -31,12 +31,12 @@
             {# {% include 'theme::_language-buttons-mobile' %} #}
 
             {% if option('headerImage') %}
-            <img src="{{ storage(option('headerImage')) }}" alt="{{tenant('name')}}" class="w-full max-h-80 object-coverx md:rounded-t-xl opacity-90 ">
+            <img src="{{ storage(option('headerImage')) }}" alt="{{tenant('name')}}" class="w-full max-h-80X object-coverx md:rounded-t-xl opacity-90 ">
             {# <div class="w-full sm:h-80 h-56 md:rounded-t-xl shadow-lg bg-[url('{{ storage(option('headerImage')) }}')] bg-containX bg-cover   bg-no-repeat bg-center opacity-90"></div> #}
             {% else %}
              
                 {% if option()|length  == 0 %}
-                    <img src="{{asset('assets/images/cover.png')}}" alt="{{tenant('name')}}" class="w-full max-h-80 object-coverx md:rounded-t-xl  opacity-90">
+                    <img src="{{asset('assets/images/cover.png')}}" alt="{{tenant('name')}}" class="w-full max-h-80X object-coverx md:rounded-t-xl  opacity-90">
                 {% endif %}
 
             {% endif %}
@@ -52,6 +52,7 @@
 
             <div class="flex flex-col gap-y-10 Xdivide-y-2 divide-gray-200 divide-dashed">
                 {{renderBlockComponent('about')}}
+                {{renderBlockComponent('numbers')}}
                 
                 {{renderBlockComponent('features')}}
                 {{renderBlock('services')}}

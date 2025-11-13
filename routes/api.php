@@ -86,6 +86,8 @@ Route::middleware(['auth:sanctum','admin'])
         Route::post('services', Services\UpdateServices::class);
         Route::get('agreement', Agreement\GetAgreement::class);
         Route::post('agreement', Agreement\UpdateAgreement::class);
+        Route::get('numbers', Numbers\GetNumbers::class);
+        Route::post('numbers', Numbers\UpdateNumbers::class);
     });
 
 // Contact form endpoint (public)

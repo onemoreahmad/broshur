@@ -89,6 +89,15 @@
                     </span>
                     <span class="text-sm text-base-500"> معرض الأعمال </span>
                 </RouterLink>
+
+                <RouterLink :to="{ name: 'blocks.numbers' }" active-class="bg-white hover:bg-white" class="cursor-pointer lg:w-full w-fit shrink-0 hover:bg-base-100 lg:rounded-s p-2.5 px-3 flex flex-grow items-center gap-x-2 bg-base-100/50">
+                    <span class="text-lg inline-block -mt-1"> 
+                        <svg viewBox="0 0 24 24" fill="none" class="size-5" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 13H21M3 17H21M7 21H17C18.1046 21 19 20.1046 19 19V5C19 3.89543 18.1046 3 17 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21Z" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M9 9H15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+                    </span>
+                    <span class="text-sm text-base-500"> الإحصائيات </span>
+                </RouterLink>
+
+                
  
             </nav>
  
