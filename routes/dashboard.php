@@ -9,8 +9,11 @@ Route::as('dashboard.')
 ->middleware(['auth', 'admin'])
 ->group(function () {
     
-         // payment callback route
-         Route::as('payment.')
+    Route::post('upload-media', [\App\Actions\UploadMedia::class, 'upload'])->name('upload-media');
+    Route::post('upload-image', [\App\Actions\UploadImage::class, 'upload'])->name('upload-image');
+
+    // payment callback route
+    Route::as('payment.')
          ->prefix('payment')
          ->get('callback', \App\Actions\PaymentCallback::class)
              ->middleware('auth')

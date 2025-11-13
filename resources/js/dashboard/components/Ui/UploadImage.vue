@@ -31,7 +31,7 @@
                             accept="image/*"
                         />
                     </label>
-                    <p class="text-xs text-gray-500 mt-1">PNG, JPG, GIF حتى 5MB</p>
+                    <p class="text-xs text-gray-500 mt-1">PNG, JPG, GIF حتى 10MB</p>
                 </div>
             </div>
              
@@ -95,8 +95,8 @@ const handleFileChange = async (event) => {
     if (!file) return
     
     // Validate file size (5MB max)
-    if (file.size > 5 * 1024 * 1024) {
-        errorsStore.setErrors({ [props.name]: ['حجم الملف يجب أن يكون أقل من 5 ميجابايت'] })
+    if (file.size > 10 * 1024 * 1024) {
+        errorsStore.setErrors({ [props.name]: ['حجم الملف يجب أن يكون أقل من 10 ميجابايت'] })
         return
     }
     
@@ -118,7 +118,7 @@ const handleFileChange = async (event) => {
         formData.append('modelId', props.modelId)
         
         // Upload file
-        const response = await axios.post('/admin/upload-image', formData, {
+        const response = await axios.post('/dashboard/upload-image', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
