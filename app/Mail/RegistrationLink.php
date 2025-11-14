@@ -28,7 +28,7 @@ class RegistrationLink extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'رابط التسجيل \ الدخول - بروشور',
+            subject: 'رابط تسجيل الدخول - بروشور',
         );
     }
 
