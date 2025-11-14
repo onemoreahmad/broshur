@@ -14,10 +14,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->loadViewsFrom( resource_path('views/admin'), 'admin'); 
-        $this->loadViewsFrom( resource_path('views/site'), 'site'); 
-        $this->loadViewsFrom( resource_path('views/auth'), 'auth'); 
-        $this->loadViewsFrom( resource_path('views/storefront'), 'storefront'); 
     }
 
     /**
@@ -25,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->loadViewsFrom( resource_path('views/admin'), 'admin'); 
+        $this->loadViewsFrom( resource_path('views/site'), 'site'); 
+        $this->loadViewsFrom( resource_path('views/auth'), 'auth'); 
+        $this->loadViewsFrom( resource_path('views/storefront'), 'storefront'); 
+
+        
         \URL::forceScheme('https');
 
         Livewire::addPersistentMiddleware([
