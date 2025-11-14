@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -59,6 +60,10 @@ class User extends Authenticatable implements FilamentUser
 
     public function getImageAttribute($value)
     {
+        if (Str::startsWith($value, 'http')) {
+            return $value;
+        }
+
         if ($value) {
             return Storage::url($value);
         }

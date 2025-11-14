@@ -1,4 +1,18 @@
  <x-auth::layout title="تسجيل الدخول" subtitle="سجل دخولك لإدارة أعمالك.">
+
+         <div class="flex flex-col gap-2 mb-2">
+            <ui:button variant="blue" class="w-full !p-7 !bg-red-700 !hover:bg-red-800 !text-white" href="{{ route('auth.social', ['social' => 'google']) }}">
+                <ui:icon name="brand-google" class="!w-5 !h-5" />
+                سجل باستخدام حسابك في Google
+            </ui:button>
+            <ui:button variant="ghost" class="w-full !p-7 !bg-black !hover:bg-black/80 !text-white" icon="brand-github" href="{{ route('auth.social', ['social' => 'github']) }}">
+                سجل باستخدام حسابك في GitHub
+            </ui:button>
+        </div>
+
+        <ui:separator text="أو سجل باستخدام بريدك الإلكتروني" height="4" />
+
+
      <form wire:submit="submit" class="grid mb-12 flex flex-col gap-y-1">
          <ui:input label="البريد الإلكتروني" width="w-full" name="email" dir="ltr" type="email" placeholder="your@email.com" />
          <ui:input label="كلمة المرور" width="w-full" name="password" dir="ltr" type="password" placeholder="*****" />

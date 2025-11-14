@@ -1,5 +1,18 @@
 <x-auth::layout title="أنشئ بروشور جديد" subtitle="إبدأ مجاناً اليوم، وقم بترقية باقتك في أي وقت حسب إحتياجاتك">
     <form wire:submit="submit" class="flex flex-col gap-y-1">
+
+        <div class="flex flex-col gap-2 mb-2">
+            <ui:button variant="blue" class="w-full !p-7 !bg-red-700 !hover:bg-red-800 !text-white" href="{{ route('auth.social', ['social' => 'google']) }}">
+                <ui:icon name="brand-google" class="!w-5 !h-5" />
+                سجل باستخدام حسابك في Google
+            </ui:button>
+            <ui:button variant="ghost" class="w-full !p-7 !bg-black !hover:bg-black/80 !text-white" icon="brand-github" href="{{ route('auth.social', ['social' => 'github']) }}">
+                سجل باستخدام حسابك في GitHub
+            </ui:button>
+        </div>
+
+        <ui:separator text="أو سجل باستخدام بريدك الإلكتروني" height="4" />
+
         <ui:input label="اسم الصفحة" name="tenant_name" width="w-full" placeholder="مثال: وجيز الرقمية" />
         <ui:input name="tenant_handle" width="w-full" placeholder="my-business" dir="ltr" infoDir="rtl" prefix="https://{{ config('app.domain') }}/" info="رابط الصفحة، يمكنه تغييره لاحقاً." wire:blur="reseterrors" />
  
