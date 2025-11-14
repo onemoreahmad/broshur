@@ -7,10 +7,10 @@ use Livewire\Livewire;
 Route::get('link/{id}', \App\Actions\VisitLink::class)
     ->name('storefront.link');
     
-Livewire::setUpdateRoute(function ($handle) {
-    return Route::post('{tenant}/ajax', $handle)
-        ->middleware(['currentBroshur']);
-});
+// Livewire::setUpdateRoute(function ($handle) {
+//     return Route::post('{tenant}/ajax', $handle)
+//         ->middleware(['currentBroshur']);
+// });
 
 // sitefront routes
 Volt::route('{tenant}/{lang?}', 'storefront.home')
