@@ -57,7 +57,7 @@
                     </ul>
 
                     <div class="flex flex-col items-start mt-8 sm:gap-x-4 sm:flex-row sm:items-center lg:mt-12">
-                        <a href="{{ route('auth.register') }}" title="" class="inline-flex items-center justify-center px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:bg-blue-700" role="button">
+                        <a href="{{ route('auth.register-login') }}" title="" class="inline-flex items-center justify-center px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:bg-blue-700" role="button">
                             <svg class="w-5 h-5 me-2 -ms-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
@@ -116,7 +116,7 @@
                     ></div>
 
                     <a
-                        href="{{route('auth.register')}}"
+                        href="{{route('auth.register-login')}}"
                         wire:navigate
                         title="أنشئ صفحتك الآن بدقيقة"
                         class="relative inline-flex items-center justify-center py-3.5 text-base font-bold text-white transition-all duration-200 bg-gray-900 border border-transparent px-9 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 font-pj hover:bg-opacity-90 rounded-xl"

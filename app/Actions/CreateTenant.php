@@ -15,8 +15,8 @@ class CreateTenant
     public function rules(): array
     {
         return [
-            'tenant_name' => 'required|min:2|max:200',
-            'tenant_handle' => 'required|min:2|max:100|alpha_dash:ascii,unique:tenants,handle',
+            'tenant_name' => 'required|min:1|max:200',
+            'tenant_handle' => 'required|min:1|max:100|alpha_dash:ascii,unique:tenants,handle',
             'email' => 'required|email|max:255',
             'user_id' => 'required|exists:users,id',
         ];

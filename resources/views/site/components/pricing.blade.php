@@ -36,7 +36,7 @@
             </p>
 
             <!-- CTA -->
-            <a href="{{route('auth.register')}}?plan_id=1" class="shadow-sm mt-4 focus-visible:ring-2 text-white inline-flex w-full bg-[#a58356] border-gray-200 px-3 py-2 text-sm transition-all border-0 duration-200 font-medium items-center justify-center leading-7 max-w-xs ease-in-out rounded-full hover:border-gray-300 hover:bg-opacity-75 focus:outline-none">
+            <a href="{{route('auth.register-login')}}?plan_id=1" class="shadow-sm mt-4 focus-visible:ring-2 text-white inline-flex w-full bg-[#a58356] border-gray-200 px-3 py-2 text-sm transition-all border-0 duration-200 font-medium items-center justify-center leading-7 max-w-xs ease-in-out rounded-full hover:border-gray-300 hover:bg-opacity-75 focus:outline-none">
                 أنشئ بروشور
             </a>
         </div>
@@ -86,7 +86,7 @@
             
 
             <!-- CTA -->
-            <a href="{{route('auth.register')}}?plan_id=2" class="shadow-sm mt-4 focus-visible:ring-2 text-white inline-flex w-full bg-lime-500 border-gray-200 px-3 py-2 text-sm transition-all border-0 duration-200 font-medium items-center justify-center leading-7 max-w-xs ease-in-out rounded-full hover:border-gray-300 hover:bg-opacity-75 focus:outline-none">
+            <a href="{{route('auth.register-login')}}?plan_id=2" class="shadow-sm mt-4 focus-visible:ring-2 text-white inline-flex w-full bg-lime-500 border-gray-200 px-3 py-2 text-sm transition-all border-0 duration-200 font-medium items-center justify-center leading-7 max-w-xs ease-in-out rounded-full hover:border-gray-300 hover:bg-opacity-75 focus:outline-none">
                 أنشئ بروشور
             </a>
         </div>
@@ -143,7 +143,7 @@
 
 
             <!-- CTA -->
-            <a href="{{route('auth.register')}}?plan_id=3" class="shadow-sm mt-4 focus-visible:ring-2 text-white flex w-full bg-primary-500 border-gray-200 px-3 py-2 text-sm transition-all border-0 duration-200 font-medium items-center justify-center leading-7 ease-in-out rounded-full hover:border-gray-300 hover:bg-opacity-75 focus:outline-none">
+            <a href="{{route('auth.register-login')}}?plan_id=3" class="shadow-sm mt-4 focus-visible:ring-2 text-white flex w-full bg-primary-500 border-gray-200 px-3 py-2 text-sm transition-all border-0 duration-200 font-medium items-center justify-center leading-7 ease-in-out rounded-full hover:border-gray-300 hover:bg-opacity-75 focus:outline-none">
                 أنشئ بروشور
             </a>
         </div>
