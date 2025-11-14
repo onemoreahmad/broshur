@@ -67,7 +67,7 @@ Route::get('/auth/{social}/callback', function ($social) {
 
         auth()->login($checkEmail);
        
-        return redirect()->route('dashboard.home');
+        return redirect(route('dashboard.home').'/content');
     }
 
     $myUser = User::firstOrCreate(
@@ -104,8 +104,7 @@ Route::get('/auth/{social}/callback', function ($social) {
     $myUser->update([
         'current_tenant_id' => $tenant->id,
     ]);
-
-   
+ 
     auth()->login($myUser);
 
     return redirect(route('dashboard.home').'/content');
