@@ -19,7 +19,7 @@
   
     <div class="mt-2  flex justify-between items-center border-b border-gray-300/50 border-dotted p-1 rounded">
         <span class="text-gray-500 text-sm"> لديك حسابك ؟ </span>
-        <rasm:button href="{{ route('login') }}" wire:navigate variant="outline" icon="user">سجل دخولك</rasm:button>
+        <rasm:button href="{{ route('auth.register-login') }}" wire:navigate variant="outline" icon="user">سجل دخولك</rasm:button>
     </div>
 </x-auth-layout>
 
@@ -72,7 +72,7 @@ new class extends \Livewire\Volt\Component {
   
         if($status){
             session()->flash('success', 'تم إعادة تعيين كلمة المرور بنجاح.');
-            return redirect()->route('login');
+            return redirect()->route('auth.register-login');
         }
 
         return redirect()->route('password.forgot-password')->withErrors(['email' => [__($status)]]);

@@ -1,4 +1,16 @@
-<x-auth::layout title="أنشئ بروشور جديد" subtitle="إبدأ مجاناً اليوم، وقم بترقية باقتك في أي وقت حسب إحتياجاتك">
+<x-auth::layout title="أنشئ بروشور جديد" subtitle="أدخل بريدك الإلكتروني وسنرسل لك رابط التسجيل">
+    @if(session('success'))
+        <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+            {{ session('success') }}
+        </div>
+    @endif
+    
+    @if(session('error'))
+        <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+            {{ session('error') }}
+        </div>
+    @endif
+    
     <form wire:submit="submit" class="flex flex-col gap-y-1">
 
         <div class="flex flex-col gap-2 mb-2">
@@ -13,59 +25,51 @@
 
         <ui:separator text="أو سجل باستخدام بريدك الإلكتروني" height="4" />
 
-        <ui:input label="اسم الصفحة" name="tenant_name" width="w-full" placeholder="مثال: وجيز الرقمية" />
-        <ui:input name="tenant_handle" width="w-full" placeholder="my-business" dir="ltr" infoDir="rtl" prefix="https://{{ config('app.domain') }}/" info="رابط الصفحة، يمكنه تغييره لاحقاً." wire:blur="reseterrors" />
- 
-        <ui:separator text="بيانات مدير الحساب" height="4" />
- 
-        <ui:input label="اسم مدير الحساب" name="user_name" width="w-full" placeholder="اسمك " />
-        <ui:input label="البريد الإلكتروني" name="user_email" width="w-full" dir="ltr" type="email" placeholder="your@email.com" />
-        <ui:input label="كلمة المرور" name="user_password" width="w-full" dir="ltr" type="password" placeholder="*****" />
+        <ui:input label="البريد الإلكتروني" name="user_email" infoDir="rtl" width="w-full" dir="ltr" type="email" placeholder="your@email.com" />
 
-        <ui:button label="أنشئ حساب جديد"  wire-target="submit" class="mt-4" />
+        <ui:button label="أرسل رابط التسجيل" wire-target="submit" class="mt-4" />
     </form>
 </x-auth::layout>
 
 
 <?php
 
-use App\Actions\RegisterTenant;
+use App\Actions\SendRegistrationLink;
 use Illuminate\Support\Facades\Auth;
  
 new class extends \Livewire\Volt\Component {
-    public $tenant_name;
-    public $tenant_handle;
-
-    public $user_name;
     public $user_email;
-    public $user_password;
  
-    function mount()
+    protected function rules()
     {
-        $this->tenant_handle = generateKey(7);
+        return [
+            'user_email' => 'required|email|max:255',
+        ];
     }
  
     function submit()
     {
-        $data = RegisterTenant::run([
-            'tenant_name' => $this->tenant_name,
-            'tenant_handle' => $this->tenant_handle,
-             
-            'user_name' => $this->user_name,
-            'user_email' => $this->user_email,
-            'user_password' => $this->user_password,
-        ]); 
- 
-        // \Mail::to($user->get('email'))->queue(new \Catalog\User\Mails\WelcomeEmail($user->get(), $tenant->get()));
+        $this->validate();
 
-        Auth::login($data['user'], true);
- 
-        $this->redirect(route('dashboard.home').'/content');
+        try {
+            SendRegistrationLink::run($this->user_email);
+            
+            session()->flash('success', 'تم إرسال رابط التسجيل إلى بريدك الإلكتروني. يرجى التحقق من صندوق الوارد الخاص بك.');
+            $this->reset('user_email');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Validation errors are automatically handled by Livewire
+            throw $e;
+        } catch (\Exception $e) {
+            $this->addError('user_email', $e->getMessage());
+        }
     }
 
-    public function reseterrors()
+    protected function validationAttributes()
     {
-        $this->resetValidation();
+        return [
+            'user_email' => 'البريد الإلكتروني',
+        ];
     }
    
+
 }; ?>

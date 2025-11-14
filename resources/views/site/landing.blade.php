@@ -15,8 +15,8 @@
             <div class="flex justify-center max-w-xl mx-auto">
                 <div class="rounded-full flex items-center w-full mx-auto justify-between -mt-7 bg-black text-white px-2 py-2 text-xs sm:text-sm font-medium">
                       <a href="{{ route('site.home') }}" wire:navigate title="" class="flex items-center gap-x-3 ms-3">
-                        <img class="w-auto h-7" src="{{ asset('assets/images/broshur-logo-shape.webp') }}" alt="" />
-                        <img class="w-auto h-7" src="{{ asset('assets/images/logo-white-0.webp') }}" alt="" />
+                        <img class="w-auto h-5 md:h-7" src="{{ asset('assets/images/broshur-logo-shape.webp') }}" alt="" />
+                        <img class="w-auto h-6 md:h-7" src="{{ asset('assets/images/logo-white-0.webp') }}" alt="" />
                         {{-- <span class="text-xl lg:text-3xl font-camel font-extrabold">
                             {{ config('app.name') }} 
                         </span> --}}
@@ -27,8 +27,8 @@
                         @auth
                             <ui:button variant="primary" href="{{ route('dashboard.home') }}" label="لوحة التحكم" class="!rounded-full text-base font-tsh !p-6" rounded="full" icon="settings" />
                         @else
-                            <ui:button variant="primary" href="{{ route('auth.register') }}" label="أنشئ صفحة" wire:navigate rounded="full" icon="plus" class="!rounded-full !bg-primary-600 !hover:bg-primary-700" />
-                            <ui:button variant="ghost" href="{{ route('auth.login') }}" label="دخول" wire:navigate class="text-white hover:text-white/70 !hover:bg-black/5 !font-normal" icon:trailing="arrow-left" />
+                            <ui:button variant="primary" href="{{ route('auth.register-login') }}" label="أنشئ بروشور" wire:navigate rounded="full" icon="plus" class="!rounded-full !bg-primary-600 !hover:bg-primary-700 " />
+                            <ui:button variant="ghost" href="{{ route('auth.register-login') }}" label="دخول" wire:navigate class="text-white hover:text-white/70 !hover:bg-black/5 !font-normal !hidden !md:block" icon:trailing="arrow-left" />
                         @endauth   
                     </div>
                 </div>
@@ -95,7 +95,7 @@
 
         <div class="mt-12 text-center max-w-sm lg:max-w-xl mx-auto">
                 <div class="mt-6 flex items-center justify-center gap-3">
-                    <a href="{{ route('auth.register')}}" wire:navigate class="inline-flex items-center gap-3 rounded-full bg-primary-600 text-white px-3 py-3 text-2xl ps-6 font-semiboldx shadow-sm hover:bg-primary-700">
+                    <a href="{{ route('auth.register-login')}}" wire:navigate class="inline-flex items-center gap-3 rounded-full bg-primary-600 text-white px-3 py-3 text-2xl ps-6 font-semiboldx shadow-sm hover:bg-primary-700">
                         أنشئ صفحتك مجاناً 
                         <ui:icon name="arrow-left" size="10" class="bg-teal-400 rounded-full p-1" />
                     </a>
@@ -624,7 +624,7 @@
 
       <div class=" text-center max-w-sm lg:max-w-xl mx-auto">
                 <div class=" flex items-center justify-center gap-3">
-                    <a href="{{ route('auth.register') }}" wire:navigate class="inline-flex items-center gap-3 rounded-full bg-primary-600 text-white px-3 py-3 text-2xl ps-6 font-semiboldx shadow-sm hover:bg-primary-700">
+                    <a href="{{ route('auth.register-login') }}" wire:navigate class="inline-flex items-center gap-3 rounded-full bg-primary-600 text-white px-3 py-3 text-2xl ps-6 font-semiboldx shadow-sm hover:bg-primary-700">
                         أنشئ صفحتك مجاناً 
                         <ui:icon name="arrow-left" size="10" class="bg-amber-400 rounded-full p-1" />
                     </a>

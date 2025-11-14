@@ -20,8 +20,8 @@
                     @auth
                         <ui:button variant="primary" href="{{ route('admin.home') }}" label="لوحة التحكم" class="!rounded-full text-xl !p-6" rounded="full" icon="settings" />
                     @else
-                        <ui:button variant="primary" href="{{ route('auth.register') }}" label="بروشور جديد" wire:navigate rounded="full" icon="plus" class="!rounded-full !bg-primary-600 !hover:bg-primary-700" />
-                        <ui:button variant="ghost" href="{{ route('auth.login') }}" label="دخول" wire:navigate class="text-white hover:text-white/70 !hover:bg-black/5 " icon:trailing="arrow-left" />
+                        <ui:button variant="primary" href="{{ route('auth.register-login') }}" label="بروشور جديد" wire:navigate rounded="full" icon="plus" class="!rounded-full !bg-primary-600 !hover:bg-primary-700" />
+                        <ui:button variant="ghost" href="{{ route('auth.register-login') }}" label="دخول" wire:navigate class="text-white hover:text-white/70 !hover:bg-black/5 " icon:trailing="arrow-left" />
                     @endauth   
  
                 </div>
