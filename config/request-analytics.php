@@ -21,6 +21,7 @@ return [
         'web' => [
             'web',
             'auth', // Uncomment if using web authentication
+            'superadmin',
             // 'request-analytics.access',
         ],
         'api' => [
