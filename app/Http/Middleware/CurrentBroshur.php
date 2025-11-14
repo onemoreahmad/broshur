@@ -32,10 +32,12 @@ class CurrentBroshur
     private function getTenant($request)
     {
         $tenant = Tenant::where('handle', $request->route('tenant'))->first();
+         
         if(!$tenant){
-            // return redirect()->to(config('app.url'));
-            return response()->view('errors.tenant-not-found', status: 404);
+            return redirect()->to(config('app.url'));
+            // return response()->view('errors.tenant-not-found', status: 404);
         }
+
         config()->set('tenant', $tenant);
         session()->put('current_tenant_id', $tenant->id);
         session()->put('current_tenant_handle', $tenant->handle);
