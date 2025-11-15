@@ -35,7 +35,7 @@
     >
 
         @if ($icon)
-            <rasm:icon name="{{ $icon }}" class="!w-5 !h-5 @if($slot->isEmpty() && !$label) rtl:-mr-1 ltr:-ml-1 @endif absolute ltr:left-3 rtl:right-3 top-2 opacity-50" />
+            <ui:icon name="{{ $icon }}" class="!w-5 !h-5 @if($slot->isEmpty() && !$label) rtl:-mr-1 ltr:-ml-1 @endif absolute ltr:left-3 rtl:right-3 top-2 opacity-50" />
         @endif
 
         <input id="{{ $name }}" type="{{ $type }}"

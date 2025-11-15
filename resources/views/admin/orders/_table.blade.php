@@ -9,7 +9,7 @@
         <div class="flex-grow">
             <div class="relative text-sm text-gray-800 col-span-3">
                 <div class="absolute ps-2 right-0 top-0 bottom-0 flex items-center pointer-events-none text-gray-500">
-                    <rasm:icon name="search" class="  text-gray-400" />
+                    <ui:icon name="search" class="  text-gray-400" />
                 </div>
 
                 <input wire:model.live="search" type="text" placeholder="ابحث .."
@@ -26,8 +26,8 @@
             <button wire:click="deleteSelected" wire:confirm="Are you sure you want to delete all selected items?"
                 class="flex items-center gap-2 rounded-lg border px-3 py-1.5 bg-white text-sm text-gray-700 hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-75">
 
-                <rasm:icon name="trash" wire:loading.remove class=" text-gray-300 w-4 h-4" />
-                <rasm:icon name="loader-3" wire:loading wire:target="deleteSelected"
+                <ui:icon name="trash" wire:loading.remove class=" text-gray-300 w-4 h-4" />
+                <ui:icon name="loader-3" wire:loading wire:target="deleteSelected"
                     class="animate-spin  text-gray-300 w-4 h-4" />
                 {{ __('Delete selected') }}<span x-text="'('+$wire.selectedIds.length+')'"></span>
             </button>
@@ -40,7 +40,7 @@
             <ui:empty subtitle="سيتم عرض قائمة الطلبات وأي تفاعلات تحدث على الصفحات الخاص بك هنا." class="p-2">
                 {{ __('No responses.') }}
                 <x-slot:icon>
-                    <rasm:icon name="message-2" class="!w-12 !h-12 text-gray-400 p-0.5" />
+                    <ui:icon name="message-2" class="!w-12 !h-12 text-gray-400 p-0.5" />
                 </x-slot:icon>
             </ui:empty>
         @else
@@ -110,7 +110,7 @@
                                             @if (data_get($item, 'data.client.name') || data_get($item, 'data.client_name'))
                                                 <span class="opacity-50 inline-flex items-center gap-x-1 bg-cyan-200 p-1 px-1 rounded-md text-xs font-bold">
                                                     {{ __(data_get($item, 'data.client.name', data_get($item, 'data.client_name'))) }}
-                                                    {{-- <rasm:icon name="user" class="!h-4" /> --}}
+                                                    {{-- <ui:icon name="user" class="!h-4" /> --}}
                                                     {{-- {{ data_get($item, 'data.client.phone', data_get($item, 'data.client_phone')) ?: data_get($item, 'data.client.email', data_get($item, 'data.client_email')) }} --}}
                                                 </span>
                                             @endif
@@ -129,7 +129,7 @@
                                     <button @click="dropdownMenu = ! dropdownMenu" type="button"
                                         class="hover:bg-gray-200 p-1 rounded-lg inline-block" id="user-menu-button"
                                         aria-expanded="false" aria-haspopup="true">
-                                        <rasm:icon name="dots" class="  text-gray-400" />
+                                        <ui:icon name="dots" class="  text-gray-400" />
 
                                     </button>
 
@@ -169,7 +169,7 @@
         <div wire:loading.flex wire:target="sortBy, search, nextPage, previousPage, archive, archiveSelected"
             class="flex justify-center items-center absolute inset-0">
 
-            <rasm:icon name="loader-3" class="animate-spin  text-gray-300 w-10 h-10" />
+            <ui:icon name="loader-3" class="animate-spin  text-gray-300 w-10 h-10" />
         </div>
     </div>
 

@@ -16,7 +16,7 @@
              </svg>
          </x-slot>
          <x-slot:actions>
-             <rasm:button @click.prevent="$dispatch('openmodal')" label="{{ __('Add tenant') }}" />
+             <ui:button @click.prevent="$dispatch('openmodal')" label="{{ __('Add tenant') }}" />
          </x-slot>
 
          <div class="mt-6 flex flex-col gap-y-1X divide-y divide-gray-100">
@@ -43,16 +43,16 @@
              @endforeach
          </div>
 
-         <rasm:modal title="أضف منشأة جديدة" size="md">
+         <ui:modal title="أضف منشأة جديدة" size="md">
              <x-admin::form wire:submit="submit">
-                 <rasm:input name="tenant_name" label="" width="w-full" placeholder="اسم المنشأة" />
-                 <rasm:input name="tenant_handle" dir="ltr" width="w-full" placeholder="subdomain-handle"
+                 <ui:input name="tenant_name" label="" width="w-full" placeholder="اسم المنشأة" />
+                 <ui:input name="tenant_handle" dir="ltr" width="w-full" placeholder="subdomain-handle"
                      prefix="https://" suffix=".{{ config('app.domain') }}" />
                  <x-slot:footer>
-                     <rasm:button type="submit" wire-target="submit" label="{{ __('Save') }}" />
+                     <ui:button type="submit" wire-target="submit" label="{{ __('Save') }}" />
                  </x-slot>
                 </x-admin::form>
-         </rasm:modal>
+         </ui:modal>
 
      </x-admin::mainbox>
  </x-admin::container>

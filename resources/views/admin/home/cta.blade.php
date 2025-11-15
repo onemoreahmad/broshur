@@ -2,7 +2,7 @@
     <ui:callout icon="info-circle" color="blue" inline>
         <x-slot name="text"> أزرار الإجراءات الرئيسية، يمكنك إضافة أكثر من زر لدفع الزائر لإتخاذ إجراء مثل شراء أو حجز خدمة أو التواصل معك.</x-slot>
         {{-- <x-slot name="action" class="@md:h-full m-0!">
-            <rasm:button variant="primary" icon:trailing="arrow-left" wire-target="saveAndNext" class="cursor-pointer" wire:click="saveAndNext"> التالي </rasm:button>
+            <ui:button variant="primary" icon:trailing="arrow-left" wire-target="saveAndNext" class="cursor-pointer" wire:click="saveAndNext"> التالي </ui:button>
         </x-slot> --}}
     </ui:callout>
  

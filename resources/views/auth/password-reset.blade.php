@@ -1,12 +1,12 @@
-<x-auth-layout title="إعادة تعيين كلمة المرور" subtitle="أدخل بريدك الإلكتروني لإستعادة كلمة المرور.">
+<x-auth::layout title="إعادة تعيين كلمة المرور" subtitle="أدخل بريدك الإلكتروني لإستعادة كلمة المرور.">
  
     <form wire:submit="submit" class="grid mb-12 flex flex-col gap-y-2">
         <input type="hidden" wire:model="token" value="{{ $token }}">
         <input type="hidden" wire:model="email" value="{{ $email }}">
 
-        <rasm:input label="كلمة المرور" width="w-full" name="password" wire:model="password" dir="ltr"  type="password" placeholder="*****" />
-        <rasm:input label="تأكيد كلمة المرور" width="w-full" name="password_confirmation" wire:model="password_confirmation" dir="ltr"  type="password" placeholder="*****" />
-        <rasm:button variant="primary" type="submit" icon="lock-open" wire-target="submit"> استعادة كلمة المرور </rasm:button>
+        <ui:input label="كلمة المرور" width="w-full" name="password" wire:model="password" dir="ltr"  type="password" placeholder="*****" />
+        <ui:input label="تأكيد كلمة المرور" width="w-full" name="password_confirmation" wire:model="password_confirmation" dir="ltr"  type="password" placeholder="*****" />
+        <ui:button variant="primary" type="submit" icon="lock-open" wire-target="submit"> استعادة كلمة المرور </ui:button>
 
         @if($errors->any())
             <div class="alert alert-danger">
@@ -19,9 +19,9 @@
   
     <div class="mt-2  flex justify-between items-center border-b border-gray-300/50 border-dotted p-1 rounded">
         <span class="text-gray-500 text-sm"> لديك حسابك ؟ </span>
-        <rasm:button href="{{ route('auth.register-login') }}" wire:navigate variant="outline" icon="user">سجل دخولك</rasm:button>
+        <ui:button href="{{ route('auth.login') }}" wire:navigate variant="outline" icon="user">سجل دخولك</ui:button>
     </div>
-</x-auth-layout>
+</x-auth::layout>
 
 <?php
 
@@ -72,10 +72,10 @@ new class extends \Livewire\Volt\Component {
   
         if($status){
             session()->flash('success', 'تم إعادة تعيين كلمة المرور بنجاح.');
-            return redirect()->route('auth.register-login');
+            return redirect()->route('auth.login');
         }
 
-        return redirect()->route('password.forgot-password')->withErrors(['email' => [__($status)]]);
+        return redirect()->route('auth.password.forgot-password') ;
 
 
     }

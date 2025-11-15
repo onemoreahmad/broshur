@@ -8,7 +8,9 @@
   
     <div class="mt-2  flex justify-between items-center border-b border-gray-300/50 border-dotted p-1 rounded">
         <span class="text-gray-500 text-sm">ليس لديك حساب ؟ </span>
-        <ui:button href="{{ route('auth.register-login') }}" wire:navigate variant="outline" icon="user">تسجيل الدخول / إنشاء حساب</ui:button>
+        <ui:button href="{{ route('auth.register') }}" wire:navigate variant="outline" icon="user-plus">أنشئ حساب جديد</ui:button>
+        <span class="text-gray-500 text-sm mx-2">أو</span>
+        <ui:button href="{{ route('auth.login') }}" wire:navigate variant="outline" icon="user">سجل دخولك</ui:button>
     </div>
 </x-auth::layout>
 
@@ -47,11 +49,14 @@ new class extends \Livewire\Volt\Component {
     
         if($status === Password::ResetLinkSent){
             session()->flash('success', 'تم إرسال رابط إستعادة كلمة المرور إلى بريدك الإلكتروني.');
-            return redirect()->route('auth.register-login');
+            return redirect()->route('auth.login');
         }
         $this->addError('email', 'حدث خطأ ما.');
-        return redirect()->route('password.forgot-password')->withErrors(['email' => [__($status)]]); 
+        return redirect()->route('auth.password.forgot-password') ; 
     }
 
-   
+    public function rendering($view): void
+    {
+        $view->title('تسجيل الدخول');
+    }
 }; ?>

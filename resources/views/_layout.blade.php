@@ -31,7 +31,7 @@
 </head>
 <body class="bg-gray-200 relative">
 
-   @if(session('success'))
+   {{-- @if(session('success'))
         <div class="alert alert-success absolute top-0 left-0 right-0 bg-green-100 text-green-800 border border-green-200 rounded-lg p-4 mb-4 mx-auto max-w-6xl mt-4">
             {{ session('success') }}
         </div>
@@ -45,7 +45,7 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+    @endif --}}
 
     {{$slot}}
 </body>

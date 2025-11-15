@@ -26,13 +26,34 @@
     <form wire:submit="submit" class="flex flex-col gap-y-1">
         <ui:input label="البريد الإلكتروني" name="email" infoDir="rtl" width="w-full" dir="ltr" type="email" placeholder="your@email.com" />
 
-        <ui:button label="أرسل رابط تسجيل الدخول" wire-target="submit" class="mt-4" />
+        @if($usePassword)
+            <ui:input label="كلمة المرور" name="password" infoDir="rtl" width="w-full" dir="ltr" type="password" placeholder="*****" />
+            <div class="flex justify-end mt-1">
+                <a href="{{ route('auth.password.forgot-password') }}" wire:navigate class="text-sm text-blue-600 hover:text-blue-800 underline">
+                    نسيت كلمة المرور؟
+                </a>
+            </div>
+        @endif
+
+        <div class="flex items-center gap-2 mt-2">
+            <input type="checkbox" id="usePassword" wire:model.live="usePassword" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+            <label for="usePassword" class="text-sm text-gray-700 cursor-pointer">تسجيل الدخول بكلمة المرور</label>
+        </div>
+
+
+
+        @if($usePassword)
+            <ui:button label="تسجيل الدخول" wire-target="submit" class="mt-4" />
+        @else
+            <ui:button label="أرسل رابط تسجيل الدخول" wire-target="submit" class="mt-4" />
+        @endif
     </form>
 
     <div class="mt-2 flex justify-between items-center border-b border-gray-300/50 border-dotted p-1 rounded">
         <span class="text-gray-500 text-sm">ليس لديك حسابك بعد ؟ </span>
         <ui:button href="{{ route('auth.register') }}" wire:navigate label="أنشئ حساب جديد" variant="outline" />
     </div>
+    
 </x-auth::layout>
 
 <?php
@@ -42,12 +63,25 @@ use Illuminate\Support\Facades\Auth;
 
 new class extends \Livewire\Volt\Component {
     public $email;
+    public $password;
+    public $usePassword = false;
+
+    public function updatedUsePassword()
+    {
+        $this->reset('password');
+    }
 
     protected function rules()
     {
-        return [
+        $rules = [
             'email' => 'required|email|max:255',
         ];
+
+        if ($this->usePassword) {
+            $rules['password'] = 'required|string|min:6';
+        }
+
+        return $rules;
     }
 
     function submit()
@@ -55,10 +89,30 @@ new class extends \Livewire\Volt\Component {
         $this->validate();
 
         try {
-            SendRegistrationLink::run($this->email);
-            
-            session()->flash('success', 'تم إرسال رابط تسجيل الدخول إلى بريدك الإلكتروني. يرجى التحقق من صندوق الوارد الخاص بك.');
-            $this->reset('email');
+            if ($this->usePassword) {
+                // Direct password login
+                if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
+                    $user = Auth::user();
+                    
+                    // Update last login
+                    $user->update([
+                        'last_login_at' => now(),
+                        'last_login_ip' => request()->ip(),
+                    ]);
+
+                    // Redirect to dashboard
+                    return $this->redirect(route('dashboard.home')) ;
+                } else {
+                    $this->addError('email', 'البريد الإلكتروني أو كلمة المرور غير صحيحة.');
+                    return;
+                }
+            } else {
+                // Send registration link
+                SendRegistrationLink::run($this->email);
+                
+                session()->flash('success', 'تم إرسال رابط تسجيل الدخول إلى بريدك الإلكتروني. يرجى التحقق من صندوق الوارد الخاص بك.');
+                $this->reset('email');
+            }
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Validation errors are automatically handled by Livewire
             throw $e;
@@ -71,6 +125,7 @@ new class extends \Livewire\Volt\Component {
     {
         return [
             'email' => 'البريد الإلكتروني',
+            'password' => 'كلمة المرور',
         ];
     }
 

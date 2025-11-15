@@ -10,14 +10,18 @@ use App\Models\SocialAccount;
 use App\Actions\CreateTenant;
 use App\Models\Tenant;
 
+Volt::route('/reset-password/{token}', 'auth.password-reset')->middleware('guest')->name('password.reset')->middleware('guest');
+
 // auth routes 
 Route::as('auth.')
 ->middleware(['web'])
 ->group(function () {
     Volt::route('/register/verify/{token}', 'auth.register-verify')->middleware('guest')->name('register.verify');
-    Volt::route('/reset-password/{token}', 'auth.password-reset')->middleware('guest')->name('password.reset')->middleware('guest');
+    
     Volt::route('/password/forgot-password', 'auth.forgot-password')->middleware('guest')->name('password.forgot-password')->middleware('guest');
     Volt::route('/register-login', 'auth.register-login')->name('register-login')->middleware('guest');
+    Volt::route('/login', 'auth.login')->name('login')->middleware('guest');
+    Volt::route('/register', 'auth.register')->name('register')->middleware('guest');
 
     Route::get('/logout', function (Request $request) {
         auth()->logout();

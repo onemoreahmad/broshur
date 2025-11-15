@@ -22,18 +22,18 @@
     </div>
     <div class="mt-10 mb-2 text-sm flex gap-x-2 text-gray-600">
          <button wire:click="openTab('order-detail')"  class="p-2 px-3 rounded-md flex items-center gap-x-2 hover:bg-white/40 @if($activeTab === 'order-detail') text-gray-800 bg-white hover:bg-white @endif"> 
-            <rasm:icon name="receipt" />
+            <ui:icon name="receipt" />
             {{ __('Order detail') }} 
         </button>
 
         @if(data_get($order, 'invoice'))
             <button wire:click="openTab('order-invoice')"  class="p-2 px-3 rounded-md flex items-center gap-x-2 hover:bg-white/40 @if($activeTab === 'order-invoice') text-gray-800  bg-white hover:bg-white @endif">
-                <rasm:icon name="file-invoice" />
+                <ui:icon name="file-invoice" />
                 {{ __('Order invoice') }} 
             </button>
         @endif
-        {{-- <rasm:button wire:click="openTab('order-invoice')" label="{{ __('Order invoice') }}" variant="ghost" class="@if($activeTab === 'order-invoice') !bg-primary-500 @endif" />  --}}
-        {{-- <rasm:button wire:click="openTab('order-payment')" label="{{ __('Order payment') }}" variant="ghost" class="@if($activeTab == 'order-payment') !bg-pxrimary-500 @endif" />  --}}
+        {{-- <ui:button wire:click="openTab('order-invoice')" label="{{ __('Order invoice') }}" variant="ghost" class="@if($activeTab === 'order-invoice') !bg-primary-500 @endif" />  --}}
+        {{-- <ui:button wire:click="openTab('order-payment')" label="{{ __('Order payment') }}" variant="ghost" class="@if($activeTab == 'order-payment') !bg-pxrimary-500 @endif" />  --}}
              
     </div>
  
@@ -60,7 +60,7 @@
                                 
                                 {{-- @if(data_get($order, 'invoice'))
                                     @if(request()->route()->getName() != 'admin.responses.invoice')
-                                        <rasm:button icon="printer" variant="outline" href="{{ route('admin.responses.invoice', ['responseId' => $order->id, 'invoiceId' => data_get($order, 'invoice.id')]) }}" target="_blank" label="{{__('Print invoice')}}" color="blue" />
+                                        <ui:button icon="printer" variant="outline" href="{{ route('admin.responses.invoice', ['responseId' => $order->id, 'invoiceId' => data_get($order, 'invoice.id')]) }}" target="_blank" label="{{__('Print invoice')}}" color="blue" />
                                     @endif
                                 @endif --}}
                                 {{-- <livewire:order.components.set-status :model="$order" /> --}}
