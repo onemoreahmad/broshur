@@ -18,6 +18,7 @@ class GetCta
         // Get all CTA links ordered by sort
         $links = Link::where('block_id', $block->id)
             ->where('type', 'cta')
+            ->whereNotIn('slug', ['contact']) // hide contact link for now
             ->orderBy('sort')
             ->get();
         
@@ -39,12 +40,16 @@ class GetCta
                 $data['contact_email'] = $link->link;
                 $data['contact_subject'] = data_get($link->meta, 'subject', '');
                 $data['contact_sort'] = $link->sort;
+            } elseif ($link->slug === 'phone') {
+                $data['phone_enabled'] = (bool) $link->active;
+                $data['phone_number'] = $link->link;
+                $data['phone_sort'] = $link->sort;
             } elseif ($link->slug === 'subscription') {
                 $data['subscription_enabled'] = (bool) $link->active;
                 $data['subscription_sort'] = $link->sort;
                 $data['subscription_message'] = data_get($link->meta, 'message', '');
             } else {
-                // Custom links (not whatsapp, contact, or subscription)
+                // Custom links (not whatsapp, contact, phone, or subscription)
                 $customLinks[] = [
                     'id' => $link->id,
                     'url' => $link->link,
@@ -70,9 +75,14 @@ class GetCta
             $data['contact_subject'] = '';
             $data['contact_sort'] = 2;
         }
+        if (!isset($data['phone_enabled'])) {
+            $data['phone_enabled'] = false;
+            $data['phone_number'] = '';
+            $data['phone_sort'] = 3;
+        }
         if (!isset($data['subscription_enabled'])) {
             $data['subscription_enabled'] = false;
-            $data['subscription_sort'] = 3;
+            $data['subscription_sort'] = 4;
             $data['subscription_message'] = '';
         }
         

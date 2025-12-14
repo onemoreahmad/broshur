@@ -24,9 +24,15 @@
                 {% endif %}
                 {% if data_get(link, 'slug') == 'contact' and link.active %}
                     <button type="button" @click="openContactModal()" class="shrink flex-grow  bg-{{ option('primaryColor', 'blue') }}-700 hover:bg-{{ option('primaryColor', 'blue') }}-800 flex items-center justify-center gap-x-2 border-2 border-transparent text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200">
-                        {{icon('phone-call', 6)}}
-                        اتصل بنا
+                        {{icon('mail-forward', 6)}}
+                        راسلنا
                     </button>
+                {% endif %}
+                {% if data_get(link, 'slug') == 'phone' and link.active %}
+                    <a href="tel:{{data_get(link, 'link')}}" class="shrink flex-grow bg-white border-2 border-{{ option('primaryColor', 'blue') }}-700 text-{{ option('primaryColor', 'blue') }}-900 flex items-center gap-x-2 justify-center py-3 px-4 rounded-lg font-medium hover:bg-{{ option('primaryColor', 'blue') }}-700 hover:text-white transition-colors duration-200">
+                        {{icon('phone', 6)}}
+                        اتصل الآن
+                    </a>
                 {% endif %}
                 {% if data_get(link, 'slug') == 'subscription' and link.active %}
                     <button type="button" @click="openSubscriptionModal()" class="shrink flex-grow  bg-{{ option('primaryColor', 'blue') }}-700 hover:bg-{{ option('primaryColor', 'blue') }}-800 flex items-center justify-center gap-x-2 border-2 border-transparent text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200">

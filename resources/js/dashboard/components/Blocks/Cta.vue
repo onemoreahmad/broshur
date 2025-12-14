@@ -69,6 +69,11 @@
                             <UiTextarea name="subscription_message" label="رسالة الاشتراك" v-model="form.subscription_message" placeholder="مرحباً، اشترك ليصلك كل جديد"  />
                         </div>
 
+                        <!-- Phone Fields -->
+                        <div v-if="button.type === 'phone' && form.phone_enabled" class="space-y-1 mt-1">
+                            <UiInput name="phone_number" label="رقم الهاتف" v-model="form.phone_number" placeholder="+966501234567"  />
+                        </div>
+
                         <!-- Contact Fields 
                         <div v-if="button.type === 'contact' && form.contact_enabled" class="space-y-1 mt-1">
                             <UiInput name="contact_email" label="البريد الإلكتروني" v-model="form.contact_email" placeholder="contact@example.com"  />
@@ -174,9 +179,12 @@ const form = ref({
     // contact_email: '',
     // contact_subject: '',
     contact_sort: 2,
+    phone_enabled: false,
+    phone_number: '',
+    phone_sort: 3,
     subscription_enabled: false,
     subscription_message: '',
-    subscription_sort: 3,
+    subscription_sort: 4,
     custom_links: []
 })
 
@@ -190,7 +198,7 @@ const sortedButtons = computed(() => {
     const buttons = [
         {
             type: 'whatsapp',
-            label: 'زر محادثة واتساب',
+            label: ' محادثة واتساب',
             enabled: form.value.whatsapp_enabled,
             number: form.value.whatsapp_number,
             // message: form.value.whatsapp_message,
@@ -198,18 +206,25 @@ const sortedButtons = computed(() => {
         },
         {
             type: 'contact',
-            label: 'زر التواصل',
+            label: ' راسلنا',
             enabled: form.value.contact_enabled,
             // email: form.value.contact_email,
             // subject: form.value.contact_subject,
             sort: form.value.contact_sort || 2
         },
         {
+            type: 'phone',
+            label: ' اتصل الآن',
+            enabled: form.value.phone_enabled,
+            number: form.value.phone_number,
+            sort: form.value.phone_sort || 3
+        },
+        {
             type: 'subscription',
-            label: 'زر الاشتراك',
+            label: ' الاشتراك',
             enabled: form.value.subscription_enabled,
             message: form.value.subscription_message,
-            sort: form.value.subscription_sort || 3
+            sort: form.value.subscription_sort || 4
         }
     ]
     return buttons.sort((a, b) => a.sort - b.sort)
@@ -240,6 +255,8 @@ const updateButtonEnabled = (buttonType, enabled) => {
         form.value.whatsapp_enabled = enabled
     } else if (buttonType === 'contact') {
         form.value.contact_enabled = enabled
+    } else if (buttonType === 'phone') {
+        form.value.phone_enabled = enabled
     } else if (buttonType === 'subscription') {
         form.value.subscription_enabled = enabled
     }
@@ -274,6 +291,8 @@ const drop = (dropIndex, event) => {
         form.value.whatsapp_sort = newDraggedSort
     } else if (draggedButton.type === 'contact') {
         form.value.contact_sort = newDraggedSort
+    } else if (draggedButton.type === 'phone') {
+        form.value.phone_sort = newDraggedSort
     } else if (draggedButton.type === 'subscription') {
         form.value.subscription_sort = newDraggedSort
     }
@@ -282,6 +301,8 @@ const drop = (dropIndex, event) => {
         form.value.whatsapp_sort = newDropSort
     } else if (dropButton.type === 'contact') {
         form.value.contact_sort = newDropSort
+    } else if (dropButton.type === 'phone') {
+        form.value.phone_sort = newDropSort
     } else if (dropButton.type === 'subscription') {
         form.value.subscription_sort = newDropSort
     }
@@ -379,6 +400,9 @@ const save = () => {
             form.value.contact_enabled = button.enabled
             // form.value.contact_email = button.email
             // form.value.contact_subject = button.subject
+        } else if (button.type === 'phone') {
+            form.value.phone_enabled = button.enabled
+            form.value.phone_number = button.number
         } else if (button.type === 'subscription') {
             form.value.subscription_enabled = button.enabled
             form.value.subscription_message = button.message

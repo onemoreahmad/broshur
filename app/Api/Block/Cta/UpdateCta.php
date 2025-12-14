@@ -19,6 +19,9 @@ class UpdateCta
             'whatsapp_enabled' => ['nullable', 'boolean'],
             'whatsapp_number' => ['nullable','required_if:whatsapp_enabled,true', 'string', 'max:20'],
             'contact_enabled' => ['nullable', 'boolean'],
+            'phone_enabled' => ['nullable', 'boolean'],
+            'phone_number' => ['nullable','required_if:phone_enabled,true', 'string', 'max:20'],
+            'phone_sort' => ['nullable', 'integer'],
             'subscription_enabled' => ['nullable', 'boolean'],
             'subscription_sort' => ['nullable', 'integer'],
             'subscription_message' => ['nullable', 'string', 'max:500'],
@@ -45,7 +48,8 @@ class UpdateCta
         // Get sort values from request or use defaults
         $whatsappSort = $request->whatsapp_sort ?? 1;
         $contactSort = $request->contact_sort ?? 2;
-        $subscriptionSort = $request->subscription_sort ?? 3;
+        $phoneSort = $request->phone_sort ?? 3;
+        $subscriptionSort = $request->subscription_sort ?? 4;
 
         // Update or create WhatsApp link
         $whatsappLink = Link::updateOrCreate(
@@ -85,6 +89,22 @@ class UpdateCta
             ]
         );
 
+        // Update or create Phone link
+        $phoneLink = Link::updateOrCreate(
+            [
+                'block_id' => $block->id,
+                'type' => 'cta',
+                'slug' => 'phone',
+            ],
+            [
+                'tenant_id' => $tenantId,
+                'name' => 'phone',
+                'link' => $request->phone_number ?? '',
+                'active' => (bool) $request->phone_enabled,
+                'sort' => $phoneSort,
+            ]
+        );
+
         // Update or create Subscription link
         $subscriptionLink = Link::updateOrCreate(
             [
@@ -107,10 +127,10 @@ class UpdateCta
         // Handle custom links
         if ($request->has('custom_links')) {
             DB::transaction(function () use ($request, $tenantId, $block) {
-                // Get existing custom link IDs for this block (excluding whatsapp, contact, subscription)
+                // Get existing custom link IDs for this block (excluding whatsapp, contact, phone, subscription)
                 $existingIds = Link::where('block_id', $block->id)
                     ->where('type', 'cta')
-                    ->whereNotIn('slug', ['whatsapp', 'contact', 'subscription'])
+                    ->whereNotIn('slug', ['whatsapp', 'contact', 'phone', 'subscription'])
                     ->pluck('id')
                     ->toArray();
                 $submittedIds = collect($request->custom_links)->pluck('id')->filter()->toArray();
@@ -161,7 +181,7 @@ class UpdateCta
         // Get custom links for response
         $customLinks = Link::where('block_id', $block->id)
             ->where('type', 'cta')
-            ->whereNotIn('slug', ['whatsapp', 'contact', 'subscription'])
+            ->whereNotIn('slug', ['whatsapp', 'contact', 'phone', 'subscription'])
             ->orderBy('sort')
             ->get()
             ->map(function ($link) {
@@ -186,6 +206,9 @@ class UpdateCta
                 // 'contact_email' => $contactLink->link,
                 // 'contact_subject' => data_get($contactLink->meta, 'subject', ''),
                 'contact_sort' => $contactLink->sort,
+                'phone_enabled' => $phoneLink->active,
+                'phone_number' => $phoneLink->link,
+                'phone_sort' => $phoneLink->sort,
                 'subscription_enabled' => $subscriptionLink->active,
                 'subscription_sort' => $subscriptionLink->sort,
                 'subscription_message' => data_get($subscriptionLink->meta, 'message', ''),
@@ -204,6 +227,8 @@ class UpdateCta
             'contact_enabled' => 'تفعيل التواصل',
             'contact_email' => 'البريد الإلكتروني',
             'contact_subject' => 'موضوع الرسالة',
+            'phone_enabled' => 'تفعيل الاتصال',
+            'phone_number' => 'رقم الهاتف',
             'subscription_message' => 'رسالة الاشتراك',
             'custom_links' => 'الروابط المخصصة',
             'custom_links.*.url' => 'رابط',

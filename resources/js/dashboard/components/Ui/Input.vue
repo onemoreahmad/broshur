@@ -4,6 +4,7 @@
             class="input w-full" 
             :class="{ 'input-error': errorsStore.errors && errorsStore.errors[name] }" 
             :placeholder="placeholder" 
+            :dir="dir"
             type="text" 
         />
     </UiField>
@@ -20,6 +21,7 @@ defineProps({
     name: String,
     label: String,
     placeholder: String,
+    dir: String,
 });
 
 </script>
