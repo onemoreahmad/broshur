@@ -369,13 +369,13 @@
             iconBackground: 'bg-indigo-500',
             trend: null,
         },
-        {
-            id: 'average_visit_time',
-            label: 'متوسط زمن الزيارة',
-            value: '0s',
-            iconBackground: 'bg-teal-500',
-            trend: null,
-        },
+        //{
+        //    id: 'average_visit_time',
+        //    label: 'متوسط زمن الزيارة',
+        //    value: '0s',
+        //    iconBackground: 'bg-teal-500',
+        //    trend: null,
+        //},
 
     ])
 
@@ -420,13 +420,13 @@
                     iconBackground: 'bg-indigo-500',
                     trend: null,
                 },
-                {
-                    id: 'average_visit_time',
-                    label: 'متوسط زمن الزيارة',
-                    value: summary.average_visit_time ?? '0s',
-                    iconBackground: 'bg-purple-500',
-                    trend: null,
-                },
+                // {
+                //     id: 'average_visit_time',
+                //     label: 'متوسط زمن الزيارة',
+                //     value: summary.average_visit_time ?? '0s',
+                //     iconBackground: 'bg-purple-500',
+                //     trend: null,
+                // },
             ]
         } catch (error) {
             console.error('Failed to load dashboard summary', error)
