@@ -74,6 +74,46 @@
                             <UiInput name="phone_number" label="رقم الهاتف" v-model="form.phone_number" placeholder="+966501234567"  />
                         </div>
 
+                        <!-- Download Fields -->
+                        <div v-if="button.type === 'download' && form.download_enabled" class="space-y-1 mt-1">
+                            <UiInput name="download_label" label="نص الزر" v-model="form.download_label" placeholder="تحميل الملف"  />
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">الملف</label>
+                                <div v-if="form.download_file_url" class="flex items-center gap-2 p-2 bg-gray-50 rounded border">
+                                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                    </svg>
+                                    <span class="flex-1 text-sm text-gray-700 truncate">{{ form.download_file_name || 'ملف مرفوع' }}</span>
+                                    <a :href="form.download_file_url" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm">
+                                        عرض
+                                    </a>
+                                    <button @click="removeDownloadFile" type="button" class="text-red-600 hover:text-red-800 text-sm">
+                                        حذف
+                                    </button>
+                                </div>
+                                <div v-else class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                                    <input 
+                                        type="file" 
+                                        @change="handleDownloadFileChange" 
+                                        :id="`download_file_${button.type}`"
+                                        class="sr-only"
+                                        accept="*/*"
+                                    />
+                                    <label :for="`download_file_${button.type}`" class="cursor-pointer">
+                                        <svg class="mx-auto h-8 w-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                        </svg>
+                                        <span class="mt-2 block text-sm text-gray-600">اضغط لرفع ملف</span>
+                                        <span class="mt-1 block text-xs text-gray-500">PDF, DOC, ZIP, أو أي نوع ملف</span>
+                                    </label>
+                                    <div v-if="uploadingDownload" class="mt-2 flex items-center justify-center gap-2 text-sm text-gray-600">
+                                        <span class="loading loading-spinner loading-sm"></span>
+                                        <span>جاري رفع الملف...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Contact Fields 
                         <div v-if="button.type === 'contact' && form.contact_enabled" class="space-y-1 mt-1">
                             <UiInput name="contact_email" label="البريد الإلكتروني" v-model="form.contact_email" placeholder="contact@example.com"  />
@@ -182,6 +222,11 @@ const form = ref({
     phone_enabled: false,
     phone_number: '',
     phone_sort: 3,
+    download_enabled: false,
+    download_file_url: '',
+    download_file_name: '',
+    download_label: '',
+    download_sort: 5,
     subscription_enabled: false,
     subscription_message: '',
     subscription_sort: 4,
@@ -192,6 +237,7 @@ const loading = ref(false)
 const formLoading = ref(false)
 const draggedIndex = ref(null)
 const dragOverIndex = ref(null)
+const uploadingDownload = ref(false)
 
 // Computed to get buttons as array sorted by sort value
 const sortedButtons = computed(() => {
@@ -220,6 +266,15 @@ const sortedButtons = computed(() => {
             sort: form.value.phone_sort || 3
         },
         {
+            type: 'download',
+            label: ' تحميل ملف',
+            enabled: form.value.download_enabled,
+            file_url: form.value.download_file_url,
+            file_name: form.value.download_file_name,
+            button_label: form.value.download_label,
+            sort: form.value.download_sort || 5
+        },
+        {
             type: 'subscription',
             label: ' الاشتراك',
             enabled: form.value.subscription_enabled,
@@ -241,6 +296,16 @@ onMounted(() => {
         if (typeof form.value.subscription_message !== 'string') {
             form.value.subscription_message = ''
         }
+        // Ensure download file fields exist
+        if (!form.value.download_file_url) {
+            form.value.download_file_url = ''
+        }
+        if (!form.value.download_file_name) {
+            form.value.download_file_name = ''
+        }
+        if (!form.value.download_label) {
+            form.value.download_label = ''
+        }
         loading.value = false
     })
     .catch(error => {
@@ -257,6 +322,8 @@ const updateButtonEnabled = (buttonType, enabled) => {
         form.value.contact_enabled = enabled
     } else if (buttonType === 'phone') {
         form.value.phone_enabled = enabled
+    } else if (buttonType === 'download') {
+        form.value.download_enabled = enabled
     } else if (buttonType === 'subscription') {
         form.value.subscription_enabled = enabled
     }
@@ -293,6 +360,8 @@ const drop = (dropIndex, event) => {
         form.value.contact_sort = newDraggedSort
     } else if (draggedButton.type === 'phone') {
         form.value.phone_sort = newDraggedSort
+    } else if (draggedButton.type === 'download') {
+        form.value.download_sort = newDraggedSort
     } else if (draggedButton.type === 'subscription') {
         form.value.subscription_sort = newDraggedSort
     }
@@ -303,6 +372,8 @@ const drop = (dropIndex, event) => {
         form.value.contact_sort = newDropSort
     } else if (dropButton.type === 'phone') {
         form.value.phone_sort = newDropSort
+    } else if (dropButton.type === 'download') {
+        form.value.download_sort = newDropSort
     } else if (dropButton.type === 'subscription') {
         form.value.subscription_sort = newDropSort
     }
@@ -389,6 +460,52 @@ const handleDragEnd = (event) => {
     dragOverIndex.value = null
 }
 
+// Download file upload handler
+const handleDownloadFileChange = async (event) => {
+    const file = event.target.files[0]
+    if (!file) return
+    
+    // Validate file size (50MB max)
+    if (file.size > 50 * 1024 * 1024) {
+        errorsStore.setErrors({ download_file: ['حجم الملف يجب أن يكون أقل من 50 ميجابايت'] })
+        return
+    }
+    
+    uploadingDownload.value = true
+    
+    try {
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('mediaCollection', 'downloads')
+        
+        const response = await axios.post('/dashboard/upload-image', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        
+        if (response.data.success) {
+            // Convert storage path to URL if needed
+            let fileUrl = response.data.url
+            if (fileUrl && !fileUrl.startsWith('http') && !fileUrl.startsWith('/storage/')) {
+                fileUrl = '/storage/' + fileUrl
+            }
+            form.value.download_file_url = fileUrl
+            form.value.download_file_name = file.name
+        }
+    } catch (error) {
+        console.error('Upload error:', error)
+        errorsStore.setErrors({ download_file: ['حدث خطأ أثناء رفع الملف'] })
+    } finally {
+        uploadingDownload.value = false
+    }
+}
+
+const removeDownloadFile = () => {
+    form.value.download_file_url = ''
+    form.value.download_file_name = ''
+}
+
 const save = () => {
     // Update form from buttons before saving (in case any changes were made)
     sortedButtons.value.forEach(button => {
@@ -403,6 +520,11 @@ const save = () => {
         } else if (button.type === 'phone') {
             form.value.phone_enabled = button.enabled
             form.value.phone_number = button.number
+        } else if (button.type === 'download') {
+            form.value.download_enabled = button.enabled
+            form.value.download_file_url = button.file_url
+            form.value.download_file_name = button.file_name
+            form.value.download_label = button.button_label
         } else if (button.type === 'subscription') {
             form.value.subscription_enabled = button.enabled
             form.value.subscription_message = button.message

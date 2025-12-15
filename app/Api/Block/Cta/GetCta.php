@@ -44,12 +44,18 @@ class GetCta
                 $data['phone_enabled'] = (bool) $link->active;
                 $data['phone_number'] = $link->link;
                 $data['phone_sort'] = $link->sort;
+            } elseif ($link->slug === 'download') {
+                $data['download_enabled'] = (bool) $link->active;
+                $data['download_file_url'] = $link->link;
+                $data['download_file_name'] = data_get($link->meta, 'file_name', '');
+                $data['download_label'] = data_get($link->meta, 'label', '');
+                $data['download_sort'] = $link->sort;
             } elseif ($link->slug === 'subscription') {
                 $data['subscription_enabled'] = (bool) $link->active;
                 $data['subscription_sort'] = $link->sort;
                 $data['subscription_message'] = data_get($link->meta, 'message', '');
             } else {
-                // Custom links (not whatsapp, contact, phone, or subscription)
+                // Custom links (not whatsapp, contact, phone, download, or subscription)
                 $customLinks[] = [
                     'id' => $link->id,
                     'url' => $link->link,
@@ -79,6 +85,13 @@ class GetCta
             $data['phone_enabled'] = false;
             $data['phone_number'] = '';
             $data['phone_sort'] = 3;
+        }
+        if (!isset($data['download_enabled'])) {
+            $data['download_enabled'] = false;
+            $data['download_file_url'] = '';
+            $data['download_file_name'] = '';
+            $data['download_label'] = '';
+            $data['download_sort'] = 5;
         }
         if (!isset($data['subscription_enabled'])) {
             $data['subscription_enabled'] = false;

@@ -22,6 +22,11 @@ class UpdateCta
             'phone_enabled' => ['nullable', 'boolean'],
             'phone_number' => ['nullable','required_if:phone_enabled,true', 'string', 'max:20'],
             'phone_sort' => ['nullable', 'integer'],
+            'download_enabled' => ['nullable', 'boolean'],
+            'download_file_url' => ['nullable', 'string', 'max:500'],
+            'download_file_name' => ['nullable', 'string', 'max:255'],
+            'download_label' => ['nullable', 'string', 'max:100'],
+            'download_sort' => ['nullable', 'integer'],
             'subscription_enabled' => ['nullable', 'boolean'],
             'subscription_sort' => ['nullable', 'integer'],
             'subscription_message' => ['nullable', 'string', 'max:500'],
@@ -49,6 +54,7 @@ class UpdateCta
         $whatsappSort = $request->whatsapp_sort ?? 1;
         $contactSort = $request->contact_sort ?? 2;
         $phoneSort = $request->phone_sort ?? 3;
+        $downloadSort = $request->download_sort ?? 5;
         $subscriptionSort = $request->subscription_sort ?? 4;
 
         // Update or create WhatsApp link
@@ -105,6 +111,26 @@ class UpdateCta
             ]
         );
 
+        // Update or create Download link
+        $downloadLink = Link::updateOrCreate(
+            [
+                'block_id' => $block->id,
+                'type' => 'cta',
+                'slug' => 'download',
+            ],
+            [
+                'tenant_id' => $tenantId,
+                'name' => 'download',
+                'link' => $request->download_file_url ?? '',
+                'active' => (bool) $request->download_enabled,
+                'meta' => [
+                    'file_name' => $request->download_file_name ?? '',
+                    'label' => $request->download_label ?? '',
+                ],
+                'sort' => $downloadSort,
+            ]
+        );
+
         // Update or create Subscription link
         $subscriptionLink = Link::updateOrCreate(
             [
@@ -127,10 +153,10 @@ class UpdateCta
         // Handle custom links
         if ($request->has('custom_links')) {
             DB::transaction(function () use ($request, $tenantId, $block) {
-                // Get existing custom link IDs for this block (excluding whatsapp, contact, phone, subscription)
+                // Get existing custom link IDs for this block (excluding whatsapp, contact, phone, download, subscription)
                 $existingIds = Link::where('block_id', $block->id)
                     ->where('type', 'cta')
-                    ->whereNotIn('slug', ['whatsapp', 'contact', 'phone', 'subscription'])
+                    ->whereNotIn('slug', ['whatsapp', 'contact', 'phone', 'download', 'subscription'])
                     ->pluck('id')
                     ->toArray();
                 $submittedIds = collect($request->custom_links)->pluck('id')->filter()->toArray();
@@ -181,7 +207,7 @@ class UpdateCta
         // Get custom links for response
         $customLinks = Link::where('block_id', $block->id)
             ->where('type', 'cta')
-            ->whereNotIn('slug', ['whatsapp', 'contact', 'phone', 'subscription'])
+            ->whereNotIn('slug', ['whatsapp', 'contact', 'phone', 'download', 'subscription'])
             ->orderBy('sort')
             ->get()
             ->map(function ($link) {
@@ -209,6 +235,11 @@ class UpdateCta
                 'phone_enabled' => $phoneLink->active,
                 'phone_number' => $phoneLink->link,
                 'phone_sort' => $phoneLink->sort,
+                'download_enabled' => $downloadLink->active,
+                'download_file_url' => $downloadLink->link,
+                'download_file_name' => data_get($downloadLink->meta, 'file_name', ''),
+                'download_label' => data_get($downloadLink->meta, 'label', ''),
+                'download_sort' => $downloadLink->sort,
                 'subscription_enabled' => $subscriptionLink->active,
                 'subscription_sort' => $subscriptionLink->sort,
                 'subscription_message' => data_get($subscriptionLink->meta, 'message', ''),
@@ -229,6 +260,10 @@ class UpdateCta
             'contact_subject' => 'موضوع الرسالة',
             'phone_enabled' => 'تفعيل الاتصال',
             'phone_number' => 'رقم الهاتف',
+            'download_enabled' => 'تفعيل التحميل',
+            'download_file_url' => 'رابط الملف',
+            'download_file_name' => 'اسم الملف',
+            'download_label' => 'نص الزر',
             'subscription_message' => 'رسالة الاشتراك',
             'custom_links' => 'الروابط المخصصة',
             'custom_links.*.url' => 'رابط',

@@ -34,6 +34,19 @@
                         اتصل الآن
                     </a>
                 {% endif %}
+                {% if data_get(link, 'slug') == 'download' and link.active %}
+                    <a href="{{data_get(link, 'link')}}" download class="shrink flex-grow bg-white border-2 border-{{ option('primaryColor', 'blue') }}-700 text-{{ option('primaryColor', 'blue') }}-900 flex items-center gap-x-2 justify-center py-3 px-4 rounded-lg font-medium hover:bg-{{ option('primaryColor', 'blue') }}-700 hover:text-white transition-colors duration-200">
+                        {{icon('file-download', 6)}}
+                        {% if data_get(link, 'meta.label') %}
+                            {{data_get(link, 'meta.label')}}
+                        {% elseif data_get(link, 'meta.file_name') %}
+                            {{data_get(link, 'meta.file_name')}}
+                        {% else %}
+                            تحميل ملف
+                        {% endif %}
+                        {{icon('arrow-down', 6)}}
+                    </a>
+                {% endif %}
                 {% if data_get(link, 'slug') == 'subscription' and link.active %}
                     <button type="button" @click="openSubscriptionModal()" class="shrink flex-grow  bg-{{ option('primaryColor', 'blue') }}-700 hover:bg-{{ option('primaryColor', 'blue') }}-800 flex items-center justify-center gap-x-2 border-2 border-transparent text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200">
                         {{icon('mail', 6)}}
