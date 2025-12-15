@@ -25,7 +25,7 @@
     </div>
 </section> --}}
 
-<div class="min-h-screen flex flex-col items-center justify-center antialiased selection:bg-orange-500/30 text-white bg-black">
+<div class="flex flex-col items-center justify-top antialiased selection:bg-orange-500/30 text-white bg-black">
  
     <!-- Fixed Navigation -->
     <nav class="fixedX w-full top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-6 bg-black/80 backdrop-blur-md border-b border-white/10 h-16">
@@ -66,7 +66,7 @@
     </nav>
 
     <!-- Wrapper for the horizontal scroll presentation -->
-    <main id="slider" class="flex flex-row overflow-x-auto snap-x snap-mandatory hide-scrollbar w-full p-2 gap-x-3 md:gap-x-6 scroll-smooth" Xstyle="mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);">
+    <main id="slider" class="flex flex-row overflow-x-auto snap-x snap-mandatory hide-scrollbar w-full p-8 gap-x-3 md:gap-x-6 scroll-smooth" Xstyle="mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);">
   
         <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-0">
             <a href="https://broshur.com/frst" target="_blank">
