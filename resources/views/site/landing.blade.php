@@ -199,7 +199,7 @@
             <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/qoot.png') }}" alt="" />
             <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/shthel-color.webp') }}" alt="" />
             <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/crisp-burger.webp') }}" alt="" />
-            <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/baderatg.jpg') }}" alt="" />
+            {{-- <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/baderatg.jpg') }}" alt="" /> --}}
             <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/crisp-ice.png') }}" alt="" />
         </div>
  
