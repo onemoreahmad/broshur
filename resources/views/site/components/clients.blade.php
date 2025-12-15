@@ -80,11 +80,18 @@
             </a>
         </section>
 
+       <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-2">
+            <a href="https://broshur.com/daralzbrj" target="_blank">
+                <img src="{{ asset('assets/images/daralzbrj.webp') }}" alt="" class="w-full h-full rounded-3xl object-top object-contain hover:scale-105 transition-all duration-300">
+            </a>
+        </section>
+
         <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-3">
             <a href="https://broshur.com/baderatgharb" target="_blank">
                 <img src="{{ asset('assets/images/baderat.webp') }}" alt="" class="w-full h-full rounded-3xl object-top object-contain hover:scale-105 transition-all duration-300">
             </a>
         </section>
+      
      
         <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-2">
             <a href="https://broshur.com/qoot" target="_blank">
