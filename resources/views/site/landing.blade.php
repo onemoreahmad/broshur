@@ -1,5 +1,5 @@
-<div class="bg-stone-300/50  min-h-screen pt-10 lg:pt-12 px-1 lg:px-0">
-    <section class="relative xbg-white/50 pb-32 mx-auto max-w-7xl rounded-3xl   bg-gradient-to-b from-[#f4f4f4]  via-teal-300/10 to-transparent">
+<div class="bg-stone-300/50  min-h-screen pt-10 lg:pt-12">
+    <section class="relative xbg-white/50 pb-20 mx-auto max-w-7xl rounded-3xl   bg-gradient-to-b from-[#f4f4f4]  via-teal-300/10 to-transparent">
         <div class="absolute inset-0 -z-10 opacity-40 pointer-events-none">
             <svg class="size-full text-stone-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
                 <defs>
@@ -205,11 +205,11 @@
  
         </div>
     </section>
-     
-     
- 
+      
+     <x-site::clients />
+  
 
-     <div class="mx-auto max-w-3xl text-center relative z-10">
+     <div class="mx-auto max-w-3xl text-center relative z-10 mt-24 lg:mt-32">
         <h1 class="text-3xl sm:text-4xl  text-gray-800">
             <b class="font-normal inline-block mb-7 text-5xl lg:text-6xl">لا تفوّت عميل!</b>
             <br class="" />
