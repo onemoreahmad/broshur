@@ -35,16 +35,17 @@
         </div>
 
         <!-- Center: Pagination Dots (Hidden on small mobile, visible on sm+) -->
-        <div id="pagination-dots" class="hidden sm:flex items-center justify-center gap-2 w-1/3">
+        <div id="pagination-dots" class="hidden sm:flex items-center justify-center gap-2 w-1/3" dir="ltr">
             <!-- Initial state: first active, others inactive. JS handles updates. -->
-            <div class="w-1.5 h-1.5 rounded-full bg-white/20 hover:bg-white/50 cursor-pointer transition-colors hover:scale-125 transition-transform" data-index="0"></div>
+            {{-- <div class="w-1.5 h-1.5 rounded-full bg-white cursor-pointer hover:scale-125 transition-transform" data-index="0"></div>
             <div class="w-1.5 h-1.5 rounded-full bg-white/20 hover:bg-white/50 cursor-pointer transition-colors hover:scale-125 transition-transform" data-index="1"></div>
             <div class="w-1.5 h-1.5 rounded-full bg-white/20 hover:bg-white/50 cursor-pointer transition-colors hover:scale-125 transition-transform" data-index="2"></div>
-            <div class="w-1.5 h-1.5 rounded-full bg-white cursor-pointer hover:scale-125 transition-transform" data-index="3"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-white/20 hover:bg-white/50 cursor-pointer transition-colors hover:scale-125 transition-transform" data-index="3"></div>
             <div class="w-1.5 h-1.5 rounded-full bg-white/20 hover:bg-white/50 cursor-pointer transition-colors hover:scale-125 transition-transform" data-index="4"></div>
             <div class="w-1.5 h-1.5 rounded-full bg-white/20 hover:bg-white/50 cursor-pointer transition-colors hover:scale-125 transition-transform" data-index="5"></div>
             <div class="w-1.5 h-1.5 rounded-full bg-white/20 hover:bg-white/50 cursor-pointer transition-colors hover:scale-125 transition-transform" data-index="6"></div>
             <div class="w-1.5 h-1.5 rounded-full bg-white/20 hover:bg-white/50 cursor-pointer transition-colors hover:scale-125 transition-transform" data-index="7"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-white/20 hover:bg-white/50 cursor-pointer transition-colors hover:scale-125 transition-transform" data-index="8"></div> --}}
         </div>
 
         <!-- Right: Arrows (Hidden on Mobile, use Swipe) -->
@@ -65,7 +66,7 @@
     </nav>
 
     <!-- Wrapper for the horizontal scroll presentation -->
-    <main id="slider" class="flex flex-row overflow-x-auto snap-x snap-mandatory hide-scrollbar w-full p-8 gap-x-3 md:gap-x-6 scroll-smooth" Xstyle="mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);">
+    <main id="slider" class="flex flex-row overflow-x-auto snap-center snap-mandatory hide-scrollbar w-full p-8 gap-x-3 md:gap-x-6 scroll-smooth" style="mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);">
   
         <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-0">
             <a href="https://broshur.com/frst" target="_blank">
@@ -93,31 +94,31 @@
         </section>
       
      
-        <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-2">
+        <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-4">
             <a href="https://broshur.com/qoot" target="_blank">
                 <img src="{{ asset('assets/images/qoot.webp') }}" alt="" class="w-full h-full rounded-3xl object-top object-contain hover:scale-105 transition-all duration-300">
             </a>
         </section>
 
-        <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-4">
+        <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-5">
             <a href="https://broshur.com/frst" target="_blank">
                 <img src="{{ asset('assets/images/frst.webp') }}" alt="" class="w-full h-full rounded-3xl object-top object-contain hover:scale-105 transition-all duration-300">
             </a>
         </section>
 
-        <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-5">
+        <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-6">
             <a href="https://broshur.com/aswar" target="_blank">
                 <img src="{{ asset('assets/images/aswar.webp') }}" alt="" class="w-full h-full rounded-3xl object-top object-contain hover:scale-105 transition-all duration-300">
             </a>
         </section>
 
-        <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-6">
+        <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-7">
             <a href="https://broshur.com/qoot" target="_blank">
                 <img src="{{ asset('assets/images/qoot.webp') }}" alt="" class="w-full h-full rounded-3xl object-top object-contain hover:scale-105 transition-all duration-300">
             </a>
         </section>
 
-        <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-7">
+        <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-8">
             <a href="https://broshur.com/baderatgharb" target="_blank">
                 <img src="{{ asset('assets/images/baderat.webp') }}" alt="" class="w-full h-full rounded-3xl object-top object-contain hover:scale-105 transition-all duration-300">
             </a>
@@ -125,9 +126,9 @@
   
     </main>
 
-    <script>
+    {{-- <script>
         lucide.createIcons();
-    </script>
+    </script> --}}
     
     <!-- Animation & Navigation Logic -->
     <script>
@@ -165,6 +166,11 @@
             const dots = dotsContainer.children;
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
+            const isRTL = document.documentElement.getAttribute('dir') === 'rtl' || document.body.getAttribute('dir') === 'rtl';
+
+            if (isRTL && dotsContainer) {
+                dotsContainer.classList.add('flex-row-reverse');
+            }
 
             // --- Update Dots Helper ---
             const updateDots = (activeIndex) => {
@@ -223,6 +229,5 @@
       })();
     </script>
 
-<script data-img-fallback-handler="">!function(){var f=["https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg","https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4734259a-bad7-422f-981e-ce01e79184f2_1600w.jpg","https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c543a9e1-f226-4ced-80b0-feb8445a75b9_1600w.jpg","https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/5bab247f-35d9-400d-a82b-fd87cfe913d2_1600w.webp","https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/30104e3c-5eea-4b93-93e9-5313698a7156_1600w.webp"],h=new Set;function g(s){for(var x=0,i=0;i<s.length;i++)x=(x<<5)-x+s.charCodeAt(i)|0;return f[Math.abs(x)%f.length]}function r(t){var s=t.src;if(s&&!h.has(s)){h.add(s);t.src=g(s)}}window.addEventListener("error",function(e){var t=e.target;if(t&&t.tagName==="IMG")r(t)},!0);function c(){document.querySelectorAll("img").forEach(function(i){if(i.complete&&!i.naturalWidth&&i.src)r(i)})}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",c);else c()}()</script>
-
+ 
 </div>

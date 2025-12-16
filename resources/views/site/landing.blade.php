@@ -112,7 +112,7 @@
                     <div class="lg:pt-24 order-2 lg:order-none">
                         <div class="flex items-start gap-3 lg:text-end lg:flex-row-reverse">
                             <div class="shrink-0">
-<svg viewBox="0 0 24 24" fill="none" class="size-12"  xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 8L8 10" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M6 4L8 7" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M11 6.56252L14.7001 2.93755C16.1597 1.50753 18.7629 1.73938 20.5145 3.4554C22.266 5.17142 22.5027 7.72176 21.043 9.15178L18.1358 12" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M15 15.5866L10.9653 20.001C9.57254 21.5247 7.0887 21.2777 5.41744 19.4492C3.74618 17.6207 3.52038 14.9032 4.91309 13.3795L6.17395 12" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+                                <svg viewBox="0 0 24 24" fill="none" class="size-12"  xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 8L8 10" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M6 4L8 7" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M11 6.56252L14.7001 2.93755C16.1597 1.50753 18.7629 1.73938 20.5145 3.4554C22.266 5.17142 22.5027 7.72176 21.043 9.15178L18.1358 12" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M15 15.5866L10.9653 20.001C9.57254 21.5247 7.0887 21.2777 5.41744 19.4492C3.74618 17.6207 3.52038 14.9032 4.91309 13.3795L6.17395 12" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
                                 {{-- <svg xmlns="http://www.w3.org/2000/svg" class="size-10" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h18v2H3V3zm0 6h12v2H3V9zm0 6h18v2H3v-2z"/></svg> --}}
                             </div>
                             <div>
@@ -145,7 +145,7 @@
                     </div>
 
                     <div class="order-1 lg:order-none">
-                    <ui:mobile-dark>
+                        <ui:mobile-dark>
                             {{-- <img src="https://template.canva.com/EAEsa3Aii8U/4/0/900w-3QolSmpWFXk.jpg" class="w-full h-full object-cover" alt="" /> --}}
                             {{-- <img src="https://template.canva.com/EAFqeAlAaHc/1/0/900w-2-Zw-73tvq4.jpg" class="w-full h-full object-cover" alt="" /> --}}
                             <img src="{{ asset('assets/images/demo.webp') }}" class="w-full h-full object-contain object-top" alt="" />
@@ -153,7 +153,7 @@
                     </div>
 
                     <div class="lg:pt-24 order-3 lg:order-none">
-                        <div class="flex items-start gap-3 justify-end">
+                        <div class="flex items-start gap-3 lg:justify-end">
                             <div class="shrink-0 ">
                                 <svg viewBox="0 0 24 24" fill="none" class="size-12" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 10C2 7.17157 2 5.75736 2.87868 4.87868C3.75736 4 5.17157 4 8 4H13C15.8284 4 17.2426 4 18.1213 4.87868C19 5.75736 19 7.17157 19 10C19 12.8284 19 14.2426 18.1213 15.1213C17.2426 16 15.8284 16 13 16H8C5.17157 16 3.75736 16 2.87868 15.1213C2 14.2426 2 12.8284 2 10Z" stroke="#1C274C" stroke-width="1.5"></path> <path opacity="0.5" d="M19.0003 7.07617C19.9754 7.17208 20.6317 7.38885 21.1216 7.87873C22.0003 8.75741 22.0003 10.1716 22.0003 13.0001C22.0003 15.8285 22.0003 17.2427 21.1216 18.1214C20.2429 19.0001 18.8287 19.0001 16.0003 19.0001H11.0003C8.17187 19.0001 6.75766 19.0001 5.87898 18.1214C5.38909 17.6315 5.17233 16.9751 5.07642 16" stroke="#1C274C" stroke-width="1.5"></path> <path d="M13 10C13 11.3807 11.8807 12.5 10.5 12.5C9.11929 12.5 8 11.3807 8 10C8 8.61929 9.11929 7.5 10.5 7.5C11.8807 7.5 13 8.61929 13 10Z" stroke="#1C274C" stroke-width="1.5"></path> <path opacity="0.5" d="M16 12L16 8" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M5 12L5 8" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
 
@@ -166,7 +166,7 @@
                             
                         </div>
 
-                        <div class="mt-16 flex items-start gap-3 justify-end">
+                        <div class="mt-16 flex items-start gap-3 lg:justify-end">
                             <div class="shrink-0">
                                 <svg viewBox="0 0 24 24" fill="none" class="size-12"  xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.5" d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="#1C274C" stroke-width="1.5"></path> <path opacity="0.5" d="M11.25 18C11.25 18.4142 11.5858 18.75 12 18.75C12.4142 18.75 12.75 18.4142 12.75 18H11.25ZM18 8L18.5303 8.53033C18.8232 8.23744 18.8232 7.76256 18.5303 7.46967L18 8ZM17.0303 5.96967C16.7374 5.67678 16.2626 5.67678 15.9697 5.96967C15.6768 6.26256 15.6768 6.73744 15.9697 7.03033L17.0303 5.96967ZM15.9697 8.96967C15.6768 9.26256 15.6768 9.73744 15.9697 10.0303C16.2626 10.3232 16.7374 10.3232 17.0303 10.0303L15.9697 8.96967ZM12.75 18V12H11.25V18H12.75ZM16 8.75H18V7.25H16V8.75ZM18.5303 7.46967L17.0303 5.96967L15.9697 7.03033L17.4697 8.53033L18.5303 7.46967ZM17.4697 7.46967L15.9697 8.96967L17.0303 10.0303L18.5303 8.53033L17.4697 7.46967ZM12.75 12C12.75 10.2051 14.2051 8.75 16 8.75V7.25C13.3766 7.25 11.25 9.37665 11.25 12H12.75Z" fill="#1C274C"></path> <path d="M11.25 18C11.25 18.4142 11.5858 18.75 12 18.75C12.4142 18.75 12.75 18.4142 12.75 18H11.25ZM6 8L5.46967 7.46967C5.17678 7.76256 5.17678 8.23744 5.46967 8.53033L6 8ZM8.03033 7.03033C8.32322 6.73744 8.32322 6.26256 8.03033 5.96967C7.73744 5.67678 7.26256 5.67678 6.96967 5.96967L8.03033 7.03033ZM6.96967 10.0303C7.26256 10.3232 7.73744 10.3232 8.03033 10.0303C8.32322 9.73744 8.32322 9.26256 8.03033 8.96967L6.96967 10.0303ZM12.75 18V12H11.25V18H12.75ZM8 7.25H6V8.75H8V7.25ZM6.53033 8.53033L8.03033 7.03033L6.96967 5.96967L5.46967 7.46967L6.53033 8.53033ZM5.46967 8.53033L6.96967 10.0303L8.03033 8.96967L6.53033 7.46967L5.46967 8.53033ZM12.75 12C12.75 9.37665 10.6234 7.25 8 7.25V8.75C9.79493 8.75 11.25 10.2051 11.25 12H12.75Z" fill="#1C274C"></path> </g></svg>
 
