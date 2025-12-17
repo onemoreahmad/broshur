@@ -54,6 +54,11 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
+    public function tenants()
+    {
+        return $this->hasMany(Tenant::class);
+    }
+
     public function tenant()
     {
         return $this->hasOne(Tenant::class, 'id', 'current_tenant_id');

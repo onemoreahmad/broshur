@@ -9,6 +9,7 @@
     import TicketDetail from '../views/TicketDetail.vue';
     import Subscribers from '../views/Subscribers.vue';
     import Account from '../views/Account.vue';
+    import Tenants from '../views/Tenants.vue';
     import Design from '../views/Design.vue';
     import Share from '../views/Share.vue';
     import Settings from '../views/Settings.vue';
@@ -119,6 +120,7 @@
             { path: '/tickets/:id', component: TicketDetail, name: 'tickets.detail' },
             { path: '/subscribers', component: Subscribers, name: 'subscribers' },
             { path: '/account', component: Account, name: 'account' },
+            { path: '/tenants', component: Tenants, name: 'tenants' },
             { path: '/design', component: Design, name: 'design' },
             { path: '/share', component: Share, name: 'share' },
             { path: '/settings', component: Settings, name: 'settings' },

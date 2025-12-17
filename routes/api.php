@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/auth', \App\Api\Auth\GetAuth::class)->middleware('auth:sanctum');
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/tenants', \App\Api\Tenant\GetTenants::class);
+    Route::post('/tenants', \App\Api\Tenant\CreateTenant::class);
+    Route::post('/tenants/{tenant}/switch', \App\Api\Tenant\SwitchTenant::class);
+});
+
 
 Route::post('/account', \App\Api\Account\UpdateAccount::class)->middleware('auth:sanctum');
 
