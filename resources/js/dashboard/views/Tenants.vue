@@ -1,9 +1,9 @@
 <template>
-    <Container title="المنشآت" subtitle="يمكنك إنشاء وإدارة منشآت متعددة تحت حسابك.">
+    <Container title="الصفحات" subtitle="يمكنك إنشاء وإدارة صفحات متعددة تحت حسابك.">
         <template #actions>
             <button @click="openCreateModal" class="btn btn-primary btn-sm flex items-center gap-2">
                 <svg viewBox="0 0 24 24" class="size-4" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 4V20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M20 12L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
-                <span>إضافة منشأة</span>
+                <span>إضافة صفحة</span>
             </button>
         </template>
 
@@ -29,7 +29,7 @@
                                     v-if="isCurrent(tenant)"
                                     class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full"
                                 >
-                                    الحالي
+                                    الحالية
                                 </span>
                             </div>
                             <span class="text-sm text-gray-600" dir="ltr">
@@ -70,9 +70,9 @@
                 <div class="text-gray-400 mb-3">
                     <svg viewBox="0 0 24 24" class="size-16 mx-auto" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M16.79 2H7.21C4.91 2 2 3.85 2 7.77V16.23C2 20.15 4.91 22 7.21 22H16.79C19.09 22 22 20.15 22 16.23V7.77C22 3.85 19.09 2 16.79 2ZM11.56 16.25H8.44C7.96 16.25 7.57 15.86 7.57 15.38C7.57 14.9 7.96 14.51 8.44 14.51H11.56C12.04 14.51 12.43 14.9 12.43 15.38C12.43 15.86 12.04 16.25 11.56 16.25ZM15.56 12.51H8.44C7.96 12.51 7.57 12.12 7.57 11.64C7.57 11.16 7.96 10.77 8.44 10.77H15.56C16.04 10.77 16.43 11.16 16.43 11.64C16.43 12.12 16.04 12.51 15.56 12.51ZM15.56 8.76H8.44C7.96 8.76 7.57 8.37 7.57 7.89C7.57 7.41 7.96 7.02 8.44 7.02H15.56C16.04 7.02 16.43 7.41 16.43 7.89C16.43 8.37 16.04 8.76 15.56 8.76Z" fill="#1C274C"></path> </g></svg>
                 </div>
-                <p class="text-sm text-gray-600 mb-4">لا توجد منشآت بعد</p>
+                <p class="text-sm text-gray-600 mb-4">لا توجد صفحات بعد</p>
                 <button @click="openCreateModal" class="btn btn-primary">
-                    إنشاء أول منشأة
+                    إنشاء أول صفحة
                 </button>
             </div>
         </div>
@@ -81,8 +81,8 @@
             <div class="bg-white rounded-2xl shadow-xl w-full max-w-xl p-6 relative">
                 <div class="flex items-center justify-between mb-4">
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-800">إضافة منشأة جديدة</h3>
-                        <p class="text-sm text-gray-500 mt-1">سيتم ربط المنشأة بحسابك الحالي.</p>
+                        <h3 class="text-lg font-semibold text-gray-800">إضافة صفحة جديدة</h3>
+                        <p class="text-sm text-gray-500 mt-1">سيتم ربط الصفحة بحسابك الحالي.</p>
                     </div>
                     <button @click="closeCreateModal" class="text-gray-400 hover:text-gray-600">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -139,7 +139,7 @@ import { useErrorsStore } from '../stores/errors'
 import { storeToRefs } from 'pinia'
 
 useHead({
-    title: 'المنشآت',
+    title: 'الصفحات',
 })
 
 const tenants = ref([])
@@ -174,7 +174,7 @@ const fetchTenants = async () => {
         tenants.value = data.data || []
         currentTenantId.value = data.current_tenant_id
     } catch (error) {
-        notify({ type: 'error', text: 'تعذر تحميل المنشآت حالياً' })
+        notify({ type: 'error', text: 'تعذر تحميل الصفحات حالياً' })
     } finally {
         loading.value = false
     }
@@ -196,7 +196,7 @@ const createTenant = async () => {
         const { data } = await axios.post('/api/tenants', form.value)
         tenants.value = [data.tenant, ...tenants.value]
         closeCreateModal()
-        notify({ type: 'success', text: 'تم إنشاء المنشأة بنجاح' })
+        notify({ type: 'success', text: 'تم إنشاء الصفحة بنجاح' })
 
         // بعد الإنشاء نعيد التوجيه للوحة الرئيسية لتحديث السياق
         window.location.href = '/dashboard/content'
@@ -204,7 +204,7 @@ const createTenant = async () => {
         if (error.response?.data?.errors) {
             errorsStore.setErrors(error.response.data.errors)
         }
-        notify({ type: 'error', text: 'تعذر إنشاء المنشأة، حاول مرة أخرى' })
+        notify({ type: 'error', text: 'تعذر إنشاء الصفحة، حاول مرة أخرى' })
     } finally {
         formLoading.value = false
     }
@@ -223,10 +223,10 @@ const switchTenant = async (tenantId) => {
     try {
         await axios.post(`/api/tenants/${tenantId}/switch`)
         currentTenantId.value = tenantId
-        notify({ type: 'success', text: 'تم تعيين المنشأة الحالية' })
+        notify({ type: 'success', text: 'تم تعيين الصفحة الحالية' })
         window.location.href = '/dashboard'
     } catch (error) {
-        notify({ type: 'error', text: 'تعذر تغيير المنشأة الحالية' })
+        notify({ type: 'error', text: 'تعذر تغيير الصفحة الحالية' })
     }
 }
 
