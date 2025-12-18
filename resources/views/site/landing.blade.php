@@ -73,21 +73,21 @@
             </div>
         </div>
 
-                <h1 class="text-4xl sm:text-5xl md:text-6xl text-base-900 tracking-tight max-w-sm lg:max-w-2xl mx-auto">
-                     أنشئ صفحة دائمة لأعمالك،  
+                <h1 class="text-4xl sm:text-5xl md:text-6xl text-base-900 leading-12 !lg:leading-[4.5rem] max-w-sm sm:max-w-xl xl:max-w-2xl mx-auto">
+                     أنشئ صفحات تسويقية مُركّزة،   
                     <div class="relative inline-flex">
                         <span class="absolute inset-x-0 bottom-0 border-b-[12px] border-amber-400"></span>
-                        <h1 class="relative text-4xl font-semibold text-black sm:text-6xl lg:text-7xl">تبيع عنّك</h1>
-                    </div>
-                    ،
-                  
-
+                        <h1 class="relative text-4xl font-semibold text-black sm:text-6xl  "> تحقق أهدافك </h1>
+                    </div>،
+                     
                     {{-- <span class="text-primary-500">تبيع عنّك، </span> --}}
                      بدقائق!
                 </h1>
                 <p class="mt-8 text-gray-500 max-w-sm lg:max-w-xl mx-auto text-base lg:text-lg  font-thin">
-                    أنشئ  
-                    صفحة لتسويق أعمالك ومشاريعك
+                    <b>بروشورك</b>
+                    يساعدك تنشئ
+
+                    صفحات لتسويق أعمالك ومشاريعك
                     خلال دقائق،
                     تستقبل طلبات العملاء عنّك، تجاوب على أسئلتهم، وتوصلهم بك 24/7 على مدار الساعة.
                 </p>
@@ -148,7 +148,8 @@
                         <ui:mobile-dark>
                             {{-- <img src="https://template.canva.com/EAEsa3Aii8U/4/0/900w-3QolSmpWFXk.jpg" class="w-full h-full object-cover" alt="" /> --}}
                             {{-- <img src="https://template.canva.com/EAFqeAlAaHc/1/0/900w-2-Zw-73tvq4.jpg" class="w-full h-full object-cover" alt="" /> --}}
-                            <img src="{{ asset('assets/images/demo.webp') }}" class="w-full h-full object-contain object-top" alt="" />
+                            {{-- <img src="{{ asset('assets/images/demo.webp') }}" class="w-full h-full object-contain object-top" alt="" /> --}}
+                            <img src="{{ asset('assets/images/aswar.webp') }}" class="w-full h-full object-contain object-top" alt="" />
                         </ui:mobile-dark>
                     </div>
 
@@ -193,15 +194,15 @@
             </div>
         </div>
   
-        <div class="flex flex-wrap items-center justify-center max-w-5xl gap-5 mx-auto mt-20 sm:gap-y-8 md:gap-12">
+        {{-- <div class="flex flex-wrap items-center justify-center max-w-5xl gap-5 mx-auto mt-20 sm:gap-y-8 md:gap-12">
             <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/aswar.avif') }}" alt="" />
             <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/frst.webp') }}" alt="" />
             <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/qoot.png') }}" alt="" />
             <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/shthel-color.webp') }}" alt="" />
             <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/crisp-burger.webp') }}" alt="" />
-            {{-- <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/baderatg.jpg') }}" alt="" /> --}}
+            <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/baderatg.jpg') }}" alt="" />
             <img class="object-contain bg-white/20 rounded-2xl p-2 size-16 lg:size-20 max-w-full filter grayscaleX hover:grayscale-0 transition-all duration-300" src="{{ asset('assets/images/clients/crisp-ice.png') }}" alt="" />
-        </div>
+        </div> --}}
  
         </div>
     </section>

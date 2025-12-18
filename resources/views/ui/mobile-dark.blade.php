@@ -3,7 +3,7 @@
     <!-- Phone Frame Container -->
     <div class="relative">
         <!-- Phone Frame with Dark Blue Bezel -->
-        <div class="relative w-[370px] h-[700px] bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900 rounded-[3.5rem] p-2.5 shadow-2xl border border-slate-600/30">
+        <div class="relative w-[324px] h-[700px] bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900 rounded-[3.5rem] p-2.5 shadow-2xl border border-slate-600/30">
             <!-- Inner Screen Container -->
             <div class="relative w-full h-full bg-slate-900 rounded-[3rem] overflow-hidden">
                 <!-- Status Bar -->
