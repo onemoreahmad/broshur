@@ -49,7 +49,7 @@ return [
                     ],
                 ],
                 "fontFamily" => [
-                    "sans" => "tsh, ibmps, sans-serif",
+                    "sans" => "rubik, tsh, ibmps, sans-serif",
                     "logo" => "allabbad",
                     "tsh" => "tsh",
                     "camel" => "camel",
@@ -58,6 +58,12 @@ return [
         ],
         "preflight" => [
             "@font-face" => [
+                [
+                    "fontFamily" => "rubik",
+                    "src" => ' url(https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap)',
+                    "fontStyle" => "normal",
+                    "fontDisplay" => "swap",
+                 ],
                 [
                     "fontFamily" => "tsh",
                     "src" => 'url(/assets/fonts/tsh.woff) format("woff")',

@@ -13,10 +13,13 @@
 
         <div class="px-4 mx-auto max-w-7xl ">
             <div class="flex justify-center max-w-xl mx-auto">
-                <div class="rounded-full flex items-center w-full mx-auto justify-between -mt-7 bg-black text-white px-2 py-2 text-xs sm:text-sm font-medium">
-                      <a href="{{ route('site.home') }}" wire:navigate title="" class="flex items-center gap-x-3 ms-3">
+                <div class="rounded-full flex items-center w-full mx-auto justify-between -mt-7 bg-[#010301] text-white px-2 py-2 text-xs sm:text-sm font-medium">
+                      <a href="{{ route('site.home') }}" wire:navigate title="" class="flex items-center gap-x-2 ms-1">
                         <img class="w-auto h-5 md:h-7" src="{{ asset('assets/images/broshur-logo-shape.webp') }}" alt="" />
-                        <img class="w-auto h-6 md:h-7" src="{{ asset('assets/images/logo-white-0.webp') }}" alt="" />
+                        {{-- <img class="w-auto h-5 md:h-7" src="{{ asset('assets/images/logo-y-r-p.webp') }}" alt="" /> --}}
+                        {{-- <img class="w-auto h-6 md:h-9" src="{{ asset('assets/images/logo-10-white.webp') }}" alt="" /> --}}
+                        {{-- <img class="w-auto h-6 md:h-9" src="{{ asset('assets/images/logo-10-orange.webp') }}" alt="" /> --}}
+                        <img class="w-auto h-6 md:h-9" src="{{ asset('assets/images/t1-w.webp') }}" alt="" />
                         {{-- <span class="text-xl lg:text-3xl font-camel font-extrabold">
                             {{ config('app.name') }} 
                         </span> --}}
@@ -73,7 +76,7 @@
             </div>
         </div>
 
-                <h1 class="text-4xl sm:text-5xl md:text-6xl text-base-900 leading-12 !lg:leading-[4.5rem] max-w-sm sm:max-w-xl xl:max-w-2xl mx-auto">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl text-base-900 font-semibold leading-12 !lg:leading-[4.5rem] max-w-sm sm:max-w-xl xl:max-w-2xl mx-auto">
                      أنشئ صفحات تسويقية مُركّزة،   
                     <div class="relative inline-flex">
                         <span class="absolute inset-x-0 bottom-0 border-b-[12px] border-amber-400"></span>
@@ -212,7 +215,7 @@
 
      <div class="mx-auto max-w-3xl text-center relative z-10 mt-24 lg:mt-32">
         <h1 class="text-3xl sm:text-4xl  text-gray-800">
-            <b class="font-normal inline-block mb-7 text-5xl lg:text-6xl">لا تفوّت عميل!</b>
+            <b class="font-semibold inline-block mb-7 text-5xl lg:text-6xl">لا تفوّت عميل!</b>
             <br class="" />
             استقبل طلبات عملائك وجاوب على كل أسئلتهم.
         </h1>
@@ -376,7 +379,7 @@
 
      <div class="mx-auto max-w-3xl text-center relative z-10 mt-32">
         <h1 class="text-3xl sm:text-4xl  text-gray-800">
-            <b class="font-normal inline-block mb-7 text-5xl lg:text-6xl">صممّها بنفسك!</b>
+            <b class="font-semibold inline-block mb-7 text-5xl lg:text-6xl">صممّها بنفسك!</b>
          </h1>
         <p class="  text-gray-600 leading-7 text-xl font-thin max-w-lg mx-auto">
             ما تحتاج خبير تقني،
@@ -414,7 +417,7 @@
     <section class="py-16 lg:py-20 xl:py-32 lg:mt-5 mt-12">
         <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-6xl">
             <div class="max-w-2xl mx-auto text-center">
-                <h2 class="text-3xl font-normal text-gray-900 sm:text-4xl lg:text-5xl"> الأسئلة المتكررة  </h2>
+                <h2 class="text-3xl font-semibold text-gray-900 sm:text-4xl lg:text-5xl"> الأسئلة المتكررة  </h2>
                 <p class="mt-4 text-base font-thin leading-7 text-gray-600/60 lg:text-xl lg:mt-6 lg:leading-8"> هنا قائمة بإجاباتنا على أكثر الأسئلة تكراراً، إذا لم تجد إجابة لسؤالك 
                 <a href="{{route('site.page.contact')}}" wire:navigate class="text-primary-700 hover:text-primary-600"> تواصل معنا</a>
                  في أي وقت.</p>
