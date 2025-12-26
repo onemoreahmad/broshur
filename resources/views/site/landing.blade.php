@@ -19,7 +19,7 @@
                         {{-- <img class="w-auto h-5 md:h-7" src="{{ asset('assets/images/logo-y-r-p.webp') }}" alt="" /> --}}
                         {{-- <img class="w-auto h-6 md:h-9" src="{{ asset('assets/images/logo-10-white.webp') }}" alt="" /> --}}
                         {{-- <img class="w-auto h-6 md:h-9" src="{{ asset('assets/images/logo-10-orange.webp') }}" alt="" /> --}}
-                        <img class="w-auto h-6 md:h-9" src="{{ asset('assets/images/t1-w.webp') }}" alt="" />
+                        <img class="w-auto h-6 md:h-9" src="{{ asset('assets/images/t1-w.png') }}" alt="" />
                         {{-- <span class="text-xl lg:text-3xl font-camel font-extrabold">
                             {{ config('app.name') }} 
                         </span> --}}
@@ -78,16 +78,17 @@
 
                 <h1 class="text-4xl sm:text-5xl md:text-6xl text-base-900 font-semibold leading-12 !lg:leading-[4.5rem] max-w-sm sm:max-w-xl xl:max-w-2xl mx-auto">
                      أنشئ صفحات تسويقية مُركّزة،   
-                    <div class="relative inline-flex">
+                    {{-- <div class="relative inline-flex">
                         <span class="absolute inset-x-0 bottom-0 border-b-[12px] border-amber-400"></span>
                         <h1 class="relative text-4xl font-semibold text-black sm:text-6xl  "> تحقق أهدافك </h1>
-                    </div>،
+                    </div>، --}}
                      
                     {{-- <span class="text-primary-500">تبيع عنّك، </span> --}}
                      بدقائق!
                 </h1>
-                <p class="mt-8 text-gray-500 max-w-sm lg:max-w-xl mx-auto text-base lg:text-lg  font-thin">
-                    <b>بروشورك</b>
+                <p class="mt-8 text-gray-500 max-w-sm lg:max-w-xl mx-auto text-base lg:text-xl">
+                    {{-- <b>بروشور</b> --}}
+                    <img src="{{ asset('assets/images/t1.png') }}" class="inline-block h-6 md:h-9" alt="" />
                     يساعدك تنشئ
 
                     صفحات لتسويق أعمالك ومشاريعك
