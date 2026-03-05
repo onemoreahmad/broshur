@@ -43,7 +43,7 @@
              @endforeach
          </div>
 
-         <ui:modal title="أضف منشأة جديدة" size="md">
+         {{-- <ui:modal title="أضف منشأة جديدة" size="md">
              <x-admin::form wire:submit="submit">
                  <ui:input name="tenant_name" label="" width="w-full" placeholder="اسم المنشأة" />
                  <ui:input name="tenant_handle" dir="ltr" width="w-full" placeholder="subdomain-handle"
@@ -52,7 +52,7 @@
                      <ui:button type="submit" wire-target="submit" label="{{ __('Save') }}" />
                  </x-slot>
                 </x-admin::form>
-         </ui:modal>
+         </ui:modal> --}}
 
      </x-admin::mainbox>
  </x-admin::container>
