@@ -69,7 +69,7 @@
     <main id="slider" class="flex flex-row overflow-x-auto snap-center snap-mandatory hide-scrollbar w-full p-8 gap-x-3 md:gap-x-6 scroll-smooth" style="mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, black 5%, black 95%, transparent);">
   
         <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-0">
-            <a href="https://broshur.com/frst" target="_blank">
+            <a href="https://broshur.com/frst1" target="_blank">
                 <img src="{{ asset('assets/images/frst.webp') }}" alt="" class="w-full h-full rounded-3xl object-top object-contain hover:scale-105 transition-all duration-300">
             </a>  
         </section>
@@ -101,7 +101,7 @@
         </section>
 
         <section class="slide-container flex-shrink-0 w-[65vw] lg:w-[25vw] 2xl:w-[20vw] bg-[#0A0A0A] group  rounded-3xl  transition-all duration-300 relative flex flex-col overflow-hidden shadow-2xl snap-center" id="slide-5">
-            <a href="https://broshur.com/frst" target="_blank">
+            <a href="https://broshur.com/frst1" target="_blank">
                 <img src="{{ asset('assets/images/frst.webp') }}" alt="" class="w-full h-full rounded-3xl object-top object-contain hover:scale-105 transition-all duration-300">
             </a>
         </section>
